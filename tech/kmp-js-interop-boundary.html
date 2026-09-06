@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en"><head><title>The Kotlin → JS / Wasm / React Interop Boundary · second-brain</title><meta charset="utf-8"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400;1,600&amp;family=Inter:wght@400;700&amp;family=JetBrains Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="synapse"/><meta property="og:title" content="The Kotlin → JS / Wasm / React Interop Boundary · second-brain"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="The Kotlin → JS / Wasm / React Interop Boundary · second-brain"/><meta name="twitter:description" content="The Kotlin → JS / Wasm / React Interop Boundary What crosses cleanly from a shared Kotlin core to a web-native React/TypeScript consumer, what doesn’t, and how the library is packaged ..."/><meta property="og:description" content="The Kotlin → JS / Wasm / React Interop Boundary What crosses cleanly from a shared Kotlin core to a web-native React/TypeScript consumer, what doesn’t, and how the library is packaged ..."/><meta property="og:image:alt" content="The Kotlin → JS / Wasm / React Interop Boundary What crosses cleanly from a shared Kotlin core to a web-native React/TypeScript consumer, what doesn’t, and how the library is packaged ..."/><meta property="twitter:domain" content="oxzo.github.io/brains-site"/><meta property="og:url" content="https://oxzo.github.io/brains-site/tech/kmp-js-interop-boundary"/><meta property="twitter:url" content="https://oxzo.github.io/brains-site/tech/kmp-js-interop-boundary"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="The Kotlin → JS / Wasm / React Interop Boundary What crosses cleanly from a shared Kotlin core to a web-native React/TypeScript consumer, what doesn’t, and how the library is packaged ..."/><meta name="generator" content="Quartz"/><link href="../index.322b98b4.css" rel="stylesheet" type="text/css" spa-preserve/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  padding: 2rem;
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL2hvbWUvcnVubmVyL3dvcmsvYnJhaW5zL2JyYWlucy9zaXRlL3F1YXJ0ei9jb21wb25lbnRzL3N0eWxlcyIsInNvdXJjZXMiOlsibWVybWFpZC5pbmxpbmUuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTs7QUFHRjtFQUNFO0VBQ0E7O0FBR0Y7RUFDRTs7O0FBS0Y7RUFDRTtFQUNBOzs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7O0FBR0Y7RUFDRTs7QUFJRjtFQUNFO0VBQ0E7RUFDQSIsInNvdXJjZXNDb250ZW50IjpbIi5leHBhbmQtYnV0dG9uIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbG9hdDogcmlnaHQ7XG4gIHBhZGRpbmc6IDAuNHJlbTtcbiAgbWFyZ2luOiAwLjNyZW07XG4gIHJpZ2h0OiAwOyAvLyBOT1RFOiByaWdodCB3aWxsIGJlIHNldCBpbiBtZXJtYWlkLmlubGluZS50c1xuICBjb2xvcjogdmFyKC0tZ3JheSk7XG4gIGJvcmRlci1jb2xvcjogdmFyKC0tZGFyayk7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWxpZ2h0KTtcbiAgYm9yZGVyOiAxcHggc29saWQ7XG4gIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgb3BhY2l0eTogMDtcbiAgdHJhbnNpdGlvbjogMC4ycztcblxuICAmID4gc3ZnIHtcbiAgICBmaWxsOiB2YXIoLS1saWdodCk7XG4gICAgZmlsdGVyOiBjb250cmFzdCgwLjMpO1xuICB9XG5cbiAgJjpob3ZlciB7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIGJvcmRlci1jb2xvcjogdmFyKC0tc2Vjb25kYXJ5KTtcbiAgfVxuXG4gICY6Zm9jdXMge1xuICAgIG91dGxpbmU6IDA7XG4gIH1cbn1cblxucHJlIHtcbiAgJjpob3ZlciA+IC5leHBhbmQtYnV0dG9uIHtcbiAgICBvcGFjaXR5OiAxO1xuICAgIHRyYW5zaXRpb246IDAuMnM7XG4gIH1cbn1cblxuI21lcm1haWQtY29udGFpbmVyIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICBjb250YWluOiBsYXlvdXQ7XG4gIHotaW5kZXg6IDk5OTtcbiAgbGVmdDogMDtcbiAgdG9wOiAwO1xuICB3aWR0aDogMTAwdnc7XG4gIGhlaWdodDogMTAwdmg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGRpc3BsYXk6IG5vbmU7XG4gIGJhY2tkcm9wLWZpbHRlcjogYmx1cig0cHgpO1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuNSk7XG5cbiAgJi5hY3RpdmUge1xuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgfVxuXG4gICYgPiAjbWVybWFpZC1zcGFjZSB7XG4gICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1saWdodCk7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDUwJTtcbiAgICBsZWZ0OiA1MCU7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gICAgaGVpZ2h0OiA4MHZoO1xuICAgIHdpZHRoOiA4MHZ3O1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG5cbiAgICAmID4gLm1lcm1haWQtY29udGVudCB7XG4gICAgICBwYWRkaW5nOiAycmVtO1xuICAgICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgICAgdHJhbnNmb3JtLW9yaWdpbjogMCAwO1xuICAgICAgdHJhbnNpdGlvbjogdHJhbnNmb3JtIDAuMXMgZWFzZTtcbiAgICAgIG92ZXJmbG93OiB2aXNpYmxlO1xuICAgICAgbWluLWhlaWdodDogMjAwcHg7XG4gICAgICBtaW4td2lkdGg6IDIwMHB4O1xuXG4gICAgICBwcmUge1xuICAgICAgICBtYXJnaW46IDA7XG4gICAgICAgIGJvcmRlcjogbm9uZTtcbiAgICAgIH1cblxuICAgICAgc3ZnIHtcbiAgICAgICAgbWF4LXdpZHRoOiBub25lO1xuICAgICAgICBoZWlnaHQ6IGF1dG87XG4gICAgICB9XG4gICAgfVxuXG4gICAgJiA+IC5tZXJtYWlkLWNvbnRyb2xzIHtcbiAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgIGJvdHRvbTogMjBweDtcbiAgICAgIHJpZ2h0OiAyMHB4O1xuICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgIGdhcDogOHB4O1xuICAgICAgcGFkZGluZzogOHB4O1xuICAgICAgYmFja2dyb3VuZDogdmFyKC0tbGlnaHQpO1xuICAgICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICAgIGJvcmRlci1yYWRpdXM6IDZweDtcbiAgICAgIGJveC1zaGFkb3c6IDAgMnB4IDRweCByZ2JhKDAsIDAsIDAsIDAuMSk7XG4gICAgICB6LWluZGV4OiAyO1xuXG4gICAgICAubWVybWFpZC1jb250cm9sLWJ1dHRvbiB7XG4gICAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAgICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICAgICAgICB3aWR0aDogMzJweDtcbiAgICAgICAgaGVpZ2h0OiAzMnB4O1xuICAgICAgICBwYWRkaW5nOiAwO1xuICAgICAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodCk7XG4gICAgICAgIGNvbG9yOiB2YXIoLS1kYXJrKTtcbiAgICAgICAgYm9yZGVyLXJhZGl1czogNHB4O1xuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgICAgIGZvbnQtc2l6ZTogMTZweDtcbiAgICAgICAgZm9udC1mYW1pbHk6IHZhcigtLWJvZHlGb250KTtcbiAgICAgICAgdHJhbnNpdGlvbjogYWxsIDAuMnMgZWFzZTtcblxuICAgICAgICAmOmhvdmVyIHtcbiAgICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICB9XG5cbiAgICAgICAgJjphY3RpdmUge1xuICAgICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWSgxcHgpO1xuICAgICAgICB9XG5cbiAgICAgICAgLy8gU3R5bGUgdGhlIHJlc2V0IGJ1dHRvbiBkaWZmZXJlbnRseVxuICAgICAgICAmOm50aC1jaGlsZCgyKSB7XG4gICAgICAgICAgd2lkdGg6IGF1dG87XG4gICAgICAgICAgcGFkZGluZzogMCAxMnB4O1xuICAgICAgICAgIGZvbnQtc2l6ZTogMTRweDtcbiAgICAgICAgfVxuICAgICAgfVxuICAgIH1cbiAgfVxufVxuIl19 */</style><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" spa-preserve/><script src="../prescript.be9697b4.js" type="application/javascript" spa-preserve></script><script type="application/javascript" spa-preserve>const fetchData = fetch("../static/contentIndex.73890e1e.json").then(data => data.json())</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://oxzo.github.io/brains-site/index.xml"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://oxzo.github.io/brains-site/tech/kmp-js-interop-boundary-og-image.webp"/><meta property="og:image:url" content="https://oxzo.github.io/brains-site/tech/kmp-js-interop-boundary-og-image.webp"/><meta name="twitter:image" content="https://oxzo.github.io/brains-site/tech/kmp-js-interop-boundary-og-image.webp"/><meta property="og:image:type" content="image/.webp"/></head><body data-slug="tech/kmp-js-interop-boundary"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">synapse</a></h2><div class="spacer mobile-only"></div><div style="display: flex; flex-direction: row; flex-wrap: nowrap; gap: 1rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button"><p>Search</p><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Search for something" placeholder="Search for something"/><div class="search-layout" data-preview="true"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Dark mode"><title>Dark mode</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Light mode"><title>Light mode</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div></div><div class="explorer" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a,b)=>!a.isFolder&amp;&amp;!b.isFolder||a.isFolder&amp;&amp;b.isFolder?a.displayName.localeCompare(b.displayName,void 0,{numeric:!0,sensitivity:\&quot;base\&quot;}):!a.isFolder&amp;&amp;b.isFolder?1:-1&quot;,&quot;filterFn&quot;:&quot;node=>node.slugSegment!==\&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;node=>node&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-content"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>Explorer</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="explorer-content" aria-expanded="false"><ul class="explorer-ul overflow" id="0x8mfk"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#"></a></li></template><template id="template-folder"><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../tech/">tech</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>The Kotlin → JS / Wasm / React Interop Boundary</a></div></nav><h1 class="article-title">The Kotlin → JS / Wasm / React Interop Boundary</h1><p show-comma="true" class="content-meta"><time datetime="2026-08-26T00:00:00.000Z">Aug 26, 2026</time><span>12 min read</span></p><ul class="tags"><li><a href="../tags/tech" class="internal tag-link">tech</a></li><li><a href="../tags/kotlin" class="internal tag-link">kotlin</a></li><li><a href="../tags/multiplatform" class="internal tag-link">multiplatform</a></li><li><a href="../tags/web" class="internal tag-link">web</a></li><li><a href="../tags/time-sensitive" class="internal tag-link">time-sensitive</a></li><li><a href="../tags/publish" class="internal tag-link">publish</a></li></ul></div></div><article class="popover-hint"><h1 id="the-kotlin--js--wasm--react-interop-boundary">The Kotlin → JS / Wasm / React Interop Boundary<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-kotlin--js--wasm--react-interop-boundary" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>What crosses cleanly from a shared Kotlin core to a web-native React/TypeScript consumer, what doesn’t, and how the library is packaged and debugged. Companion to <a href="../tech/kotlin-multiplatform-web-enterprise" class="internal" data-slug="tech/kotlin-multiplatform-web-enterprise">kotlin-multiplatform-web-enterprise</a> and <a href="../tech/kmp-enterprise-adoption-evidence" class="internal" data-slug="tech/kmp-enterprise-adoption-evidence">kmp-enterprise-adoption-evidence</a>. For the Compose-renders-the-UI alternative and its accessibility ceiling, see <a href="../tech/kmp-web-accessibility" class="internal" data-slug="tech/kmp-web-accessibility">kmp-web-accessibility</a>.</p>
+<p><strong>As of 2026-06</strong> (packaging, bundle-size, bundler-consumption, and Wasm sections locally verified 2026-07-06 against Kotlin 2.3.20). This boundary moves fast — <code>@JsExport</code> is experimental and several limitations were only addressed in late-2025 Kotlin releases. Re-verify version-pinned facts before relying on them.</p>
+<h2 id="target-choice-kotlinjs-not-kotlinwasm">Target choice: Kotlin/JS, not Kotlin/Wasm<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#target-choice-kotlinjs-not-kotlinwasm" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>For a logic-only core handed to a JS frontend, JetBrains recommends <strong>Kotlin/JS</strong>: it “is the better fit because it provides a better interop experience” (<a href="https://blog.jetbrains.com/kotlin/2025/05/present-and-future-kotlin-for-web/" class="external">JetBrains, 2025-05<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>). Kotlin/Wasm’s strengths are near-native compute, faster UI rendering, and smaller binaries — all UI/compute-oriented, and largely irrelevant when you only ship a library that must hand rich typed objects across the boundary.</p>
+<p>Stability (as of 2026-06):</p>
+<ul>
+<li><strong>Kotlin/JS web target — Stable</strong>; <strong>Kotlin/Wasm (wasmJs) web target — Beta</strong>, in the KMP supported-platforms table (<a href="https://kotlinlang.org/docs/multiplatform/supported-platforms.html" class="external">kotlinlang.org<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>).</li>
+<li>Kotlin/Wasm’s wasm-js target reached <strong>Beta</strong> with Kotlin 2.2.20 (Sept 2025); Kotlin/Wasm overall is Beta with Stable expected late 2026 (<a href="https://www.infoworld.com/article/4056077/kotlin-2-2-20-boosts-webassembly-support.html" class="external">InfoWorld, 2025-09<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>; the “Stable late 2026” date is not in that source but is not contradicted). WasmGC reportedly reached all major browsers including Safari in late 2024 (the Safari 18.2 / Dec 2024 specifics are <strong>(unverified)</strong> — no source was fetched for this sentence).</li>
+</ul>
+<h2 id="the-jsexport-mechanism--experimental-top-level-only">The <code>@JsExport</code> mechanism — experimental, top-level only<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-jsexport-mechanism--experimental-top-level-only" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>The current JS-export path is built on the experimental <code>@JsExport</code> annotation. JetBrains acknowledges its constraints “make it challenging to use in enterprise applications” (verbatim, JetBrains 2025-05). JetBrains is working to let the “majority of Kotlin declarations” be exported and to stabilize the annotation — not yet done.</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled/> <strong>Note:</strong> the dossier attributed stabilization to ticket KT-80310, but that ticket number could not be confirmed against the cited blog or YouTrack — <strong>(unverified)</strong>, treat the ticket number as unconfirmed even though the stabilization <em>plan</em> is confirmed.</li>
+</ul>
+<h2 id="what-crosses-cleanly-on-kotlinjs">What crosses cleanly on Kotlin/JS<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#what-crosses-cleanly-on-kotlinjs" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Per the official <code>js-to-kotlin-interop</code> doc (as of 2026-06, <a href="https://kotlinlang.org/docs/js-to-kotlin-interop.html" class="external">kotlinlang.org<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>) and Touchlab’s guides:</p>
+<ul>
+<li><strong>Exports reasonably:</strong> data classes, regular classes, objects, nullability, enums (since 1.6.20), interfaces (since 1.6.20).</li>
+<li><strong>Anything not marked <code>@JsExport</code> is not supported across the boundary.</strong></li>
+</ul>
+<h2 id="what-does-not-cross-cleanly-per-api-friction">What does NOT cross cleanly (per-API friction)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#what-does-not-cross-cleanly-per-api-friction" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Confirmed against the official doc and Touchlab’s dev.to <code>@JsExport</code> guide:</p>
+<ul>
+<li><strong>Collections.</strong> <code>List</code>/<code>MutableList</code>/<code>Map</code>/<code>Set</code> are not exported as native JS arrays/objects — they surface as <code>KtList</code>/<code>KtMutableList</code>/<code>KtMap</code>/<code>KtSet</code> views needing conversion methods (<code>asJsReadonlyArrayView</code>/<code>asJsArrayView</code>). Must be flattened to <code>Array</code> / plain JS objects for a clean TS consumer.</li>
+<li><strong><code>Long</code>.</strong> Non-exportable with no JS equivalent; breaks TS typing unless <code>skipLibCheck = true</code>. Exporting as <code>BigInt</code> requires experimental compiler flags <code>-Xes-long-as-bigint</code> <strong>and</strong> the language feature <code>+JsAllowLongInExportedDeclarations</code> (<code>-XXLanguage:+JsAllowLongInExportedDeclarations</code>). Kotlin 2.3.0 added experimental <code>BigInt</code>/<code>BigInt64Array</code> representation.</li>
+<li><strong>Unsigned integer types.</strong> Explicitly not supported.</li>
+<li><strong>Suspend functions.</strong> Only experimentally exportable since Kotlin 2.3.0 behind <code>-Xenable-suspend-function-exporting</code> (consumed as JS async functions). Before that, manual <code>Promise</code> wrapping via <code>GlobalScope.promise</code> was required.</li>
+<li><strong><code>Flow</code> / <code>StateFlow</code>.</strong> No clean export; require hand-written wrappers (<code>FlowObserver</code>/<code>StateFlowObserver</code>-style), per <a href="https://kt.academy/article/ak-js-interop" class="external">kt.academy<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> (Kotlin 1.8.21 reference). No clean export path was confirmed from a primary source for the callbackFlow→callbacks/Observables pattern.</li>
+<li><strong>Sealed-class hierarchies.</strong> Export buggily — <code>data</code>/regular-class subclasses export, but <code>object</code> subclasses are invisible.</li>
+<li><strong>Default parameters.</strong> Not preserved across the boundary (not confirmed by an authoritative source for either target — treat as <strong>(unverified)</strong>).</li>
+<li><strong>Name mangling.</strong> The compiler mangles names (e.g. <code>hello_sv8swh_k$</code>) unless <code>@JsName</code> is used.</li>
+<li><strong>TypeScript union types</strong> cannot be expressed in Kotlin (<a href="https://kt.academy/article/ak-js-interop" class="external">kt.academy<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>, 1.8.21).</li>
+</ul>
+<p><strong>Net effect:</strong> the shared-core team must design a <strong>DTO-flattened, annotation-disciplined facade</strong> — not expose the rich idiomatic domain model. That facade is the public API the web team consumes, and it is the contract that needs semver and <code>.d.ts</code>-diff review.</p>
+<h2 id="late-2025--2026-improvements-kotlin-23x">Late-2025 / 2026 improvements (Kotlin 2.3.x)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#late-2025--2026-improvements-kotlin-23x" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Confirmed against <a href="https://kotlinlang.org/docs/whatsnew23.html" class="external">whatsnew23<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>. <strong>Kotlin 2.3.0 (released 2025-12-16)</strong> added:</p>
+<ul>
+<li>Experimental <code>@JsExport</code> of <strong>suspend functions</strong> (<code>-Xenable-suspend-function-exporting</code>)</li>
+<li><code>LongArray</code> as <code>BigInt64Array</code> (under <code>-Xes-long-as-bigint</code>)</li>
+<li>Unified companion-object access across all module systems</li>
+<li><code>@JsStatic</code> in interfaces</li>
+<li><code>@JsExport.Default</code></li>
+</ul>
+<p><strong>Kotlin 2.3.20 (released ~2026-03)</strong> added the ability to <strong>implement Kotlin interfaces from TypeScript</strong> and experimental SWC compilation support.</p>
+<p>Several of these remain Experimental behind flags. The broad shape of the friction persists.</p>
+<h2 id="wasm-boundary-is-more-restrictive">Wasm boundary is more restrictive<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#wasm-boundary-is-more-restrictive" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>If Kotlin/Wasm is chosen anyway: only primitives, strings, function types, <code>JsAny</code> subtypes, and <strong>opaque <code>JsReference&lt;T></code> handles</strong> may cross — arbitrary Kotlin classes/objects/collections cannot (<a href="https://touchlab.co/kotlin-wasm-js-interop" class="external">Touchlab, 2024-03<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>; <a href="https://kotlinlang.org/docs/wasm-js-interop.html" class="external">kotlinlang wasm-js-interop<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>). A Kotlin object reaches JS as e.g. <code>fun createUser(...): JsReference&lt;User></code> — awkward for a React/TS consumer wanting real typed objects.</p>
+<p><strong>Locally verified 2026-07-06 (Kotlin 2.3.20, same spike, <code>wasmJs { binaries.library(); generateTypeScriptDefinitions() }</code>):</strong></p>
+<ul>
+<li><strong>The restriction has NOT loosened.</strong> <code>@JsExport</code> on a class is a hard compile error on wasmJs: <em>“This annotation is not applicable to target ‘class’. Applicable targets: function”</em> (verbatim). The JS-target facade cannot be reused; the Wasm facade is top-level functions only.</li>
+<li><strong>What works, at runtime too</strong> (Node 22 / V8 WasmGC): primitives and <code>String</code> cross; function types cross <em>with real TS signatures</em> (<code>onNext: (p0: string) => void</code>, unsubscribe as <code>() => void</code>); <code>JsReference&lt;Account></code> round-trips correctly but surfaces as <strong><code>unknown</code></strong> in the generated <code>.d.mts</code> — the TS consumer loses all type information for handles. <code>Long</code>→<code>String</code> flattening stays exact (2^53 + 1 verified end-to-end).</li>
+<li><strong>TS-declaration generation and npm packaging work on wasmJs</strong> despite the Experimental label: <code>.d.mts</code>, ESM glue (auto-detects browser/Node/Deno/standalone VMs), and <code>package.json</code> with <code>main</code>/<code>types</code> wired, at <code>build/dist/wasmJs/productionLibrary</code>.</li>
+<li><strong>Warts hit in one afternoon:</strong> the <code>ExperimentalWasmDsl</code> opt-in moved to <code>org.jetbrains.kotlin.gradle</code> (old FQN is an error, removal scheduled 2.4); an incremental-compilation internal compiler error after adding an export to an existing build (<code>ArrayIndexOutOfBoundsException</code> in <code>WasmIrFileMetadata.fromByteArray</code>) — a clean build fixes it; and the JS-side per-file granularity property breaks the wasmJs compile in the same module (<em>“Per-file compilation can’t be used with any <code>moduleKind</code> except <code>es</code>”</em>) — the JS tree-shaking recipe above conflicts with a co-hosted wasmJs target.</li>
+</ul>
+<h3 id="measured-wasm-bundle-size-resolves-the-open-question-one-datapoint">Measured Wasm bundle size (resolves the open question, one datapoint)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#measured-wasm-bundle-size-resolves-the-open-question-one-datapoint" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Production library distribution (binaryen-optimized), total = <code>.wasm</code> + JS glue:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Facade reachable graph</th><th><code>.wasm</code> (raw / gzip)</th><th>Total incl. glue (raw / gzip)</th></tr></thead><tbody><tr><td>logic only (DTO validation, <code>JsReference</code>, Map/Long/String ops)</td><td>10.2 KB / 5.3 KB</td><td><strong>18.3 KB / 8.4 KB</strong></td></tr><tr><td>+ Flow/coroutines machinery</td><td>56.0 KB / 21.9 KB</td><td><strong>65.6 KB / 25.4 KB</strong></td></tr></tbody></table></div>
+<p>Two structural differences from the JS target:</p>
+<ul>
+<li><strong>DCE is automatic and whole-program.</strong> The logic-only build contains zero coroutines symbols even though <code>commonMain</code> depends on kotlinx-coroutines — unused domain surface just vanishes at link time, no <code>sideEffects</code> hand-assertion, no granularity recipe. This automatic whole-program DCE is the opposite of the Kotlin/JS default, where everything in the module graph ships.</li>
+<li><strong>Size verdict flips by workload.</strong> Logic-only: Wasm total (~8 KB gzip) is ~3× smaller than the JS target’s minified floor (~25–28 KB gzip). With coroutines reachable: rough gzip parity (~25 KB both). The old “Kotlin/JS larger bundles, Kotlin/Wasm smaller binaries” folklore is directionally right for lean cores, but the JS glue (~3 KB gzip) and coroutines dominate the difference.</li>
+</ul>
+<p>Caveats: one local datapoint, tiny facade, library-mode distribution; browser WasmGC support and streaming-instantiation behavior not re-tested here. Interop friction (no classes, <code>unknown</code> handles) still makes Kotlin/JS the JetBrains-recommended and practically saner target for a rich typed facade — the size win only matters if the exported surface is genuinely function-shaped.</p>
+<h2 id="packaging--build--npm">Packaging / build / npm<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#packaging--build--npm" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>Locally verified 2026-07-06</strong> (Kotlin 2.3.20, Gradle 8.14.5, JDK 21 — spike built from <a href="../tech/kmp-jsexport-facade-example" class="internal" data-slug="tech/kmp-jsexport-facade-example">kmp-jsexport-facade-example</a>): configure <code>js { binaries.library(); generateTypeScriptDefinitions() }</code> (the <code>IR</code> argument is no longer needed; IR is the only compiler). The <code>jsBrowserProductionLibraryDistribution</code> task is real and emits per-module <code>.js</code> files (facade + kotlin stdlib + each kotlinx dependency), <code>.js.map</code> source maps, one <code>.d.ts</code>, and a <code>package.json</code> with <code>main</code>/<code>types</code> wired — at <code>build/dist/js/productionLibrary</code>, <strong>not</strong> the <code>build/productionLibrary</code> in older Touchlab docs. <code>npm install &lt;path></code> and a strict-mode <code>tsc</code> typecheck against the emitted <code>.d.ts</code> both worked. The build also runs a <code>jsProductionLibraryValidateGeneratedByCompilerTypeScript</code> validation task.</p>
+<p>Two consumer-relevant surprises from the same spike, both <strong>UMD-specific</strong> (see the ESM section below for the fix):</p>
+<ul>
+<li><strong>Output is UMD, not ESM, by default</strong> for a browser library. <code>useEsModules()</code> in the js target DSL switches the distribution to <code>.mjs</code> + <code>.d.mts</code> with real <code>import</code>/<code>export</code> statements and <code>main</code>/<code>types</code> re-pointed accordingly (verified 2026-07-06).</li>
+<li><strong>Under UMD, the Kotlin package becomes a nested TS namespace.</strong> A facade in package <code>core.facade</code> produces <code>export declare namespace core.facade { ... }</code>, so the consumer writes <code>import { core } from '&lt;lib>'</code> and reaches types as <code>core.facade.Money</code>. <strong>Under ESM the nesting disappears:</strong> the <code>.d.mts</code> emits flat root-level named exports (<code>export declare class Money</code>) even from a nested Kotlin package, so consumers get the idiomatic <code>import { Money } from '&lt;lib>'</code> (verified 2026-07-06).</li>
+</ul>
+<h3 id="esm--bundler-consumption-and-tree-shaking-measured-2026-07-06-both-bundlers">ESM + bundler consumption and tree-shaking (measured 2026-07-06, both bundlers)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#esm--bundler-consumption-and-tree-shaking-measured-2026-07-06-both-bundlers" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Same spike, <code>useEsModules()</code>, consumed by a Vite 7.3.6 production build (Rollup + esbuild-minify) and a webpack 5.108.4 production build (terser); typechecked strict with <code>moduleResolution: bundler</code>. Both bundlers consumed the library with zero configuration. Measured bundle sizes:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Library config</th><th>Consumer imports</th><th>Vite (raw / gzip)</th><th>webpack (raw / gzip)</th></tr></thead><tbody><tr><td>per-module ESM (default)</td><td>full facade (Promise + Flow paths)</td><td>90.8 KB / 28.1 KB</td><td>85.5 KB / 25.4 KB</td></tr><tr><td>per-module ESM</td><td><strong>one DTO only</strong></td><td>90.2 KB / 27.9 KB</td><td>85.1 KB / 25.2 KB</td></tr><tr><td>per-module ESM + hand-added <code>sideEffects: false</code></td><td>one DTO only</td><td>byte-identical</td><td>byte-identical</td></tr><tr><td>per-file granularity (<code>kotlin.js.ir.output.granularity=per-file</code>, 123 modules), no flag</td><td>one DTO only</td><td>93.7 KB / 27.6 KB</td><td>—</td></tr><tr><td><strong>per-file + <code>sideEffects: false</code> together</strong></td><td><strong>one DTO only</strong></td><td><strong>2.1 KB / 0.98 KB</strong></td><td><strong>1.6 KB / 0.77 KB</strong></td></tr><tr><td>per-file + <code>sideEffects: false</code> together</td><td>full facade</td><td>—</td><td>92.6 KB / 26.7 KB</td></tr></tbody></table></div>
+<p>Conclusions (item 2 <strong>corrects the first pass of this section</strong>, which tested the levers only one at a time and wrongly concluded no lever works):</p>
+<ol>
+<li><strong>Minification, not tree-shaking, sets the default cost.</strong> The ~278 KB of unminified per-module <code>.mjs</code> collapses to ~85–90 KB raw / ~25–28 KB gzip once either bundler minifies it — the honest consumer-side floor for stdlib + coroutines is <strong>~25–28 KB gzip</strong>, not the raw-dist ~50 KB in the table below.</li>
+<li><strong>Tree-shaking is zero by default but fully recoverable — the levers only work in combination.</strong> Each lever alone does nothing: at per-module granularity the whole facade plus its imports is one module, so <code>sideEffects: false</code> has nothing separate to prune (byte-identical in both bundlers); per-file granularity alone still ships everything because each generated file runs <code>initMetadataFor*</code> calls at module scope that bundlers must assume are side effects. <strong>Per-file granularity + a hand-added <code>sideEffects: false</code> prunes almost everything in both bundlers</strong>: the one-DTO consumer drops from ~85–90 KB to <strong>~2 KB raw / &lt;1 KB gzip</strong>, with all coroutines machinery gone.</li>
+<li><strong>The recipe has real costs</strong>, which is why the default conclusion still stands for most teams: (a) <code>sideEffects: false</code> is a hand-made post-build assertion Gradle doesn’t emit — it declares every Kotlin module initializer droppable. That assertion held at runtime for this facade (full flow re-run and correct under the aggressive config) but is <strong>not a general guarantee</strong> for code relying on module-init registration; (b) per-file mode ships a dangling <code>types</code> path (<code>package.json</code> points to a root <code>.d.mts</code> that per-file mode doesn’t emit — declarations land per-file, e.g. <code>&lt;module>/core/facade/Facade.export.d.mts</code>), so the post-build step must also fix that; (c) full-facade consumers pay a per-file wrapper overhead (~8% raw vs per-module).</li>
+<li><strong>So: bundle cost is set by the library’s dependency graph — unless you adopt the per-file + <code>sideEffects</code> recipe</strong>, in which case it’s set by what consumers import. For a facade whose web consumers use only a slice (DTO validation, a rule engine), the recipe is worth the post-build packaging step; for full-surface consumers, stick with the default per-module granularity.</li>
+</ol>
+<p>Bundler note: webpack ran ~6% smaller raw / ~10% smaller gzip than Vite on identical inputs (terser vs esbuild-minify) — a minifier difference, not a KMP finding.</p>
+<h3 id="measured-bundle-size-resolves-the-open-question-one-datapoint">Measured bundle size (resolves the open question, one datapoint)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#measured-bundle-size-resolves-the-open-question-one-datapoint" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>For the minimal logic-only facade library above (a handful of DTOs, one suspend fn, one Flow bridge), the production library distribution measured:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Module</th><th>Raw</th><th>Gzip</th></tr></thead><tbody><tr><td>facade module itself</td><td>18.8 KB</td><td>3.8 KB</td></tr><tr><td>kotlin-kotlin-stdlib.js</td><td>162.9 KB</td><td>27.4 KB</td></tr><tr><td>kotlinx-coroutines-core.js</td><td>109.5 KB</td><td>18.4 KB</td></tr><tr><td>kotlinx-atomicfu.js + dom-api-compat</td><td>4.7 KB</td><td>1.4 KB</td></tr><tr><td><strong>Total</strong></td><td><strong>≈296 KB</strong></td><td><strong>≈51 KB</strong></td></tr></tbody></table></div>
+<p>So the stdlib floor is <strong>~163 KB raw / ~27 KB gzipped</strong>, and using coroutines/Flow across the boundary adds another ~110 KB / ~18 KB. Caveats: this is <code>binaries.library()</code> per-module output measured locally for a tiny facade (Kotlin 2.3.20) — one datapoint, not a benchmark; consumer-side bundler DCE on the UMD output was not measured.</p>
+<h2 id="debugging">Debugging<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#debugging" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Source maps ship (<code>.js.map</code>, auto-generated since Kotlin 1.3.60), so web devs debug minified Kotlin-origin JS that maps back to Kotlin sources — workable but unfamiliar.</p>
+<h2 id="what-we-couldnt-establish">What we couldn’t establish<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#what-we-couldnt-establish" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><del>No concrete KB/MB measurement of Kotlin stdlib overhead in JS or Wasm library output</del> — <strong>resolved 2026-07-06 by local measurement for both targets</strong> (JS: Packaging section, ~163 KB raw / ~27 KB gzip stdlib floor, ~25–28 KB gzip after bundler minification; Wasm: its own section, 8.4 KB gzip logic-only / 25.4 KB gzip with coroutines, glue included). No <em>independent published</em> benchmark was found. The load-time/UI-speed half of the reported JS-vs-Wasm tradeoff remains <strong>(unverified)</strong>: ~0.25–0.5s faster initial JS load; ~3× faster Wasm UI (<a href="https://www.kmpship.app/blog/kotlin-wasm-and-compose-web-2025" class="external">kmpship.app<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>).</li>
+<li><del>Vite and webpack consumption, tree-shaking, and dead-code-elimination behavior</del> — <strong>resolved 2026-07-06 by local measurement, both bundlers</strong> (see the ESM/bundler section): both consume the <code>useEsModules()</code> output cleanly with zero config; minification cuts the bundle to ~25–28 KB gzip; tree-shaking is zero by default but recoverable via per-file granularity + hand-added <code>sideEffects: false</code> (one-DTO consumer: &lt;1 KB gzip), with the caveats listed there.</li>
+<li>Browser devtools debugging quality with the generated source maps (stepping into Kotlin, variable inspection) — asserted via <code>.js.map</code>, not independently evaluated.</li>
+<li><del>Whether the Wasm interop restriction loosened by 2026</del> — <strong>resolved 2026-07-06: it has not.</strong> Exporting a class on wasmJs is still a hard compile error in Kotlin 2.3.20 (see the Wasm section for the verbatim error and what does cross).</li>
+<li>Default-parameter handling — not confirmed by an authoritative source.</li>
+<li>A clean <code>Flow</code>-to-JS export path — none confirmed.</li>
+</ul>
+<h2 id="sources">Sources<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#sources" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>JetBrains, “Present and Future of Kotlin for Web” (2025-05): <a href="https://blog.jetbrains.com/kotlin/2025/05/present-and-future-kotlin-for-web/" class="external">https://blog.jetbrains.com/kotlin/2025/05/present-and-future-kotlin-for-web/<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>Kotlin/JS to JS interop: <a href="https://kotlinlang.org/docs/js-to-kotlin-interop.html" class="external">https://kotlinlang.org/docs/js-to-kotlin-interop.html<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>Kotlin/Wasm JS interop: <a href="https://kotlinlang.org/docs/wasm-js-interop.html" class="external">https://kotlinlang.org/docs/wasm-js-interop.html<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>KMP supported platforms: <a href="https://kotlinlang.org/docs/multiplatform/supported-platforms.html" class="external">https://kotlinlang.org/docs/multiplatform/supported-platforms.html<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>What’s new in Kotlin 2.3.0: <a href="https://kotlinlang.org/docs/whatsnew23.html" class="external">https://kotlinlang.org/docs/whatsnew23.html<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>InfoWorld, Kotlin 2.2.20 / WebAssembly (2025-09): <a href="https://www.infoworld.com/article/4056077/kotlin-2-2-20-boosts-webassembly-support.html" class="external">https://www.infoworld.com/article/4056077/kotlin-2-2-20-boosts-webassembly-support.html<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>Touchlab, Kotlin/Wasm JS interop (2024-03): <a href="https://touchlab.co/kotlin-wasm-js-interop" class="external">https://touchlab.co/kotlin-wasm-js-interop<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>Touchlab, @JsExport guide (dev.to): <a href="https://dev.to/touchlab/jsexport-guide-for-exposing-kotlin-to-js-20l9" class="external">https://dev.to/touchlab/jsexport-guide-for-exposing-kotlin-to-js-20l9<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>Touchlab, distributing Kotlin/JS libraries (dev.to): <a href="https://dev.to/touchlab/different-ways-to-distribute-and-integrate-kotlinjs-library-1hg3" class="external">https://dev.to/touchlab/different-ways-to-distribute-and-integrate-kotlinjs-library-1hg3<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>kt.academy, JS interop (Kotlin 1.8.21): <a href="https://kt.academy/article/ak-js-interop" class="external">https://kt.academy/article/ak-js-interop<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+</ul></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>Graph View</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc desktop-only"><button type="button" class="toc-header" aria-controls="toc-content" aria-expanded="true"><h3>Table of Contents</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="toc-content"><ul id="h9l23p" class="overflow"><li class="depth-0"><a href="#the-kotlin--js--wasm--react-interop-boundary" data-for="the-kotlin--js--wasm--react-interop-boundary">The Kotlin → JS / Wasm / React Interop Boundary</a></li><li class="depth-1"><a href="#target-choice-kotlinjs-not-kotlinwasm" data-for="target-choice-kotlinjs-not-kotlinwasm">Target choice: Kotlin/JS, not Kotlin/Wasm</a></li><li class="depth-1"><a href="#the-jsexport-mechanism--experimental-top-level-only" data-for="the-jsexport-mechanism--experimental-top-level-only">The @JsExport mechanism — experimental, top-level only</a></li><li class="depth-1"><a href="#what-crosses-cleanly-on-kotlinjs" data-for="what-crosses-cleanly-on-kotlinjs">What crosses cleanly on Kotlin/JS</a></li><li class="depth-1"><a href="#what-does-not-cross-cleanly-per-api-friction" data-for="what-does-not-cross-cleanly-per-api-friction">What does NOT cross cleanly (per-API friction)</a></li><li class="depth-1"><a href="#late-2025--2026-improvements-kotlin-23x" data-for="late-2025--2026-improvements-kotlin-23x">Late-2025 / 2026 improvements (Kotlin 2.3.x)</a></li><li class="depth-1"><a href="#wasm-boundary-is-more-restrictive" data-for="wasm-boundary-is-more-restrictive">Wasm boundary is more restrictive</a></li><li class="depth-2"><a href="#measured-wasm-bundle-size-resolves-the-open-question-one-datapoint" data-for="measured-wasm-bundle-size-resolves-the-open-question-one-datapoint">Measured Wasm bundle size (resolves the open question, one datapoint)</a></li><li class="depth-1"><a href="#packaging--build--npm" data-for="packaging--build--npm">Packaging / build / npm</a></li><li class="depth-2"><a href="#esm--bundler-consumption-and-tree-shaking-measured-2026-07-06-both-bundlers" data-for="esm--bundler-consumption-and-tree-shaking-measured-2026-07-06-both-bundlers">ESM + bundler consumption and tree-shaking (measured 2026-07-06, both bundlers)</a></li><li class="depth-2"><a href="#measured-bundle-size-resolves-the-open-question-one-datapoint" data-for="measured-bundle-size-resolves-the-open-question-one-datapoint">Measured bundle size (resolves the open question, one datapoint)</a></li><li class="depth-1"><a href="#debugging" data-for="debugging">Debugging</a></li><li class="depth-1"><a href="#what-we-couldnt-establish" data-for="what-we-couldnt-establish">What we couldn’t establish</a></li><li class="depth-1"><a href="#sources" data-for="sources">Sources</a></li><li class="overflow-end"></li></ul></div></div><div class="backlinks"><h3>Backlinks</h3><ul id="xacmdj" class="overflow"><li><a href="../tech/kmp-enterprise-adoption-evidence" class="internal">KMP Enterprise Adoption Evidence — Web-Target &amp; Finance</a></li><li><a href="../tech/kmp-jsexport-facade-example" class="internal">Worked Example — The DTO-Flattened @JsExport Facade</a></li><li><a href="../tech/kmp-web-accessibility" class="internal">KMP Web Accessibility — WCAG Under a Canvas-Rendered UI</a></li><li><a href="../tech/kotlin-multiplatform-web-enterprise" class="internal">KMP for Web in a Finserv Enterprise — Shared Kotlin Core, Web-Native UI</a></li><li><a href="../tech/multiplatform-app-architecture-options" class="internal">Web + iOS + Android + Backend: The Architecture Option Space</a></li><li><a href="../tech/react-native-expo-enterprise" class="internal">React Native + Expo in the Enterprise — the JS-Everywhere Lane</a></li><li><a href="../tech/rust-shared-core-enterprise" class="internal">Rust Shared Core in the Enterprise — the Compiled-Core Lane</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v4.4.1</a> © 2026</p><ul><li><a href="https://github.com/oxzo/brains">source</a></li><li><a href="/index.xml">rss</a></li></ul></footer></div></div></body><script type="application/javascript">function o(){let t=this.parentElement;t.classList.toggle("is-collapsed");let e=t.classList.contains("is-collapsed")?this.scrollHeight:t.scrollHeight;t.style.maxHeight=e+"px";let c=t,l=t.parentElement;for(;l;){if(!l.classList.contains("callout"))return;let i=l.classList.contains("is-collapsed")?l.scrollHeight:l.scrollHeight+c.scrollHeight;l.style.maxHeight=i+"px",c=l,l=l.parentElement}}function n(){let t=document.getElementsByClassName("callout is-collapsible");for(let s of t){let e=s.firstElementChild;if(!e)continue;e.addEventListener("click",o),window.addCleanup(()=>e.removeEventListener("click",o));let l=s.classList.contains("is-collapsed")?e.scrollHeight:s.scrollHeight;s.style.maxHeight=l+"px"}}document.addEventListener("nav",n);
+</script><script type="module">function f(i,e){if(!i)return;function r(o){o.target===this&&(o.preventDefault(),o.stopPropagation(),e())}function t(o){o.key.startsWith("Esc")&&(o.preventDefault(),e())}i?.addEventListener("click",r),window.addCleanup(()=>i?.removeEventListener("click",r)),document.addEventListener("keydown",t),window.addCleanup(()=>document.removeEventListener("keydown",t))}function y(i){for(;i.firstChild;)i.removeChild(i.firstChild)}var h=class{constructor(e,r){this.container=e;this.content=r;this.setupEventListeners(),this.setupNavigationControls(),this.resetTransform()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;cleanups=[];setupEventListeners(){let e=this.onMouseDown.bind(this),r=this.onMouseMove.bind(this),t=this.onMouseUp.bind(this),o=this.resetTransform.bind(this);this.container.addEventListener("mousedown",e),document.addEventListener("mousemove",r),document.addEventListener("mouseup",t),window.addEventListener("resize",o),this.cleanups.push(()=>this.container.removeEventListener("mousedown",e),()=>document.removeEventListener("mousemove",r),()=>document.removeEventListener("mouseup",t),()=>window.removeEventListener("resize",o))}cleanup(){for(let e of this.cleanups)e()}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let r=this.createButton("+",()=>this.zoom(.1)),t=this.createButton("-",()=>this.zoom(-.1)),o=this.createButton("Reset",()=>this.resetTransform());e.appendChild(t),e.appendChild(o),e.appendChild(r),this.container.appendChild(e)}createButton(e,r){let t=document.createElement("button");return t.textContent=e,t.className="mermaid-control-button",t.addEventListener("click",r),window.addCleanup(()=>t.removeEventListener("click",r)),t}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}zoom(e){let r=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),t=this.content.getBoundingClientRect(),o=t.width/2,n=t.height/2,c=r-this.scale;this.currentPan.x-=o*c,this.currentPan.y-=n*c,this.scale=r,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){this.scale=1;let e=this.content.querySelector("svg");this.currentPan={x:e.getBoundingClientRect().width/2,y:e.getBoundingClientRect().height/2},this.updateTransform()}},C=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],E;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;E||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let r=E.default,t=new WeakMap;for(let n of e)t.set(n,n.innerText);async function o(){for(let s of e){s.removeAttribute("data-processed");let a=t.get(s);a&&(s.innerHTML=a)}let n=C.reduce((s,a)=>(s[a]=window.getComputedStyle(document.documentElement).getPropertyValue(a),s),{}),c=document.documentElement.getAttribute("saved-theme")==="dark";r.initialize({startOnLoad:!1,securityLevel:"loose",theme:c?"dark":"base",themeVariables:{fontFamily:n["--codeFont"],primaryColor:n["--light"],primaryTextColor:n["--darkgray"],primaryBorderColor:n["--tertiary"],lineColor:n["--darkgray"],secondaryColor:n["--secondary"],tertiaryColor:n["--tertiary"],clusterBkg:n["--light"],edgeLabelBackground:n["--highlight"]}}),await r.run({nodes:e})}await o(),document.addEventListener("themechange",o),window.addCleanup(()=>document.removeEventListener("themechange",o));for(let n=0;n<e.length;n++){let v=function(){let g=l.querySelector("#mermaid-space"),m=l.querySelector(".mermaid-content");if(!m)return;y(m);let w=c.querySelector("svg").cloneNode(!0);m.appendChild(w),l.classList.add("active"),g.style.cursor="grab",u=new h(g,m)},M=function(){l.classList.remove("active"),u?.cleanup(),u=null},c=e[n],s=c.parentElement,a=s.querySelector(".clipboard-button"),d=s.querySelector(".expand-button"),p=window.getComputedStyle(a),L=a.offsetWidth+parseFloat(p.marginLeft||"0")+parseFloat(p.marginRight||"0");d.style.right=`calc(${L}px + 0.3rem)`,s.prepend(d);let l=s.querySelector("#mermaid-container");if(!l)return;let u=null;d.addEventListener("click",v),f(l,M),window.addCleanup(()=>{u?.cleanup(),d.removeEventListener("click",v)})}});
+</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript"></script><script src="../postscript.00b09a8c.js" type="module"></script></html>

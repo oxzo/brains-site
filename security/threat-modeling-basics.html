@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en"><head><title>Threat Modeling Basics · second-brain</title><meta charset="utf-8"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400;1,600&amp;family=Inter:wght@400;700&amp;family=JetBrains Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="synapse"/><meta property="og:title" content="Threat Modeling Basics · second-brain"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Threat Modeling Basics · second-brain"/><meta name="twitter:description" content="Threat Modeling Basics What it is Threat modeling is a structured process for identifying, quantifying, and addressing security threats to a system. Rather than reacting to vulnerabilities after they’re exploited, threat modeling forces you to think like an attacker during the design phase — systematically decomposing a system into components, mapping data flows, and asking “what could go wrong?” at every boundary."/><meta property="og:description" content="Threat Modeling Basics What it is Threat modeling is a structured process for identifying, quantifying, and addressing security threats to a system. Rather than reacting to vulnerabilities after they’re exploited, threat modeling forces you to think like an attacker during the design phase — systematically decomposing a system into components, mapping data flows, and asking “what could go wrong?” at every boundary."/><meta property="og:image:alt" content="Threat Modeling Basics What it is Threat modeling is a structured process for identifying, quantifying, and addressing security threats to a system. Rather than reacting to vulnerabilities after they’re exploited, threat modeling forces you to think like an attacker during the design phase — systematically decomposing a system into components, mapping data flows, and asking “what could go wrong?” at every boundary."/><meta property="twitter:domain" content="oxzo.github.io/brains-site"/><meta property="og:url" content="https://oxzo.github.io/brains-site/security/threat-modeling-basics"/><meta property="twitter:url" content="https://oxzo.github.io/brains-site/security/threat-modeling-basics"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="Threat Modeling Basics What it is Threat modeling is a structured process for identifying, quantifying, and addressing security threats to a system. Rather than reacting to vulnerabilities after they’re exploited, threat modeling forces you to think like an attacker during the design phase — systematically decomposing a system into components, mapping data flows, and asking “what could go wrong?” at every boundary."/><meta name="generator" content="Quartz"/><link href="../index.322b98b4.css" rel="stylesheet" type="text/css" spa-preserve/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  padding: 2rem;
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL2hvbWUvcnVubmVyL3dvcmsvYnJhaW5zL2JyYWlucy9zaXRlL3F1YXJ0ei9jb21wb25lbnRzL3N0eWxlcyIsInNvdXJjZXMiOlsibWVybWFpZC5pbmxpbmUuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTs7QUFHRjtFQUNFO0VBQ0E7O0FBR0Y7RUFDRTs7O0FBS0Y7RUFDRTtFQUNBOzs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7O0FBR0Y7RUFDRTs7QUFJRjtFQUNFO0VBQ0E7RUFDQSIsInNvdXJjZXNDb250ZW50IjpbIi5leHBhbmQtYnV0dG9uIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbG9hdDogcmlnaHQ7XG4gIHBhZGRpbmc6IDAuNHJlbTtcbiAgbWFyZ2luOiAwLjNyZW07XG4gIHJpZ2h0OiAwOyAvLyBOT1RFOiByaWdodCB3aWxsIGJlIHNldCBpbiBtZXJtYWlkLmlubGluZS50c1xuICBjb2xvcjogdmFyKC0tZ3JheSk7XG4gIGJvcmRlci1jb2xvcjogdmFyKC0tZGFyayk7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWxpZ2h0KTtcbiAgYm9yZGVyOiAxcHggc29saWQ7XG4gIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgb3BhY2l0eTogMDtcbiAgdHJhbnNpdGlvbjogMC4ycztcblxuICAmID4gc3ZnIHtcbiAgICBmaWxsOiB2YXIoLS1saWdodCk7XG4gICAgZmlsdGVyOiBjb250cmFzdCgwLjMpO1xuICB9XG5cbiAgJjpob3ZlciB7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIGJvcmRlci1jb2xvcjogdmFyKC0tc2Vjb25kYXJ5KTtcbiAgfVxuXG4gICY6Zm9jdXMge1xuICAgIG91dGxpbmU6IDA7XG4gIH1cbn1cblxucHJlIHtcbiAgJjpob3ZlciA+IC5leHBhbmQtYnV0dG9uIHtcbiAgICBvcGFjaXR5OiAxO1xuICAgIHRyYW5zaXRpb246IDAuMnM7XG4gIH1cbn1cblxuI21lcm1haWQtY29udGFpbmVyIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICBjb250YWluOiBsYXlvdXQ7XG4gIHotaW5kZXg6IDk5OTtcbiAgbGVmdDogMDtcbiAgdG9wOiAwO1xuICB3aWR0aDogMTAwdnc7XG4gIGhlaWdodDogMTAwdmg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGRpc3BsYXk6IG5vbmU7XG4gIGJhY2tkcm9wLWZpbHRlcjogYmx1cig0cHgpO1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuNSk7XG5cbiAgJi5hY3RpdmUge1xuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgfVxuXG4gICYgPiAjbWVybWFpZC1zcGFjZSB7XG4gICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1saWdodCk7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDUwJTtcbiAgICBsZWZ0OiA1MCU7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gICAgaGVpZ2h0OiA4MHZoO1xuICAgIHdpZHRoOiA4MHZ3O1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG5cbiAgICAmID4gLm1lcm1haWQtY29udGVudCB7XG4gICAgICBwYWRkaW5nOiAycmVtO1xuICAgICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgICAgdHJhbnNmb3JtLW9yaWdpbjogMCAwO1xuICAgICAgdHJhbnNpdGlvbjogdHJhbnNmb3JtIDAuMXMgZWFzZTtcbiAgICAgIG92ZXJmbG93OiB2aXNpYmxlO1xuICAgICAgbWluLWhlaWdodDogMjAwcHg7XG4gICAgICBtaW4td2lkdGg6IDIwMHB4O1xuXG4gICAgICBwcmUge1xuICAgICAgICBtYXJnaW46IDA7XG4gICAgICAgIGJvcmRlcjogbm9uZTtcbiAgICAgIH1cblxuICAgICAgc3ZnIHtcbiAgICAgICAgbWF4LXdpZHRoOiBub25lO1xuICAgICAgICBoZWlnaHQ6IGF1dG87XG4gICAgICB9XG4gICAgfVxuXG4gICAgJiA+IC5tZXJtYWlkLWNvbnRyb2xzIHtcbiAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgIGJvdHRvbTogMjBweDtcbiAgICAgIHJpZ2h0OiAyMHB4O1xuICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgIGdhcDogOHB4O1xuICAgICAgcGFkZGluZzogOHB4O1xuICAgICAgYmFja2dyb3VuZDogdmFyKC0tbGlnaHQpO1xuICAgICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICAgIGJvcmRlci1yYWRpdXM6IDZweDtcbiAgICAgIGJveC1zaGFkb3c6IDAgMnB4IDRweCByZ2JhKDAsIDAsIDAsIDAuMSk7XG4gICAgICB6LWluZGV4OiAyO1xuXG4gICAgICAubWVybWFpZC1jb250cm9sLWJ1dHRvbiB7XG4gICAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAgICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICAgICAgICB3aWR0aDogMzJweDtcbiAgICAgICAgaGVpZ2h0OiAzMnB4O1xuICAgICAgICBwYWRkaW5nOiAwO1xuICAgICAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodCk7XG4gICAgICAgIGNvbG9yOiB2YXIoLS1kYXJrKTtcbiAgICAgICAgYm9yZGVyLXJhZGl1czogNHB4O1xuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgICAgIGZvbnQtc2l6ZTogMTZweDtcbiAgICAgICAgZm9udC1mYW1pbHk6IHZhcigtLWJvZHlGb250KTtcbiAgICAgICAgdHJhbnNpdGlvbjogYWxsIDAuMnMgZWFzZTtcblxuICAgICAgICAmOmhvdmVyIHtcbiAgICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICB9XG5cbiAgICAgICAgJjphY3RpdmUge1xuICAgICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWSgxcHgpO1xuICAgICAgICB9XG5cbiAgICAgICAgLy8gU3R5bGUgdGhlIHJlc2V0IGJ1dHRvbiBkaWZmZXJlbnRseVxuICAgICAgICAmOm50aC1jaGlsZCgyKSB7XG4gICAgICAgICAgd2lkdGg6IGF1dG87XG4gICAgICAgICAgcGFkZGluZzogMCAxMnB4O1xuICAgICAgICAgIGZvbnQtc2l6ZTogMTRweDtcbiAgICAgICAgfVxuICAgICAgfVxuICAgIH1cbiAgfVxufVxuIl19 */</style><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" spa-preserve/><script src="../prescript.be9697b4.js" type="application/javascript" spa-preserve></script><script type="application/javascript" spa-preserve>const fetchData = fetch("../static/contentIndex.73890e1e.json").then(data => data.json())</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://oxzo.github.io/brains-site/index.xml"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://oxzo.github.io/brains-site/security/threat-modeling-basics-og-image.webp"/><meta property="og:image:url" content="https://oxzo.github.io/brains-site/security/threat-modeling-basics-og-image.webp"/><meta name="twitter:image" content="https://oxzo.github.io/brains-site/security/threat-modeling-basics-og-image.webp"/><meta property="og:image:type" content="image/.webp"/></head><body data-slug="security/threat-modeling-basics"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">synapse</a></h2><div class="spacer mobile-only"></div><div style="display: flex; flex-direction: row; flex-wrap: nowrap; gap: 1rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button"><p>Search</p><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Search for something" placeholder="Search for something"/><div class="search-layout" data-preview="true"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Dark mode"><title>Dark mode</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Light mode"><title>Light mode</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div></div><div class="explorer" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a,b)=>!a.isFolder&amp;&amp;!b.isFolder||a.isFolder&amp;&amp;b.isFolder?a.displayName.localeCompare(b.displayName,void 0,{numeric:!0,sensitivity:\&quot;base\&quot;}):!a.isFolder&amp;&amp;b.isFolder?1:-1&quot;,&quot;filterFn&quot;:&quot;node=>node.slugSegment!==\&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;node=>node&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-content"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>Explorer</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="explorer-content" aria-expanded="false"><ul class="explorer-ul overflow" id="0x8mfk"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#"></a></li></template><template id="template-folder"><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../security/">security</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>Threat Modeling Basics</a></div></nav><h1 class="article-title">Threat Modeling Basics</h1><p show-comma="true" class="content-meta"><time datetime="2026-08-07T00:00:00.000Z">Aug 07, 2026</time><span>13 min read</span></p><ul class="tags"><li><a href="../tags/security" class="internal tag-link">security</a></li><li><a href="../tags/threat-modeling" class="internal tag-link">threat-modeling</a></li><li><a href="../tags/stride" class="internal tag-link">stride</a></li><li><a href="../tags/risk-assessment" class="internal tag-link">risk-assessment</a></li><li><a href="../tags/publish" class="internal tag-link">publish</a></li></ul></div></div><article class="popover-hint"><h1 id="threat-modeling-basics">Threat Modeling Basics<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#threat-modeling-basics" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h2 id="what-it-is">What it is<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#what-it-is" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Threat modeling is a structured process for identifying, quantifying, and addressing security threats to a system. Rather than reacting to vulnerabilities after they’re exploited, threat modeling forces you to think like an attacker during the design phase — systematically decomposing a system into components, mapping data flows, and asking “what could go wrong?” at every boundary.</p>
+<h2 id="why-it-matters">Why it matters<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#why-it-matters" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Most security breaches exploit architectural weaknesses, not exotic zero-days. A system that was never threat-modeled tends to accumulate implicit trust assumptions that attackers love to violate — “the database is only reachable internally” or “users won’t modify the request body”. Threat modeling surfaces these assumptions early, when fixing them is cheap. It also gives you a rational basis for prioritizing security work instead of chasing the latest CVE.</p>
+<p>The case for it is primarily <em>temporal</em>: before implementation, the architecture is still cheap to change, and cross-boundary authority errors have not yet been buried in code. That is a strong argument, and it is not the same as an evidence-backed one — see <a href="#does-it-work-the-cost-and-coverage-evidence" class="internal alias">Does it work? The cost and coverage evidence</a> below before treating threat modeling as a control rather than a design activity.</p>
+<h2 id="details">Details<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#details" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="the-threat-modeling-process">The Threat Modeling Process<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-threat-modeling-process" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>The core loop, regardless of framework:</p>
+<ol>
+<li><strong>Decompose the system</strong> — Draw a data flow diagram (DFD) showing processes, data stores, external entities, and trust boundaries.</li>
+<li><strong>Identify threats</strong> — For each element and data flow, enumerate what could go wrong using a structured framework (STRIDE, PASTA, attack trees, etc.).</li>
+<li><strong>Rate severity</strong> — Score each threat by likelihood and impact. DREAD (Damage, Reproducibility, Exploitability, Affected users, Discoverability) or CVSS can help here, but even a simple High/Medium/Low matrix works for small teams.</li>
+<li><strong>Plan mitigations</strong> — For each threat, decide: mitigate (fix it), accept (risk is tolerable), transfer (insurance, SLA), or avoid (remove the feature).</li>
+<li><strong>Validate</strong> — Verify mitigations actually address the threats. Re-model when the system changes.</li>
+</ol>
+<h3 id="data-flow-diagrams-dfds">Data Flow Diagrams (DFDs)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#data-flow-diagrams-dfds" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>DFDs are the starting artifact. They use four element types:</p>
+<ul>
+<li><strong>External entities</strong> (rectangles) — Users, third-party APIs, anything outside your control.</li>
+<li><strong>Processes</strong> (circles) — Code that transforms data. Your application logic.</li>
+<li><strong>Data stores</strong> (parallel lines) — Databases, files, caches, queues.</li>
+<li><strong>Data flows</strong> (arrows) — How data moves between elements. Label with protocol and data type.</li>
+</ul>
+<p>The critical addition is <strong>trust boundaries</strong> (dashed lines). Every place where the trust level changes is a trust boundary — between your frontend and backend, between your backend and a third-party API, between user input and your parser. Most threats live at trust boundaries.</p>
+<p>Start with a Level 0 DFD (context diagram) showing the whole system as one process, then expand to Level 1 showing major subsystems. You rarely need to go deeper than Level 2 for threat modeling.</p>
+<p><strong>Tooling for DFDs</strong>:</p>
+<ul>
+<li><strong>draw.io / diagrams.net</strong> — Free, works offline, exports to SVG/PNG. The <code>Threat Modeling</code> shape library has DFD elements built in.</li>
+<li><strong>Microsoft Threat Modeling Tool</strong> — Windows only, generates STRIDE threats automatically from DFDs. Free.</li>
+<li><strong>OWASP Threat Dragon</strong> — Open-source, browser-based, generates threat reports from DFDs.</li>
+<li><strong>Mermaid diagrams</strong> — If you prefer text-as-code: embed DFDs in markdown and render in Obsidian or CI.</li>
+<li><strong>threagile</strong> — Threat model as YAML, auto-generates risk reports and DFDs. Good for infrastructure-heavy models.</li>
+</ul>
+<h3 id="stride-framework">STRIDE Framework<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#stride-framework" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Developed at Microsoft as part of the SDL (Security Development Lifecycle). Each letter maps to a category of threat and its corresponding security property:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Threat</th><th>Violated Property</th><th>Example</th></tr></thead><tbody><tr><td><strong>Spoofing</strong></td><td>Authentication</td><td>Attacker impersonates a legitimate user via stolen credentials or forged tokens</td></tr><tr><td><strong>Tampering</strong></td><td>Integrity</td><td>Attacker modifies data in transit (MITM) or at rest (SQL injection altering records)</td></tr><tr><td><strong>Repudiation</strong></td><td>Non-repudiation</td><td>User denies performing an action and there are no logs to prove otherwise</td></tr><tr><td><strong>Information Disclosure</strong></td><td>Confidentiality</td><td>Error messages leak stack traces; API returns fields the user shouldn’t see</td></tr><tr><td><strong>Denial of Service</strong></td><td>Availability</td><td>Resource exhaustion, algorithmic complexity attacks, or simply flooding endpoints</td></tr><tr><td><strong>Elevation of Privilege</strong></td><td>Authorization</td><td>Unprivileged user gains admin access via IDOR, path traversal, or broken access control</td></tr></tbody></table></div>
+<p><strong>STRIDE-per-element</strong>: Apply STRIDE to each DFD element. External entities are primarily susceptible to Spoofing. Processes are susceptible to all six. Data stores are susceptible to Tampering, Information Disclosure, and Denial of Service. Data flows are susceptible to Tampering, Information Disclosure, and Denial of Service.</p>
+<p><strong>STRIDE-per-interaction</strong>: Apply STRIDE to each data flow crossing a trust boundary. This is more focused and scales better for complex systems.</p>
+<h3 id="beyond-stride--other-frameworks">Beyond STRIDE — Other Frameworks<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#beyond-stride--other-frameworks" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>PASTA</strong> (Process for Attack Simulation and Threat Analysis) — A seven-stage, risk-centric methodology that starts with business objectives and works down to technical threat enumeration. Better than STRIDE when you need to tie threats directly to business impact and present findings to non-technical stakeholders. Stages: (1) Define objectives, (2) Define technical scope, (3) Application decomposition, (4) Threat analysis, (5) Vulnerability analysis, (6) Attack modeling, (7) Risk/impact analysis.</p>
+<p><strong>LINDDUN</strong> — Privacy-focused threat modeling framework. Six categories: Linkability, Identifiability, Non-repudiation (in privacy, non-repudiation is a <em>threat</em> — users want plausible deniability), Detectability, Disclosure of information, Unawareness, Non-compliance. Use when GDPR or other privacy regulations apply.</p>
+<p><strong>VAST</strong> (Visual, Agile, and Simple Threat modeling) — Designed for Agile/DevOps environments. Produces two types of models: application threat models (for developers) and operational threat models (for infrastructure teams). Integrates into sprint workflows rather than being a separate phase.</p>
+<p><strong>MITRE ATT&amp;CK</strong> — Not a threat modeling methodology per se, but a comprehensive knowledge base of real-world adversary tactics and techniques. Use it to validate your threat model: for each STRIDE threat you identify, check ATT&amp;CK for known techniques an attacker would use. This grounds your model in reality rather than theory. Browse at <a href="https://attack.mitre.org/" class="external">https://attack.mitre.org/<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>.</p>
+<h3 id="attack-trees">Attack Trees<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#attack-trees" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Attack trees model threats as a hierarchical goal structure:</p>
+<ul>
+<li><strong>Root node</strong>: The attacker’s goal (e.g., “Steal user credentials”).</li>
+<li><strong>Child nodes</strong>: Ways to achieve the parent goal, connected by AND/OR gates.</li>
+<li><strong>Leaf nodes</strong>: Concrete attack steps.</li>
+</ul>
+<p>Example (simplified):</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="github-light github-dark"><code data-language="text" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>Steal user credentials (OR)</span></span>
+<span data-line><span>├── Phish the user (AND)</span></span>
+<span data-line><span>│   ├── Craft convincing email</span></span>
+<span data-line><span>│   └── Host fake login page</span></span>
+<span data-line><span>├── Exploit password reset flow (OR)</span></span>
+<span data-line><span>│   ├── Enumerate valid emails via timing</span></span>
+<span data-line><span>│   └── Intercept reset token (weak randomness)</span></span>
+<span data-line><span>└── Dump the database (AND)</span></span>
+<span data-line><span>    ├── Find SQL injection point</span></span>
+<span data-line><span>    └── Exfiltrate via error-based or blind technique</span></span></code></pre></figure>
+<p>Attack trees are powerful because they let you assign costs and probabilities to leaf nodes and propagate them up. If phishing costs <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord">50</span><span class="mord mathnormal">an</span><span class="mord mathnormal">d</span><span class="mord mathnormal">ha</span><span class="mord mathnormal">s</span><span class="mord mathnormal">an</span><span class="mord">80</span></span></span></span>10K exploit toolkit, you know where to focus defenses.</p>
+<p><strong>Quantitative risk scoring with attack trees</strong>: Assign each leaf node three values — cost to attacker, probability of success, and impact to defender. Propagate up: OR gates take the max probability (attacker picks the easiest path), AND gates multiply probabilities (attacker must succeed at all steps). This gives you a rational basis for security investment — spend on mitigations where the attacker’s cost-to-benefit ratio is most favorable.</p>
+<p><strong>Tools for attack trees</strong>: ADTool (open-source, graphical), SecuriCAD (commercial, simulation-based), or simply a markdown outline with annotations.</p>
+<h3 id="threat-modeling-real-world-examples">Threat Modeling Real-World Examples<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#threat-modeling-real-world-examples" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Example 1: Self-hosted web app with API</strong></p>
+<ol>
+<li>Draw DFD: Browser <span>→</span> Nginx reverse proxy <span>→</span> Node.js API <span>→</span> PostgreSQL. Trust boundaries: internet/DMZ (at Nginx), DMZ/internal (at API), API/database.</li>
+<li>STRIDE at each boundary:
+<ul>
+<li>Internet/DMZ: Spoofing (forged JWTs), DoS (HTTP flood), Information Disclosure (server version headers).</li>
+<li>DMZ/Internal: Tampering (SSRF from API to internal services), Elevation of Privilege (API escape to host).</li>
+<li>API/Database: SQL injection (Tampering), excessive data returns (Information Disclosure).</li>
+</ul>
+</li>
+<li>Mitigations: Rate limiting at Nginx, JWT validation with <code>iss</code>/<code>aud</code> claims, parameterized queries, network segmentation, <code>Server</code> header removal.</li>
+</ol>
+<p><strong>Example 2: CI/CD pipeline (a la the xz-utils attack)</strong></p>
+<ol>
+<li>DFD: Developer workstation <span>→</span> GitHub <span>→</span> GitHub Actions <span>→</span> Container registry <span>→</span> Kubernetes.</li>
+<li>Key trust boundaries: developer identity (SSH/GPG keys), CI runner (shared infrastructure), registry upload credentials.</li>
+<li>STRIDE analysis reveals: Spoofing (compromised maintainer account), Tampering (malicious PR modifying build scripts), Information Disclosure (secrets leaked in CI logs).</li>
+<li>Mitigations: Branch protection rules, required code review, <a href="https://github.com/oxzo/brains/tree/main/knowledge/security/supply-chain-security.md" class="external">SLSA provenance<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>, secret scanning, ephemeral CI runners.</li>
+</ol>
+<h3 id="does-it-work-the-cost-and-coverage-evidence">Does it work? The cost and coverage evidence<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#does-it-work-the-cost-and-coverage-evidence" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Threat modeling is one of the most confidently recommended practices in security and one of the least measured. The evidence that exists is worth knowing because it is <em>encouraging about validity and discouraging about completeness</em>.</p>
+<p>Scandariato, Wuyts &amp; Joosen’s descriptive study of Microsoft’s technique (<em>Requirements Engineering</em>, 2015) is the standard reference. It ran STRIDE with 57 final-year master’s students and measured productivity, precision, and recall against a researcher-constructed baseline. The headline results: <strong>precision ≈ 0.81, recall ≈ 0.36.</strong></p>
+<p>Read those two numbers together:</p>
+<ul>
+<li><strong>Most threats identified were real.</strong> Four in five findings were valid, so the output of a session is not noise.</li>
+<li><strong>Roughly two-thirds of the baseline threats were missed.</strong> A completed threat model is not a coverage claim.</li>
+</ul>
+<p><em>(Precision and recall corroborated across two independent secondary sources on 2026-08-07; the paywalled paper was not read directly. Per-hour productivity figures circulate for this study but were not verified and are deliberately omitted here. Scope: students, one method, one modeled system, an expert-built baseline — not a production breach study.)</em></p>
+<p>The practical consequence is not “don’t threat model.” It is: <strong>treat the output as a set of leads with a known miss rate</strong>, never as the reason a design is safe. A model that finds five real threats and misses ten is still worth the afternoon; a model treated as an assurance artifact is <a href="../security/adversarial-vs-reliability-reasoning" class="internal alias" data-slug="security/adversarial-vs-reliability-reasoning">average-case evidence against an adversary who selects the tail</a>.</p>
+<h3 id="make-it-an-executable-design-review">Make it an executable design review<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#make-it-an-executable-design-review" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>The failure mode this evidence points at is ceremony — a diagram and a taxonomy that create confidence without changing anything. The counter is a completion rule: <strong>every accepted threat must produce at least one of</strong> —</p>
+<ul>
+<li>a removed authority,</li>
+<li>an architectural boundary,</li>
+<li>an invariant or type that makes the state unrepresentable (<a href="../security/designing-out-defect-classes" class="internal" data-slug="security/designing-out-defect-classes">designing-out-defect-classes</a>),</li>
+<li>a negative or metamorphic test (<a href="../security/authorization-as-a-protocol" class="internal" data-slug="security/authorization-as-a-protocol">authorization-as-a-protocol</a>),</li>
+<li>an observable event in the evidence plane (<a href="../security/post-breach-investigability" class="internal" data-slug="security/post-breach-investigability">post-breach-investigability</a>),</li>
+<li>a recovery action,</li>
+<li>or an explicitly accepted, dated residual risk.</li>
+</ul>
+<p>If a session produces none of these, it produced a document. Re-run the model on <strong>boundary-changing diffs</strong> rather than on a calendar, and stop when new scenarios stop changing the design or the tests.</p>
+<h3 id="when-to-threat-model">When to Threat Model<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#when-to-threat-model" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li><strong>During initial design</strong> — Before writing code. The DFD doesn’t need to be perfect; even a whiteboard sketch helps.</li>
+<li><strong>Before major changes</strong> — New authentication flow? New external integration? New data store? Re-model the affected area.</li>
+<li><strong>After incidents</strong> — A breach reveals gaps in your model. Update it.</li>
+<li><strong>Periodically</strong> — Systems drift. Annual reviews catch creeping assumptions.</li>
+</ul>
+<h3 id="lightweight-threat-modeling-for-solo-developers--small-teams">Lightweight Threat Modeling for Solo Developers / Small Teams<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#lightweight-threat-modeling-for-solo-developers--small-teams" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>You don’t need a formal process or expensive tools. The minimum viable threat model:</p>
+<ol>
+<li><strong>Sketch the DFD</strong> on paper or in a tool like draw.io. 15 minutes.</li>
+<li><strong>Walk each trust boundary</strong> and ask the STRIDE questions. Write threats in a markdown file or issue tracker. 30 minutes.</li>
+<li><strong>Rank by gut feel</strong> — High/Medium/Low. Don’t overthink scoring.</li>
+<li><strong>File issues</strong> for the High and Medium threats. Accept the Lows explicitly (write it down so future-you knows it was deliberate).</li>
+<li><strong>Timebox it</strong> — A 1-hour session per quarter is infinitely better than never modeling.</li>
+</ol>
+<p><strong>Minimal threat model template</strong> (copy into a markdown file or issue):</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="github-light github-dark"><code data-language="text" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>## Threat Model: [System/Feature Name]</span></span>
+<span data-line><span>Date: YYYY-MM-DD | Participants: [names]</span></span>
+<span data-line> </span>
+<span data-line><span>### System Description</span></span>
+<span data-line><span>[1-2 sentence summary of what it does and who uses it]</span></span>
+<span data-line> </span>
+<span data-line><span>### Data Flow Diagram</span></span>
+<span data-line><span>[Link to draw.io/Mermaid diagram, or ASCII sketch]</span></span>
+<span data-line> </span>
+<span data-line><span>### Trust Boundaries</span></span>
+<span data-line><span>1. [Boundary 1]: [what changes across this boundary]</span></span>
+<span data-line><span>2. [Boundary 2]: ...</span></span>
+<span data-line> </span>
+<span data-line><span>### Threats Identified</span></span>
+<span data-line><span>| # | Category | Threat | Severity | Mitigation | Status |</span></span>
+<span data-line><span>|---|----------|--------|----------|------------|--------|</span></span>
+<span data-line><span>| 1 | Spoofing | ... | High | ... | Open |</span></span>
+<span data-line> </span>
+<span data-line><span>### Accepted Risks</span></span>
+<span data-line><span>- [Risk]: [Reason for acceptance] — Reviewed [date]</span></span>
+<span data-line> </span>
+<span data-line><span>### Next Review Date: [date]</span></span></code></pre></figure>
+<p>Adam Shostack’s “four question” framing is useful for teams new to threat modeling:</p>
+<ol>
+<li>What are we building?</li>
+<li>What can go wrong?</li>
+<li>What are we going to do about it?</li>
+<li>Did we do a good enough job?</li>
+</ol>
+<h3 id="connection-to-ai-security">Connection to AI Security<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#connection-to-ai-security" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>LLM-based systems introduce novel threat modeling challenges. Mapping STRIDE to AI agents:</p>
+<ul>
+<li><strong>Spoofing</strong>: Prompt injection can make an agent impersonate system instructions — the model can’t reliably distinguish user input from system instructions.</li>
+<li><strong>Information Disclosure</strong>: Prompt extraction attacks leak system prompts and tool configurations. Indirect injection can exfiltrate context window contents.</li>
+<li><strong>Elevation of Privilege</strong>: An attacker’s injected prompt can escalate from “user message” trust level to “system instruction” trust level, gaining access to tools and data the attacker shouldn’t control.</li>
+<li><strong>Tampering</strong>: Poisoned training data or compromised tool outputs alter agent behavior.</li>
+<li><strong>Denial of Service</strong>: Context window exhaustion, infinite tool-calling loops.</li>
+</ul>
+<p>When threat modeling an AI system, treat the model itself as an untrustworthy process — it’s a probabilistic component that can be manipulated. Draw trust boundaries around every tool the model can call, and assume injected content can cross those boundaries. See <a href=".././ai/prompt-injection" class="internal" data-slug="ai/prompt-injection">prompt-injection</a> and <a href=".././ai/ai-agent-security" class="internal" data-slug="ai/ai-agent-security">ai-agent-security</a> for deeper treatment.</p>
+<h3 id="threat-modeling-checklist">Threat Modeling Checklist<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#threat-modeling-checklist" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Quick-reference checklist to run through during a threat modeling session:</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled/> <strong>System scope defined</strong> — Clear boundary of what’s in/out of scope for this model</li>
+<li class="task-list-item"><input type="checkbox" disabled/> <strong>DFD drawn</strong> — All processes, data stores, external entities, and data flows mapped</li>
+<li class="task-list-item"><input type="checkbox" disabled/> <strong>Trust boundaries identified</strong> — Every point where privilege, ownership, or network zone changes</li>
+<li class="task-list-item"><input type="checkbox" disabled/> <strong>STRIDE applied</strong> — Each trust boundary examined for all six threat categories</li>
+<li class="task-list-item"><input type="checkbox" disabled/> <strong>Severity rated</strong> — Each threat scored (at minimum High/Medium/Low)</li>
+<li class="task-list-item"><input type="checkbox" disabled/> <strong>Mitigations assigned</strong> — Each High/Medium threat has a planned mitigation or explicit acceptance</li>
+<li class="task-list-item"><input type="checkbox" disabled/> <strong>Third-party dependencies reviewed</strong> — Threats from external APIs, libraries, and services considered (see <a href="https://github.com/oxzo/brains/tree/main/knowledge/security/supply-chain-security.md" class="external">supply-chain-security<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>)</li>
+<li class="task-list-item"><input type="checkbox" disabled/> <strong>Authentication and authorization flows traced</strong> — Token lifecycle, session management, privilege boundaries mapped</li>
+<li class="task-list-item"><input type="checkbox" disabled/> <strong>Data classification done</strong> — Sensitive data (PII, credentials, keys) identified and their flows traced</li>
+<li class="task-list-item"><input type="checkbox" disabled/> <strong>Findings documented</strong> — Threats, mitigations, and accepted risks recorded in a persistent, reviewable format</li>
+<li class="task-list-item"><input type="checkbox" disabled/> <strong>Review date set</strong> — Next scheduled review on the calendar</li>
+</ul>
+<h2 id="related">Related<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#related" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><a href="../security/adversarial-vs-reliability-reasoning" class="internal" data-slug="security/adversarial-vs-reliability-reasoning">adversarial-vs-reliability-reasoning</a> — why a completed model with 0.36 recall is not an assurance claim</li>
+<li><a href="../security/designing-out-defect-classes" class="internal" data-slug="security/designing-out-defect-classes">designing-out-defect-classes</a> — where an accepted threat should land: unrepresentable states</li>
+<li><a href="../security/authorization-as-a-protocol" class="internal" data-slug="security/authorization-as-a-protocol">authorization-as-a-protocol</a> — where the trust-boundary findings become testable relations</li>
+<li><a href="../security/ambient-authority-and-blast-radius" class="internal" data-slug="security/ambient-authority-and-blast-radius">ambient-authority-and-blast-radius</a> — the “if this is compromised” question a DFD doesn’t ask</li>
+<li><a href="../security/post-breach-investigability" class="internal" data-slug="security/post-breach-investigability">post-breach-investigability</a> — the observable-event outcome of an accepted threat</li>
+<li><a href="../security/linux-hardening-checklist" class="internal" data-slug="security/linux-hardening-checklist">linux-hardening-checklist</a> — Applying mitigations from threat models to a real system</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/security/supply-chain-security.md" class="external">supply-chain-security<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — Threat modeling your build and dependency pipeline</li>
+<li><a href=".././ai/ai-agent-security" class="internal" data-slug="ai/ai-agent-security">ai-agent-security</a> — Permission models for AI agents</li>
+<li><a href=".././ai/prompt-injection" class="internal" data-slug="ai/prompt-injection">prompt-injection</a> — The primary attack vector unique to LLM systems</li>
+</ul>
+<h2 id="sources">Sources<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#sources" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>Adam Shostack, <em>Threat Modeling: Designing for Security</em> (Wiley, 2014) — The definitive book on the subject</li>
+<li>Scandariato, R., Wuyts, K. &amp; Joosen, W. (2015) — “A descriptive study of Microsoft’s threat modeling technique” — <em>Requirements Engineering</em> — <a href="https://doi.org/10.1007/s00766-013-0195-2" class="external">https://doi.org/10.1007/s00766-013-0195-2<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>. <em>57 final-year master’s students; measured productivity, precision, and recall. Precision ≈ 0.81, recall ≈ 0.36 corroborated across independent secondary sources 2026-08-07; primary paywalled and not read. Academic setting, one system, expert-constructed baseline.</em></li>
+<li>Microsoft Security Development Lifecycle — Original home of STRIDE</li>
+<li>OWASP Threat Modeling Cheat Sheet — <a href="https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html" class="external">https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>Bruce Schneier, <em>Attack Trees</em> (Dr. Dobb’s Journal, 1999) — Original formalization of attack trees</li>
+<li>OWASP Threat Modeling Playbook — Practical worksheets for team exercises</li>
+<li>MITRE ATT&amp;CK Framework — <a href="https://attack.mitre.org/" class="external">https://attack.mitre.org/<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — Real-world adversary tactics and techniques</li>
+<li>LINDDUN privacy threat modeling — <a href="https://www.linddun.org/" class="external">https://www.linddun.org/<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>Threagile (threat model as code) — <a href="https://github.com/Threagile/threagile" class="external">https://github.com/Threagile/threagile<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+</ul></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>Graph View</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc desktop-only"><button type="button" class="toc-header" aria-controls="toc-content" aria-expanded="true"><h3>Table of Contents</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="toc-content"><ul id="h9l23p" class="overflow"><li class="depth-0"><a href="#threat-modeling-basics" data-for="threat-modeling-basics">Threat Modeling Basics</a></li><li class="depth-1"><a href="#what-it-is" data-for="what-it-is">What it is</a></li><li class="depth-1"><a href="#why-it-matters" data-for="why-it-matters">Why it matters</a></li><li class="depth-1"><a href="#details" data-for="details">Details</a></li><li class="depth-2"><a href="#the-threat-modeling-process" data-for="the-threat-modeling-process">The Threat Modeling Process</a></li><li class="depth-2"><a href="#data-flow-diagrams-dfds" data-for="data-flow-diagrams-dfds">Data Flow Diagrams (DFDs)</a></li><li class="depth-2"><a href="#stride-framework" data-for="stride-framework">STRIDE Framework</a></li><li class="depth-2"><a href="#beyond-stride--other-frameworks" data-for="beyond-stride--other-frameworks">Beyond STRIDE — Other Frameworks</a></li><li class="depth-2"><a href="#attack-trees" data-for="attack-trees">Attack Trees</a></li><li class="depth-2"><a href="#threat-modeling-real-world-examples" data-for="threat-modeling-real-world-examples">Threat Modeling Real-World Examples</a></li><li class="depth-2"><a href="#does-it-work-the-cost-and-coverage-evidence" data-for="does-it-work-the-cost-and-coverage-evidence">Does it work? The cost and coverage evidence</a></li><li class="depth-2"><a href="#make-it-an-executable-design-review" data-for="make-it-an-executable-design-review">Make it an executable design review</a></li><li class="depth-2"><a href="#when-to-threat-model" data-for="when-to-threat-model">When to Threat Model</a></li><li class="depth-2"><a href="#lightweight-threat-modeling-for-solo-developers--small-teams" data-for="lightweight-threat-modeling-for-solo-developers--small-teams">Lightweight Threat Modeling for Solo Developers / Small Teams</a></li><li class="depth-2"><a href="#connection-to-ai-security" data-for="connection-to-ai-security">Connection to AI Security</a></li><li class="depth-2"><a href="#threat-modeling-checklist" data-for="threat-modeling-checklist">Threat Modeling Checklist</a></li><li class="depth-1"><a href="#related" data-for="related">Related</a></li><li class="depth-1"><a href="#sources" data-for="sources">Sources</a></li><li class="overflow-end"></li></ul></div></div><div class="backlinks"><h3>Backlinks</h3><ul id="xacmdj" class="overflow"><li><a href="../general/ooda-loop" class="internal">OODA Loop</a></li><li><a href="../security/adversarial-vs-reliability-reasoning" class="internal">Adversarial vs. Reliability Reasoning</a></li><li><a href="../security/authorization-as-a-protocol" class="internal">Authorization as a Protocol</a></li><li><a href="../security/incident-response-basics" class="internal">Incident Response Basics</a></li><li><a href="../security/linux-hardening-checklist" class="internal">Linux Hardening Checklist</a></li><li><a href="../security/password-key-hygiene" class="internal">Password and Key Hygiene</a></li><li><a href="../security/web-application-security" class="internal">Web Application Security</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v4.4.1</a> © 2026</p><ul><li><a href="https://github.com/oxzo/brains">source</a></li><li><a href="/index.xml">rss</a></li></ul></footer></div></div></body><script type="application/javascript">function o(){let t=this.parentElement;t.classList.toggle("is-collapsed");let e=t.classList.contains("is-collapsed")?this.scrollHeight:t.scrollHeight;t.style.maxHeight=e+"px";let c=t,l=t.parentElement;for(;l;){if(!l.classList.contains("callout"))return;let i=l.classList.contains("is-collapsed")?l.scrollHeight:l.scrollHeight+c.scrollHeight;l.style.maxHeight=i+"px",c=l,l=l.parentElement}}function n(){let t=document.getElementsByClassName("callout is-collapsible");for(let s of t){let e=s.firstElementChild;if(!e)continue;e.addEventListener("click",o),window.addCleanup(()=>e.removeEventListener("click",o));let l=s.classList.contains("is-collapsed")?e.scrollHeight:s.scrollHeight;s.style.maxHeight=l+"px"}}document.addEventListener("nav",n);
+</script><script type="module">function f(i,e){if(!i)return;function r(o){o.target===this&&(o.preventDefault(),o.stopPropagation(),e())}function t(o){o.key.startsWith("Esc")&&(o.preventDefault(),e())}i?.addEventListener("click",r),window.addCleanup(()=>i?.removeEventListener("click",r)),document.addEventListener("keydown",t),window.addCleanup(()=>document.removeEventListener("keydown",t))}function y(i){for(;i.firstChild;)i.removeChild(i.firstChild)}var h=class{constructor(e,r){this.container=e;this.content=r;this.setupEventListeners(),this.setupNavigationControls(),this.resetTransform()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;cleanups=[];setupEventListeners(){let e=this.onMouseDown.bind(this),r=this.onMouseMove.bind(this),t=this.onMouseUp.bind(this),o=this.resetTransform.bind(this);this.container.addEventListener("mousedown",e),document.addEventListener("mousemove",r),document.addEventListener("mouseup",t),window.addEventListener("resize",o),this.cleanups.push(()=>this.container.removeEventListener("mousedown",e),()=>document.removeEventListener("mousemove",r),()=>document.removeEventListener("mouseup",t),()=>window.removeEventListener("resize",o))}cleanup(){for(let e of this.cleanups)e()}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let r=this.createButton("+",()=>this.zoom(.1)),t=this.createButton("-",()=>this.zoom(-.1)),o=this.createButton("Reset",()=>this.resetTransform());e.appendChild(t),e.appendChild(o),e.appendChild(r),this.container.appendChild(e)}createButton(e,r){let t=document.createElement("button");return t.textContent=e,t.className="mermaid-control-button",t.addEventListener("click",r),window.addCleanup(()=>t.removeEventListener("click",r)),t}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}zoom(e){let r=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),t=this.content.getBoundingClientRect(),o=t.width/2,n=t.height/2,c=r-this.scale;this.currentPan.x-=o*c,this.currentPan.y-=n*c,this.scale=r,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){this.scale=1;let e=this.content.querySelector("svg");this.currentPan={x:e.getBoundingClientRect().width/2,y:e.getBoundingClientRect().height/2},this.updateTransform()}},C=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],E;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;E||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let r=E.default,t=new WeakMap;for(let n of e)t.set(n,n.innerText);async function o(){for(let s of e){s.removeAttribute("data-processed");let a=t.get(s);a&&(s.innerHTML=a)}let n=C.reduce((s,a)=>(s[a]=window.getComputedStyle(document.documentElement).getPropertyValue(a),s),{}),c=document.documentElement.getAttribute("saved-theme")==="dark";r.initialize({startOnLoad:!1,securityLevel:"loose",theme:c?"dark":"base",themeVariables:{fontFamily:n["--codeFont"],primaryColor:n["--light"],primaryTextColor:n["--darkgray"],primaryBorderColor:n["--tertiary"],lineColor:n["--darkgray"],secondaryColor:n["--secondary"],tertiaryColor:n["--tertiary"],clusterBkg:n["--light"],edgeLabelBackground:n["--highlight"]}}),await r.run({nodes:e})}await o(),document.addEventListener("themechange",o),window.addCleanup(()=>document.removeEventListener("themechange",o));for(let n=0;n<e.length;n++){let v=function(){let g=l.querySelector("#mermaid-space"),m=l.querySelector(".mermaid-content");if(!m)return;y(m);let w=c.querySelector("svg").cloneNode(!0);m.appendChild(w),l.classList.add("active"),g.style.cursor="grab",u=new h(g,m)},M=function(){l.classList.remove("active"),u?.cleanup(),u=null},c=e[n],s=c.parentElement,a=s.querySelector(".clipboard-button"),d=s.querySelector(".expand-button"),p=window.getComputedStyle(a),L=a.offsetWidth+parseFloat(p.marginLeft||"0")+parseFloat(p.marginRight||"0");d.style.right=`calc(${L}px + 0.3rem)`,s.prepend(d);let l=s.querySelector("#mermaid-container");if(!l)return;let u=null;d.addEventListener("click",v),f(l,M),window.addCleanup(()=>{u?.cleanup(),d.removeEventListener("click",v)})}});
+</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript"></script><script src="../postscript.00b09a8c.js" type="module"></script></html>

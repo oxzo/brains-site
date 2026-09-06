@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en"><head><title>AI-Friendly Repository Structure · second-brain</title><meta charset="utf-8"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400;1,600&amp;family=Inter:wght@400;700&amp;family=JetBrains Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="synapse"/><meta property="og:title" content="AI-Friendly Repository Structure · second-brain"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="AI-Friendly Repository Structure · second-brain"/><meta name="twitter:description" content="AI-Friendly Repository Structure How to structure code repositories so AI coding assistants (Claude Code, Cursor, GitHub Copilot, Aider, Codex, Gemini CLI, etc.) can contribute ..."/><meta property="og:description" content="AI-Friendly Repository Structure How to structure code repositories so AI coding assistants (Claude Code, Cursor, GitHub Copilot, Aider, Codex, Gemini CLI, etc.) can contribute ..."/><meta property="og:image:alt" content="AI-Friendly Repository Structure How to structure code repositories so AI coding assistants (Claude Code, Cursor, GitHub Copilot, Aider, Codex, Gemini CLI, etc.) can contribute ..."/><meta property="twitter:domain" content="oxzo.github.io/brains-site"/><meta property="og:url" content="https://oxzo.github.io/brains-site/ai/ai-friendly-repo-structure"/><meta property="twitter:url" content="https://oxzo.github.io/brains-site/ai/ai-friendly-repo-structure"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="AI-Friendly Repository Structure How to structure code repositories so AI coding assistants (Claude Code, Cursor, GitHub Copilot, Aider, Codex, Gemini CLI, etc.) can contribute ..."/><meta name="generator" content="Quartz"/><link href="../index.322b98b4.css" rel="stylesheet" type="text/css" spa-preserve/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  padding: 2rem;
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL2hvbWUvcnVubmVyL3dvcmsvYnJhaW5zL2JyYWlucy9zaXRlL3F1YXJ0ei9jb21wb25lbnRzL3N0eWxlcyIsInNvdXJjZXMiOlsibWVybWFpZC5pbmxpbmUuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTs7QUFHRjtFQUNFO0VBQ0E7O0FBR0Y7RUFDRTs7O0FBS0Y7RUFDRTtFQUNBOzs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7O0FBR0Y7RUFDRTs7QUFJRjtFQUNFO0VBQ0E7RUFDQSIsInNvdXJjZXNDb250ZW50IjpbIi5leHBhbmQtYnV0dG9uIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbG9hdDogcmlnaHQ7XG4gIHBhZGRpbmc6IDAuNHJlbTtcbiAgbWFyZ2luOiAwLjNyZW07XG4gIHJpZ2h0OiAwOyAvLyBOT1RFOiByaWdodCB3aWxsIGJlIHNldCBpbiBtZXJtYWlkLmlubGluZS50c1xuICBjb2xvcjogdmFyKC0tZ3JheSk7XG4gIGJvcmRlci1jb2xvcjogdmFyKC0tZGFyayk7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWxpZ2h0KTtcbiAgYm9yZGVyOiAxcHggc29saWQ7XG4gIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgb3BhY2l0eTogMDtcbiAgdHJhbnNpdGlvbjogMC4ycztcblxuICAmID4gc3ZnIHtcbiAgICBmaWxsOiB2YXIoLS1saWdodCk7XG4gICAgZmlsdGVyOiBjb250cmFzdCgwLjMpO1xuICB9XG5cbiAgJjpob3ZlciB7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIGJvcmRlci1jb2xvcjogdmFyKC0tc2Vjb25kYXJ5KTtcbiAgfVxuXG4gICY6Zm9jdXMge1xuICAgIG91dGxpbmU6IDA7XG4gIH1cbn1cblxucHJlIHtcbiAgJjpob3ZlciA+IC5leHBhbmQtYnV0dG9uIHtcbiAgICBvcGFjaXR5OiAxO1xuICAgIHRyYW5zaXRpb246IDAuMnM7XG4gIH1cbn1cblxuI21lcm1haWQtY29udGFpbmVyIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICBjb250YWluOiBsYXlvdXQ7XG4gIHotaW5kZXg6IDk5OTtcbiAgbGVmdDogMDtcbiAgdG9wOiAwO1xuICB3aWR0aDogMTAwdnc7XG4gIGhlaWdodDogMTAwdmg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGRpc3BsYXk6IG5vbmU7XG4gIGJhY2tkcm9wLWZpbHRlcjogYmx1cig0cHgpO1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuNSk7XG5cbiAgJi5hY3RpdmUge1xuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgfVxuXG4gICYgPiAjbWVybWFpZC1zcGFjZSB7XG4gICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1saWdodCk7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDUwJTtcbiAgICBsZWZ0OiA1MCU7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gICAgaGVpZ2h0OiA4MHZoO1xuICAgIHdpZHRoOiA4MHZ3O1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG5cbiAgICAmID4gLm1lcm1haWQtY29udGVudCB7XG4gICAgICBwYWRkaW5nOiAycmVtO1xuICAgICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgICAgdHJhbnNmb3JtLW9yaWdpbjogMCAwO1xuICAgICAgdHJhbnNpdGlvbjogdHJhbnNmb3JtIDAuMXMgZWFzZTtcbiAgICAgIG92ZXJmbG93OiB2aXNpYmxlO1xuICAgICAgbWluLWhlaWdodDogMjAwcHg7XG4gICAgICBtaW4td2lkdGg6IDIwMHB4O1xuXG4gICAgICBwcmUge1xuICAgICAgICBtYXJnaW46IDA7XG4gICAgICAgIGJvcmRlcjogbm9uZTtcbiAgICAgIH1cblxuICAgICAgc3ZnIHtcbiAgICAgICAgbWF4LXdpZHRoOiBub25lO1xuICAgICAgICBoZWlnaHQ6IGF1dG87XG4gICAgICB9XG4gICAgfVxuXG4gICAgJiA+IC5tZXJtYWlkLWNvbnRyb2xzIHtcbiAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgIGJvdHRvbTogMjBweDtcbiAgICAgIHJpZ2h0OiAyMHB4O1xuICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgIGdhcDogOHB4O1xuICAgICAgcGFkZGluZzogOHB4O1xuICAgICAgYmFja2dyb3VuZDogdmFyKC0tbGlnaHQpO1xuICAgICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICAgIGJvcmRlci1yYWRpdXM6IDZweDtcbiAgICAgIGJveC1zaGFkb3c6IDAgMnB4IDRweCByZ2JhKDAsIDAsIDAsIDAuMSk7XG4gICAgICB6LWluZGV4OiAyO1xuXG4gICAgICAubWVybWFpZC1jb250cm9sLWJ1dHRvbiB7XG4gICAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAgICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICAgICAgICB3aWR0aDogMzJweDtcbiAgICAgICAgaGVpZ2h0OiAzMnB4O1xuICAgICAgICBwYWRkaW5nOiAwO1xuICAgICAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodCk7XG4gICAgICAgIGNvbG9yOiB2YXIoLS1kYXJrKTtcbiAgICAgICAgYm9yZGVyLXJhZGl1czogNHB4O1xuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgICAgIGZvbnQtc2l6ZTogMTZweDtcbiAgICAgICAgZm9udC1mYW1pbHk6IHZhcigtLWJvZHlGb250KTtcbiAgICAgICAgdHJhbnNpdGlvbjogYWxsIDAuMnMgZWFzZTtcblxuICAgICAgICAmOmhvdmVyIHtcbiAgICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICB9XG5cbiAgICAgICAgJjphY3RpdmUge1xuICAgICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWSgxcHgpO1xuICAgICAgICB9XG5cbiAgICAgICAgLy8gU3R5bGUgdGhlIHJlc2V0IGJ1dHRvbiBkaWZmZXJlbnRseVxuICAgICAgICAmOm50aC1jaGlsZCgyKSB7XG4gICAgICAgICAgd2lkdGg6IGF1dG87XG4gICAgICAgICAgcGFkZGluZzogMCAxMnB4O1xuICAgICAgICAgIGZvbnQtc2l6ZTogMTRweDtcbiAgICAgICAgfVxuICAgICAgfVxuICAgIH1cbiAgfVxufVxuIl19 */</style><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" spa-preserve/><script src="../prescript.be9697b4.js" type="application/javascript" spa-preserve></script><script type="application/javascript" spa-preserve>const fetchData = fetch("../static/contentIndex.73890e1e.json").then(data => data.json())</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://oxzo.github.io/brains-site/index.xml"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://oxzo.github.io/brains-site/ai/ai-friendly-repo-structure-og-image.webp"/><meta property="og:image:url" content="https://oxzo.github.io/brains-site/ai/ai-friendly-repo-structure-og-image.webp"/><meta name="twitter:image" content="https://oxzo.github.io/brains-site/ai/ai-friendly-repo-structure-og-image.webp"/><meta property="og:image:type" content="image/.webp"/></head><body data-slug="ai/ai-friendly-repo-structure"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">synapse</a></h2><div class="spacer mobile-only"></div><div style="display: flex; flex-direction: row; flex-wrap: nowrap; gap: 1rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button"><p>Search</p><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Search for something" placeholder="Search for something"/><div class="search-layout" data-preview="true"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Dark mode"><title>Dark mode</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Light mode"><title>Light mode</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div></div><div class="explorer" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a,b)=>!a.isFolder&amp;&amp;!b.isFolder||a.isFolder&amp;&amp;b.isFolder?a.displayName.localeCompare(b.displayName,void 0,{numeric:!0,sensitivity:\&quot;base\&quot;}):!a.isFolder&amp;&amp;b.isFolder?1:-1&quot;,&quot;filterFn&quot;:&quot;node=>node.slugSegment!==\&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;node=>node&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-content"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>Explorer</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="explorer-content" aria-expanded="false"><ul class="explorer-ul overflow" id="0x8mfk"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#"></a></li></template><template id="template-folder"><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../ai/">AI — Index</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>AI-Friendly Repository Structure</a></div></nav><h1 class="article-title">AI-Friendly Repository Structure</h1><p show-comma="true" class="content-meta"><time datetime="2026-07-19T00:00:00.000Z">Jul 19, 2026</time><span>19 min read</span></p><ul class="tags"><li><a href="../tags/ai" class="internal tag-link">ai</a></li><li><a href="../tags/dev-workflow" class="internal tag-link">dev-workflow</a></li><li><a href="../tags/best-practices" class="internal tag-link">best-practices</a></li><li><a href="../tags/publish" class="internal tag-link">publish</a></li></ul></div></div><article class="popover-hint"><h1 id="ai-friendly-repository-structure">AI-Friendly Repository Structure<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#ai-friendly-repository-structure" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>How to structure code repositories so AI coding assistants (Claude Code, Cursor, GitHub Copilot, Aider, Codex, Gemini CLI, etc.) can contribute effectively. Covers instruction files, architecture, context management, documentation, testing, workflow, and anti-patterns.</p>
+<h2 id="why-it-matters">Why it matters<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#why-it-matters" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>The difference between a repo where agents produce good work and one where they create a mess comes down to structure, guardrails, and workflow design. AI agents now write a large share of new code — estimates range from 22% of <em>merged</em> code (DX Q4 2025 survey) to ~41% of <em>generated</em> code; generated ≠ merged, so pick the measure before quoting a number. And the quality gap is real: CodeRabbit’s “State of AI vs Human Code Generation” (Dec 2025, 470 open-source PRs) found AI-co-authored PRs carried 1.7x more issues overall, security issues up to 2.74× higher in the worst category (XSS), and 75% more logic/correctness issues than human-only PRs. This is not about making AI’s job easier — it is about making your codebase more maintainable and your AI output more reliable.</p>
+<p><em>(Corrected 2026-06-10: previously “2.74x more security vulnerabilities and 75% more misconfigurations… 2026 industry data” — 2.74x is the ceiling category, the 75% was logic issues not misconfigurations, and the source is CodeRabbit Dec 2025.)</em></p>
+<h2 id="1-ai-instruction-files">1. AI Instruction Files<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#1-ai-instruction-files" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="the-landscape-as-of-april-2026">The landscape (as of April 2026)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-landscape-as-of-april-2026" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Tool</th><th>Primary File</th><th>Location</th><th>Format</th></tr></thead><tbody><tr><td>Claude Code</td><td><code>CLAUDE.md</code></td><td>Project root, <code>~/.claude/</code>, parent/child dirs</td><td>Markdown</td></tr><tr><td>OpenAI Codex</td><td><code>AGENTS.md</code></td><td>Project root, <code>~/.codex/</code>, subdirs</td><td>Markdown</td></tr><tr><td>Gemini CLI</td><td><code>GEMINI.md</code></td><td>Project root, <code>~/.gemini/</code>, subdirs</td><td>Markdown</td></tr><tr><td>Cursor</td><td><code>.cursor/rules/*.mdc</code></td><td><code>.cursor/rules/</code> directory</td><td>MDC (Markdown + YAML)</td></tr><tr><td>GitHub Copilot</td><td><code>.github/copilot-instructions.md</code></td><td><code>.github/</code> directory</td><td>Markdown</td></tr><tr><td>Copilot (scoped)</td><td><code>.github/instructions/*.instructions.md</code></td><td><code>.github/instructions/</code></td><td>Markdown + YAML frontmatter</td></tr><tr><td>Windsurf</td><td><code>.windsurf/rules/*.md</code></td><td><code>.windsurf/rules/</code> directory</td><td>Markdown</td></tr><tr><td>JetBrains AI</td><td><code>.aiassistant/rules/*.md</code></td><td><code>.aiassistant/rules/</code></td><td>Markdown</td></tr><tr><td>JetBrains Junie</td><td><code>.junie/guidelines.md</code></td><td>Project root</td><td>Markdown</td></tr><tr><td>Universal</td><td><code>AGENTS.md</code></td><td>Project root</td><td>Markdown</td></tr></tbody></table></div>
+<p><strong>AGENTS.md</strong> emerged mid-2025 from Sourcegraph, OpenAI, Google, Cursor collaboration. Now maintained by the Agentic AI Foundation under the Linux Foundation. Supported by 20+ tools. Over 20,000 GitHub repos have adopted it. If you use multiple AI tools, keep shared instructions in AGENTS.md and tool-specific overrides in their native files.</p>
+<h3 id="what-to-include">What to include<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#what-to-include" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>High-value content:</strong></p>
+<ul>
+<li>Build/test/lint commands with exact flags (agents reference these constantly)</li>
+<li>Technology stack with hard version constraints</li>
+<li>Non-obvious project conventions and patterns</li>
+<li>Boundaries: always/ask-first/never tiers</li>
+<li>Non-standard tooling underrepresented in training data</li>
+<li>Workflow rules (branch naming, PR conventions)</li>
+<li>Developer environment quirks (required env vars)</li>
+</ul>
+<p><strong>What to exclude:</strong></p>
+<ul>
+<li>Code style enforcement (delegate to linters/formatters — “never send an LLM to do a linter’s job”)</li>
+<li>Architecture overviews (agents discover these independently; removing them produces identical behavior at lower token cost)</li>
+<li>Repository structure documentation (becomes stale, actively misleads)</li>
+<li>Content the agent can figure out by reading code</li>
+<li>Standard language conventions the model already knows</li>
+<li>Auto-generated content (LLM-generated instruction files <em>reduced</em> task success by 0.5-2% while increasing costs 20-23%)</li>
+</ul>
+<h3 id="critical-constraints">Critical constraints<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#critical-constraints" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li>Frontier LLMs can reliably follow ~150-200 instructions. Claude Code’s system prompt uses ~50. Your file gets the remainder.</li>
+<li>Keep under 300 lines. A focused 50-line file outperforms a sprawling 1,000-line one.</li>
+<li>The reported performance gain from human-curated files (~4% in instruction-file evals) is real but modest. The ROI comes from preventing specific, observed failure classes.</li>
+<li>“Lost in the middle” — critical rules should go early in the file.</li>
+<li>Treat instruction files like code: review when things go wrong, prune regularly, test by observing behavior changes.</li>
+</ul>
+<h3 id="multi-tool-strategy">Multi-tool strategy<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#multi-tool-strategy" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="github-light github-dark"><code data-language="text" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>project/</span></span>
+<span data-line><span>+-- AGENTS.md              # Universal: shared instructions</span></span>
+<span data-line><span>+-- CLAUDE.md              # Claude-specific (@imports, hooks)</span></span>
+<span data-line><span>+-- .github/</span></span>
+<span data-line><span>|   +-- copilot-instructions.md</span></span>
+<span data-line><span>+-- .cursor/</span></span>
+<span data-line><span>|   +-- rules/             # Cursor scoped rules</span></span></code></pre></figure>
+<p>Claude Code reads AGENTS.md as fallback. If you only use Claude Code, CLAUDE.md alone is sufficient.</p>
+<h3 id="hierarchical-organization">Hierarchical organization<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#hierarchical-organization" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>All major tools support nested instruction files. Root = universal rules, subdirectories = scoped context. Nested files take precedence on conflicts.</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="github-light github-dark"><code data-language="text" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>project/</span></span>
+<span data-line><span>+-- CLAUDE.md              # Universal project rules</span></span>
+<span data-line><span>+-- apps/web/CLAUDE.md     # Next.js-specific</span></span>
+<span data-line><span>+-- apps/api/CLAUDE.md     # API-specific patterns</span></span>
+<span data-line><span>+-- packages/shared/CLAUDE.md</span></span></code></pre></figure>
+<h3 id="progressive-disclosure-pattern">Progressive disclosure pattern<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#progressive-disclosure-pattern" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Don’t front-load everything. Create an <code>agent_docs/</code> directory with focused files:</p>
+<ul>
+<li><code>building_the_project.md</code></li>
+<li><code>running_tests.md</code></li>
+<li><code>code_conventions.md</code></li>
+<li><code>service_architecture.md</code></li>
+</ul>
+<p>Reference from CLAUDE.md using <code>@agent_docs/building_the_project.md</code> syntax. Claude reads on demand, keeping base context lean.</p>
+<h2 id="2-repository-structure-patterns">2. Repository Structure Patterns<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#2-repository-structure-patterns" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="vertical-slicing-by-feature-strongly-preferred">Vertical slicing by feature (strongly preferred)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#vertical-slicing-by-feature-strongly-preferred" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>AI agents traverse codebases depth-first. Vertical/feature-driven organization keeps everything an agent needs for one task in one directory, minimizing tool calls and context consumption.</p>
+<p><strong>Preferred:</strong></p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="github-light github-dark"><code data-language="text" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>features/</span></span>
+<span data-line><span>+-- auth/</span></span>
+<span data-line><span>|   +-- index.ts</span></span>
+<span data-line><span>|   +-- index.test.ts</span></span>
+<span data-line><span>|   +-- schema.ts</span></span>
+<span data-line><span>|   +-- utils.ts</span></span>
+<span data-line><span>|   +-- utils.test.ts</span></span>
+<span data-line><span>+-- billing/</span></span>
+<span data-line><span>    +-- index.ts</span></span>
+<span data-line><span>    +-- index.test.ts</span></span>
+<span data-line><span>    +-- webhook-handler.ts</span></span>
+<span data-line><span>    +-- webhook-handler.test.ts</span></span></code></pre></figure>
+<p><strong>Avoid (horizontal slicing):</strong></p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="github-light github-dark"><code data-language="text" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>controllers/</span></span>
+<span data-line><span>+-- auth-controller.ts</span></span>
+<span data-line><span>+-- billing-controller.ts</span></span>
+<span data-line><span>services/</span></span>
+<span data-line><span>+-- auth-service.ts</span></span>
+<span data-line><span>+-- billing-service.ts</span></span>
+<span data-line><span>models/</span></span>
+<span data-line><span>+-- user.ts</span></span>
+<span data-line><span>+-- invoice.ts</span></span></code></pre></figure>
+<p>Horizontal slicing scatters feature logic across directories, forcing agents to jump between folders, consuming more tokens and losing coherence. One analysis found modularized, collocated files “improve recall by eliminating cross-cutting jumps between directories.”</p>
+<h3 id="key-structural-principles">Key structural principles<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#key-structural-principles" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ol>
+<li><strong>Collocation</strong>: Keep implementation, tests, types, and utilities for a feature together</li>
+<li><strong>Small, focused files</strong>: Avoid large “service” or “repository” files that mix unrelated operations — they pollute context with irrelevant code</li>
+<li><strong>Focused test files</strong>: Match tests 1:1 with source files rather than monolithic test suites</li>
+<li><strong>Clear module boundaries</strong>: Each module should have an explicit public interface (barrel exports, <code>__init__.py</code>, etc.)</li>
+<li><strong>Self-contained modules</strong>: Dependencies between modules should be explicit and minimal</li>
+</ol>
+<h3 id="functional-core-imperative-shell-fcis">Functional Core, Imperative Shell (FCIS)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#functional-core-imperative-shell-fcis" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Separate pure business logic (deterministic functions: data in → data out, zero side effects) from I/O operations (database, network, filesystem). The “shell” orchestrates side effects around the pure “core.”</p>
+<p>Why this matters for AI:</p>
+<ul>
+<li>Pure functions map directly to LLM input-output reasoning — agents generate reliable tests without complex mocking frameworks</li>
+<li>Side-effect-free code is safe for autonomous modification — no risk of accidental database mutations or network calls during agent execution</li>
+<li>Sub-agents can operate exclusively within the functional core with minimal blast radius</li>
+<li>When business logic is coupled with side effects, AI frequently hallucinates mocking frameworks or generates brittle, untestable code</li>
+</ul>
+<h3 id="dependency-hygiene">Dependency hygiene<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#dependency-hygiene" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Circular dependencies (A → B → A) are catastrophic for AI reasoning. Transformers process information sequentially through attention — cyclical logic confuses the reasoning engine, causing hallucinated patches that deepen the tangle. One modified shared utility can cascade across dozens of files the agent doesn’t know about.</p>
+<ul>
+<li>Extract shared types and interfaces into standalone neutral modules (Interface Segregation Principle)</li>
+<li>Enforce acyclic dependencies with tooling (eslint-plugin-import, madge, deptry, Go’s built-in cycle detection)</li>
+<li>Keep module boundaries explicit — each module has a clear public API</li>
+<li>Consider code intelligence tools that build AST-based dependency graphs (see Section 3) so agents can query blast radius before modifying shared code</li>
+</ul>
+<h3 id="monorepo-vs-polyrepo">Monorepo vs polyrepo<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#monorepo-vs-polyrepo" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Monorepos give AI agents a major advantage: cross-project context, pattern consistency, atomic multi-project changes, and no context loss at repository boundaries. Nx reports ~30% productivity improvement on cross-project work with agents.</p>
+<p>However, monorepos introduce complexity. The <strong>meta-repo pattern</strong> offers a middle ground: a dedicated repo serving as the AI agent’s knowledge base for navigating a multi-repo codebase, containing:</p>
+<ul>
+<li><code>AGENTS.md</code> with repository map and conventions</li>
+<li><code>repos.yaml</code> with machine-readable repo definitions</li>
+<li><code>structure/</code> for dependency graphs</li>
+<li><code>conventions/</code> for cross-repo standards</li>
+<li><code>workflows/</code> for step-by-step multi-repo operations</li>
+<li><code>active-work/</code> for current multi-session epics</li>
+</ul>
+<p>Using this pattern, one case study demonstrated an 8-merge-request fix across 6 repositories over 5 sessions without context loss.</p>
+<h3 id="domain-driven-layers">Domain-driven layers<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#domain-driven-layers" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>For larger projects, DDD layers (/domain, /application, /infrastructure) give agents predictable navigation: business rules in domain (no cloud dependencies), integrations in infrastructure. Agents can modify and test business logic independently.</p>
+<h2 id="3-context-management">3. Context Management<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#3-context-management" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="the-core-constraint">The core constraint<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-core-constraint" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>LLM performance degrades as context fills. The “40% rule” suggests quality drops noticeably past 40% context utilization. Everything in the repo structure should work to minimize how much context an agent needs to load for any given task.</p>
+<h3 id="strategies">Strategies<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#strategies" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>File-level discipline:</strong></p>
+<ul>
+<li>Keep files small and focused — under 300-400 lines is a good target</li>
+<li>One concept/feature per file</li>
+<li>Clear naming that describes contents without needing to read the file</li>
+<li>Type exports and barrel files so agents don’t need to read implementation to understand interfaces</li>
+<li>Whitespace, deep indentation, and formatting are parsed as distinct tokens by LLM tokenizers — keep formatting clean but avoid excessive nesting that burns tokens without aiding AI comprehension</li>
+</ul>
+<p><strong>Instruction-level discipline:</strong></p>
+<ul>
+<li>Use progressive disclosure: tell the agent how to find information, not all the information</li>
+<li>Scope rules to file types using glob patterns (Cursor <code>.mdc</code> frontmatter, Copilot <code>applyTo</code> field)</li>
+<li>Put critical rules early in instruction files (“lost in the middle” problem)</li>
+<li>Customize compaction behavior: “When compacting, always preserve the full list of modified files and any test commands”</li>
+</ul>
+<p><strong>Session-level discipline:</strong></p>
+<ul>
+<li>Clear context between unrelated tasks (<code>/clear</code> in Claude Code)</li>
+<li>Use subagents for investigation — they explore in separate context windows and report summaries</li>
+<li>Scope investigations narrowly: “look at src/auth/” not “investigate the codebase”</li>
+<li>After 2-3 failed corrections, start fresh rather than accumulating failed context</li>
+</ul>
+<p><strong>Architecture-level discipline:</strong></p>
+<ul>
+<li>Sub-agent architectures: specialized agents handle focused tasks with clean context, returning condensed summaries (1,000-2,000 tokens)</li>
+<li>Claude Code Skills run in their own context window and can be parallelized</li>
+<li>Context persistence through structured memory files (TODO.md, DECISIONS.log) rather than relying on conversation history</li>
+</ul>
+<h3 id="tools-for-context-packing-and-code-intelligence">Tools for context packing and code intelligence<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#tools-for-context-packing-and-code-intelligence" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li><strong>Repomix</strong> (20.9k GitHub stars): Packs codebase into AI-friendly single files with token counting and Tree-sitter compression. Has MCP server integration.</li>
+<li><strong>repo-map / llm-codemap</strong>: AST-based dependency graphs that give agents structural understanding of call chains, inheritance hierarchies, and cross-file relationships — a shift from “context packing” (blindly appending text) to “graph querying” (targeted structural lookups)</li>
+<li><strong>AI Distiller</strong>: AST-powered compression (90-98% reduction) via Tree-sitter — strips method implementations and internal variables, keeps public API signatures, types, and critical docstrings</li>
+<li><strong>gitingest / repo2txt</strong>: Bundle codebase excerpts for feeding to AI</li>
+<li><strong>Nx Polygraph</strong>: Connects multiple repos into a federated meta-repo for agent context</li>
+<li><strong>.aidignore</strong>: Like <code>.gitignore</code> for AI context — explicitly exclude generated code, vendor directories, build artifacts from agent analysis. Complementary to <code>.repomixignore</code> (Repomix’s own ignore file)</li>
+</ul>
+<h2 id="4-documentation-as-code-for-ai">4. Documentation-as-Code for AI<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#4-documentation-as-code-for-ai" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="what-helps-ai-understand-code">What helps AI understand code<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#what-helps-ai-understand-code" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Type annotations are critical.</strong> Explicit types serve as machine-readable documentation. Agents parse function signatures, parameter types, and return types to understand intent without reading implementation. TypeScript strict mode, Python type hints for all functions, explicit interfaces over type aliases.</p>
+<p><strong>Naming conventions matter more than you think.</strong> When a codebase follows consistent naming patterns, AI becomes a “force multiplier.” When it doesn’t, AI becomes a “chaos amplifier.” Establish and document naming conventions explicitly, especially counterintuitive ones.</p>
+<p><strong>One real code snippet beats three paragraphs.</strong> In instruction files, demonstrate patterns with actual project code rather than prose descriptions.</p>
+<p><strong>Architecture Decision Records (ADRs):</strong></p>
+<ul>
+<li>Capture the <em>why</em> behind architectural choices — agents can discover <em>what</em> code does but not <em>why</em> decisions were made</li>
+<li>New standard: AgDR (Agent Decision Records) extends ADR for AI-assisted development</li>
+<li>ADRs become “executable intentions” for AI assistants — the agent reads the ADR and implements consistently with the recorded decision</li>
+<li>AI can help generate ADRs from codebase analysis, but human review is essential</li>
+<li>For machine readability, use explicit section tags in ADRs (<code>&lt;decision></code>, <code>&lt;context></code>, <code>&lt;consequences></code>) — lets LLMs parse decision boundaries reliably instead of guessing from prose structure</li>
+<li>Embed capability manifests and authorization constraints in tabular format within ADRs — transforms passive records into active governance that agents can query</li>
+</ul>
+<p><strong>Inline documentation strategy:</strong></p>
+<ul>
+<li>JSDoc/docstrings on public interfaces: parameters, return types, edge cases, side effects</li>
+<li>Comments for the “why”, not the “what” — AI reads code for what it does, comments for why</li>
+<li>Gold standard file: one exemplar file that demonstrates all conventions applied together, functioning as an end-to-end test for AI style compliance</li>
+<li>64% of developers now use AI for documentation generation (Google DORA 2025)</li>
+</ul>
+<p><strong>What to make explicit:</strong></p>
+<ul>
+<li>Error handling patterns (how the project handles failures)</li>
+<li>Non-obvious conventions (e.g., “all client API methods never throw — always return ApiResult<t>”)</t></li>
+<li>Domain terminology and jargon</li>
+<li>Framework-specific idioms that differ from defaults</li>
+</ul>
+<h3 id="machine-readable-documentation-formats">Machine-readable documentation formats<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#machine-readable-documentation-formats" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Standard README.md optimized for human consumption (badges, narrative tutorials) is inefficient for models. Emerging formats provide structured, token-efficient alternatives:</p>
+<ul>
+<li><strong>llms.txt</strong>: Sits at project root (inspired by robots.txt). Provides condensed representation of purpose, public APIs, and interaction rules. Increasingly adopted by documentation sites and library authors.</li>
+<li><strong>ReadMe.LLM</strong>: Acts like a header file — details how the model should use the library, what architectural patterns to respect, what dependencies are available in the execution environment.</li>
+</ul>
+<p>Novel frameworks and internal libraries suffer from “The Great Ossification” — AI models default to popular, heavily-represented technologies from training data. If your project uses something niche or proprietary, explicit LLM-friendly documentation is essential for agents to use it correctly rather than hallucinating based on similar-but-wrong training data.</p>
+<p><strong>Practical tips for AI-readable docs:</strong></p>
+<ul>
+<li>Numbered code snippets let models reference explicit line numbers rather than guessing file locations</li>
+<li>Avoid complex JSON in documentation examples — custom plain-text delimiters (<code>[[code]]...[[/code]]</code>) prevent quote escaping and line break issues during generation</li>
+<li>Explicitly state operational rationale for constants (e.g., <code># Three retries balances reliability vs speed; most intermittent failures resolve by the second retry</code> rather than just <code>MAX_RETRIES = 3</code>)</li>
+</ul>
+<h2 id="5-testing-and-guardrails">5. Testing and Guardrails<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#5-testing-and-guardrails" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="the-verification-principle">The verification principle<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-verification-principle" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>“Include tests, screenshots, or expected outputs so Claude can check itself. This is the single highest-leverage thing you can do.” — Anthropic best practices</p>
+<p>AI performs dramatically better when it can verify its own work. Without verification, you become the only feedback loop.</p>
+<h3 id="multi-layer-validation-stack">Multi-layer validation stack<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#multi-layer-validation-stack" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Layer 1 — Pre-commit hooks (deterministic, blocking):</strong></p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="sh" data-theme="github-light github-dark"><code data-language="sh" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Linting</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">npm</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> run</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> lint</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> ||</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> exit</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> 1</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Type checking (catches type-valid-looking but invalid AI code)</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">npx</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> tsc</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> --noEmit</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> ||</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> exit</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> 1</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Targeted tests on changed files</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">changed</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">$(</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">git</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> diff</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> --cached</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> --name-only</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> --diff-filter=d</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">)</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">if</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> echo</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> &quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">$changed</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> |</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> grep</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> -q</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> '\.ts$'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">; </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">then</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">  npm</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> test</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> --</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> --changed</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> ||</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> exit</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> 1</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">fi</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Commit message format enforcement</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">msg</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">$(</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">cat</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> &quot;</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">$1</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">)</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">if</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> !</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> echo</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> &quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">$msg</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> |</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> grep</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> -qE</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> '^(feat|fix|chore|docs|refactor|test):'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">; </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">then</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">  echo</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> &quot;Must use conventional commits&quot;</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">  exit</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> 1</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">fi</span></span></code></pre></figure>
+<p>Pre-commit hooks “aren’t about catching human mistakes anymore. They’re about keeping AI focused.” The agent gets the failure, adjusts, and tries again — no human intervention needed.</p>
+<p><strong>Layer 2 — Claude Code hooks (deterministic, lifecycle-attached):</strong>
+Unlike CLAUDE.md instructions (advisory), hooks guarantee execution. Key events:</p>
+<ul>
+<li><code>PostToolUse</code>: auto-format/lint after every file edit</li>
+<li><code>PreToolUse</code>: block writes to protected directories (migrations, generated code)</li>
+<li><code>Stop</code>: run final validation when agent finishes</li>
+</ul>
+<p><strong>Layer 3 — CI/CD pipeline:</strong></p>
+<ul>
+<li>Full test suite on PR creation</li>
+<li>Security scanning (AI code shows ~50% vulnerability rate vs 15-20% human)</li>
+<li>Architecture consistency checks</li>
+<li>Performance profiling on critical paths</li>
+</ul>
+<p><strong>Layer 4 — Multi-agent review:</strong></p>
+<ul>
+<li>Writer/Reviewer pattern: one session writes, a fresh session reviews (no bias toward own code)</li>
+<li>Adversarial review: second model or session critiques output</li>
+<li>AI review first (style, common bugs, docs gaps) then human review (architecture, business logic, edge cases) — the “review sandwich” reduces human review time 30-50%</li>
+</ul>
+<h3 id="hook-and-review-tooling">Hook and review tooling<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#hook-and-review-tooling" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li><strong>Pre-commit framework</strong>: Multi-language hook management (Ruff, ESLint, Prettier, Mypy, tsc)</li>
+<li><strong>Husky</strong>: JS/TS hook management</li>
+<li><strong>CodeRabbit</strong>: AI code review with security scanning and architecture checks</li>
+<li><strong>Ellipsis</strong>: PR-level analysis with conversational context</li>
+</ul>
+<h3 id="semantic-linting-for-ai-output">Semantic linting for AI output<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#semantic-linting-for-ai-output" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Traditional text-based linters miss structural anti-patterns common in AI-generated code. AST-based tools match code structure rather than text:</p>
+<ul>
+<li><strong>AST Grep</strong>: Lint rules that match structural intent (e.g., catch incorrect API usage regardless of variable naming). Catches semantic hallucinations that regex-based linters miss.</li>
+<li><strong>unparam</strong> (Go via golangci-lint): Detects function parameters consistently called with identical values — a common LLM anti-pattern of over-abstracting into generic functions</li>
+<li><strong>Security scanners</strong> (gosec, Snyk, Aikido, SonarQube): Critical given AI code’s ~50% vulnerability rate. Feed scanner output back to the agent via MCP or CI for automated self-correction loops.</li>
+</ul>
+<p>The goal is a self-correcting pipeline: agent generates code → semantic linters + security scanners run automatically → failures feed back to the agent → agent iterates until standards are met.</p>
+<h3 id="industry-validated-mitigation-stack">Industry-validated mitigation stack<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#industry-validated-mitigation-stack" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ol>
+<li><strong>Formal verification gates</strong>: Compiler passes, test suites, type checks, linting — things that can’t be faked</li>
+<li><strong>Adversarial review models</strong>: Second AI session or different model critiques output</li>
+<li><strong>Hierarchical agents</strong>: Separate planner, worker, and reviewer agents</li>
+<li><strong>Low-stakes prioritization</strong>: AI for boilerplate, tests, docs, migrations. Humans for critical business logic.</li>
+<li><strong>Spec-driven development</strong>: Specifications before implementation; specs as source of truth</li>
+<li><strong>Knowledge transfer rituals</strong>: Require authors to explain AI-generated code in PRs/docs</li>
+</ol>
+<h2 id="6-workflow-patterns">6. Workflow Patterns<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#6-workflow-patterns" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="the-four-phase-pattern">The four-phase pattern<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-four-phase-pattern" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ol>
+<li><strong>Explore</strong> (Plan Mode): Agent reads files and answers questions without changes</li>
+<li><strong>Plan</strong>: Agent creates detailed implementation plan, human edits before proceeding</li>
+<li><strong>Implement</strong>: Agent codes against the plan, running tests iteratively</li>
+<li><strong>Commit/PR</strong>: Agent commits with descriptive message, creates PR</li>
+</ol>
+<p>Skip planning for small, clear-scope tasks. Planning is most valuable when uncertain about approach, modifying multiple files, or unfamiliar with the code.</p>
+<h3 id="task-decomposition">Task decomposition<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#task-decomposition" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li>Generate ultra-small tasks (1-2 hours, 4-8 hours max) with clear acceptance criteria</li>
+<li>Atomic decomposition: no shared state between tasks enables parallel agent execution</li>
+<li><strong>Spec-driven development</strong>: write specs before AI implementation; specs become source of truth</li>
+<li><strong>Prompt plans</strong>: structured files containing sequential prompts for systematic execution</li>
+</ul>
+<h3 id="branch-and-collaboration-strategy">Branch and collaboration strategy<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#branch-and-collaboration-strategy" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>The trust gradient:</strong></p>
+<ol>
+<li>Agent suggests changes, human applies manually</li>
+<li>Agent makes changes on branches, human reviews PRs</li>
+<li>Agent merges low-risk changes autonomously</li>
+</ol>
+<p>Adjust based on track record and blast radius. Start conservative.</p>
+<p><strong>Parallel sessions:</strong></p>
+<ul>
+<li>Git worktrees for isolated parallel AI sessions on separate features</li>
+<li>Writer/Reviewer split: one session implements, another reviews</li>
+<li>Test-first split: one session writes tests, another writes implementation</li>
+<li>Non-interactive mode (<code>claude -p</code>) for CI, scripts, and batch migrations</li>
+</ul>
+<p><strong>Commit discipline:</strong></p>
+<ul>
+<li>Ultra-frequent commits as “save points” for rollback</li>
+<li>Never commit code you can’t explain</li>
+<li>State checkpointing constantly to Git as an undo mechanism</li>
+</ul>
+<h3 id="the-spec-first-workflow">The spec-first workflow<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-spec-first-workflow" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ol>
+<li>AI conducts structured interview surfacing requirements, constraints, edge cases</li>
+<li>Collaboratively develop spec.md with architecture, data models, testing strategy</li>
+<li>Start fresh session for implementation (clean context focused on execution)</li>
+<li>Written spec serves as reference throughout</li>
+</ol>
+<h3 id="agent-bootstrapping">Agent bootstrapping<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#agent-bootstrapping" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Autonomous agents can’t ask colleagues or manually troubleshoot setup. The repo needs a deterministic initialization sequence — an “agent bootloader” documented in CLAUDE.md or AGENTS.md:</p>
+<ol>
+<li><strong>Sync</strong>: Exact git commands to get latest state</li>
+<li><strong>Secrets</strong>: Secure injection of env vars and API keys (never hardcoded in prompts)</li>
+<li><strong>Dependencies</strong>: Deterministic install (<code>npm ci</code>, <code>poetry install</code>, lock files enforced)</li>
+<li><strong>Verify environment</strong>: Lint and test commands the agent runs to validate its own workspace before starting work</li>
+</ol>
+<p>Without this, autonomous workflows are fragile — agents silently work against stale code, missing dependencies, or broken environments. The gap between “works on my machine” and “works in the agent’s session” is where autonomous execution fails.</p>
+<h2 id="7-anti-patterns">7. Anti-Patterns<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#7-anti-patterns" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="repository-anti-patterns">Repository anti-patterns<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#repository-anti-patterns" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li><strong>Horizontal slicing</strong>: Scattering features across controllers/services/models directories forces excessive context loading</li>
+<li><strong>Monolithic files</strong>: Large service/repository files pollute context with unrelated code</li>
+<li><strong>Monolithic test suites</strong>: Bundling tests forces agents to load irrelevant test context</li>
+<li><strong>Implicit conventions</strong>: Engineers absorb patterns tacitly; agents need explicit documentation</li>
+<li><strong>Stale structural references</strong>: Outdated directory maps in instruction files actively mislead agents</li>
+</ul>
+<h3 id="instruction-file-anti-patterns">Instruction file anti-patterns<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#instruction-file-anti-patterns" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li><strong>Auto-generating instruction files</strong>: LLM-generated rules reduced task success 0.5-2%, increased costs 20-23%. Hand-write every line.</li>
+<li><strong>Rule accumulation without pruning</strong>: Creates contradictions and bloat. Review and prune regularly.</li>
+<li><strong>Over-specification</strong>: If Claude already does it correctly without the instruction, delete it</li>
+<li><strong>Broad behavioral hotfixes</strong>: Vague instructions like “write better code” are useless</li>
+<li><strong>Architecture in instruction files</strong>: Agents discover architecture independently; documenting it wastes tokens and becomes stale</li>
+</ul>
+<h3 id="workflow-anti-patterns">Workflow anti-patterns<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#workflow-anti-patterns" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li><strong>Kitchen sink sessions</strong>: Mixing unrelated tasks in one session pollutes context</li>
+<li><strong>Correction spirals</strong>: After 2 failed corrections, start fresh — don’t accumulate failed approaches</li>
+<li><strong>Infinite exploration</strong>: Unscoped “investigate” prompts cause agents to read hundreds of files</li>
+<li><strong>Single-prompt architecture</strong>: Generating entire systems in one request eliminates iteration</li>
+<li><strong>Iterative AI debugging loops</strong>: “AI writes buggy code, AI fixes it, introduces new bugs” creates layers of uncomprehended fixes</li>
+<li><strong>Blind generation</strong>: “Create a complete system” produces over-engineered, untested code</li>
+<li><strong>Premature automation</strong>: Automating before understanding the problem space</li>
+<li><strong>Trust-then-verify gap</strong>: Accepting plausible-looking output without verification</li>
+</ul>
+<h3 id="enterprise-anti-patterns">Enterprise anti-patterns<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#enterprise-anti-patterns" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li><strong>Comprehension debt</strong>: Code that is more sophisticated than the team could independently create or maintain, creating fragility and AI dependency (see <a href="../ai/ai-code-latent-failure-modes" class="internal" data-slug="ai/ai-code-latent-failure-modes">ai-code-latent-failure-modes</a> for the full taxonomy)</li>
+<li><strong>Haunted codebases</strong>: Iterative drift where “the codebase slowly becomes something no one (human or AI) fully understands”</li>
+<li><strong>AI-only implementation, human-only testing</strong>: Developers get boring work; tests miss edge cases discovered during implementation</li>
+<li><strong>No audit trails</strong>: Missing prompt history, context, iteration records for AI-generated code</li>
+<li><strong>Skill atrophy</strong>: No tracking of what happens to team expertise over 2-3 years of AI delegation</li>
+</ul>
+<h2 id="8-real-world-examples-and-tools">8. Real-World Examples and Tools<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#8-real-world-examples-and-tools" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="notable-projects-and-approaches">Notable projects and approaches<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#notable-projects-and-approaches" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li><strong>steipete/agent-rules</strong> (5.7k stars, archived Dec 2025): Early framework for Claude Code and Cursor rules, succeeded by agent-scripts</li>
+<li><strong>PaulDuvall/ai-development-patterns</strong>: Comprehensive 30+ pattern catalog covering Foundation, Development, and Operations phases with anti-patterns</li>
+<li><strong>Repomix</strong> (20.9k stars): Packs codebases into AI-friendly formats with token compression and MCP integration</li>
+<li><strong>Airbnb</strong>: Compressed an 18-month migration to 6 weeks using agents in a monorepo</li>
+<li><strong>Anthropic 2026 Agentic Coding Trends Report</strong>: Engineers use AI in ~60% of work but can only fully delegate 0-20% of tasks</li>
+<li><strong>rulesync</strong>: Tool to unify management of rules across Claude Code, Gemini CLI, Cursor from a single source</li>
+<li><strong>vibe-rules</strong>: Save, load, and distribute AI rules across projects</li>
+</ul>
+<h2 id="related">Related<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#related" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/agent-workflow-solo-practitioner.md" class="external">agent-workflow-solo-practitioner<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — Daily loop for one developer using agents</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/agent-pipeline-feature-creation.md" class="external">agent-pipeline-feature-creation<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — Concrete spec-to-PR pipeline</li>
+<li><a href="../ai/ai-verification-stack-web" class="internal" data-slug="ai/ai-verification-stack-web">ai-verification-stack-web</a> — Web-specific verification stack for AI code</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/context-window-management.md" class="external">context-window-management<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — Token economics and compaction strategies</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/agentic-ai-architecture.md" class="external">agentic-ai-architecture<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — Core agent loop and tool registry design</li>
+<li><a href="../ai/ai-agent-security" class="internal" data-slug="ai/ai-agent-security">ai-agent-security</a> — Permission classification and sandboxing</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/agent-fleet-orchestration.md" class="external">agent-fleet-orchestration<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — Running multiple agent pipelines at scale</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/functional-agent-architecture.md" class="external">functional-agent-architecture<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — FP discipline for agents (expands the FCIS pattern)</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/model-context-protocol.md" class="external">model-context-protocol<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — MCP protocol architecture (referenced in code intelligence and semantic linting sections)</li>
+</ul>
+<h2 id="sources">Sources<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#sources" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><a href="https://code.claude.com/docs/en/best-practices" class="external">Best Practices for Claude Code<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — Anthropic official documentation</li>
+<li><a href="https://www.humanlayer.dev/blog/writing-a-good-claude-md" class="external">Writing a Good CLAUDE.md<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — HumanLayer blog</li>
+<li><a href="https://www.augmentcode.com/guides/how-to-build-agents-md" class="external">How to Build Your AGENTS.md (2026)<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — Augment Code guide with ETH Zurich research</li>
+<li><a href="https://agents.md/" class="external">AGENTS.md Standard<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — Linux Foundation-backed universal standard</li>
+<li><a href="https://developers.openai.com/codex/guides/agents-md" class="external">Custom Instructions with AGENTS.md<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — OpenAI Codex documentation</li>
+<li><a href="https://www.deployhq.com/blog/ai-coding-config-files-guide" class="external">How to Configure Every AI Coding Assistant<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — DeployHQ comprehensive config guide</li>
+<li><a href="https://dev.to/somedood/coding-agents-as-a-first-class-consideration-in-project-structures-2a6b" class="external">Coding Agents as First-Class Consideration in Project Structures<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — Vertical slicing analysis</li>
+<li><a href="https://seylox.github.io/2026/03/05/blog-agents-meta-repo-pattern.html" class="external">In Which We Give Our AI Agent a Map<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — Meta-repo pattern case study</li>
+<li><a href="https://martinfowler.com/articles/exploring-gen-ai/context-engineering-coding-agents.html" class="external">Context Engineering for Coding Agents<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — Martin Fowler’s exploration</li>
+<li><a href="https://addyosmani.com/blog/ai-coding-workflow/" class="external">My LLM Coding Workflow Going Into 2026<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — Addy Osmani workflow patterns</li>
+<li><a href="https://github.com/PaulDuvall/ai-development-patterns" class="external">AI Development Patterns<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — 30+ patterns with anti-patterns catalog</li>
+<li><a href="https://nx.dev/blog/the-missing-multiplier-for-ai-agent-productivity" class="external">The Missing Multiplier for AI Agent Productivity<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — Nx monorepo AI integration</li>
+<li><a href="https://dev.to/jonesrussell/git-hooks-are-your-best-defense-against-ai-generated-mess-5h1a" class="external">Git Hooks Are Your Best Defense Against AI-Generated Mess<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — Concrete hook examples</li>
+<li><a href="https://tfir.io/ai-code-quality-2026-guardrails/" class="external">AI Code Quality in 2026: Guardrails<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — Multi-agent validation patterns</li>
+<li><a href="https://stackoverflow.blog/2026/03/26/coding-guidelines-for-ai-agents-and-people-too/" class="external">Building Shared Coding Guidelines for AI (and People Too)<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — Stack Overflow/JetBrains collaboration</li>
+<li><a href="https://www.brokenrobot.xyz/blog/the-renaissance-of-written-coding-conventions/" class="external">The Renaissance of Written Coding Conventions<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — Why conventions matter more for AI</li>
+<li><a href="https://github.com/trick77/vibe-coding-enterprise-2026" class="external">Vibe Coding Enterprise 2026<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — Comprehension debt, haunted codebases, governance gaps</li>
+<li><a href="https://gist.github.com/0xdevalias/f40bc5a6f84c4c5ad862e314894b2fa6" class="external">AI Agent Instruction File Landscape<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — Comprehensive tool config comparison</li>
+<li><a href="https://resources.anthropic.com/2026-agentic-coding-trends-report" class="external">2026 Agentic Coding Trends Report<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — Anthropic industry report</li>
+<li><a href="https://www.augmentcode.com/learn/monorepo-vs-polyrepo-ai-s-new-rules-for-repo-architecture" class="external">Monorepo vs Polyrepo: AI’s New Rules<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — Augment Code analysis</li>
+</ul></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>Graph View</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc desktop-only"><button type="button" class="toc-header" aria-controls="toc-content" aria-expanded="true"><h3>Table of Contents</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="toc-content"><ul id="h9l23p" class="overflow"><li class="depth-0"><a href="#ai-friendly-repository-structure" data-for="ai-friendly-repository-structure">AI-Friendly Repository Structure</a></li><li class="depth-1"><a href="#why-it-matters" data-for="why-it-matters">Why it matters</a></li><li class="depth-1"><a href="#1-ai-instruction-files" data-for="1-ai-instruction-files">1. AI Instruction Files</a></li><li class="depth-2"><a href="#the-landscape-as-of-april-2026" data-for="the-landscape-as-of-april-2026">The landscape (as of April 2026)</a></li><li class="depth-2"><a href="#what-to-include" data-for="what-to-include">What to include</a></li><li class="depth-2"><a href="#critical-constraints" data-for="critical-constraints">Critical constraints</a></li><li class="depth-2"><a href="#multi-tool-strategy" data-for="multi-tool-strategy">Multi-tool strategy</a></li><li class="depth-2"><a href="#hierarchical-organization" data-for="hierarchical-organization">Hierarchical organization</a></li><li class="depth-2"><a href="#progressive-disclosure-pattern" data-for="progressive-disclosure-pattern">Progressive disclosure pattern</a></li><li class="depth-1"><a href="#2-repository-structure-patterns" data-for="2-repository-structure-patterns">2. Repository Structure Patterns</a></li><li class="depth-2"><a href="#vertical-slicing-by-feature-strongly-preferred" data-for="vertical-slicing-by-feature-strongly-preferred">Vertical slicing by feature (strongly preferred)</a></li><li class="depth-2"><a href="#key-structural-principles" data-for="key-structural-principles">Key structural principles</a></li><li class="depth-2"><a href="#functional-core-imperative-shell-fcis" data-for="functional-core-imperative-shell-fcis">Functional Core, Imperative Shell (FCIS)</a></li><li class="depth-2"><a href="#dependency-hygiene" data-for="dependency-hygiene">Dependency hygiene</a></li><li class="depth-2"><a href="#monorepo-vs-polyrepo" data-for="monorepo-vs-polyrepo">Monorepo vs polyrepo</a></li><li class="depth-2"><a href="#domain-driven-layers" data-for="domain-driven-layers">Domain-driven layers</a></li><li class="depth-1"><a href="#3-context-management" data-for="3-context-management">3. Context Management</a></li><li class="depth-2"><a href="#the-core-constraint" data-for="the-core-constraint">The core constraint</a></li><li class="depth-2"><a href="#strategies" data-for="strategies">Strategies</a></li><li class="depth-2"><a href="#tools-for-context-packing-and-code-intelligence" data-for="tools-for-context-packing-and-code-intelligence">Tools for context packing and code intelligence</a></li><li class="depth-1"><a href="#4-documentation-as-code-for-ai" data-for="4-documentation-as-code-for-ai">4. Documentation-as-Code for AI</a></li><li class="depth-2"><a href="#what-helps-ai-understand-code" data-for="what-helps-ai-understand-code">What helps AI understand code</a></li><li class="depth-2"><a href="#machine-readable-documentation-formats" data-for="machine-readable-documentation-formats">Machine-readable documentation formats</a></li><li class="depth-1"><a href="#5-testing-and-guardrails" data-for="5-testing-and-guardrails">5. Testing and Guardrails</a></li><li class="depth-2"><a href="#the-verification-principle" data-for="the-verification-principle">The verification principle</a></li><li class="depth-2"><a href="#multi-layer-validation-stack" data-for="multi-layer-validation-stack">Multi-layer validation stack</a></li><li class="depth-2"><a href="#hook-and-review-tooling" data-for="hook-and-review-tooling">Hook and review tooling</a></li><li class="depth-2"><a href="#semantic-linting-for-ai-output" data-for="semantic-linting-for-ai-output">Semantic linting for AI output</a></li><li class="depth-2"><a href="#industry-validated-mitigation-stack" data-for="industry-validated-mitigation-stack">Industry-validated mitigation stack</a></li><li class="depth-1"><a href="#6-workflow-patterns" data-for="6-workflow-patterns">6. Workflow Patterns</a></li><li class="depth-2"><a href="#the-four-phase-pattern" data-for="the-four-phase-pattern">The four-phase pattern</a></li><li class="depth-2"><a href="#task-decomposition" data-for="task-decomposition">Task decomposition</a></li><li class="depth-2"><a href="#branch-and-collaboration-strategy" data-for="branch-and-collaboration-strategy">Branch and collaboration strategy</a></li><li class="depth-2"><a href="#the-spec-first-workflow" data-for="the-spec-first-workflow">The spec-first workflow</a></li><li class="depth-2"><a href="#agent-bootstrapping" data-for="agent-bootstrapping">Agent bootstrapping</a></li><li class="depth-1"><a href="#7-anti-patterns" data-for="7-anti-patterns">7. Anti-Patterns</a></li><li class="depth-2"><a href="#repository-anti-patterns" data-for="repository-anti-patterns">Repository anti-patterns</a></li><li class="depth-2"><a href="#instruction-file-anti-patterns" data-for="instruction-file-anti-patterns">Instruction file anti-patterns</a></li><li class="depth-2"><a href="#workflow-anti-patterns" data-for="workflow-anti-patterns">Workflow anti-patterns</a></li><li class="depth-2"><a href="#enterprise-anti-patterns" data-for="enterprise-anti-patterns">Enterprise anti-patterns</a></li><li class="depth-1"><a href="#8-real-world-examples-and-tools" data-for="8-real-world-examples-and-tools">8. Real-World Examples and Tools</a></li><li class="depth-2"><a href="#notable-projects-and-approaches" data-for="notable-projects-and-approaches">Notable projects and approaches</a></li><li class="depth-1"><a href="#related" data-for="related">Related</a></li><li class="depth-1"><a href="#sources" data-for="sources">Sources</a></li><li class="overflow-end"></li></ul></div></div><div class="backlinks"><h3>Backlinks</h3><ul id="xacmdj" class="overflow"><li><a href="../ai/agent-output-quality-variance" class="internal">Reducing Quality Variance in Agent Output</a></li><li><a href="../ai/ai-code-latent-failure-modes" class="internal">AI-Generated Code — Latent Failure Modes</a></li><li><a href="../ai/architecture-decision-records-ai" class="internal">ADRs in AI-Assisted Repositories</a></li><li><a href="../ai/constrained-shape-for-verifiability" class="internal">Buying Verifiability by Constraining Shape</a></li><li><a href="../ai/context-repo-loading-patterns" class="internal">Loading a Context Repo into Working Repos</a></li><li><a href="../ai/dora-2025-ai-capabilities-model" class="internal">DORA 2025 — The Amplifier Effect and the AI Capabilities Model</a></li><li><a href="../ai/" class="internal">AI — Index</a></li><li><a href="../ai/three-level-repo-documentation" class="internal">Three-Level Repository Documentation: docs, ADR, intent</a></li><li><a href="../general/choice-architecture" class="internal">Choice Architecture and Nudges</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v4.4.1</a> © 2026</p><ul><li><a href="https://github.com/oxzo/brains">source</a></li><li><a href="/index.xml">rss</a></li></ul></footer></div></div></body><script type="application/javascript">function o(){let t=this.parentElement;t.classList.toggle("is-collapsed");let e=t.classList.contains("is-collapsed")?this.scrollHeight:t.scrollHeight;t.style.maxHeight=e+"px";let c=t,l=t.parentElement;for(;l;){if(!l.classList.contains("callout"))return;let i=l.classList.contains("is-collapsed")?l.scrollHeight:l.scrollHeight+c.scrollHeight;l.style.maxHeight=i+"px",c=l,l=l.parentElement}}function n(){let t=document.getElementsByClassName("callout is-collapsible");for(let s of t){let e=s.firstElementChild;if(!e)continue;e.addEventListener("click",o),window.addCleanup(()=>e.removeEventListener("click",o));let l=s.classList.contains("is-collapsed")?e.scrollHeight:s.scrollHeight;s.style.maxHeight=l+"px"}}document.addEventListener("nav",n);
+</script><script type="module">function f(i,e){if(!i)return;function r(o){o.target===this&&(o.preventDefault(),o.stopPropagation(),e())}function t(o){o.key.startsWith("Esc")&&(o.preventDefault(),e())}i?.addEventListener("click",r),window.addCleanup(()=>i?.removeEventListener("click",r)),document.addEventListener("keydown",t),window.addCleanup(()=>document.removeEventListener("keydown",t))}function y(i){for(;i.firstChild;)i.removeChild(i.firstChild)}var h=class{constructor(e,r){this.container=e;this.content=r;this.setupEventListeners(),this.setupNavigationControls(),this.resetTransform()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;cleanups=[];setupEventListeners(){let e=this.onMouseDown.bind(this),r=this.onMouseMove.bind(this),t=this.onMouseUp.bind(this),o=this.resetTransform.bind(this);this.container.addEventListener("mousedown",e),document.addEventListener("mousemove",r),document.addEventListener("mouseup",t),window.addEventListener("resize",o),this.cleanups.push(()=>this.container.removeEventListener("mousedown",e),()=>document.removeEventListener("mousemove",r),()=>document.removeEventListener("mouseup",t),()=>window.removeEventListener("resize",o))}cleanup(){for(let e of this.cleanups)e()}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let r=this.createButton("+",()=>this.zoom(.1)),t=this.createButton("-",()=>this.zoom(-.1)),o=this.createButton("Reset",()=>this.resetTransform());e.appendChild(t),e.appendChild(o),e.appendChild(r),this.container.appendChild(e)}createButton(e,r){let t=document.createElement("button");return t.textContent=e,t.className="mermaid-control-button",t.addEventListener("click",r),window.addCleanup(()=>t.removeEventListener("click",r)),t}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}zoom(e){let r=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),t=this.content.getBoundingClientRect(),o=t.width/2,n=t.height/2,c=r-this.scale;this.currentPan.x-=o*c,this.currentPan.y-=n*c,this.scale=r,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){this.scale=1;let e=this.content.querySelector("svg");this.currentPan={x:e.getBoundingClientRect().width/2,y:e.getBoundingClientRect().height/2},this.updateTransform()}},C=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],E;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;E||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let r=E.default,t=new WeakMap;for(let n of e)t.set(n,n.innerText);async function o(){for(let s of e){s.removeAttribute("data-processed");let a=t.get(s);a&&(s.innerHTML=a)}let n=C.reduce((s,a)=>(s[a]=window.getComputedStyle(document.documentElement).getPropertyValue(a),s),{}),c=document.documentElement.getAttribute("saved-theme")==="dark";r.initialize({startOnLoad:!1,securityLevel:"loose",theme:c?"dark":"base",themeVariables:{fontFamily:n["--codeFont"],primaryColor:n["--light"],primaryTextColor:n["--darkgray"],primaryBorderColor:n["--tertiary"],lineColor:n["--darkgray"],secondaryColor:n["--secondary"],tertiaryColor:n["--tertiary"],clusterBkg:n["--light"],edgeLabelBackground:n["--highlight"]}}),await r.run({nodes:e})}await o(),document.addEventListener("themechange",o),window.addCleanup(()=>document.removeEventListener("themechange",o));for(let n=0;n<e.length;n++){let v=function(){let g=l.querySelector("#mermaid-space"),m=l.querySelector(".mermaid-content");if(!m)return;y(m);let w=c.querySelector("svg").cloneNode(!0);m.appendChild(w),l.classList.add("active"),g.style.cursor="grab",u=new h(g,m)},M=function(){l.classList.remove("active"),u?.cleanup(),u=null},c=e[n],s=c.parentElement,a=s.querySelector(".clipboard-button"),d=s.querySelector(".expand-button"),p=window.getComputedStyle(a),L=a.offsetWidth+parseFloat(p.marginLeft||"0")+parseFloat(p.marginRight||"0");d.style.right=`calc(${L}px + 0.3rem)`,s.prepend(d);let l=s.querySelector("#mermaid-container");if(!l)return;let u=null;d.addEventListener("click",v),f(l,M),window.addCleanup(()=>{u?.cleanup(),d.removeEventListener("click",v)})}});
+</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript"></script><script src="../postscript.00b09a8c.js" type="module"></script></html>

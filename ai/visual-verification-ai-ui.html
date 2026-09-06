@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en"><head><title>Visual Verification for AI-Generated UI · second-brain</title><meta charset="utf-8"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400;1,600&amp;family=Inter:wght@400;700&amp;family=JetBrains Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="synapse"/><meta property="og:title" content="Visual Verification for AI-Generated UI · second-brain"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Visual Verification for AI-Generated UI · second-brain"/><meta name="twitter:description" content="Visual Verification for AI-Generated UI The perceptual layer of the AI verification stack: pixel and DOM-level checks that catch UI failures invisible to the type system and unit ..."/><meta property="og:description" content="Visual Verification for AI-Generated UI The perceptual layer of the AI verification stack: pixel and DOM-level checks that catch UI failures invisible to the type system and unit ..."/><meta property="og:image:alt" content="Visual Verification for AI-Generated UI The perceptual layer of the AI verification stack: pixel and DOM-level checks that catch UI failures invisible to the type system and unit ..."/><meta property="twitter:domain" content="oxzo.github.io/brains-site"/><meta property="og:url" content="https://oxzo.github.io/brains-site/ai/visual-verification-ai-ui"/><meta property="twitter:url" content="https://oxzo.github.io/brains-site/ai/visual-verification-ai-ui"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="Visual Verification for AI-Generated UI The perceptual layer of the AI verification stack: pixel and DOM-level checks that catch UI failures invisible to the type system and unit ..."/><meta name="generator" content="Quartz"/><link href="../index.322b98b4.css" rel="stylesheet" type="text/css" spa-preserve/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  padding: 2rem;
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL2hvbWUvcnVubmVyL3dvcmsvYnJhaW5zL2JyYWlucy9zaXRlL3F1YXJ0ei9jb21wb25lbnRzL3N0eWxlcyIsInNvdXJjZXMiOlsibWVybWFpZC5pbmxpbmUuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTs7QUFHRjtFQUNFO0VBQ0E7O0FBR0Y7RUFDRTs7O0FBS0Y7RUFDRTtFQUNBOzs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7O0FBR0Y7RUFDRTs7QUFJRjtFQUNFO0VBQ0E7RUFDQSIsInNvdXJjZXNDb250ZW50IjpbIi5leHBhbmQtYnV0dG9uIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbG9hdDogcmlnaHQ7XG4gIHBhZGRpbmc6IDAuNHJlbTtcbiAgbWFyZ2luOiAwLjNyZW07XG4gIHJpZ2h0OiAwOyAvLyBOT1RFOiByaWdodCB3aWxsIGJlIHNldCBpbiBtZXJtYWlkLmlubGluZS50c1xuICBjb2xvcjogdmFyKC0tZ3JheSk7XG4gIGJvcmRlci1jb2xvcjogdmFyKC0tZGFyayk7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWxpZ2h0KTtcbiAgYm9yZGVyOiAxcHggc29saWQ7XG4gIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgb3BhY2l0eTogMDtcbiAgdHJhbnNpdGlvbjogMC4ycztcblxuICAmID4gc3ZnIHtcbiAgICBmaWxsOiB2YXIoLS1saWdodCk7XG4gICAgZmlsdGVyOiBjb250cmFzdCgwLjMpO1xuICB9XG5cbiAgJjpob3ZlciB7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIGJvcmRlci1jb2xvcjogdmFyKC0tc2Vjb25kYXJ5KTtcbiAgfVxuXG4gICY6Zm9jdXMge1xuICAgIG91dGxpbmU6IDA7XG4gIH1cbn1cblxucHJlIHtcbiAgJjpob3ZlciA+IC5leHBhbmQtYnV0dG9uIHtcbiAgICBvcGFjaXR5OiAxO1xuICAgIHRyYW5zaXRpb246IDAuMnM7XG4gIH1cbn1cblxuI21lcm1haWQtY29udGFpbmVyIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICBjb250YWluOiBsYXlvdXQ7XG4gIHotaW5kZXg6IDk5OTtcbiAgbGVmdDogMDtcbiAgdG9wOiAwO1xuICB3aWR0aDogMTAwdnc7XG4gIGhlaWdodDogMTAwdmg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGRpc3BsYXk6IG5vbmU7XG4gIGJhY2tkcm9wLWZpbHRlcjogYmx1cig0cHgpO1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuNSk7XG5cbiAgJi5hY3RpdmUge1xuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgfVxuXG4gICYgPiAjbWVybWFpZC1zcGFjZSB7XG4gICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1saWdodCk7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDUwJTtcbiAgICBsZWZ0OiA1MCU7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gICAgaGVpZ2h0OiA4MHZoO1xuICAgIHdpZHRoOiA4MHZ3O1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG5cbiAgICAmID4gLm1lcm1haWQtY29udGVudCB7XG4gICAgICBwYWRkaW5nOiAycmVtO1xuICAgICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgICAgdHJhbnNmb3JtLW9yaWdpbjogMCAwO1xuICAgICAgdHJhbnNpdGlvbjogdHJhbnNmb3JtIDAuMXMgZWFzZTtcbiAgICAgIG92ZXJmbG93OiB2aXNpYmxlO1xuICAgICAgbWluLWhlaWdodDogMjAwcHg7XG4gICAgICBtaW4td2lkdGg6IDIwMHB4O1xuXG4gICAgICBwcmUge1xuICAgICAgICBtYXJnaW46IDA7XG4gICAgICAgIGJvcmRlcjogbm9uZTtcbiAgICAgIH1cblxuICAgICAgc3ZnIHtcbiAgICAgICAgbWF4LXdpZHRoOiBub25lO1xuICAgICAgICBoZWlnaHQ6IGF1dG87XG4gICAgICB9XG4gICAgfVxuXG4gICAgJiA+IC5tZXJtYWlkLWNvbnRyb2xzIHtcbiAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgIGJvdHRvbTogMjBweDtcbiAgICAgIHJpZ2h0OiAyMHB4O1xuICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgIGdhcDogOHB4O1xuICAgICAgcGFkZGluZzogOHB4O1xuICAgICAgYmFja2dyb3VuZDogdmFyKC0tbGlnaHQpO1xuICAgICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICAgIGJvcmRlci1yYWRpdXM6IDZweDtcbiAgICAgIGJveC1zaGFkb3c6IDAgMnB4IDRweCByZ2JhKDAsIDAsIDAsIDAuMSk7XG4gICAgICB6LWluZGV4OiAyO1xuXG4gICAgICAubWVybWFpZC1jb250cm9sLWJ1dHRvbiB7XG4gICAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAgICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICAgICAgICB3aWR0aDogMzJweDtcbiAgICAgICAgaGVpZ2h0OiAzMnB4O1xuICAgICAgICBwYWRkaW5nOiAwO1xuICAgICAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodCk7XG4gICAgICAgIGNvbG9yOiB2YXIoLS1kYXJrKTtcbiAgICAgICAgYm9yZGVyLXJhZGl1czogNHB4O1xuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgICAgIGZvbnQtc2l6ZTogMTZweDtcbiAgICAgICAgZm9udC1mYW1pbHk6IHZhcigtLWJvZHlGb250KTtcbiAgICAgICAgdHJhbnNpdGlvbjogYWxsIDAuMnMgZWFzZTtcblxuICAgICAgICAmOmhvdmVyIHtcbiAgICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICB9XG5cbiAgICAgICAgJjphY3RpdmUge1xuICAgICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWSgxcHgpO1xuICAgICAgICB9XG5cbiAgICAgICAgLy8gU3R5bGUgdGhlIHJlc2V0IGJ1dHRvbiBkaWZmZXJlbnRseVxuICAgICAgICAmOm50aC1jaGlsZCgyKSB7XG4gICAgICAgICAgd2lkdGg6IGF1dG87XG4gICAgICAgICAgcGFkZGluZzogMCAxMnB4O1xuICAgICAgICAgIGZvbnQtc2l6ZTogMTRweDtcbiAgICAgICAgfVxuICAgICAgfVxuICAgIH1cbiAgfVxufVxuIl19 */</style><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" spa-preserve/><script src="../prescript.be9697b4.js" type="application/javascript" spa-preserve></script><script type="application/javascript" spa-preserve>const fetchData = fetch("../static/contentIndex.73890e1e.json").then(data => data.json())</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://oxzo.github.io/brains-site/index.xml"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://oxzo.github.io/brains-site/ai/visual-verification-ai-ui-og-image.webp"/><meta property="og:image:url" content="https://oxzo.github.io/brains-site/ai/visual-verification-ai-ui-og-image.webp"/><meta name="twitter:image" content="https://oxzo.github.io/brains-site/ai/visual-verification-ai-ui-og-image.webp"/><meta property="og:image:type" content="image/.webp"/></head><body data-slug="ai/visual-verification-ai-ui"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">synapse</a></h2><div class="spacer mobile-only"></div><div style="display: flex; flex-direction: row; flex-wrap: nowrap; gap: 1rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button"><p>Search</p><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Search for something" placeholder="Search for something"/><div class="search-layout" data-preview="true"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Dark mode"><title>Dark mode</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Light mode"><title>Light mode</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div></div><div class="explorer" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a,b)=>!a.isFolder&amp;&amp;!b.isFolder||a.isFolder&amp;&amp;b.isFolder?a.displayName.localeCompare(b.displayName,void 0,{numeric:!0,sensitivity:\&quot;base\&quot;}):!a.isFolder&amp;&amp;b.isFolder?1:-1&quot;,&quot;filterFn&quot;:&quot;node=>node.slugSegment!==\&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;node=>node&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-content"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>Explorer</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="explorer-content" aria-expanded="false"><ul class="explorer-ul overflow" id="0x8mfk"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#"></a></li></template><template id="template-folder"><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../ai/">AI — Index</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>Visual Verification for AI-Generated UI</a></div></nav><h1 class="article-title">Visual Verification for AI-Generated UI</h1><p show-comma="true" class="content-meta"><time datetime="2026-07-19T00:00:00.000Z">Jul 19, 2026</time><span>10 min read</span></p><ul class="tags"><li><a href="../tags/ai" class="internal tag-link">ai</a></li><li><a href="../tags/verification" class="internal tag-link">verification</a></li><li><a href="../tags/testing" class="internal tag-link">testing</a></li><li><a href="../tags/web-development" class="internal tag-link">web-development</a></li><li><a href="../tags/ui" class="internal tag-link">ui</a></li><li><a href="../tags/visual-regression" class="internal tag-link">visual-regression</a></li><li><a href="../tags/accessibility" class="internal tag-link">accessibility</a></li><li><a href="../tags/publish" class="internal tag-link">publish</a></li></ul></div></div><article class="popover-hint"><h1 id="visual-verification-for-ai-generated-ui">Visual Verification for AI-Generated UI<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#visual-verification-for-ai-generated-ui" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>The perceptual layer of the AI verification stack: pixel and DOM-level checks that catch UI failures invisible to the type system and unit tests. Sits at Layer 3 of <a href="../ai/ai-verification-stack-web" class="internal" data-slug="ai/ai-verification-stack-web">ai-verification-stack-web</a> alongside mutation testing, but covers a different failure surface — what the user <em>sees and interacts with</em>, not what the code <em>computes</em>.</p>
+<h2 id="why-ai-generated-ui-fails-visually">Why AI-generated UI fails visually<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#why-ai-generated-ui-fails-visually" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Types verify structure. Unit tests verify behavior. Neither sees the rendered output. AI agents are trained to satisfy explicit checks, so their UI changes routinely:</p>
+<ul>
+<li>Pass type-check (props line up)</li>
+<li>Pass unit tests (DOM-presence assertions hold)</li>
+<li>Look broken to a human</li>
+</ul>
+<p>The “DOM-correct, visually broken” failure is a leading mode for AI UI bugs because the agent reasons over markup and class names, not rendered output. The page is, to the agent, a string. Visual verification puts the rendered output back in the loop.</p>
+<h2 id="failure-modes-specific-to-ai-generated-ui">Failure modes specific to AI-generated UI<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#failure-modes-specific-to-ai-generated-ui" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>The bug classes that slip through type-check + unit tests on AI-authored UI changes:</p>
+<ul>
+<li><strong>Layout overflow.</strong> Fixed widths or <code>min-w</code> values that break at viewports the agent didn’t consider.</li>
+<li><strong>Z-index collisions.</strong> New element overlaps existing modals, dropdowns, or sticky headers because the agent doesn’t reason about stacking context.</li>
+<li><strong>Color contrast regressions.</strong> Tailwind class swap (<code>text-gray-500</code> → <code>text-gray-400</code>) compiles fine, trips no test, drops below the WCAG contrast threshold.</li>
+<li><strong>Hidden elements.</strong> A flexbox or grid change pushes content off-screen or behind another element. DOM still contains it; queries pass.</li>
+<li><strong>Broken responsive breakpoints.</strong> Works at the viewport the agent assumed (typically desktop) and breaks at others.</li>
+<li><strong>Focus order regressions.</strong> Tab sequence rearranged invisibly because the agent reordered DOM without thinking about keyboard users.</li>
+<li><strong>Animation jank.</strong> New transition runs at low frame rates because of layout-triggering properties (<code>top</code>/<code>left</code> instead of <code>transform</code>).</li>
+<li><strong>Light/dark mode breakage.</strong> New element doesn’t respect existing theme tokens; legible in one mode, illegible in the other.</li>
+<li><strong>Missing or wrong empty/loading/error states.</strong> Happy path renders correctly; the other states are broken or absent.</li>
+<li><strong>Internationalization breakage.</strong> Layout assumes English-length strings; breaks for German or Japanese.</li>
+</ul>
+<p>These are the bug classes a visual + accessibility verification layer is designed to catch.</p>
+<h2 id="pixel-diff-limitations-and-flakiness-sources">Pixel-diff: limitations and flakiness sources<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#pixel-diff-limitations-and-flakiness-sources" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Naive screenshot comparison (“does PNG A equal PNG B?”) fails as a primary gate because identical-intent renders are rarely byte-identical. Common flakiness sources:</p>
+<ul>
+<li><strong>Anti-aliasing variance.</strong> Subpixel font rendering differs across OSes, GPU drivers, and individual runs.</li>
+<li><strong>Font fallback.</strong> Webfont not yet loaded → fallback rendered → diff fires.</li>
+<li><strong>Animation frame timing.</strong> Capture lands on different frames of an in-flight transition.</li>
+<li><strong>Dynamic content.</strong> Timestamps, random IDs, user names, A/B test variants.</li>
+<li><strong>Cursor and focus rings.</strong> Browser draws an indicator the test didn’t expect.</li>
+<li><strong>Scrollbar gutter.</strong> Width depends on OS settings.</li>
+<li><strong>Iframe or third-party widgets.</strong> Maps, embedded video, ad slots render non-deterministically.</li>
+</ul>
+<p>Pixel-diff is a useful primitive but a poor gate without tolerance, masking, or a perceptual layer above it.</p>
+<h2 id="perceptual--smart-diffing">Perceptual / smart diffing<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#perceptual--smart-diffing" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Production visual-regression tooling adds layers above raw pixel comparison:</p>
+<ul>
+<li><strong>Anti-aliasing tolerance.</strong> Algorithms like Pixelmatch’s anti-aliasing detection or Resemble.js’s perceptual mode ignore subpixel differences below a threshold.</li>
+<li><strong>Ignore regions.</strong> Mask dynamic areas (timestamps, avatars, animations) so they don’t trigger diffs.</li>
+<li><strong>Viewport / browser matrices.</strong> Run the same component across desktop, tablet, mobile widths and across Chromium, Firefox, WebKit. Catches the responsive-breakpoint and browser-specific bugs the agent didn’t think about.</li>
+<li><strong>Baseline review workflow.</strong> Diffs aren’t auto-approved; a human reviews and accepts intentional changes. The review UX is the actual product Chromatic and Percy charge for.</li>
+<li><strong>Change-scoped snapshotting.</strong> Tools like Chromatic’s TurboSnap re-snapshot only stories whose dependency graph changed. Cuts cost dramatically on large component libraries.</li>
+</ul>
+<h3 id="tooling-landscape">Tooling landscape<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#tooling-landscape" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>As of April 2026, not exhaustive: <strong>Chromatic</strong> (Storybook-native, hosted), <strong>Percy</strong> (BrowserStack, generic), <strong>Argos</strong> (open-source-leaning, Playwright-native), <strong>Lost Pixel</strong> (open-source, self-hostable), <strong>Playwright’s built-in <code>toHaveScreenshot</code></strong> (free, unmanaged baselines). Pixelmatch and Resemble.js are the diff libraries several of these tools wrap; commercial tools like Applitools layer their own AI-driven diff on top.</p>
+<p>Choosing: hosted services charge for the review UX and baseline storage. Self-hosted Playwright works for solo projects but the baseline-management burden grows with the suite.</p>
+<h2 id="accessibility-regression">Accessibility regression<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#accessibility-regression" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Visual diff catches “looks wrong.” Accessibility checks catch “doesn’t work for keyboard, screen-reader, or low-vision users” — a separate axis the agent is just as likely to break and even less likely to test.</p>
+<p><strong>Automated WCAG scanning:</strong></p>
+<ul>
+<li><strong>axe-core</strong> — the de-facto rule engine. Integrates with Jest, Playwright, Cypress, Storybook, Lighthouse. Deque’s published claim is that axe-core finds roughly half of WCAG issues automatically; treat the exact figure as marketing and verify against current docs before citing it.</li>
+<li><strong>Pa11y</strong> — CLI-friendly accessibility runner; can drive axe and HTML CodeSniffer.</li>
+<li><strong>Lighthouse CI</strong> — bundles axe-core checks alongside performance and SEO. Already in <a href="../ai/ai-verification-stack-web" class="internal" data-slug="ai/ai-verification-stack-web">ai-verification-stack-web</a> Layer 5.</li>
+</ul>
+<p>What automated a11y catches:</p>
+<ul>
+<li>Color contrast below WCAG ratio</li>
+<li>Missing <code>alt</code>, missing form labels, missing button text</li>
+<li>Improper heading order</li>
+<li>ARIA misuse (invalid role-attribute combinations)</li>
+<li>Missing <code>lang</code>, missing <code>&lt;title></code></li>
+<li>Duplicate or empty IDs in interactive contexts</li>
+</ul>
+<p>What automated a11y misses:</p>
+<ul>
+<li><strong>Focus order.</strong> Tab sequence makes sense to a sighted user but is meaningless to a keyboard-only user.</li>
+<li><strong>Screen-reader narrative coherence.</strong> Each element is labeled, but the announced sequence is incomprehensible.</li>
+<li><strong>Live region behavior.</strong> <code>aria-live</code> regions firing too often, or not at all, when content updates.</li>
+<li><strong>Keyboard traps.</strong> Modal opens with keyboard but can’t be closed.</li>
+<li><strong>Meaningful contrast.</strong> Text passes ratio but the chosen color carries semantic meaning the contrast check can’t evaluate.</li>
+<li><strong>Cognitive accessibility.</strong> Reading level, time pressure, error recovery.</li>
+</ul>
+<p>Treat axe-green as a floor, not a ceiling. Manual keyboard testing and at least one screen-reader pass remain part of the review for any net-new UI surface.</p>
+<h2 id="animation--motion-verification">Animation &amp; motion verification<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#animation--motion-verification" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Animations are visual verification’s hardest case — they’re inherently time-varying. Strategies:</p>
+<ul>
+<li><strong><code>prefers-reduced-motion</code> test.</strong> Verify the reduced-motion fallback exists and renders sensibly. Many AI-generated animations skip this entirely.</li>
+<li><strong>Deterministic capture.</strong> Use Playwright’s <code>page.clock</code> or freeze animations via CSS (<code>* { animation-duration: 0s !important }</code>) before snapshotting to avoid frame-timing flakiness.</li>
+<li><strong>Intent-level checks.</strong> “Element transitions from off-screen to visible within 300ms” is easier to assert than “element looks correct mid-animation.” Use animation-aware waits rather than fixed delays.</li>
+<li><strong>Performance gates on animations.</strong> Use Playwright tracing or the Chrome DevTools Protocol to verify the animation runs smoothly. Catches the <code>top</code>/<code>left</code> vs <code>transform</code> failure mode.</li>
+</ul>
+<p>The agent’s typical animation failure is a CSS transition that <em>runs</em> but is functionally janky — visible but not visually correct. Deterministic capture catches existence; performance gates catch quality.</p>
+<h2 id="component-isolation-vs-full-page">Component isolation vs. full-page<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#component-isolation-vs-full-page" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Two complementary scopes:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Scope</th><th>Tool</th><th>Catches</th><th>Misses</th></tr></thead><tbody><tr><td>Component</td><td>Storybook + Chromatic / Lost Pixel</td><td>Per-component visual regression across props/variants</td><td>Integration: how components compose on a real page</td></tr><tr><td>Page</td><td>Playwright <code>toHaveScreenshot</code> / Argos</td><td>Full-page layout, integration</td><td>High maintenance burden; one component change cascades into many baseline diffs</td></tr></tbody></table></div>
+<p>Default mix for AI-authored UI work: component-level visual on every PR (cheap, high signal); page-level on critical user flows (login, checkout, dashboard), gated less aggressively. Avoid page-level snapshots of routes with heavy dynamic content unless masking is set up.</p>
+<h2 id="ai-specific-anti-patterns">AI-specific anti-patterns<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#ai-specific-anti-patterns" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>These are the failure modes that turn visual verification into theater:</p>
+<ul>
+<li><strong>Snapshot-tampering.</strong> Agent updates baselines to make tests pass — the visual analogue of test-tampering flagged in <a href="../ai/evaluating-ai-code-beyond-tests" class="internal" data-slug="ai/evaluating-ai-code-beyond-tests">evaluating-ai-code-beyond-tests</a> as the strongest negative signal. <strong>Rule: baseline updates require human review and a justification commit message.</strong> Never let an agent auto-approve its own visual diffs.</li>
+<li><strong>Baseline rot.</strong> Long-uninspected baselines accumulate accepted regressions. Schedule a recurring baseline audit; cadence depends on suite size and change rate. Without this discipline, visual regression has a famously high abandonment rate — teams drown in flaky-baseline noise and turn the gate off, leaving snapshots as dead weight.</li>
+<li><strong>Viewport tunnel vision.</strong> Agent generates UI optimized for one viewport (typically desktop). The visual matrix needs at least one mobile width.</li>
+<li><strong>A11y suppressions.</strong> Agent adds <code>// axe-disable</code> or wraps a violation in <code>aria-hidden</code> to silence the warning rather than fix it. Treat suppressions like ESLint suppressions — they require a justification.</li>
+<li><strong>Snapshot pollution.</strong> Agent writes hundreds of trivially-different stories to maximize coverage metrics. Snapshots that don’t catch real changes are noise.</li>
+<li><strong>Mocking too much.</strong> Component snapshots with all data mocked to constants miss the failure modes of real-shape data (long names, missing fields, internationalized strings). At least one variant per component should use realistic data.</li>
+</ul>
+<h2 id="what-to-wire-up-first">What to wire up first<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#what-to-wire-up-first" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Phased plan for a solo web developer adopting visual verification on an existing project. Phases are ordered by dependency, not by calendar — pace each as scope and time allow.</p>
+<p><strong>Phase 1 — Quick wins (lowest dependency, highest signal):</strong></p>
+<ol>
+<li>Add axe-core via <code>@axe-core/playwright</code> or <code>jest-axe</code> to the existing test suite. Run it on three representative pages.</li>
+<li>Turn on Lighthouse CI’s accessibility category if not already.</li>
+<li>Add Playwright <code>toHaveScreenshot</code> to one critical flow as a learning exercise.</li>
+</ol>
+<p><strong>Phase 2 — Component-level visual baseline (requires Storybook):</strong></p>
+<ol start="4">
+<li>Set up Storybook for the component library (if absent).</li>
+<li>Add Chromatic or Lost Pixel for component-level visual regression. Start with leaf components; baseline them, gate PRs on diffs.</li>
+<li>Add a viewport matrix: at least desktop + mobile.</li>
+</ol>
+<p><strong>Phase 3 — Full coverage and animation (after the component suite is stable):</strong></p>
+<ol start="7">
+<li>Page-level visual regression on the top three user flows.</li>
+<li><code>prefers-reduced-motion</code> and animation performance gates.</li>
+<li>Baseline-audit ritual: schedule a recurring walk-through of accepted diffs to catch regression rot before it normalizes.</li>
+</ol>
+<p>The first hour spent wiring axe-core is worth more than any number of hours on pixel diffs. Accessibility automation has the highest signal-to-noise ratio of any layer here.</p>
+<h2 id="limits--what-visual-verification-cannot-prove">Limits — what visual verification cannot prove<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#limits--what-visual-verification-cannot-prove" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><strong>Intent vs. appearance.</strong> A component can look identical to its baseline and be wrong (linked to the wrong route, fetching the wrong data).</li>
+<li><strong>Cross-locale layout.</strong> Without explicit non-English snapshots, layout breakage in RTL or long-string locales goes uncaught.</li>
+<li><strong>Real-device rendering.</strong> CI browsers are not real devices; mobile Safari’s WebKit quirks need a device cloud (BrowserStack, Sauce, real hardware).</li>
+<li><strong>Cognitive UX.</strong> Whether the UI is <em>understandable</em> and <em>usable</em> is out of scope for any automated layer. Manual review and user testing remain irreducible.</li>
+<li><strong>Performance under realistic load.</strong> Visual verification snapshots a clean run; real performance gates need separate tooling (Lighthouse CI, perf budgets, real-user monitoring).</li>
+</ul>
+<p>The visual + accessibility layer is a high-value gate, not a complete one. It plugs into the broader stack in <a href="../ai/ai-verification-stack-web" class="internal" data-slug="ai/ai-verification-stack-web">ai-verification-stack-web</a> and the review rubric in <a href="../ai/evaluating-ai-code-beyond-tests" class="internal" data-slug="ai/evaluating-ai-code-beyond-tests">evaluating-ai-code-beyond-tests</a>.</p>
+<h2 id="related">Related<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#related" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><a href="../ai/ai-verification-stack-web" class="internal" data-slug="ai/ai-verification-stack-web">ai-verification-stack-web</a> — parent note; this is a deep dive on Layer 3’s perceptual side</li>
+<li><a href="../ai/evaluating-ai-code-beyond-tests" class="internal" data-slug="ai/evaluating-ai-code-beyond-tests">evaluating-ai-code-beyond-tests</a> — review rubric where snapshot-tampering parallels test-tampering</li>
+<li><a href="../ai/ai-code-latent-failure-modes" class="internal" data-slug="ai/ai-code-latent-failure-modes">ai-code-latent-failure-modes</a> — AI UI bugs that pass tests connect to “silent schema drift” and “comprehension debt” patterns</li>
+<li><a href="../ai/ai-output-bias-fingerprints" class="internal" data-slug="ai/ai-output-bias-fingerprints">ai-output-bias-fingerprints</a> — sycophancy and narrative-coherence patterns also surface in agent-generated UI (“ship-ready” claims on visually broken changes)</li>
+<li><a href="../ai/hitl-progressive-autonomy" class="internal" data-slug="ai/hitl-progressive-autonomy">hitl-progressive-autonomy</a> — the human-in-the-loop case for never auto-approving baseline diffs</li>
+</ul>
+<h2 id="sources">Sources<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#sources" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>General-knowledge synthesis of standard tooling and practices in the visual-regression and a11y-testing space (April 2026). The specific tools and capabilities described are real and current — Chromatic, Percy, Argos, Lost Pixel, Playwright <code>toHaveScreenshot</code>, Pixelmatch, Resemble.js, axe-core, Pa11y, Lighthouse CI. Their feature sets evolve and should be re-checked against current docs before commitment. The “axe-core finds roughly half of WCAG issues” figure is Deque’s published marketing claim and is hedged accordingly above. No load-bearing statistics in this note are cited from named studies; for the parent stack’s quantitative claims see <a href="../ai/ai-verification-stack-web" class="internal" data-slug="ai/ai-verification-stack-web">ai-verification-stack-web</a> § Why it matters.</p></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>Graph View</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc desktop-only"><button type="button" class="toc-header" aria-controls="toc-content" aria-expanded="true"><h3>Table of Contents</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="toc-content"><ul id="h9l23p" class="overflow"><li class="depth-0"><a href="#visual-verification-for-ai-generated-ui" data-for="visual-verification-for-ai-generated-ui">Visual Verification for AI-Generated UI</a></li><li class="depth-1"><a href="#why-ai-generated-ui-fails-visually" data-for="why-ai-generated-ui-fails-visually">Why AI-generated UI fails visually</a></li><li class="depth-1"><a href="#failure-modes-specific-to-ai-generated-ui" data-for="failure-modes-specific-to-ai-generated-ui">Failure modes specific to AI-generated UI</a></li><li class="depth-1"><a href="#pixel-diff-limitations-and-flakiness-sources" data-for="pixel-diff-limitations-and-flakiness-sources">Pixel-diff: limitations and flakiness sources</a></li><li class="depth-1"><a href="#perceptual--smart-diffing" data-for="perceptual--smart-diffing">Perceptual / smart diffing</a></li><li class="depth-2"><a href="#tooling-landscape" data-for="tooling-landscape">Tooling landscape</a></li><li class="depth-1"><a href="#accessibility-regression" data-for="accessibility-regression">Accessibility regression</a></li><li class="depth-1"><a href="#animation--motion-verification" data-for="animation--motion-verification">Animation &amp; motion verification</a></li><li class="depth-1"><a href="#component-isolation-vs-full-page" data-for="component-isolation-vs-full-page">Component isolation vs. full-page</a></li><li class="depth-1"><a href="#ai-specific-anti-patterns" data-for="ai-specific-anti-patterns">AI-specific anti-patterns</a></li><li class="depth-1"><a href="#what-to-wire-up-first" data-for="what-to-wire-up-first">What to wire up first</a></li><li class="depth-1"><a href="#limits--what-visual-verification-cannot-prove" data-for="limits--what-visual-verification-cannot-prove">Limits — what visual verification cannot prove</a></li><li class="depth-1"><a href="#related" data-for="related">Related</a></li><li class="depth-1"><a href="#sources" data-for="sources">Sources</a></li><li class="overflow-end"></li></ul></div></div><div class="backlinks"><h3>Backlinks</h3><ul id="xacmdj" class="overflow"><li><a href="../ai/generative-ui-landscape" class="internal">Generative UI — Runtime Landscape and Evidence Base</a></li><li><a href="../ai/" class="internal">AI — Index</a></li><li><a href="../ai/mutation-testing-ai-generated-code" class="internal">Mutation Testing for AI-Generated Code</a></li><li><a href="../ai/playwright-test-agents" class="internal">Playwright Test Agents — Planner, Generator, Healer</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v4.4.1</a> © 2026</p><ul><li><a href="https://github.com/oxzo/brains">source</a></li><li><a href="/index.xml">rss</a></li></ul></footer></div></div></body><script type="application/javascript">function o(){let t=this.parentElement;t.classList.toggle("is-collapsed");let e=t.classList.contains("is-collapsed")?this.scrollHeight:t.scrollHeight;t.style.maxHeight=e+"px";let c=t,l=t.parentElement;for(;l;){if(!l.classList.contains("callout"))return;let i=l.classList.contains("is-collapsed")?l.scrollHeight:l.scrollHeight+c.scrollHeight;l.style.maxHeight=i+"px",c=l,l=l.parentElement}}function n(){let t=document.getElementsByClassName("callout is-collapsible");for(let s of t){let e=s.firstElementChild;if(!e)continue;e.addEventListener("click",o),window.addCleanup(()=>e.removeEventListener("click",o));let l=s.classList.contains("is-collapsed")?e.scrollHeight:s.scrollHeight;s.style.maxHeight=l+"px"}}document.addEventListener("nav",n);
+</script><script type="module">function f(i,e){if(!i)return;function r(o){o.target===this&&(o.preventDefault(),o.stopPropagation(),e())}function t(o){o.key.startsWith("Esc")&&(o.preventDefault(),e())}i?.addEventListener("click",r),window.addCleanup(()=>i?.removeEventListener("click",r)),document.addEventListener("keydown",t),window.addCleanup(()=>document.removeEventListener("keydown",t))}function y(i){for(;i.firstChild;)i.removeChild(i.firstChild)}var h=class{constructor(e,r){this.container=e;this.content=r;this.setupEventListeners(),this.setupNavigationControls(),this.resetTransform()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;cleanups=[];setupEventListeners(){let e=this.onMouseDown.bind(this),r=this.onMouseMove.bind(this),t=this.onMouseUp.bind(this),o=this.resetTransform.bind(this);this.container.addEventListener("mousedown",e),document.addEventListener("mousemove",r),document.addEventListener("mouseup",t),window.addEventListener("resize",o),this.cleanups.push(()=>this.container.removeEventListener("mousedown",e),()=>document.removeEventListener("mousemove",r),()=>document.removeEventListener("mouseup",t),()=>window.removeEventListener("resize",o))}cleanup(){for(let e of this.cleanups)e()}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let r=this.createButton("+",()=>this.zoom(.1)),t=this.createButton("-",()=>this.zoom(-.1)),o=this.createButton("Reset",()=>this.resetTransform());e.appendChild(t),e.appendChild(o),e.appendChild(r),this.container.appendChild(e)}createButton(e,r){let t=document.createElement("button");return t.textContent=e,t.className="mermaid-control-button",t.addEventListener("click",r),window.addCleanup(()=>t.removeEventListener("click",r)),t}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}zoom(e){let r=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),t=this.content.getBoundingClientRect(),o=t.width/2,n=t.height/2,c=r-this.scale;this.currentPan.x-=o*c,this.currentPan.y-=n*c,this.scale=r,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){this.scale=1;let e=this.content.querySelector("svg");this.currentPan={x:e.getBoundingClientRect().width/2,y:e.getBoundingClientRect().height/2},this.updateTransform()}},C=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],E;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;E||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let r=E.default,t=new WeakMap;for(let n of e)t.set(n,n.innerText);async function o(){for(let s of e){s.removeAttribute("data-processed");let a=t.get(s);a&&(s.innerHTML=a)}let n=C.reduce((s,a)=>(s[a]=window.getComputedStyle(document.documentElement).getPropertyValue(a),s),{}),c=document.documentElement.getAttribute("saved-theme")==="dark";r.initialize({startOnLoad:!1,securityLevel:"loose",theme:c?"dark":"base",themeVariables:{fontFamily:n["--codeFont"],primaryColor:n["--light"],primaryTextColor:n["--darkgray"],primaryBorderColor:n["--tertiary"],lineColor:n["--darkgray"],secondaryColor:n["--secondary"],tertiaryColor:n["--tertiary"],clusterBkg:n["--light"],edgeLabelBackground:n["--highlight"]}}),await r.run({nodes:e})}await o(),document.addEventListener("themechange",o),window.addCleanup(()=>document.removeEventListener("themechange",o));for(let n=0;n<e.length;n++){let v=function(){let g=l.querySelector("#mermaid-space"),m=l.querySelector(".mermaid-content");if(!m)return;y(m);let w=c.querySelector("svg").cloneNode(!0);m.appendChild(w),l.classList.add("active"),g.style.cursor="grab",u=new h(g,m)},M=function(){l.classList.remove("active"),u?.cleanup(),u=null},c=e[n],s=c.parentElement,a=s.querySelector(".clipboard-button"),d=s.querySelector(".expand-button"),p=window.getComputedStyle(a),L=a.offsetWidth+parseFloat(p.marginLeft||"0")+parseFloat(p.marginRight||"0");d.style.right=`calc(${L}px + 0.3rem)`,s.prepend(d);let l=s.querySelector("#mermaid-container");if(!l)return;let u=null;d.addEventListener("click",v),f(l,M),window.addCleanup(()=>{u?.cleanup(),d.removeEventListener("click",v)})}});
+</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript"></script><script src="../postscript.00b09a8c.js" type="module"></script></html>

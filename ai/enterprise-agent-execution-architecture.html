@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en"><head><title>Enterprise Agent Execution Architecture · second-brain</title><meta charset="utf-8"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400;1,600&amp;family=Inter:wght@400;700&amp;family=JetBrains Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="synapse"/><meta property="og:title" content="Enterprise Agent Execution Architecture · second-brain"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Enterprise Agent Execution Architecture · second-brain"/><meta name="twitter:description" content="Enterprise Agent Execution Architecture The platform-agnostic layer under the Claude-Code-specific trio (agent-sandbox-isolation-tiers, agent-isolation-hardening, ..."/><meta property="og:description" content="Enterprise Agent Execution Architecture The platform-agnostic layer under the Claude-Code-specific trio (agent-sandbox-isolation-tiers, agent-isolation-hardening, ..."/><meta property="og:image:alt" content="Enterprise Agent Execution Architecture The platform-agnostic layer under the Claude-Code-specific trio (agent-sandbox-isolation-tiers, agent-isolation-hardening, ..."/><meta property="twitter:domain" content="oxzo.github.io/brains-site"/><meta property="og:url" content="https://oxzo.github.io/brains-site/ai/enterprise-agent-execution-architecture"/><meta property="twitter:url" content="https://oxzo.github.io/brains-site/ai/enterprise-agent-execution-architecture"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="Enterprise Agent Execution Architecture The platform-agnostic layer under the Claude-Code-specific trio (agent-sandbox-isolation-tiers, agent-isolation-hardening, ..."/><meta name="generator" content="Quartz"/><link href="../index.322b98b4.css" rel="stylesheet" type="text/css" spa-preserve/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  padding: 2rem;
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL2hvbWUvcnVubmVyL3dvcmsvYnJhaW5zL2JyYWlucy9zaXRlL3F1YXJ0ei9jb21wb25lbnRzL3N0eWxlcyIsInNvdXJjZXMiOlsibWVybWFpZC5pbmxpbmUuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTs7QUFHRjtFQUNFO0VBQ0E7O0FBR0Y7RUFDRTs7O0FBS0Y7RUFDRTtFQUNBOzs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7O0FBR0Y7RUFDRTs7QUFJRjtFQUNFO0VBQ0E7RUFDQSIsInNvdXJjZXNDb250ZW50IjpbIi5leHBhbmQtYnV0dG9uIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbG9hdDogcmlnaHQ7XG4gIHBhZGRpbmc6IDAuNHJlbTtcbiAgbWFyZ2luOiAwLjNyZW07XG4gIHJpZ2h0OiAwOyAvLyBOT1RFOiByaWdodCB3aWxsIGJlIHNldCBpbiBtZXJtYWlkLmlubGluZS50c1xuICBjb2xvcjogdmFyKC0tZ3JheSk7XG4gIGJvcmRlci1jb2xvcjogdmFyKC0tZGFyayk7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWxpZ2h0KTtcbiAgYm9yZGVyOiAxcHggc29saWQ7XG4gIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgb3BhY2l0eTogMDtcbiAgdHJhbnNpdGlvbjogMC4ycztcblxuICAmID4gc3ZnIHtcbiAgICBmaWxsOiB2YXIoLS1saWdodCk7XG4gICAgZmlsdGVyOiBjb250cmFzdCgwLjMpO1xuICB9XG5cbiAgJjpob3ZlciB7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIGJvcmRlci1jb2xvcjogdmFyKC0tc2Vjb25kYXJ5KTtcbiAgfVxuXG4gICY6Zm9jdXMge1xuICAgIG91dGxpbmU6IDA7XG4gIH1cbn1cblxucHJlIHtcbiAgJjpob3ZlciA+IC5leHBhbmQtYnV0dG9uIHtcbiAgICBvcGFjaXR5OiAxO1xuICAgIHRyYW5zaXRpb246IDAuMnM7XG4gIH1cbn1cblxuI21lcm1haWQtY29udGFpbmVyIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICBjb250YWluOiBsYXlvdXQ7XG4gIHotaW5kZXg6IDk5OTtcbiAgbGVmdDogMDtcbiAgdG9wOiAwO1xuICB3aWR0aDogMTAwdnc7XG4gIGhlaWdodDogMTAwdmg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGRpc3BsYXk6IG5vbmU7XG4gIGJhY2tkcm9wLWZpbHRlcjogYmx1cig0cHgpO1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuNSk7XG5cbiAgJi5hY3RpdmUge1xuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgfVxuXG4gICYgPiAjbWVybWFpZC1zcGFjZSB7XG4gICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1saWdodCk7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDUwJTtcbiAgICBsZWZ0OiA1MCU7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gICAgaGVpZ2h0OiA4MHZoO1xuICAgIHdpZHRoOiA4MHZ3O1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG5cbiAgICAmID4gLm1lcm1haWQtY29udGVudCB7XG4gICAgICBwYWRkaW5nOiAycmVtO1xuICAgICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgICAgdHJhbnNmb3JtLW9yaWdpbjogMCAwO1xuICAgICAgdHJhbnNpdGlvbjogdHJhbnNmb3JtIDAuMXMgZWFzZTtcbiAgICAgIG92ZXJmbG93OiB2aXNpYmxlO1xuICAgICAgbWluLWhlaWdodDogMjAwcHg7XG4gICAgICBtaW4td2lkdGg6IDIwMHB4O1xuXG4gICAgICBwcmUge1xuICAgICAgICBtYXJnaW46IDA7XG4gICAgICAgIGJvcmRlcjogbm9uZTtcbiAgICAgIH1cblxuICAgICAgc3ZnIHtcbiAgICAgICAgbWF4LXdpZHRoOiBub25lO1xuICAgICAgICBoZWlnaHQ6IGF1dG87XG4gICAgICB9XG4gICAgfVxuXG4gICAgJiA+IC5tZXJtYWlkLWNvbnRyb2xzIHtcbiAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgIGJvdHRvbTogMjBweDtcbiAgICAgIHJpZ2h0OiAyMHB4O1xuICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgIGdhcDogOHB4O1xuICAgICAgcGFkZGluZzogOHB4O1xuICAgICAgYmFja2dyb3VuZDogdmFyKC0tbGlnaHQpO1xuICAgICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICAgIGJvcmRlci1yYWRpdXM6IDZweDtcbiAgICAgIGJveC1zaGFkb3c6IDAgMnB4IDRweCByZ2JhKDAsIDAsIDAsIDAuMSk7XG4gICAgICB6LWluZGV4OiAyO1xuXG4gICAgICAubWVybWFpZC1jb250cm9sLWJ1dHRvbiB7XG4gICAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAgICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICAgICAgICB3aWR0aDogMzJweDtcbiAgICAgICAgaGVpZ2h0OiAzMnB4O1xuICAgICAgICBwYWRkaW5nOiAwO1xuICAgICAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodCk7XG4gICAgICAgIGNvbG9yOiB2YXIoLS1kYXJrKTtcbiAgICAgICAgYm9yZGVyLXJhZGl1czogNHB4O1xuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgICAgIGZvbnQtc2l6ZTogMTZweDtcbiAgICAgICAgZm9udC1mYW1pbHk6IHZhcigtLWJvZHlGb250KTtcbiAgICAgICAgdHJhbnNpdGlvbjogYWxsIDAuMnMgZWFzZTtcblxuICAgICAgICAmOmhvdmVyIHtcbiAgICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICB9XG5cbiAgICAgICAgJjphY3RpdmUge1xuICAgICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWSgxcHgpO1xuICAgICAgICB9XG5cbiAgICAgICAgLy8gU3R5bGUgdGhlIHJlc2V0IGJ1dHRvbiBkaWZmZXJlbnRseVxuICAgICAgICAmOm50aC1jaGlsZCgyKSB7XG4gICAgICAgICAgd2lkdGg6IGF1dG87XG4gICAgICAgICAgcGFkZGluZzogMCAxMnB4O1xuICAgICAgICAgIGZvbnQtc2l6ZTogMTRweDtcbiAgICAgICAgfVxuICAgICAgfVxuICAgIH1cbiAgfVxufVxuIl19 */</style><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" spa-preserve/><script src="../prescript.be9697b4.js" type="application/javascript" spa-preserve></script><script type="application/javascript" spa-preserve>const fetchData = fetch("../static/contentIndex.73890e1e.json").then(data => data.json())</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://oxzo.github.io/brains-site/index.xml"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://oxzo.github.io/brains-site/ai/enterprise-agent-execution-architecture-og-image.webp"/><meta property="og:image:url" content="https://oxzo.github.io/brains-site/ai/enterprise-agent-execution-architecture-og-image.webp"/><meta name="twitter:image" content="https://oxzo.github.io/brains-site/ai/enterprise-agent-execution-architecture-og-image.webp"/><meta property="og:image:type" content="image/.webp"/></head><body data-slug="ai/enterprise-agent-execution-architecture"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">synapse</a></h2><div class="spacer mobile-only"></div><div style="display: flex; flex-direction: row; flex-wrap: nowrap; gap: 1rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button"><p>Search</p><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Search for something" placeholder="Search for something"/><div class="search-layout" data-preview="true"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Dark mode"><title>Dark mode</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Light mode"><title>Light mode</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div></div><div class="explorer" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a,b)=>!a.isFolder&amp;&amp;!b.isFolder||a.isFolder&amp;&amp;b.isFolder?a.displayName.localeCompare(b.displayName,void 0,{numeric:!0,sensitivity:\&quot;base\&quot;}):!a.isFolder&amp;&amp;b.isFolder?1:-1&quot;,&quot;filterFn&quot;:&quot;node=>node.slugSegment!==\&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;node=>node&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-content"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>Explorer</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="explorer-content" aria-expanded="false"><ul class="explorer-ul overflow" id="0x8mfk"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#"></a></li></template><template id="template-folder"><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../ai/">AI — Index</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>Enterprise Agent Execution Architecture</a></div></nav><h1 class="article-title">Enterprise Agent Execution Architecture</h1><p show-comma="true" class="content-meta"><time datetime="2026-07-31T00:00:00.000Z">Jul 31, 2026</time><span>17 min read</span></p><ul class="tags"><li><a href="../tags/ai" class="internal tag-link">ai</a></li><li><a href="../tags/security" class="internal tag-link">security</a></li><li><a href="../tags/agents" class="internal tag-link">agents</a></li><li><a href="../tags/architecture" class="internal tag-link">architecture</a></li><li><a href="../tags/governance" class="internal tag-link">governance</a></li><li><a href="../tags/time-sensitive" class="internal tag-link">time-sensitive</a></li><li><a href="../tags/publish" class="internal tag-link">publish</a></li></ul></div></div><article class="popover-hint"><h1 id="enterprise-agent-execution-architecture">Enterprise Agent Execution Architecture<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#enterprise-agent-execution-architecture" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>The platform-agnostic layer under the Claude-Code-specific trio (<a href="../ai/agent-sandbox-isolation-tiers" class="internal" data-slug="ai/agent-sandbox-isolation-tiers">agent-sandbox-isolation-tiers</a>, <a href="../ai/agent-isolation-hardening" class="internal" data-slug="ai/agent-isolation-hardening">agent-isolation-hardening</a>, <a href="../ai/agent-policy-enforcement-gap" class="internal" data-slug="ai/agent-policy-enforcement-gap">agent-policy-enforcement-gap</a>). Those ask which boundary, whether it holds, and whether an org can mandate it <em>for one tool</em>. This asks what a production agent platform looks like when no single vendor’s feature set is assumed.</p>
+<blockquote>
+<p><strong>Provenance.</strong> Synthesized from an external AI-generated research report (dated 2026-07-31) supplied by oxzo, not from primary research by this vault. Four of its roughly forty checkable vendor and standards claims were verified against source before writing; those are marked ✅ below. The report’s own product-landscape section is deliberately <strong>not</strong> carried over — it is the part that rots fastest and the part least worth inheriting unverified. Structural claims here are argument, not measurement, except where this vault’s own probes are cited.</p>
+</blockquote>
+<h2 id="the-thesis">The thesis<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-thesis" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<blockquote>
+<p>A sandbox is necessary but insufficient. The sandbox should be assumed compromisable; its job is to limit the first blast radius.</p>
+</blockquote>
+<p>The security objective is not “the agent cannot do anything harmful.” It is: <strong>no single model decision, prompt injection, sandbox process, dependency, credential, network path, or human approval can create an unbounded enterprise impact.</strong></p>
+<p>This is the same conclusion <a href="../ai/agent-policy-enforcement-gap" class="internal" data-slug="ai/agent-policy-enforcement-gap">agent-policy-enforcement-gap</a> reaches from the opposite direction — that note starts from one vendor’s policy system and finds it can’t bind a non-compliant endpoint; this one starts from architecture and concludes the endpoint was never the right place to put the guarantee.</p>
+<h2 id="why-agent-execution-is-not-ordinary-application-execution">Why agent execution is not ordinary application execution<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#why-agent-execution-is-not-ordinary-application-execution" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>A normal application runs developer-authored code on predefined inputs. An agent synthesizes new commands, interprets untrusted natural language <em>as instructions</em>, chooses tools dynamically, installs packages, retains state across long horizons, and can modify files that execute later somewhere else.</p>
+<p>That produces three simultaneous problems, and most deployments solve only the first:</p>
+<ol>
+<li><strong>Untrusted-code isolation</strong> — generated code may attack the kernel, runtime, parser, or helper services.</li>
+<li><strong>Confused-deputy prevention</strong> — a perfectly isolated process can still misuse legitimate APIs, credentials, and repositories. Isolation does nothing here.</li>
+<li><strong>Output and supply-chain containment</strong> — the agent plants changes in source, CI config, Git hooks, IDE tasks, skills, or lockfiles that execute later on a trusted machine, outside the boundary entirely.</li>
+</ol>
+<p>A sandbox that protects the host kernel addresses (1) partially and does nothing about (2) or (3).</p>
+<h2 id="trust-assumptions">Trust assumptions<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#trust-assumptions" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Assume adversarial: the model’s own output and trajectory; retrieved content, repository text, issues, documents, logs, and <em>tool descriptions</em>; packages and build scripts; the sandbox user <strong>including root inside the guest</strong>; outbound destinations reached via redirect, DNS change, or allowed SaaS APIs; persisted workspace, memory, snapshots, caches, and shared skills; other tenants; and a mistaken or malicious human request.</p>
+<p>Protect: host and hypervisor; the orchestration plane; model and tool credentials; source, customer, and regulated data; cloud/K8s/CI/identity/secrets infrastructure; other tenants; the audit evidence and policy configuration themselves; and downstream consumers of generated artifacts.</p>
+<h2 id="the-planes">The planes<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-planes" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>The core structural claim is that these five planes must be <em>separate</em>, and that the agent sits inside only the second:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Plane</th><th>Holds</th><th>Agent’s access</th></tr></thead><tbody><tr><td><strong>Orchestration &amp; policy</strong></td><td>Model gateway, deterministic policy engine, approval service, tool broker, credential exchange, budgets, kill switch</td><td>None — it proposes, the plane decides</td></tr><tr><td><strong>Execution</strong></td><td>Disposable microVM/sandbox, no ambient identity, read-only input, ephemeral scratch, quotas</td><td>This is the agent</td></tr><tr><td><strong>Capability brokers</strong></td><td>Egress proxy, package mirror, Git/DB/email/cloud brokers with destination <em>and</em> action policy, DLP</td><td>Only through typed calls</td></tr><tr><td><strong>Evidence</strong></td><td>Append-only/tamper-evident run log, hashes of policy, image, inputs, actions, outputs</td><td>Write-only, out-of-guest</td></tr><tr><td><strong>Verification &amp; release</strong></td><td>Clean image, hidden tests, scanners, exact-diff review, signing</td><td>None — cannot modify the verifier</td></tr></tbody></table></div>
+<p>Hard separation requirements: the sandbox cannot reach the hypervisor, container runtime socket, orchestrator API, cloud metadata service, secrets manager, policy store, evidence store, or approval database. The agent cannot modify its own network policy, identity, quotas, base image, verifier, hidden tests, audit sink, or termination conditions. The verifier consumes a content-addressed output — it never trusts a “tests passed” claim from the agent.</p>
+<p><strong>Policy enforcement lives outside the sandbox.</strong> An out-of-process reference monitor decides; the model only proposes. This is the architectural expression of the authority axis in <a href="../ai/agent-policy-enforcement-gap" class="internal" data-slug="ai/agent-policy-enforcement-gap">agent-policy-enforcement-gap</a>.</p>
+<h2 id="isolation-primitives">Isolation primitives<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#isolation-primitives" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Primitive</th><th>Fit</th><th>Material limitation</th></tr></thead><tbody><tr><td>Ordinary container (runc)</td><td>Trusted internal code, single tenant</td><td>Shares host kernel; not a sole boundary for arbitrary agent-generated code</td></tr><tr><td>Rootless container</td><td>Defense in depth</td><td>Still shares the kernel — does not justify a lower risk tier</td></tr><tr><td>gVisor</td><td>Medium-risk, high density</td><td>User-space kernel intercepts many syscalls; compatibility and performance vary by workload</td></tr><tr><td>Kata Containers</td><td>High-risk Kubernetes workloads</td><td>Per-pod VM boundary with container workflow; operational and memory/startup overhead</td></tr><tr><td>Confidential Containers</td><td>Host/operator outside the trust boundary</td><td>Adds TEE attestation and policy-gated secret release; inherits TEE and side-channel limits. Complements containment, doesn’t replace it</td></tr><tr><td>Firecracker-style microVM</td><td>Ephemeral high-risk jobs</td><td>A strong primitive, <strong>not</strong> a control plane — you build orchestration, images, identity, policy, logging, forensics</td></tr><tr><td>Full/confidential VM</td><td>Regulated or tenant-dedicated</td><td>Highest cost and startup overhead</td></tr><tr><td>Wasm/WASI component</td><td>Narrow deterministic tools</td><td>Host imports define real authority; not a general POSIX replacement</td></tr></tbody></table></div>
+<p>✅ <strong>Verified:</strong> <code>kubernetes-sigs/agent-sandbox</code> is real — a Sandbox CRD and controller under SIG Apps, supporting gVisor and Kata as isolation backends, with v0.2.1 moving to a “secure by default” networking architecture. It is the most direct standardization effort for this pattern.</p>
+<p>A caveat from this vault’s own testing, relevant when layering: nested <code>bwrap</code> inside an unprivileged container fails to mount a fresh <code>/proc</code>, so an inner sandbox requires a documented weaker mode — see <a href="../ai/agent-sandbox-isolation-tiers" class="internal" data-slug="ai/agent-sandbox-isolation-tiers">agent-sandbox-isolation-tiers</a>. Layered isolation is defense in depth, not two independent boundaries.</p>
+<h2 id="network-is-the-most-underestimated-boundary">Network is the most underestimated boundary<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#network-is-the-most-underestimated-boundary" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Default should be deny-all for <strong>both address families</strong>, no public ingress, enterprise-controlled or absent DNS, an immutable internal package mirror, and broker access only to named APIs. Block link-local, private ranges, node-local services, cloud metadata, cluster ranges, control planes, and other sandboxes.</p>
+<p><strong>Domain allowlists are structurally insufficient.</strong> Bypasses: compromised or user-content-hosting allowed services, redirects and alternate endpoints, DNS rebinding and raw-IP access, broad cloud API domains fronting many services, TLS/SNI vs HTTP Host ambiguity, non-HTTP protocols, QUIC/HTTP3, WebSockets, tunnels and CONNECT, and allowed APIs that themselves accept attacker-chosen destinations.</p>
+<p>This vault has measured the claim rather than only citing it. Probing a replica of Anthropic’s published reference dev-container firewall found IPv6 traffic bypassing the entire IPv4-only policy, unrestricted DNS to any external resolver, and unrestricted TCP/22 to any host — with controls confirming the allowlist worked on IPv4/443. IPv6 is also what curl reaches for by default, so the unfiltered path was the default one. Details in <a href="../ai/agent-isolation-hardening" class="internal" data-slug="ai/agent-isolation-hardening">agent-isolation-hardening</a>. Three independent egress channels in an artifact whose shape is otherwise correct.</p>
+<p>✅ <strong>Verified independently, from a different vendor:</strong> E2B’s documentation states internet access is enabled by default; domain filtering “only works for HTTP traffic on port 80 (via Host header inspection) and TLS traffic on port 443 (via SNI inspection)”; other ports use CIDR filtering only; “UDP-based protocols like QUIC/HTTP3 are not supported for domain filtering”; and “when both allow and deny rules are specified, allow rules always take precedence over deny rules.”</p>
+<p>That last clause deserves attention on its own — allow-over-deny inverts the usual security default, so a broad allow silently defeats a narrow deny. Three sources now agree that hostname-based egress control leaks at the protocol edges. Treat “egress filtering: yes” in any product matrix as a claim to test, not a control to rely on.</p>
+<h2 id="filesystem-and-persistence">Filesystem and persistence<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#filesystem-and-persistence" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Safe default: immutable base image; read-only content-addressed input; ephemeral writable scratch; an initially-empty export directory; no secrets mount; no host mount; no runtime socket.</p>
+<p><strong>Do not mount a developer checkout read-write into a high-risk sandbox.</strong> The agent can alter Git hooks, CI configuration, IDE tasks, build scripts, agent instructions, lockfiles, or generated binaries that later execute on a trusted host — problem (3) above. Prefer an immutable snapshot or private clone plus explicit patch export, and review hooks separately from ordinary diffs.</p>
+<p>Interlock worth noting: <code>sandbox-runtime</code> implements exactly this defense as a mandatory deny list (<code>.bashrc</code>, <code>.gitconfig</code>, <code>.mcp.json</code>, <code>.git/hooks/</code>, <code>.claude/agents/</code>, …) — but on Linux it only blocks files that <strong>already exist</strong>, so a non-existent <code>.git/hooks/pre-commit</code> can still be created. A control this architecture treats as essential has a documented hole in at least one implementation. See <a href="../ai/agent-isolation-hardening" class="internal" data-slug="ai/agent-isolation-hardening">agent-isolation-hardening</a>.</p>
+<p>Persist only what is required. Snapshots, caches, memories, package directories, browser profiles, and shared skill stores all carry state across runs; bind them to one tenant and never share writable state between trust domains.</p>
+<h2 id="identity-brokered-tools-and-approval">Identity, brokered tools, and approval<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#identity-brokered-tools-and-approval" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Each run gets a unique short-lived workload identity, exchanged for narrowly scoped, audience-restricted, destination-bound credentials <strong>only when a permitted tool call occurs</strong>. That identity carries tenant, run/task ID, risk tier, data class, initiating human, approved tool set, expiry, and policy and image digests. Broad reusable credentials never enter the sandbox.</p>
+<p>Prefer typed business tools over shell access to enterprise APIs. A <code>git.create_pull_request</code> tool taking a repository, base commit digest, patch digest, and branch lets the broker independently check tenant, branch pattern, changed paths, secret scan, policy, approval, and idempotency — then act with <em>its own</em> credential. The agent never holds the Git token.</p>
+<p><strong>Human approval is not a sandbox.</strong> Approvals are defeated by fatigue, misleading summaries, race conditions, and post-approval mutation. Bind approval to canonical bytes or a content digest, exact target, action, policy version, expiry, and maximum count; require re-approval when any bound field changes; show the reviewer the exact diff and an independently generated risk summary, not the agent’s own explanation.</p>
+<p>The general form of a finding in <a href="../ai/agent-sandbox-isolation-tiers" class="internal" data-slug="ai/agent-sandbox-isolation-tiers">agent-sandbox-isolation-tiers</a>: boundaries stated conversationally (“don’t push”) are re-read from the transcript and can be dropped by context compaction. Durable authorization must be a rule, not a sentence.</p>
+<h2 id="fail-closed-conditions">Fail-closed conditions<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#fail-closed-conditions" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>For high-impact operations the orchestrator must deny, terminate, or quarantine when identity/attestation/tenant binding is invalid; a policy decision is deny, unavailable, timed out, indeterminate, or untraceable to a version; a tool request fails schema, canonicalization, or object-level authorization; approval is absent, expired, revoked, or doesn’t match the action digest; egress enforcement or destination validation is unavailable; classification/residency/DLP outcome is unknown for a sensitive sink; image or artifact signature, provenance, or SBOM is missing or invalid; the required runtime class or tenant boundary can’t be proven; the durable evidence sink is unavailable; the identity broker can’t mint the narrow scope; or persistent state lacks valid tenant and integrity metadata. It must never guess, retry through a weaker path, or fall back to a broader credential.</p>
+<p>Availability exceptions must be preauthorized, named, and limited to low-risk read-only paths.</p>
+<h2 id="risk-tiers">Risk tiers<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#risk-tiers" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Tier</th><th>Example</th><th>Minimum isolation and authority</th></tr></thead><tbody><tr><td>0 Advisory</td><td>Summarize supplied documents</td><td>No execution; scoped read-only retrieval; output filtering</td></tr><tr><td>1 Bounded development</td><td>Analyze trusted repo, draft a patch</td><td>Disposable gVisor/microVM; read-only input or private clone; no secrets; restricted mirror; PR draft only</td></tr><tr><td>2 Untrusted code/data</td><td>Execute generated code or third-party repos</td><td>microVM; no network by default; no persistent state; brokered tools; full audit; independent verification</td></tr><tr><td>3 Sensitive enterprise action</td><td>Modify internal systems, regulated data, cloud resources</td><td>Tier 2 plus tenant-dedicated boundary, workload identity, typed tools, DLP, exact-action approval, separate release authority</td></tr><tr><td>4 Hostile evaluation</td><td>Cyber agents, malware analysis, containment tests</td><td>Offline or one-way; dedicated hardware; no enterprise credentials or routes; tripwires; external kill controls; post-run rebuild</td></tr></tbody></table></div>
+<p>Authority should expand <em>within</em> a run only after objective evidence passes. Don’t provision a Tier-3 identity because a task might eventually need one.</p>
+<h2 id="acceptance-tests">Acceptance tests<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#acceptance-tests" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>The operational counterpart to “verify the boundary, don’t declare it.” The platform should fail closed against: host access via runtime sockets, device nodes, host namespaces, hostPath, or nested virtualization; egress via raw IP, IPv6, alternate DNS, DNS rebinding, redirects, QUIC/UDP, WebSocket, CONNECT, cloud metadata, or exfiltration through allowed code-hosting, logs, package names, or model APIs; identity attacks using expired/wrong-audience/replayed tokens, post-approval parameter changes, or splitting a denied transaction into permitted small ones; <strong>required-control outages</strong>; filesystem attacks via symlinks, path traversal, archive extraction, and writes to <code>.git/hooks</code>, CI config, or lockfiles; and evidence attacks — dropping or reordering events, making tests green by editing tests or fixtures, or closing a run as successful after a policy denial. Required-control outages cover: policy engine returning deny/timeout/stale, credential minting unavailable, egress enforcement disabled, and evidence sink dropping events — each must stop consequential work rather than degrade.</p>
+<h2 id="standards-mapping">Standards mapping<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#standards-mapping" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>✅ <strong>Verified:</strong> the <strong>OWASP Top 10 for Agentic Applications 2026</strong> exists — released 2025-12-09, peer-reviewed by 100+ contributors, taxonomy ASI01–ASI10. Named categories include Agent Goal Hijack (ASI01), Tool Misuse &amp; Exploitation (ASI02), Agent Identity &amp; Privilege Abuse (ASI03), Agentic Supply Chain Compromise (ASI04), Unexpected Code Execution (ASI05), Memory &amp; Context Poisoning (ASI06), Insecure Inter-Agent Communication (ASI07). <em>(ASI08–ASI10 not verified — do not cite specific names for those without checking.)</em></p>
+<p>Also referenced by the source report, not individually re-verified here: NIST AI 600-1 (Generative AI Profile), SP 800-190 (container security), SP 800-207 (zero trust), SP 800-53r5, Kubernetes Pod Security Standards, MITRE ATLAS, SLSA, Sigstore, SPIFFE/SPIRE. All are well-established documents; the risk in citing them is misattributing <em>specific content</em>, not existence.</p>
+<p>Compliance mapping does not prove containment. The decisive evidence is effective configuration plus repeated adversarial tests.</p>
+<h2 id="incidents-that-ground-the-architecture">Incidents that ground the architecture<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#incidents-that-ground-the-architecture" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Every row below was verified against a primary source (NVD, GitHub Security Advisory, or CERT/CC) during authoring on 2026-07-31 — not from a secondary summary. Scores are given with their CVSS version because several differ sharply between v3.1 and v4.0.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Incident</th><th>Mechanism</th><th>What it grounds</th></tr></thead><tbody><tr><td><strong>CVE-2026-25725</strong> — Claude Code &lt; 2.1.2, CVSS 3.1 <strong>10.0</strong> / v4.0 7.7, CWE-501 Trust Boundary Violation (<a href="https://github.com/anthropics/claude-code/security/advisories/GHSA-ff64-7w26-62rf" class="external">GHSA-ff64-7w26-62rf<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>)</td><td>The bubblewrap sandbox protected <code>.claude/settings.local.json</code> read-only but <strong>failed to protect <code>.claude/settings.json</code> when that file did not exist at startup</strong>. Sandboxed code created it, injected <code>SessionStart</code> hooks, and those ran with host privileges on restart.</td><td>Problem (3): the sandbox held, and the escape still happened <em>later</em>, outside it. Also that absence-based protections fail — see below.</td></tr><tr><td><strong>CVE-2026-39861</strong> — Claude Code &lt; 2.1.64, CVSS 4.0 7.7, CWE-22/CWE-61 (<a href="https://github.com/advisories/GHSA-vp62-r36r-9xqp" class="external">GHSA-vp62-r36r-9xqp<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>)</td><td>A sandboxed process created symlinks pointing outside the workspace; the <strong>unsandboxed parent process</strong> then followed them when writing, with no confirmation. Reliable exploitation “required the ability to add untrusted content into a Claude Code context window to trigger sandboxed code execution via prompt injection.”</td><td>The boundary is only as strong as the least-sandboxed component in the loop. A partially-sandboxed architecture composes into an escape.</td></tr><tr><td><strong>CVE-2026-55607</strong> — Claude Code 2.1.38–2.1.162, CVSS 3.1 8.8, CWE-22/59/78 (<a href="https://github.com/anthropics/claude-code/security/advisories/GHSA-7835-87q9-rgvv" class="external">GHSA-7835-87q9-rgvv<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>)</td><td>Worktrees could be named <code>.git</code> and navigated to outside the sandbox context, producing git-directory confusion.</td><td>Write exceptions punched for a legitimate workflow become the escape. Every carve-out is attack surface.</td></tr><tr><td><strong>CVE-2025-59536</strong> — Claude Code &lt; 1.0.111, CVSS 3.1 8.8 / v4.0 8.7, CWE-94 (<a href="https://github.com/anthropics/claude-code/security/advisories/GHSA-4fgq-fpq9-mr3g" class="external">GHSA-4fgq-fpq9-mr3g<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>)</td><td>Hooks in a repository’s <code>.claude/settings.json</code> and MCP servers in <code>.mcp.json</code> executed on session start — MCP servers “immediately upon running claude, before the user could even read the trust dialog.&quot;</td><td>&quot;Treat repository text as hostile” is not hygiene advice. Config files in a repo are an execution vector.</td></tr><tr><td><strong>CVE-2026-21852</strong> — Claude Code &lt; 2.0.65, CVSS 3.1 7.5, CWE-522 (<a href="https://github.com/anthropics/claude-code/security/advisories/GHSA-jh7p-qr78-84p7" class="external">GHSA-jh7p-qr78-84p7<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>)</td><td>A malicious repo’s <code>.claude/settings.json</code> set <code>ANTHROPIC_BASE_URL</code> to an attacker endpoint; the client issued authenticated requests <strong>before the trust prompt</strong>, sending the API key in plaintext.</td><td>No ambient credentials in the execution environment. A credential present at startup is exfiltrable before any policy runs.</td></tr><tr><td><strong>CrewAI — CVE-2026-2275 / 2285 / 2286 / 2287</strong> (<a href="https://www.kb.cert.org/vuls/id/221883" class="external">CERT/CC VU#221883<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>)</td><td><code>CodeInterpreterTool</code> <strong>fell back to an insecure <code>SandboxPython</code> path when Docker was unreachable</strong>, chaining prompt injection into RCE, SSRF, and arbitrary file read. The fix removed the tool entirely and directed users to external sandboxes.</td><td>The fail-closed requirement, concretely. A sandbox that degrades to “no sandbox” on infrastructure error is worse than none, because the operator believes it is present.</td></tr><tr><td><strong>Nx “s1ngularity”</strong> — 2025-08-26</td><td>Malicious npm versions programmatically invoked <strong>Claude Code, Gemini CLI, and Amazon Q CLI</strong> with prompts instructing them to enumerate the filesystem for credentials, SSH keys, and wallets. GitGuardian counted 2,349 distinct secrets from 1,079 repositories; exfiltration went to ~1,400 public <code>s1ngularity-repository</code> repos. A second phase used the stolen tokens to flip private repos public.</td><td>The agent itself as a lateral-movement tool — the confused-deputy problem in the wild, and the first known case of weaponizing developer AI assistants for supply-chain attack.</td></tr><tr><td><strong>OpenClaw — CVE-2026-32922</strong> — &lt; 2026.3.11, CVSS 3.1 <strong>9.9</strong> / v4.0 9.4, CWE-266</td><td>Insufficient scope validation in <code>device.token.rotate</code> let a low-privilege pairing operator obtain an admin token and execute code across connected nodes.</td><td>Brokered identity with narrow, audience-bound scopes; and that implicit local trust is not a boundary.</td></tr></tbody></table></div>
+<p>Two patterns worth extracting, because they recur across the set:</p>
+<ol>
+<li><strong>Three of these are escapes from a <em>correctly functioning</em> sandbox.</strong> In 25725, 39861, and 55607, bubblewrap did its job; the escape came from the seam between sandboxed and unsandboxed components, or from a write exception granted deliberately. This is the strongest available evidence for the thesis that isolation is the first blast-radius limit and not the guarantee.</li>
+<li><strong>Two independent attacks target the same configuration surface from opposite directions.</strong> CVE-2026-21852 is an <em>attacker</em> placing <code>ANTHROPIC_BASE_URL</code> in a repo to steal a key; the policy-detachment path in <a href="../ai/agent-policy-enforcement-gap" class="internal" data-slug="ai/agent-policy-enforcement-gap">agent-policy-enforcement-gap</a> is a <em>user</em> exporting the same variable to silently drop out of central policy. A config key that redirects the API endpoint is load-bearing in both threat models, which is a good general signal for where to look in any agent platform.</li>
+</ol>
+<p><em>Not verified and therefore not cited above: aggregator claims of a specific total CVE count for Claude Code, and the frequently-repeated “two CVSS 10.0 sandbox escapes” — only CVE-2026-25725 reaches 10.0, and only under CVSS 3.1.</em></p>
+<h2 id="where-this-framework-is-weak">Where this framework is weak<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#where-this-framework-is-weak" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Three criticisms of the source report, recorded because the note would otherwise read as endorsement:</p>
+<ol>
+<li><strong>It is documentary, not empirical.</strong> Built from vendor documentation and standards; its own evidence caveats concede vendor pages “do not independently prove isolation” — a concession that applies to the report itself. It prescribes adversarial acceptance tests without running any. This vault’s egress probe is one small counterweight and covers a single artifact.</li>
+<li><strong>It never prices anything.</strong> The “minimum viable secure configuration” — fresh microVM per run, deny-all egress, internal mirror, brokered identity, tamper-evident evidence, independent verifier — is a platform team, not a config file. Calling it “intentionally inconvenient” is honest but is not a degraded-but-real tier for an org with two engineers. The gap between Tier 1 and “nothing” is where most real deployments sit and the report is silent there.</li>
+<li><strong>It assumes the org owns the execution substrate.</strong> Every architecture is a cluster or managed service. The dominant actual deployment — agents in developers’ local IDEs on machines the org only partly controls — is out of scope, and that is exactly where <a href="../ai/agent-policy-enforcement-gap" class="internal" data-slug="ai/agent-policy-enforcement-gap">agent-policy-enforcement-gap</a> finds the enforcement gap bites hardest.</li>
+</ol>
+<h2 id="counterargument">Counterargument<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#counterargument" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>The architecture is correct and mostly unaffordable, and an unaffordable control set has a predictable failure mode: it gets declared, partially built, and then relied upon at full strength. Consider an org that implements the microVM and the egress broker but skips the evidence plane and the independent verifier. It has covered problem (1) and left (2) and (3) — the ones isolation never addressed — while feeling considerably safer. On that reading, the highest-value first move is not the microVM at all but the <em>verification plane</em>: a clean-room CI the agent cannot write to, which catches bad output regardless of how the sandbox performed, and which most orgs already have.</p>
+<p>The counter to that: the verification plane only catches what reaches it, and problems (2) and (3) include actions that never produce a reviewable artifact — a credential used, data exfiltrated, a ticket closed. Verification is the cheapest high-value plane, not a substitute for brokered authority.</p>
+<h2 id="related">Related<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#related" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><a href="../ai/agent-sandbox-isolation-tiers" class="internal" data-slug="ai/agent-sandbox-isolation-tiers">agent-sandbox-isolation-tiers</a> — the boundary options, instantiated for one tool</li>
+<li><a href="../ai/agent-isolation-hardening" class="internal" data-slug="ai/agent-isolation-hardening">agent-isolation-hardening</a> — tested failures in a published reference implementation</li>
+<li><a href="../ai/agent-policy-enforcement-gap" class="internal" data-slug="ai/agent-policy-enforcement-gap">agent-policy-enforcement-gap</a> — why client-delivered policy isn’t a boundary</li>
+<li><a href="../ai/ai-agent-security" class="internal" data-slug="ai/ai-agent-security">ai-agent-security</a> — defense architecture overview</li>
+<li><a href="../ai/prompt-injection" class="internal" data-slug="ai/prompt-injection">prompt-injection</a> — the mechanism behind “treat the trajectory as hostile”</li>
+<li><a href="../ai/ai-supply-chain-risks" class="internal" data-slug="ai/ai-supply-chain-risks">ai-supply-chain-risks</a> — problem (3) in depth</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/agent-identity-delegated-authority.md" class="external">agent-identity-delegated-authority<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — the workload-identity and delegation layer</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/agent-audit-trails-provenance.md" class="external">agent-audit-trails-provenance<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — the evidence plane’s capture mechanics</li>
+<li><a href="../ai/hitl-progressive-autonomy" class="internal" data-slug="ai/hitl-progressive-autonomy">hitl-progressive-autonomy</a> — the staged-authority principle behind the risk tiers</li>
+</ul>
+<h2 id="sources">Sources<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#sources" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>External AI-generated research report, “Running AI Agents Safely in Enterprise Sandboxes,” dated 2026-07-31, supplied by oxzo. Primary structural source; not independently authored by this vault.</li>
+<li>Verified during authoring, 2026-07-31: OWASP Top 10 for Agentic Applications 2026 (<a href="https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/" class="external">genai.owasp.org<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>); <code>kubernetes-sigs/agent-sandbox</code> (<a href="https://github.com/kubernetes-sigs/agent-sandbox" class="external">GitHub<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>); E2B internet-access and domain-filtering behavior (<a href="https://e2b.dev/docs/sandbox/internet-access" class="external">e2b.dev docs<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>)</li>
+<li>This vault’s own egress probe against the reference dev-container firewall — see <a href="../ai/agent-isolation-hardening" class="internal" data-slug="ai/agent-isolation-hardening">agent-isolation-hardening</a></li>
+</ul></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>Graph View</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc desktop-only"><button type="button" class="toc-header" aria-controls="toc-content" aria-expanded="true"><h3>Table of Contents</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="toc-content"><ul id="h9l23p" class="overflow"><li class="depth-0"><a href="#enterprise-agent-execution-architecture" data-for="enterprise-agent-execution-architecture">Enterprise Agent Execution Architecture</a></li><li class="depth-1"><a href="#the-thesis" data-for="the-thesis">The thesis</a></li><li class="depth-1"><a href="#why-agent-execution-is-not-ordinary-application-execution" data-for="why-agent-execution-is-not-ordinary-application-execution">Why agent execution is not ordinary application execution</a></li><li class="depth-1"><a href="#trust-assumptions" data-for="trust-assumptions">Trust assumptions</a></li><li class="depth-1"><a href="#the-planes" data-for="the-planes">The planes</a></li><li class="depth-1"><a href="#isolation-primitives" data-for="isolation-primitives">Isolation primitives</a></li><li class="depth-1"><a href="#network-is-the-most-underestimated-boundary" data-for="network-is-the-most-underestimated-boundary">Network is the most underestimated boundary</a></li><li class="depth-1"><a href="#filesystem-and-persistence" data-for="filesystem-and-persistence">Filesystem and persistence</a></li><li class="depth-1"><a href="#identity-brokered-tools-and-approval" data-for="identity-brokered-tools-and-approval">Identity, brokered tools, and approval</a></li><li class="depth-1"><a href="#fail-closed-conditions" data-for="fail-closed-conditions">Fail-closed conditions</a></li><li class="depth-1"><a href="#risk-tiers" data-for="risk-tiers">Risk tiers</a></li><li class="depth-1"><a href="#acceptance-tests" data-for="acceptance-tests">Acceptance tests</a></li><li class="depth-1"><a href="#standards-mapping" data-for="standards-mapping">Standards mapping</a></li><li class="depth-1"><a href="#incidents-that-ground-the-architecture" data-for="incidents-that-ground-the-architecture">Incidents that ground the architecture</a></li><li class="depth-1"><a href="#where-this-framework-is-weak" data-for="where-this-framework-is-weak">Where this framework is weak</a></li><li class="depth-1"><a href="#counterargument" data-for="counterargument">Counterargument</a></li><li class="depth-1"><a href="#related" data-for="related">Related</a></li><li class="depth-1"><a href="#sources" data-for="sources">Sources</a></li><li class="overflow-end"></li></ul></div></div><div class="backlinks"><h3>Backlinks</h3><ul id="xacmdj" class="overflow"><li><a href="../ai/agent-isolation-hardening" class="internal">Agent Isolation Hardening</a></li><li><a href="../ai/agent-policy-enforcement-gap" class="internal">Agent Policy Enforcement Gap</a></li><li><a href="../ai/agent-sandbox-isolation-tiers" class="internal">Agent Sandbox Isolation Tiers</a></li><li><a href="../ai/ai-agent-security" class="internal">AI Agent Security</a></li><li><a href="../ai/" class="internal">AI — Index</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v4.4.1</a> © 2026</p><ul><li><a href="https://github.com/oxzo/brains">source</a></li><li><a href="/index.xml">rss</a></li></ul></footer></div></div></body><script type="application/javascript">function o(){let t=this.parentElement;t.classList.toggle("is-collapsed");let e=t.classList.contains("is-collapsed")?this.scrollHeight:t.scrollHeight;t.style.maxHeight=e+"px";let c=t,l=t.parentElement;for(;l;){if(!l.classList.contains("callout"))return;let i=l.classList.contains("is-collapsed")?l.scrollHeight:l.scrollHeight+c.scrollHeight;l.style.maxHeight=i+"px",c=l,l=l.parentElement}}function n(){let t=document.getElementsByClassName("callout is-collapsible");for(let s of t){let e=s.firstElementChild;if(!e)continue;e.addEventListener("click",o),window.addCleanup(()=>e.removeEventListener("click",o));let l=s.classList.contains("is-collapsed")?e.scrollHeight:s.scrollHeight;s.style.maxHeight=l+"px"}}document.addEventListener("nav",n);
+</script><script type="module">function f(i,e){if(!i)return;function r(o){o.target===this&&(o.preventDefault(),o.stopPropagation(),e())}function t(o){o.key.startsWith("Esc")&&(o.preventDefault(),e())}i?.addEventListener("click",r),window.addCleanup(()=>i?.removeEventListener("click",r)),document.addEventListener("keydown",t),window.addCleanup(()=>document.removeEventListener("keydown",t))}function y(i){for(;i.firstChild;)i.removeChild(i.firstChild)}var h=class{constructor(e,r){this.container=e;this.content=r;this.setupEventListeners(),this.setupNavigationControls(),this.resetTransform()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;cleanups=[];setupEventListeners(){let e=this.onMouseDown.bind(this),r=this.onMouseMove.bind(this),t=this.onMouseUp.bind(this),o=this.resetTransform.bind(this);this.container.addEventListener("mousedown",e),document.addEventListener("mousemove",r),document.addEventListener("mouseup",t),window.addEventListener("resize",o),this.cleanups.push(()=>this.container.removeEventListener("mousedown",e),()=>document.removeEventListener("mousemove",r),()=>document.removeEventListener("mouseup",t),()=>window.removeEventListener("resize",o))}cleanup(){for(let e of this.cleanups)e()}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let r=this.createButton("+",()=>this.zoom(.1)),t=this.createButton("-",()=>this.zoom(-.1)),o=this.createButton("Reset",()=>this.resetTransform());e.appendChild(t),e.appendChild(o),e.appendChild(r),this.container.appendChild(e)}createButton(e,r){let t=document.createElement("button");return t.textContent=e,t.className="mermaid-control-button",t.addEventListener("click",r),window.addCleanup(()=>t.removeEventListener("click",r)),t}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}zoom(e){let r=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),t=this.content.getBoundingClientRect(),o=t.width/2,n=t.height/2,c=r-this.scale;this.currentPan.x-=o*c,this.currentPan.y-=n*c,this.scale=r,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){this.scale=1;let e=this.content.querySelector("svg");this.currentPan={x:e.getBoundingClientRect().width/2,y:e.getBoundingClientRect().height/2},this.updateTransform()}},C=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],E;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;E||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let r=E.default,t=new WeakMap;for(let n of e)t.set(n,n.innerText);async function o(){for(let s of e){s.removeAttribute("data-processed");let a=t.get(s);a&&(s.innerHTML=a)}let n=C.reduce((s,a)=>(s[a]=window.getComputedStyle(document.documentElement).getPropertyValue(a),s),{}),c=document.documentElement.getAttribute("saved-theme")==="dark";r.initialize({startOnLoad:!1,securityLevel:"loose",theme:c?"dark":"base",themeVariables:{fontFamily:n["--codeFont"],primaryColor:n["--light"],primaryTextColor:n["--darkgray"],primaryBorderColor:n["--tertiary"],lineColor:n["--darkgray"],secondaryColor:n["--secondary"],tertiaryColor:n["--tertiary"],clusterBkg:n["--light"],edgeLabelBackground:n["--highlight"]}}),await r.run({nodes:e})}await o(),document.addEventListener("themechange",o),window.addCleanup(()=>document.removeEventListener("themechange",o));for(let n=0;n<e.length;n++){let v=function(){let g=l.querySelector("#mermaid-space"),m=l.querySelector(".mermaid-content");if(!m)return;y(m);let w=c.querySelector("svg").cloneNode(!0);m.appendChild(w),l.classList.add("active"),g.style.cursor="grab",u=new h(g,m)},M=function(){l.classList.remove("active"),u?.cleanup(),u=null},c=e[n],s=c.parentElement,a=s.querySelector(".clipboard-button"),d=s.querySelector(".expand-button"),p=window.getComputedStyle(a),L=a.offsetWidth+parseFloat(p.marginLeft||"0")+parseFloat(p.marginRight||"0");d.style.right=`calc(${L}px + 0.3rem)`,s.prepend(d);let l=s.querySelector("#mermaid-container");if(!l)return;let u=null;d.addEventListener("click",v),f(l,M),window.addCleanup(()=>{u?.cleanup(),d.removeEventListener("click",v)})}});
+</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript"></script><script src="../postscript.00b09a8c.js" type="module"></script></html>

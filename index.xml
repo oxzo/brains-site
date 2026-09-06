@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+    <channel>
+      <title>synapse</title>
+      <link>https://oxzo.github.io/brains-site</link>
+      <description>Last 10 notes on synapse</description>
+      <generator>Quartz -- quartz.jzhao.xyz</generator>
+      <item>
+    <title>AI — Index</title>
+    <link>https://oxzo.github.io/brains-site/ai/</link>
+    <guid>https://oxzo.github.io/brains-site/ai/</guid>
+    <description>AI Research, best practices, prompting, tools, and models. News &amp; Analysis ai-news-july-2026 — Delta window late Jun → mid Jul 2026: the frontier release cluster (Sonnet 5, Grok 4.5, GPT-5.6 Sol/Terra/Luna, Gemini 3.5 Pro delayed to ~Jul 17), the ~$2/M near-frontier price tier, Reflection AI’s Colossus 2 lease + Meta Compute, Illinois audit-mandating AI safety law + EU AI Act re-timing in law + FTC “truthful outputs” preemption move; resolves the predecessor’s OpenAI-funding and what-did-the-other-labs-ship open questions.</description>
+    <pubDate>Sun, 06 Sep 2026 14:45:20 GMT</pubDate>
+  </item><item>
+    <title>Wine, Proton, and Gaming on Linux</title>
+    <link>https://oxzo.github.io/brains-site/snippets/tech/wine-proton-gaming-linux-claim-1</link>
+    <guid>https://oxzo.github.io/brains-site/snippets/tech/wine-proton-gaming-linux-claim-1</guid>
+    <description>Wine is not an emulator — it reimplements the Windows API at the syscall level, translating Win32 calls (CreateFile, Direct3D) through DLL replacements down to Linux syscalls ...</description>
+    <pubDate>Sun, 06 Sep 2026 14:45:04 GMT</pubDate>
+  </item><item>
+    <title>Wine, Proton, and Gaming on Linux</title>
+    <link>https://oxzo.github.io/brains-site/snippets/tech/wine-proton-gaming-linux-claim-2</link>
+    <guid>https://oxzo.github.io/brains-site/snippets/tech/wine-proton-gaming-linux-claim-2</guid>
+    <description>Anti-cheat is the biggest remaining barrier for Linux gaming. EasyAntiCheat and BattlEye work when developers opt in, but kernel-level anti-cheat like Riot’s Vanguard does not work on Linux — which is why there’s no Valorant on Linux.</description>
+    <pubDate>Sun, 06 Sep 2026 14:45:04 GMT</pubDate>
+  </item><item>
+    <title>Wine, Proton, and Gaming on Linux</title>
+    <link>https://oxzo.github.io/brains-site/snippets/tech/wine-proton-gaming-linux-claim-3</link>
+    <guid>https://oxzo.github.io/brains-site/snippets/tech/wine-proton-gaming-linux-claim-3</guid>
+    <description>Each Wine prefix is an isolated virtual Windows installation — its own C:\ drive, registry, and DLLs — and is just a directory on your filesystem, so you can manage game files (like WoW ...</description>
+    <pubDate>Sun, 06 Sep 2026 14:45:04 GMT</pubDate>
+  </item><item>
+    <title>Wine, Proton, and Gaming on Linux</title>
+    <link>https://oxzo.github.io/brains-site/snippets/tech/wine-proton-gaming-linux-claim-4</link>
+    <guid>https://oxzo.github.io/brains-site/snippets/tech/wine-proton-gaming-linux-claim-4</guid>
+    <description>Gamescope is the better route to FSR upscaling than WINE_FULLSCREEN_FSR=1, which requires true fullscreen. Gamescope wraps any game — windowed included — in its own micro-compositor, and also gives a frame limiter and independent resolution control.</description>
+    <pubDate>Sun, 06 Sep 2026 14:45:04 GMT</pubDate>
+  </item><item>
+    <title>Wine, Proton, and Gaming on Linux</title>
+    <link>https://oxzo.github.io/brains-site/snippets/tech/wine-proton-gaming-linux-claim-5</link>
+    <guid>https://oxzo.github.io/brains-site/snippets/tech/wine-proton-gaming-linux-claim-5</guid>
+    <description>Shader compilation stutter is expected on first encounter, not a misconfiguration: DXVK compiles shaders as it meets them and writes a .dxvk-cache beside the game ...</description>
+    <pubDate>Sun, 06 Sep 2026 14:45:04 GMT</pubDate>
+  </item><item>
+    <title>MCP Server Development</title>
+    <link>https://oxzo.github.io/brains-site/snippets/tech/mcp-server-development-claim-1</link>
+    <guid>https://oxzo.github.io/brains-site/snippets/tech/mcp-server-development-claim-1</guid>
+    <description>MCP solves the “N×M” integration problem: instead of building a custom integration between every AI client and every tool, you build one MCP server and it works with all MCP clients ...</description>
+    <pubDate>Sun, 06 Sep 2026 14:45:04 GMT</pubDate>
+  </item><item>
+    <title>MCP Server Development</title>
+    <link>https://oxzo.github.io/brains-site/snippets/tech/mcp-server-development-claim-2</link>
+    <guid>https://oxzo.github.io/brains-site/snippets/tech/mcp-server-development-claim-2</guid>
+    <description>In an stdio-transport MCP server, never use console.log — it corrupts the JSON-RPC stream. Write debug output to stderr or a file instead, and return tool errors as isError content blocks rather than throwing, so the AI can see the error and recover.</description>
+    <pubDate>Sun, 06 Sep 2026 14:45:04 GMT</pubDate>
+  </item><item>
+    <title>MCP Server Development</title>
+    <link>https://oxzo.github.io/brains-site/snippets/tech/mcp-server-development-definition-1</link>
+    <guid>https://oxzo.github.io/brains-site/snippets/tech/mcp-server-development-definition-1</guid>
+    <description>The Model Context Protocol (MCP) is an open standard for connecting AI agents to external tools, data, and services. A server exposes tools (functions the agent calls), resources (data it reads), and prompts (reusable templates) over JSON-RPC.</description>
+    <pubDate>Sun, 06 Sep 2026 14:45:04 GMT</pubDate>
+  </item><item>
+    <title>TypeScript for AI Tooling</title>
+    <link>https://oxzo.github.io/brains-site/snippets/tech/typescript-for-ai-tooling-claim-1</link>
+    <guid>https://oxzo.github.io/brains-site/snippets/tech/typescript-for-ai-tooling-claim-1</guid>
+    <description>Force structured JSON output from an LLM by using tool_choice with a specific tool name, then parsing the tool input against a schema. This is more reliable than asking for JSON in the prompt.</description>
+    <pubDate>Sun, 06 Sep 2026 14:45:04 GMT</pubDate>
+  </item>
+    </channel>
+  </rss>

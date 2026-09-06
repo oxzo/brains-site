@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en"><head><title>Spec-Driven Development and the Accretive Loop as One Operating Model · second-brain</title><meta charset="utf-8"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400;1,600&amp;family=Inter:wght@400;700&amp;family=JetBrains Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="synapse"/><meta property="og:title" content="Spec-Driven Development and the Accretive Loop as One Operating Model · second-brain"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Spec-Driven Development and the Accretive Loop as One Operating Model · second-brain"/><meta name="twitter:description" content="Spec-Driven Development and the Accretive Loop as One Operating Model Tool specifics verified 2026-09-04 against Spec Kit’s evolving-specs guide, Kiro’s specs and correctness ..."/><meta property="og:description" content="Spec-Driven Development and the Accretive Loop as One Operating Model Tool specifics verified 2026-09-04 against Spec Kit’s evolving-specs guide, Kiro’s specs and correctness ..."/><meta property="og:image:alt" content="Spec-Driven Development and the Accretive Loop as One Operating Model Tool specifics verified 2026-09-04 against Spec Kit’s evolving-specs guide, Kiro’s specs and correctness ..."/><meta property="twitter:domain" content="oxzo.github.io/brains-site"/><meta property="og:url" content="https://oxzo.github.io/brains-site/ai/spec-driven-development-operating-model"/><meta property="twitter:url" content="https://oxzo.github.io/brains-site/ai/spec-driven-development-operating-model"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="Spec-Driven Development and the Accretive Loop as One Operating Model Tool specifics verified 2026-09-04 against Spec Kit’s evolving-specs guide, Kiro’s specs and correctness ..."/><meta name="generator" content="Quartz"/><link href="../index.322b98b4.css" rel="stylesheet" type="text/css" spa-preserve/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  padding: 2rem;
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL2hvbWUvcnVubmVyL3dvcmsvYnJhaW5zL2JyYWlucy9zaXRlL3F1YXJ0ei9jb21wb25lbnRzL3N0eWxlcyIsInNvdXJjZXMiOlsibWVybWFpZC5pbmxpbmUuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTs7QUFHRjtFQUNFO0VBQ0E7O0FBR0Y7RUFDRTs7O0FBS0Y7RUFDRTtFQUNBOzs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7O0FBR0Y7RUFDRTs7QUFJRjtFQUNFO0VBQ0E7RUFDQSIsInNvdXJjZXNDb250ZW50IjpbIi5leHBhbmQtYnV0dG9uIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbG9hdDogcmlnaHQ7XG4gIHBhZGRpbmc6IDAuNHJlbTtcbiAgbWFyZ2luOiAwLjNyZW07XG4gIHJpZ2h0OiAwOyAvLyBOT1RFOiByaWdodCB3aWxsIGJlIHNldCBpbiBtZXJtYWlkLmlubGluZS50c1xuICBjb2xvcjogdmFyKC0tZ3JheSk7XG4gIGJvcmRlci1jb2xvcjogdmFyKC0tZGFyayk7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWxpZ2h0KTtcbiAgYm9yZGVyOiAxcHggc29saWQ7XG4gIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgb3BhY2l0eTogMDtcbiAgdHJhbnNpdGlvbjogMC4ycztcblxuICAmID4gc3ZnIHtcbiAgICBmaWxsOiB2YXIoLS1saWdodCk7XG4gICAgZmlsdGVyOiBjb250cmFzdCgwLjMpO1xuICB9XG5cbiAgJjpob3ZlciB7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIGJvcmRlci1jb2xvcjogdmFyKC0tc2Vjb25kYXJ5KTtcbiAgfVxuXG4gICY6Zm9jdXMge1xuICAgIG91dGxpbmU6IDA7XG4gIH1cbn1cblxucHJlIHtcbiAgJjpob3ZlciA+IC5leHBhbmQtYnV0dG9uIHtcbiAgICBvcGFjaXR5OiAxO1xuICAgIHRyYW5zaXRpb246IDAuMnM7XG4gIH1cbn1cblxuI21lcm1haWQtY29udGFpbmVyIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICBjb250YWluOiBsYXlvdXQ7XG4gIHotaW5kZXg6IDk5OTtcbiAgbGVmdDogMDtcbiAgdG9wOiAwO1xuICB3aWR0aDogMTAwdnc7XG4gIGhlaWdodDogMTAwdmg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGRpc3BsYXk6IG5vbmU7XG4gIGJhY2tkcm9wLWZpbHRlcjogYmx1cig0cHgpO1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuNSk7XG5cbiAgJi5hY3RpdmUge1xuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgfVxuXG4gICYgPiAjbWVybWFpZC1zcGFjZSB7XG4gICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1saWdodCk7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDUwJTtcbiAgICBsZWZ0OiA1MCU7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gICAgaGVpZ2h0OiA4MHZoO1xuICAgIHdpZHRoOiA4MHZ3O1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG5cbiAgICAmID4gLm1lcm1haWQtY29udGVudCB7XG4gICAgICBwYWRkaW5nOiAycmVtO1xuICAgICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgICAgdHJhbnNmb3JtLW9yaWdpbjogMCAwO1xuICAgICAgdHJhbnNpdGlvbjogdHJhbnNmb3JtIDAuMXMgZWFzZTtcbiAgICAgIG92ZXJmbG93OiB2aXNpYmxlO1xuICAgICAgbWluLWhlaWdodDogMjAwcHg7XG4gICAgICBtaW4td2lkdGg6IDIwMHB4O1xuXG4gICAgICBwcmUge1xuICAgICAgICBtYXJnaW46IDA7XG4gICAgICAgIGJvcmRlcjogbm9uZTtcbiAgICAgIH1cblxuICAgICAgc3ZnIHtcbiAgICAgICAgbWF4LXdpZHRoOiBub25lO1xuICAgICAgICBoZWlnaHQ6IGF1dG87XG4gICAgICB9XG4gICAgfVxuXG4gICAgJiA+IC5tZXJtYWlkLWNvbnRyb2xzIHtcbiAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgIGJvdHRvbTogMjBweDtcbiAgICAgIHJpZ2h0OiAyMHB4O1xuICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgIGdhcDogOHB4O1xuICAgICAgcGFkZGluZzogOHB4O1xuICAgICAgYmFja2dyb3VuZDogdmFyKC0tbGlnaHQpO1xuICAgICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICAgIGJvcmRlci1yYWRpdXM6IDZweDtcbiAgICAgIGJveC1zaGFkb3c6IDAgMnB4IDRweCByZ2JhKDAsIDAsIDAsIDAuMSk7XG4gICAgICB6LWluZGV4OiAyO1xuXG4gICAgICAubWVybWFpZC1jb250cm9sLWJ1dHRvbiB7XG4gICAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAgICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICAgICAgICB3aWR0aDogMzJweDtcbiAgICAgICAgaGVpZ2h0OiAzMnB4O1xuICAgICAgICBwYWRkaW5nOiAwO1xuICAgICAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodCk7XG4gICAgICAgIGNvbG9yOiB2YXIoLS1kYXJrKTtcbiAgICAgICAgYm9yZGVyLXJhZGl1czogNHB4O1xuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgICAgIGZvbnQtc2l6ZTogMTZweDtcbiAgICAgICAgZm9udC1mYW1pbHk6IHZhcigtLWJvZHlGb250KTtcbiAgICAgICAgdHJhbnNpdGlvbjogYWxsIDAuMnMgZWFzZTtcblxuICAgICAgICAmOmhvdmVyIHtcbiAgICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICB9XG5cbiAgICAgICAgJjphY3RpdmUge1xuICAgICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWSgxcHgpO1xuICAgICAgICB9XG5cbiAgICAgICAgLy8gU3R5bGUgdGhlIHJlc2V0IGJ1dHRvbiBkaWZmZXJlbnRseVxuICAgICAgICAmOm50aC1jaGlsZCgyKSB7XG4gICAgICAgICAgd2lkdGg6IGF1dG87XG4gICAgICAgICAgcGFkZGluZzogMCAxMnB4O1xuICAgICAgICAgIGZvbnQtc2l6ZTogMTRweDtcbiAgICAgICAgfVxuICAgICAgfVxuICAgIH1cbiAgfVxufVxuIl19 */</style><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" spa-preserve/><script src="../prescript.be9697b4.js" type="application/javascript" spa-preserve></script><script type="application/javascript" spa-preserve>const fetchData = fetch("../static/contentIndex.73890e1e.json").then(data => data.json())</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://oxzo.github.io/brains-site/index.xml"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://oxzo.github.io/brains-site/ai/spec-driven-development-operating-model-og-image.webp"/><meta property="og:image:url" content="https://oxzo.github.io/brains-site/ai/spec-driven-development-operating-model-og-image.webp"/><meta name="twitter:image" content="https://oxzo.github.io/brains-site/ai/spec-driven-development-operating-model-og-image.webp"/><meta property="og:image:type" content="image/.webp"/></head><body data-slug="ai/spec-driven-development-operating-model"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">synapse</a></h2><div class="spacer mobile-only"></div><div style="display: flex; flex-direction: row; flex-wrap: nowrap; gap: 1rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button"><p>Search</p><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Search for something" placeholder="Search for something"/><div class="search-layout" data-preview="true"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Dark mode"><title>Dark mode</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Light mode"><title>Light mode</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div></div><div class="explorer" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a,b)=>!a.isFolder&amp;&amp;!b.isFolder||a.isFolder&amp;&amp;b.isFolder?a.displayName.localeCompare(b.displayName,void 0,{numeric:!0,sensitivity:\&quot;base\&quot;}):!a.isFolder&amp;&amp;b.isFolder?1:-1&quot;,&quot;filterFn&quot;:&quot;node=>node.slugSegment!==\&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;node=>node&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-content"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>Explorer</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="explorer-content" aria-expanded="false"><ul class="explorer-ul overflow" id="0x8mfk"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#"></a></li></template><template id="template-folder"><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../ai/">AI — Index</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>Spec-Driven Development and the Accretive Loop as One Operating Model</a></div></nav><h1 class="article-title">Spec-Driven Development and the Accretive Loop as One Operating Model</h1><p show-comma="true" class="content-meta"><time datetime="2026-09-05T00:00:00.000Z">Sep 05, 2026</time><span>18 min read</span></p><ul class="tags"><li><a href="../tags/ai" class="internal tag-link">ai</a></li><li><a href="../tags/dev-workflow" class="internal tag-link">dev-workflow</a></li><li><a href="../tags/spec" class="internal tag-link">spec</a></li><li><a href="../tags/verification" class="internal tag-link">verification</a></li><li><a href="../tags/time-sensitive" class="internal tag-link">time-sensitive</a></li><li><a href="../tags/publish" class="internal tag-link">publish</a></li></ul></div></div><article class="popover-hint"><h1 id="spec-driven-development-and-the-accretive-loop-as-one-operating-model">Spec-Driven Development and the Accretive Loop as One Operating Model<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#spec-driven-development-and-the-accretive-loop-as-one-operating-model" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>Tool specifics verified 2026-09-04 against Spec Kit’s evolving-specs guide, Kiro’s specs and correctness docs, and the OpenSpec README, concepts and existing-projects docs. The combined model is original to this vault.</p>
+<p><a href="../ai/accretive-spec-development" class="internal" data-slug="ai/accretive-spec-development">accretive-spec-development</a> positions the loop beside spec-driven development (SDD) as a different mode: agree-then-build versus build-then-harvest. Under both, every clause ends up affirmed twice by a human — once as a <strong>requirement</strong> (this is what we want) and once as a <strong>check</strong> (this is how we would know). The models differ in which affirmation comes first and which one gates the build. This note gives the rule for that, the region transitions that follow from it, and how the loop’s artifacts sit inside a tool’s layout without a second set of books. It is also the vault’s SDD note: it carries only the SDD mechanics the combination needs, not a tool comparison. The runnable method built on this reasoning is <a href="../ai/clause-loop" class="internal" data-slug="ai/clause-loop">clause-loop</a>, which also carries it to prototypes, specifications and documentation and which is normative — where this note and it differ, it wins; this note stays the why.</p>
+<h2 id="one-shape-two-orders">One shape, two orders<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#one-shape-two-orders" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>The three verified tools share a core: specify or propose → design or plan → tasks → implement. Spec Kit and OpenSpec wrap it with a clarify or explore step in front and a consistency or verify step behind, and OpenSpec archives at the end. Spec Kit runs it as <code>/speckit.specify</code>, <code>/speckit.clarify</code>, <code>/speckit.plan</code>, <code>/speckit.tasks</code>, <code>/speckit.analyze</code>, <code>/speckit.implement</code>, <code>/speckit.converge</code>; Kiro as <code>requirements.md</code>, <code>design.md</code>, <code>tasks.md</code>; OpenSpec as <code>/opsx:explore</code>, <code>/opsx:propose</code>, <code>/opsx:apply</code>, <code>/opsx:archive</code>, with <code>/opsx:verify</code> (“check implementation matches specs”) optional in its expanded profile. The loop’s shape is intent plus falsifier → probe → confront → harvest → freeze → consolidate.</p>
+<p>What differs:</p>
+<ul>
+<li><strong>Which affirmation gates the build.</strong> SDD gates on the requirement — “Agree before you build”, in OpenSpec’s words. The loop gates on the check: it pre-registers a falsifier, builds, and affirms the harvested clause afterwards.</li>
+<li><strong>What the human authors upstream.</strong> A requirement with WHEN/THEN scenarios bounds many failure directions; one falsifier line bounds one. Both are agent-drafted otherwise, so this is the only place independence enters — which is why the loop asks the human to <em>own</em> the falsifier at every outcome boundary, not to type one per task.</li>
+<li><strong>A design gate.</strong> SDD puts a <code>design.md</code> or <code>plan.md</code> in front of the human before the build. The loop has no design step: “how” is the agent’s probe choice, seen first at Confront.</li>
+<li><strong>Enforcement point.</strong> SDD checks its artifacts against each other before implementation (<code>/speckit.analyze</code> across spec, plan and tasks). The loop enforces after, in CI, through the contract guard on a frozen region’s manifest.</li>
+<li><strong>Granularity.</strong> A change per SDD cycle; a clause per loop.</li>
+</ul>
+<p>What does <em>not</em> differ is accumulation or brownfield fit. OpenSpec’s <code>openspec/specs/</code> “starts nearly empty and accumulates”; “you write specs only for what you’re about to change”; “the spec for <code>auth/</code> becomes thorough only after you’ve made several auth changes”. That is accretion at change granularity — a design claim from the tool’s own docs; no non-vendor evidence on brownfield behaviour is cited here. The loop is accretion at clause granularity with an executable pin. So “SDD for frozen regions, the loop for open ones” is the wrong cut: OpenSpec runs on regions that have no spec yet by design, and the loop already sends work in regions without a contract to a plan when a heuristic fires. Region state is an input to the rule below, not the boundary between the models.</p>
+<h2 id="the-operating-rule">The operating rule<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-operating-rule" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Which affirmation gates the build. <strong>The requirement gates it</strong> — agree, then build — when a planning heuristic fires on the envelope the probe declares: uncertainty about the approach, rework in the region, growth past the last three building loops, cross-domain coordination with at least one region under contract, or a contract change that would modify or retire a wanted clause in a region under contract. Separately, a <strong>hard gate</strong> — an irreversibility-list item, a production or shared-environment write, a destructive operation, a credential, an externally visible action, or an edit to a frozen region’s verification surface — stops for the human’s permission on that action whichever affirmation is gating, and a bare surface edit needs a permit, not a proposal. Otherwise <strong>the check gates it</strong> — build, harvest, then promote. The heuristics and gates are defined normatively in <a href="../ai/clause-loop" class="internal" data-slug="ai/clause-loop">clause-loop</a> rule 4; this note only places them. The surface gate is the pre-build half of test-tamper protection; a code-only probe that <em>breaks</em> a listed check without editing its surface is caught after the fact by the execution guard (the failing row below). Under this rule, “spec is the source of truth, code is a regenerable artifact” (<a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/writing-loops-not-prompts.md" class="external">writing-loops-not-prompts<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>) is true of a region under contract and false of a region that is harvesting, where the running artifact is the truth and every clause is provisional.</p>
+<p>Three honest notes on the rule. Its output drifts: as regions go under contract, the cross-domain heuristic and the surface gate fire more often, and a mature project is requirement-first by construction — the loop is the on-ramp, not the steady state. And the growth heuristic has a cold start: after three trivial probes, any real one is longer than the previous three combined. Read it against the last three probes that built something. And the model has not been run: what would show the rule wrong is the heuristics or the gates firing on most probes within the first month, so harvesting never happens, or <code>DECISIONS.log</code> going unwritten after a few sessions.</p>
+<h2 id="region-states-and-transitions">Region states and transitions<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#region-states-and-transitions" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>A <strong>region</strong> is the unit a manifest covers: a domain folder under <code>openspec/specs/</code> (a feature directory in Spec Kit). An intent that spans two folders is two regions and hits the cross-domain heuristic once either is under contract. Three states:</p>
+<ul>
+<li><strong>open</strong> — no clauses.</li>
+<li><strong>harvesting</strong> — the loop is running; clauses are observed or wanted; checks may well run in CI, but no manifest guards them.</li>
+<li><strong>under contract</strong> — frozen: every clause wanted and verified, a manifest written from the pins naming clauses, checks and the verification surface, a contract test exported to consumers — other agents, future sessions, downstream services.</li>
+</ul>
+<p>Rows two to four below are the phases of a requirement-first change; the region keeps its state while the change runs.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>From → to</th><th>Trigger</th><th>What gets written</th><th>Affirmation</th></tr></thead><tbody><tr><td>open → harvesting</td><td>a Ground constraint written into the region, or the first Close that touches it; on brownfield the first probe harvests observed clauses into the delta</td><td>the region spec, via <code>ground</code> or the merged delta</td><td>the check, at promotion</td></tr><tr><td>harvesting → proposal</td><td>a heuristic fires inside Probe; the agent refuses to build and returns it</td><td><code>changes/&lt;name>/proposal.md</code>, <code>design.md</code>, a delta spec, <code>tasks.md</code> with each row as intent plus falsifier</td><td>the requirement; adversarial review (<code>/red-team</code>) of the proposal</td></tr><tr><td>proposal → applying</td><td>delta agreed, gate passed</td><td>nothing new: each task runs Probe and Decide, inheriting the change’s falsifier unless it introduces a new assumption, trade-off or visible behaviour, and harvest pins the delta’s scenarios to check ids</td><td>per task — falsifier before, check and evidence after; acceptance was given at agreement</td></tr><tr><td>applying → archived</td><td>every scenario has a pinned check that rejects a mutant for a named reason; a clause-level fulfilment check (<code>/intent-fulfilment-check</code>) reports nothing unaddressed or substituted</td><td>the archive folder; the delta merged into <code>specs/&lt;region>/spec.md</code> with pins carried; consolidate when due. The manifest is updated <strong>only if the region was under contract before the change</strong> (a re-freeze, with a decisions entry); otherwise the region returns to harvesting with the change’s clauses wanted and freeze-eligible</td><td>at archive — the record of what was agreed, which the decisions log does not keep</td></tr><tr><td>harvesting → under contract</td><td>freeze: every clause wanted and currently verified in the freeze run, no open exception</td><td>manifest written from the pins, contract-test export, decisions entry through the approval boundary</td><td>at freeze</td></tr><tr><td>under contract → proposal</td><td>the cross-domain heuristic, or any intent whose delta would modify a listed clause; a bare surface edit takes a permit instead</td><td>as the second row</td><td>the requirement</td></tr><tr><td>under contract → harvesting</td><td>unfreeze: decisions entry, consumers told</td><td>manifest removed</td><td>the requirement</td></tr><tr><td>any → failing clause</td><td>a pinned check fails</td><td>verification <code>failing</code>, acceptance unchanged; under contract the build fails until the artifact is fixed or the clause is changed through a proposal; expiring exceptions exist only while harvesting</td><td>none — it is a stop</td></tr></tbody></table></div>
+<p>Two rows need a note. A requirement-first change does not suspend the loop: inside it, every task is intent plus falsifier, and the mutant gate still runs before a scenario counts as pinned. And retiring is not failing. A failing clause’s check <em>fails</em>; a retired requirement’s check still passes, so retirement is a deliberate decision at archive — a <code>retire</code> entry saying whether the behaviour stays and whether the check stays as characterization coverage — rather than an automatic deletion, and a check is deleted only when its purpose is obsolete. The first is <a href="../ai/clause-loop" class="internal" data-slug="ai/clause-loop">clause-loop</a> rules 1, 2 and 4; the second is rule 3.</p>
+<h2 id="artifacts-one-layout-three-additions">Artifacts: one layout, three additions<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#artifacts-one-layout-three-additions" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>The rule that prevents a second set of books: <strong>the region’s spec file is <code>specs/&lt;region>/spec.md</code> and there is no other</strong>. The loop’s files map onto the tool’s layout, inside its root; nothing lives beside it. Three additions carry the loop’s guarantees, because no verified tool has them in this form:</p>
+<ol>
+<li><strong>The pin</strong> — under each <code>#### Scenario:</code>, one trailing line with a stable id, acceptance, oracle type, check id, birth change and evidence. Whether OpenSpec’s tooling tolerates the extra line is unverified.</li>
+<li><strong>The manifest written from the pins, the contract guard and the contract-test export</strong> — the CI mechanism behind “under contract”.</li>
+<li><strong><code>DECISIONS.log</code></strong> — nine kinds, defined in <a href="../ai/clause-loop" class="internal" data-slug="ai/clause-loop">clause-loop</a>, written by the agent from the human’s decisions.</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Loop artifact or step</th><th>Verified SDD counterpart</th><th>Fit</th></tr></thead><tbody><tr><td><code>GROUND.md</code></td><td>Spec Kit <code>.specify/memory/constitution.md</code>; AGENTS.md</td><td>close; nothing in the guide gives the constitution an irreversibility list, so add one there</td></tr><tr><td>a check-gated change’s <code>proposal.md</code></td><td>OpenSpec <code>proposal.md</code> (“why and what”)</td><td>the same file, thinner: intent, falsifier and envelope; it earns its delta at harvest instead of before the build</td></tr><tr><td><code>specs/&lt;domain>/spec.md</code></td><td><code>openspec/specs/&lt;region>/spec.md</code>, or a living <code>spec.md</code></td><td>the same file; pins ride as trailing lines</td></tr><tr><td>a promoted clause</td><td><code>## ADDED Requirements</code>, SHALL plus <code>#### Scenario:</code> WHEN/THEN; a Kiro EARS-formatted requirement</td><td>a wanted clause is written in this form at promotion; tier-two guarded invariants keep the loop’s own form (named manual check, owner, cadence)</td></tr><tr><td>the pin</td><td>Kiro’s “traceable link between your requirements and the tests that validate them”</td><td>the same link, opposite birth order; the pin adds acceptance and the mutant evidence</td></tr><tr><td>none</td><td><code>design.md</code> (OpenSpec, Kiro), <code>plan.md</code> (Spec Kit)</td><td>requirement-first changes get one; harvest changes delegate “how” to the probe</td></tr><tr><td><code>DECISIONS.log</code></td><td><code>openspec/changes/archive/&lt;date>-&lt;name>/</code></td><td>complementary: the archive holds agreements, the log holds rejections, permits, exceptions and amendments; keep both</td></tr><tr><td>the manifest and its contract guard</td><td>none — a constitution states protection intent without an executable mechanism; Kiro properties are tests, not change guards</td><td>loop-only</td></tr><tr><td>consolidate</td><td>OpenSpec’s archive-merge (“each delta spec section … is applied to the corresponding main spec”)</td><td>closest match; the merge runs at every archive, and consolidate at every freeze and every ~10 archives</td></tr><tr><td>the not-exercised list</td><td><code>/speckit.converge</code> (“verify completeness and generate tasks for remaining gaps”)</td><td>both are absence lists; converge output enters only as new intents with a human falsifier, never as auto-run tasks</td></tr><tr><td>no task list</td><td><code>tasks.md</code> (all three tools)</td><td>exists only inside a change; each row is intent plus falsifier</td></tr><tr><td>Confront</td><td><code>/opsx:verify</code> (optional; “check implementation matches specs”)</td><td>the loop makes the post-build gate mandatory and adds the not-exercised list</td></tr><tr><td>none</td><td><code>/red-team</code> on <code>proposal.md</code></td><td>the pre-build gate <a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/frontend-ai-2026-brief-review.md" class="external">frontend-ai-2026-brief-review<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> names as missing from the vault’s SDD material</td></tr></tbody></table></div>
+<p>Reference layout, OpenSpec-shaped; <code>+</code> marks the additions:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="github-light github-dark"><code data-language="text" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>openspec/</span></span>
+<span data-line><span>  GROUND.md                      # + context, constraints, preferences, irreversibility list, envelope defaults, approval boundary</span></span>
+<span data-line><span>  DECISIONS.log                  # + append-only; nine kinds; agent-written</span></span>
+<span data-line><span>  specs/&lt;region>/spec.md         # wanted clauses only; each scenario carries a Pin line: id, acceptance, oracle, check, evidence</span></span>
+<span data-line><span>  specs/&lt;region>/manifest        # + written from the pins: clause ids, check ids, verification surface; the contract guard reads it</span></span>
+<span data-line><span>  changes/&lt;name>/</span></span>
+<span data-line><span>    proposal.md                  # check-first change: intent + falsifier · requirement-first: why, what, red-team result</span></span>
+<span data-line><span>    design.md                    # requirement-first changes only: how</span></span>
+<span data-line><span>    specs/&lt;region>/spec.md       # delta ADDED / MODIFIED / RETIRED; observed clauses live here until promoted</span></span>
+<span data-line><span>    tasks.md                     # requirement-first changes only; each row names its falsifier as inherited or its own</span></span>
+<span data-line><span>  changes/archive/&lt;date>-&lt;name>/</span></span></code></pre></figure>
+<p>Spec Kit is feature-keyed (<code>specs/&lt;feature>/spec.md</code>). Treat a feature directory as a region when the feature is one. When a feature spans regions, the per-feature directories stay as the historical record the guide wants and the region file is consolidated from them; the two will diverge, and the region file wins.</p>
+<p>The vault’s own skill chain is this pipeline without the name: <a href="../skills/skill-to-prd" class="internal alias" data-slug="skills/skill-to-prd">to-prd</a> is specify or propose, <a href="../skills/skill-plan-options" class="internal alias" data-slug="skills/skill-plan-options">plan-options</a> is plan or design, <a href="../skills/skill-task-decompose" class="internal alias" data-slug="skills/skill-task-decompose">task-decompose</a> is tasks with a falsifiable done-criterion per row, the loops are implement, <a href="../skills/skill-intent-fulfilment-check" class="internal alias" data-slug="skills/skill-intent-fulfilment-check">intent-fulfilment-check</a> is converge’s completion assessment at intent level, and <a href="../skills/skill-pr-contract" class="internal alias" data-slug="skills/skill-pr-contract">pr-contract</a> is the archive-time record.</p>
+<h2 id="which-spec-kit-persistence-model-when">Which Spec Kit persistence model, when<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#which-spec-kit-persistence-model-when" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Spec Kit’s guide names three ways to keep <code>specs/</code> aligned with code. The combined model uses two of them, by phase, and declines the third:</p>
+<ul>
+<li><strong>Flow-back while harvesting.</strong> The guide lets “the first useful edit … happen wherever the insight lands” and then realigns the artifact set, with <code>/speckit.analyze</code> to check for gaps; its discipline is “do not leave a lower-level change in <code>tasks.md</code> or code if <code>spec.md</code> still says something different and the spec is meant to remain trustworthy”. An observed clause is that first edit, captured in the artifact closest to the work. The loop adds what the guide does not have: the clause is not trustworthy until promoted, and promotion needs the pin, the locked check and the mutant gate — this vault’s additions, not the guide’s.</li>
+<li><strong>Living spec under contract.</strong> “Revise the existing <code>spec.md</code> first. Then regenerate or manually revise downstream artifacts so they match”, with <code>/speckit.analyze</code> before implementation resumes and <code>/speckit.converge</code> to assess completion. A change to a region under contract starts in the delta spec, which is this model.</li>
+<li><strong>Flow-forward, declined.</strong> “Each feature directory should remain a historical record” — a new directory per follow-up change. That conflicts with one spec file per region; the model keeps the per-change record in the archive folder instead, which is OpenSpec’s mechanism, not Spec Kit’s.</li>
+</ul>
+<h2 id="the-oracle-bridge">The oracle bridge<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-oracle-bridge" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Kiro extracts properties from EARS-formatted requirements during design, before implementation, and calls the result “a clear, traceable link between your requirements and the tests that validate them”. The loop builds the same link in the opposite order: probe, then check, then clause. In both, the agent authors the check, so independence comes only from what the human authored upstream — a requirement in one direction, a falsifier in the other, and the requirement reaches further. That is <a href="../ai/oracle-problem-verification" class="internal" data-slug="ai/oracle-problem-verification">oracle-problem-verification</a>’s circular-spec row stated as a workflow rule.</p>
+<p>The completeness rule that makes either order acceptable: <strong>a clause is complete only when it has both a requirement form and a pinned check shown to reject a mutant for a named reason</strong>, whichever was born first. Requirement-first clauses have the form and must earn the pin; harvested clauses have the pin and must earn the form before promotion.</p>
+<p>Kiro’s on-failure choice — fix the implementation, adjust the tests, or refine the requirements — maps onto the loop’s rules one to one: fixing code is free inside the loop; adjusting a test is an edit to a locked check and needs the human’s permission — through the approval boundary once the region is under contract; refining a requirement is a change to a wanted clause and needs a decision, or a proposal if the region is under contract. The mutant gate is the addition: Kiro’s docs name neither it nor the test library that runs the properties.</p>
+<h2 id="two-critique-gates">Two critique gates<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#two-critique-gates" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>A falsifier is a pre-registration — how we would know it is not working — not a critique. The critique asks whether this is the wrong thing to build, and it sits where the cost is:</p>
+<ul>
+<li><strong>Before the build,</strong> <a href="../skills/skill-red-team" class="internal alias" data-slug="skills/skill-red-team">red-team</a> on <code>proposal.md</code> and <code>design.md</code>, because a requirement-first change is expensive by definition. The output has a destination: the strongest objection becomes a <code>#### Scenario:</code> in the delta or a rejection in <code>DECISIONS.log</code>. A red team whose findings go nowhere is theatre.</li>
+<li><strong>After the probe,</strong> Confront: the human reacts to the running artifact <em>and</em> to the not-exercised list, after committing to what pass and fail look like — pre-registered criteria, <a href="../skills/skill-predict-then-compare" class="internal alias" data-slug="skills/skill-predict-then-compare">predict-then-compare</a>. Cheap probe, cheap gate. OpenSpec’s optional <code>/opsx:verify</code> is the tool slot for this; the loop makes it mandatory.</li>
+</ul>
+<h2 id="failure-modes-of-running-both">Failure modes of running both<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#failure-modes-of-running-both" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><strong>Double bookkeeping.</strong> A <code>SPEC.md</code> beside <code>openspec/specs/</code>. The one-file-per-region rule exists for this.</li>
+<li><strong>Theatrical proposal.</strong> A proposal structured to pass the gate that anchors nothing. Run a four-axis intent audit (<a href="../skills/skill-intent-check" class="internal alias" data-slug="skills/skill-intent-check">intent-check</a>) on the SHALL lines; a proposal with no falsifiable scenario is rejected, not improved.</li>
+<li><strong>Independence collapse.</strong> The agent writes the proposal, the design, the tasks and the properties, and the human only approves. The floor is a human-owned falsifier at every outcome boundary — the change’s intent, and any task that introduces a new assumption, trade-off or visible behaviour — with the other tasks inheriting it and saying so; below that, every check encodes the agent’s reading of the intent — <a href="../ai/intent-engineering-discipline" class="internal" data-slug="ai/intent-engineering-discipline">intent-engineering-discipline</a>’s “theatrical spec” with tests attached.</li>
+<li><strong>Harvest-only SDD.</strong> Building on a region under contract and back-filling a proposal from the harvest. The surface gate stops it before the build when the envelope names the edit; the surface guard fails CI when it does not, and the execution guard when a listed check breaks without its surface being touched.</li>
+<li><strong>Converge as the gap oracle.</strong> Letting <code>/speckit.converge</code>’s generated tasks replace the not-exercised list removes the human falsifier from failure-mode coverage — the agent then names both the gap and its fix.</li>
+<li><strong>Consolidate and archive drifting.</strong> An archive-merge can break pins the same way a consolidate rewrite can. Re-point any pin the rewrite breaks — the consolidate rule — applies to both.</li>
+<li><strong>Undefined regions.</strong> The cross-domain heuristic, the manifest and the spec file are all keyed on the region. If <code>auth/</code> is one region to one person and three to another, the heuristic fires on everything. Fix the folder taxonomy in Ground.</li>
+<li><strong>Retirement handled as failure, or a rejected clause’s check deleted by reflex.</strong> A passing check silently kept, or useful characterization coverage thrown away; see the transition table.</li>
+<li><strong>Too heavy for one person.</strong> Per clause: a pin, an evidence record, a decision; per proposal: a red team; plus the contract guard. The public surface is four actions and a packet the human answers in chat, which is the thinning already applied. The likeliest failure is not a bookkeeping error but dropping the model. If it must be thinned further, keep the pin, the evidence rule and the manifest and relax the rest first.</li>
+</ul>
+<h2 id="when-not-to-combine">When not to combine<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#when-not-to-combine" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>Multi-team contracts before anything has frozen: SDD alone.</li>
+<li>Regenerate-from-spec practice, where code is rebuilt from the spec rather than edited: harvest is idle; SDD plus the mutant gate.</li>
+<li>Work where the first probe is itself the expensive part: plan-first, as the loop already says.</li>
+<li>Regulated audit trails: permit and freeze lines carry an approval reference from the boundary, but the log is agent-written and the boundary is whatever the repo host provides; add a formal approval step at archive.</li>
+<li>Parallel agents or session handoff: a plan file is the thread and “no task list” stops holding.</li>
+</ul>
+<h2 id="related">Related<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#related" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><a href="../ai/accretive-spec-development" class="internal" data-slug="ai/accretive-spec-development">accretive-spec-development</a> — the loop this note places, and why the spec is a byproduct; its rules are defined normatively in <a href="../ai/clause-loop" class="internal" data-slug="ai/clause-loop">clause-loop</a></li>
+<li><a href="../ai/clause-loop" class="internal" data-slug="ai/clause-loop">clause-loop</a> — the normative method this reasoning produces: seven rules, the evidence rule, four actions, both paths, the seven oracle types, acceptance and verification axes, the contract guard, profiles for code, prototypes, specifications and documentation, and a starter kit</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/writing-loops-not-prompts.md" class="external">writing-loops-not-prompts<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — the tooling table (Spec Kit, Kiro, AGENTS.md); this note adds OpenSpec</li>
+<li><a href="../ai/intent-engineering-discipline" class="internal" data-slug="ai/intent-engineering-discipline">intent-engineering-discipline</a> — “theatrical spec” and “spec drift without re-check”, the two failure modes any combination must answer; need-level before solution-level</li>
+<li><a href="../ai/oracle-problem-verification" class="internal" data-slug="ai/oracle-problem-verification">oracle-problem-verification</a> — the circular-spec row behind the oracle bridge</li>
+<li><a href="../ai/mutation-testing-ai-generated-code" class="internal" data-slug="ai/mutation-testing-ai-generated-code">mutation-testing-ai-generated-code</a> — the per-suite version of the per-clause mutant gate</li>
+<li><a href="../ai/intent-to-retrospective-loop" class="internal" data-slug="ai/intent-to-retrospective-loop">intent-to-retrospective-loop</a> — the lifecycle the skill chain above instantiates</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/agent-workflow-solo-practitioner.md" class="external">agent-workflow-solo-practitioner<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — the vault’s earlier spec-first habit; the requirement-first side of this model</li>
+<li><a href="../ai/ai-verification-stack-web" class="internal" data-slug="ai/ai-verification-stack-web">ai-verification-stack-web</a> — its “implementation cannot drift without failing the build” holds only for pinned, manifest-listed clauses</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/frontend-ai-2026-brief-review.md" class="external">frontend-ai-2026-brief-review<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — names the pre-build critique gate as a gap</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/coding-with-agentic-loops.md" class="external">coding-with-agentic-loops<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — the hold-out and no-test-edits mitigations the locked check enforces</li>
+</ul>
+<h2 id="sources">Sources<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#sources" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Checked 2026-09-04, raw files fetched from the repositories. The combined model is original to this vault, drafted, design-reviewed and red-teamed in-session. External references used for the tool mechanics only:</p>
+<ul>
+<li>GitHub, <code>github/spec-kit</code>, <code>docs/guides/evolving-specs.md</code> — command names, file layout, the <code>/speckit.converge</code> definition, the three persistence models, the flow-back discipline sentence. Primary.</li>
+<li>Kiro, <code>kiro.dev/docs/specs/</code> and <code>docs/specs/correctness/</code> — the three spec files, property extraction during design, the on-failure triad, the “traceable link” line. Primary.</li>
+<li><code>Fission-AI/OpenSpec</code>, README, <code>docs/concepts.md</code> and <code>docs/existing-projects.md</code> — specs and change-folder layout, delta format, the archive process, default and expanded command profiles, “Agree before you build”, the brownfield accumulation lines. Primary.</li>
+</ul></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>Graph View</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc desktop-only"><button type="button" class="toc-header" aria-controls="toc-content" aria-expanded="true"><h3>Table of Contents</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="toc-content"><ul id="h9l23p" class="overflow"><li class="depth-0"><a href="#spec-driven-development-and-the-accretive-loop-as-one-operating-model" data-for="spec-driven-development-and-the-accretive-loop-as-one-operating-model">Spec-Driven Development and the Accretive Loop as One Operating Model</a></li><li class="depth-1"><a href="#one-shape-two-orders" data-for="one-shape-two-orders">One shape, two orders</a></li><li class="depth-1"><a href="#the-operating-rule" data-for="the-operating-rule">The operating rule</a></li><li class="depth-1"><a href="#region-states-and-transitions" data-for="region-states-and-transitions">Region states and transitions</a></li><li class="depth-1"><a href="#artifacts-one-layout-three-additions" data-for="artifacts-one-layout-three-additions">Artifacts: one layout, three additions</a></li><li class="depth-1"><a href="#which-spec-kit-persistence-model-when" data-for="which-spec-kit-persistence-model-when">Which Spec Kit persistence model, when</a></li><li class="depth-1"><a href="#the-oracle-bridge" data-for="the-oracle-bridge">The oracle bridge</a></li><li class="depth-1"><a href="#two-critique-gates" data-for="two-critique-gates">Two critique gates</a></li><li class="depth-1"><a href="#failure-modes-of-running-both" data-for="failure-modes-of-running-both">Failure modes of running both</a></li><li class="depth-1"><a href="#when-not-to-combine" data-for="when-not-to-combine">When not to combine</a></li><li class="depth-1"><a href="#related" data-for="related">Related</a></li><li class="depth-1"><a href="#sources" data-for="sources">Sources</a></li><li class="overflow-end"></li></ul></div></div><div class="backlinks"><h3>Backlinks</h3><ul id="xacmdj" class="overflow"><li><a href="../ai/accretive-spec-development" class="internal">Accretive Spec Development</a></li><li><a href="../ai/clause-loop" class="internal">Clause Loop</a></li><li><a href="../ai/" class="internal">AI — Index</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v4.4.1</a> © 2026</p><ul><li><a href="https://github.com/oxzo/brains">source</a></li><li><a href="/index.xml">rss</a></li></ul></footer></div></div></body><script type="application/javascript">function o(){let t=this.parentElement;t.classList.toggle("is-collapsed");let e=t.classList.contains("is-collapsed")?this.scrollHeight:t.scrollHeight;t.style.maxHeight=e+"px";let c=t,l=t.parentElement;for(;l;){if(!l.classList.contains("callout"))return;let i=l.classList.contains("is-collapsed")?l.scrollHeight:l.scrollHeight+c.scrollHeight;l.style.maxHeight=i+"px",c=l,l=l.parentElement}}function n(){let t=document.getElementsByClassName("callout is-collapsible");for(let s of t){let e=s.firstElementChild;if(!e)continue;e.addEventListener("click",o),window.addCleanup(()=>e.removeEventListener("click",o));let l=s.classList.contains("is-collapsed")?e.scrollHeight:s.scrollHeight;s.style.maxHeight=l+"px"}}document.addEventListener("nav",n);
+</script><script type="module">function f(i,e){if(!i)return;function r(o){o.target===this&&(o.preventDefault(),o.stopPropagation(),e())}function t(o){o.key.startsWith("Esc")&&(o.preventDefault(),e())}i?.addEventListener("click",r),window.addCleanup(()=>i?.removeEventListener("click",r)),document.addEventListener("keydown",t),window.addCleanup(()=>document.removeEventListener("keydown",t))}function y(i){for(;i.firstChild;)i.removeChild(i.firstChild)}var h=class{constructor(e,r){this.container=e;this.content=r;this.setupEventListeners(),this.setupNavigationControls(),this.resetTransform()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;cleanups=[];setupEventListeners(){let e=this.onMouseDown.bind(this),r=this.onMouseMove.bind(this),t=this.onMouseUp.bind(this),o=this.resetTransform.bind(this);this.container.addEventListener("mousedown",e),document.addEventListener("mousemove",r),document.addEventListener("mouseup",t),window.addEventListener("resize",o),this.cleanups.push(()=>this.container.removeEventListener("mousedown",e),()=>document.removeEventListener("mousemove",r),()=>document.removeEventListener("mouseup",t),()=>window.removeEventListener("resize",o))}cleanup(){for(let e of this.cleanups)e()}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let r=this.createButton("+",()=>this.zoom(.1)),t=this.createButton("-",()=>this.zoom(-.1)),o=this.createButton("Reset",()=>this.resetTransform());e.appendChild(t),e.appendChild(o),e.appendChild(r),this.container.appendChild(e)}createButton(e,r){let t=document.createElement("button");return t.textContent=e,t.className="mermaid-control-button",t.addEventListener("click",r),window.addCleanup(()=>t.removeEventListener("click",r)),t}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}zoom(e){let r=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),t=this.content.getBoundingClientRect(),o=t.width/2,n=t.height/2,c=r-this.scale;this.currentPan.x-=o*c,this.currentPan.y-=n*c,this.scale=r,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){this.scale=1;let e=this.content.querySelector("svg");this.currentPan={x:e.getBoundingClientRect().width/2,y:e.getBoundingClientRect().height/2},this.updateTransform()}},C=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],E;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;E||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let r=E.default,t=new WeakMap;for(let n of e)t.set(n,n.innerText);async function o(){for(let s of e){s.removeAttribute("data-processed");let a=t.get(s);a&&(s.innerHTML=a)}let n=C.reduce((s,a)=>(s[a]=window.getComputedStyle(document.documentElement).getPropertyValue(a),s),{}),c=document.documentElement.getAttribute("saved-theme")==="dark";r.initialize({startOnLoad:!1,securityLevel:"loose",theme:c?"dark":"base",themeVariables:{fontFamily:n["--codeFont"],primaryColor:n["--light"],primaryTextColor:n["--darkgray"],primaryBorderColor:n["--tertiary"],lineColor:n["--darkgray"],secondaryColor:n["--secondary"],tertiaryColor:n["--tertiary"],clusterBkg:n["--light"],edgeLabelBackground:n["--highlight"]}}),await r.run({nodes:e})}await o(),document.addEventListener("themechange",o),window.addCleanup(()=>document.removeEventListener("themechange",o));for(let n=0;n<e.length;n++){let v=function(){let g=l.querySelector("#mermaid-space"),m=l.querySelector(".mermaid-content");if(!m)return;y(m);let w=c.querySelector("svg").cloneNode(!0);m.appendChild(w),l.classList.add("active"),g.style.cursor="grab",u=new h(g,m)},M=function(){l.classList.remove("active"),u?.cleanup(),u=null},c=e[n],s=c.parentElement,a=s.querySelector(".clipboard-button"),d=s.querySelector(".expand-button"),p=window.getComputedStyle(a),L=a.offsetWidth+parseFloat(p.marginLeft||"0")+parseFloat(p.marginRight||"0");d.style.right=`calc(${L}px + 0.3rem)`,s.prepend(d);let l=s.querySelector("#mermaid-container");if(!l)return;let u=null;d.addEventListener("click",v),f(l,M),window.addCleanup(()=>{u?.cleanup(),d.removeEventListener("click",v)})}});
+</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript"></script><script src="../postscript.00b09a8c.js" type="module"></script></html>

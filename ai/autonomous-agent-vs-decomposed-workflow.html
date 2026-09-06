@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en"><head><title>Autonomous Agent vs Decomposed Workflow · second-brain</title><meta charset="utf-8"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400;1,600&amp;family=Inter:wght@400;700&amp;family=JetBrains Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="synapse"/><meta property="og:title" content="Autonomous Agent vs Decomposed Workflow · second-brain"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Autonomous Agent vs Decomposed Workflow · second-brain"/><meta name="twitter:description" content="Autonomous Agent vs Decomposed Workflow When a task needs several steps, there are two ends of a design axis: hand the whole flow to one agent that decides its own steps in a tool-calling ..."/><meta property="og:description" content="Autonomous Agent vs Decomposed Workflow When a task needs several steps, there are two ends of a design axis: hand the whole flow to one agent that decides its own steps in a tool-calling ..."/><meta property="og:image:alt" content="Autonomous Agent vs Decomposed Workflow When a task needs several steps, there are two ends of a design axis: hand the whole flow to one agent that decides its own steps in a tool-calling ..."/><meta property="twitter:domain" content="oxzo.github.io/brains-site"/><meta property="og:url" content="https://oxzo.github.io/brains-site/ai/autonomous-agent-vs-decomposed-workflow"/><meta property="twitter:url" content="https://oxzo.github.io/brains-site/ai/autonomous-agent-vs-decomposed-workflow"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="Autonomous Agent vs Decomposed Workflow When a task needs several steps, there are two ends of a design axis: hand the whole flow to one agent that decides its own steps in a tool-calling ..."/><meta name="generator" content="Quartz"/><link href="../index.322b98b4.css" rel="stylesheet" type="text/css" spa-preserve/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  padding: 2rem;
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL2hvbWUvcnVubmVyL3dvcmsvYnJhaW5zL2JyYWlucy9zaXRlL3F1YXJ0ei9jb21wb25lbnRzL3N0eWxlcyIsInNvdXJjZXMiOlsibWVybWFpZC5pbmxpbmUuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTs7QUFHRjtFQUNFO0VBQ0E7O0FBR0Y7RUFDRTs7O0FBS0Y7RUFDRTtFQUNBOzs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7O0FBR0Y7RUFDRTs7QUFJRjtFQUNFO0VBQ0E7RUFDQSIsInNvdXJjZXNDb250ZW50IjpbIi5leHBhbmQtYnV0dG9uIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbG9hdDogcmlnaHQ7XG4gIHBhZGRpbmc6IDAuNHJlbTtcbiAgbWFyZ2luOiAwLjNyZW07XG4gIHJpZ2h0OiAwOyAvLyBOT1RFOiByaWdodCB3aWxsIGJlIHNldCBpbiBtZXJtYWlkLmlubGluZS50c1xuICBjb2xvcjogdmFyKC0tZ3JheSk7XG4gIGJvcmRlci1jb2xvcjogdmFyKC0tZGFyayk7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWxpZ2h0KTtcbiAgYm9yZGVyOiAxcHggc29saWQ7XG4gIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgb3BhY2l0eTogMDtcbiAgdHJhbnNpdGlvbjogMC4ycztcblxuICAmID4gc3ZnIHtcbiAgICBmaWxsOiB2YXIoLS1saWdodCk7XG4gICAgZmlsdGVyOiBjb250cmFzdCgwLjMpO1xuICB9XG5cbiAgJjpob3ZlciB7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIGJvcmRlci1jb2xvcjogdmFyKC0tc2Vjb25kYXJ5KTtcbiAgfVxuXG4gICY6Zm9jdXMge1xuICAgIG91dGxpbmU6IDA7XG4gIH1cbn1cblxucHJlIHtcbiAgJjpob3ZlciA+IC5leHBhbmQtYnV0dG9uIHtcbiAgICBvcGFjaXR5OiAxO1xuICAgIHRyYW5zaXRpb246IDAuMnM7XG4gIH1cbn1cblxuI21lcm1haWQtY29udGFpbmVyIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICBjb250YWluOiBsYXlvdXQ7XG4gIHotaW5kZXg6IDk5OTtcbiAgbGVmdDogMDtcbiAgdG9wOiAwO1xuICB3aWR0aDogMTAwdnc7XG4gIGhlaWdodDogMTAwdmg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGRpc3BsYXk6IG5vbmU7XG4gIGJhY2tkcm9wLWZpbHRlcjogYmx1cig0cHgpO1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuNSk7XG5cbiAgJi5hY3RpdmUge1xuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgfVxuXG4gICYgPiAjbWVybWFpZC1zcGFjZSB7XG4gICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1saWdodCk7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDUwJTtcbiAgICBsZWZ0OiA1MCU7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gICAgaGVpZ2h0OiA4MHZoO1xuICAgIHdpZHRoOiA4MHZ3O1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG5cbiAgICAmID4gLm1lcm1haWQtY29udGVudCB7XG4gICAgICBwYWRkaW5nOiAycmVtO1xuICAgICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgICAgdHJhbnNmb3JtLW9yaWdpbjogMCAwO1xuICAgICAgdHJhbnNpdGlvbjogdHJhbnNmb3JtIDAuMXMgZWFzZTtcbiAgICAgIG92ZXJmbG93OiB2aXNpYmxlO1xuICAgICAgbWluLWhlaWdodDogMjAwcHg7XG4gICAgICBtaW4td2lkdGg6IDIwMHB4O1xuXG4gICAgICBwcmUge1xuICAgICAgICBtYXJnaW46IDA7XG4gICAgICAgIGJvcmRlcjogbm9uZTtcbiAgICAgIH1cblxuICAgICAgc3ZnIHtcbiAgICAgICAgbWF4LXdpZHRoOiBub25lO1xuICAgICAgICBoZWlnaHQ6IGF1dG87XG4gICAgICB9XG4gICAgfVxuXG4gICAgJiA+IC5tZXJtYWlkLWNvbnRyb2xzIHtcbiAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgIGJvdHRvbTogMjBweDtcbiAgICAgIHJpZ2h0OiAyMHB4O1xuICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgIGdhcDogOHB4O1xuICAgICAgcGFkZGluZzogOHB4O1xuICAgICAgYmFja2dyb3VuZDogdmFyKC0tbGlnaHQpO1xuICAgICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICAgIGJvcmRlci1yYWRpdXM6IDZweDtcbiAgICAgIGJveC1zaGFkb3c6IDAgMnB4IDRweCByZ2JhKDAsIDAsIDAsIDAuMSk7XG4gICAgICB6LWluZGV4OiAyO1xuXG4gICAgICAubWVybWFpZC1jb250cm9sLWJ1dHRvbiB7XG4gICAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAgICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICAgICAgICB3aWR0aDogMzJweDtcbiAgICAgICAgaGVpZ2h0OiAzMnB4O1xuICAgICAgICBwYWRkaW5nOiAwO1xuICAgICAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodCk7XG4gICAgICAgIGNvbG9yOiB2YXIoLS1kYXJrKTtcbiAgICAgICAgYm9yZGVyLXJhZGl1czogNHB4O1xuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgICAgIGZvbnQtc2l6ZTogMTZweDtcbiAgICAgICAgZm9udC1mYW1pbHk6IHZhcigtLWJvZHlGb250KTtcbiAgICAgICAgdHJhbnNpdGlvbjogYWxsIDAuMnMgZWFzZTtcblxuICAgICAgICAmOmhvdmVyIHtcbiAgICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICB9XG5cbiAgICAgICAgJjphY3RpdmUge1xuICAgICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWSgxcHgpO1xuICAgICAgICB9XG5cbiAgICAgICAgLy8gU3R5bGUgdGhlIHJlc2V0IGJ1dHRvbiBkaWZmZXJlbnRseVxuICAgICAgICAmOm50aC1jaGlsZCgyKSB7XG4gICAgICAgICAgd2lkdGg6IGF1dG87XG4gICAgICAgICAgcGFkZGluZzogMCAxMnB4O1xuICAgICAgICAgIGZvbnQtc2l6ZTogMTRweDtcbiAgICAgICAgfVxuICAgICAgfVxuICAgIH1cbiAgfVxufVxuIl19 */</style><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" spa-preserve/><script src="../prescript.be9697b4.js" type="application/javascript" spa-preserve></script><script type="application/javascript" spa-preserve>const fetchData = fetch("../static/contentIndex.73890e1e.json").then(data => data.json())</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://oxzo.github.io/brains-site/index.xml"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://oxzo.github.io/brains-site/ai/autonomous-agent-vs-decomposed-workflow-og-image.webp"/><meta property="og:image:url" content="https://oxzo.github.io/brains-site/ai/autonomous-agent-vs-decomposed-workflow-og-image.webp"/><meta name="twitter:image" content="https://oxzo.github.io/brains-site/ai/autonomous-agent-vs-decomposed-workflow-og-image.webp"/><meta property="og:image:type" content="image/.webp"/></head><body data-slug="ai/autonomous-agent-vs-decomposed-workflow"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">synapse</a></h2><div class="spacer mobile-only"></div><div style="display: flex; flex-direction: row; flex-wrap: nowrap; gap: 1rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button"><p>Search</p><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Search for something" placeholder="Search for something"/><div class="search-layout" data-preview="true"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Dark mode"><title>Dark mode</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Light mode"><title>Light mode</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div></div><div class="explorer" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a,b)=>!a.isFolder&amp;&amp;!b.isFolder||a.isFolder&amp;&amp;b.isFolder?a.displayName.localeCompare(b.displayName,void 0,{numeric:!0,sensitivity:\&quot;base\&quot;}):!a.isFolder&amp;&amp;b.isFolder?1:-1&quot;,&quot;filterFn&quot;:&quot;node=>node.slugSegment!==\&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;node=>node&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-content"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>Explorer</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="explorer-content" aria-expanded="false"><ul class="explorer-ul overflow" id="0x8mfk"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#"></a></li></template><template id="template-folder"><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../ai/">AI — Index</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>Autonomous Agent vs Decomposed Workflow</a></div></nav><h1 class="article-title">Autonomous Agent vs Decomposed Workflow</h1><p show-comma="true" class="content-meta"><time datetime="2026-07-18T00:00:00.000Z">Jul 18, 2026</time><span>10 min read</span></p><ul class="tags"><li><a href="../tags/ai" class="internal tag-link">ai</a></li><li><a href="../tags/agents" class="internal tag-link">agents</a></li><li><a href="../tags/architecture" class="internal tag-link">architecture</a></li><li><a href="../tags/workflow-design" class="internal tag-link">workflow-design</a></li><li><a href="../tags/publish" class="internal tag-link">publish</a></li></ul></div></div><article class="popover-hint"><h1 id="autonomous-agent-vs-decomposed-workflow">Autonomous Agent vs Decomposed Workflow<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#autonomous-agent-vs-decomposed-workflow" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>When a task needs several steps, there are two ends of a design axis: hand the whole flow to <strong>one agent</strong> that decides its own steps in a tool-calling loop, or <strong>decompose</strong> it into discrete steps you wire together yourself (prompt chain, router, orchestrator). This note frames that as a spectrum, enumerates the intermediate options, and gives the head-to-head pros/cons and the axes that decide which one to reach for.</p>
+<p>The governing distinction (from Anthropic’s <em>Building Effective Agents</em>, Dec 2024): a <strong>workflow</strong> is a system where LLM calls and tools are orchestrated through <em>predefined code paths</em>; an <strong>agent</strong> is a system where the <em>LLM directs its own process and tool use</em>, deciding at each step what to do next. Most production systems are not one or the other — they are workflows with agentic cells.</p>
+<p>This is the <strong>build-time</strong> sibling to <a href="../ai/task-decomposition-for-ai-plans" class="internal" data-slug="ai/task-decomposition-for-ai-plans">task-decomposition-for-ai-plans</a> (which decides whether to split a <em>plan</em> you’re about to issue) and <a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/agentic-ai-architecture.md" class="external">agentic-ai-architecture<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> (the loop mechanics). The reliability case underneath it is <a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/reliability-vs-capability-agents.md" class="external">reliability-vs-capability-agents<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>.</p>
+<h2 id="the-core-axis--who-owns-the-control-flow">The core axis — who owns the control flow<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-core-axis--who-owns-the-control-flow" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>The single variable that orders every option below is <strong>who decides what the next step is</strong>:</p>
+<ul>
+<li><strong>You decide, at design time</strong> → the control flow is in code. Deterministic, inspectable, testable. The LLM fills in cells; it never chooses the path.</li>
+<li><strong>The model decides, at run time</strong> → the control flow is in the model’s head. Flexible, handles open-ended tasks, but the path is non-deterministic and only visible after the fact.</li>
+</ul>
+<p>Everything else — cost, latency, debuggability, reliability — falls out of where you put that decision.</p>
+<h2 id="the-option-spectrum-low--high-agent-autonomy">The option spectrum (low → high agent autonomy)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-option-spectrum-low--high-agent-autonomy" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>More options than the binary, ordered by how much control flow you cede to the model:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>#</th><th>Pattern</th><th>Who picks the next step</th><th>Best when</th><th>Main risk</th></tr></thead><tbody><tr><td>0</td><td><strong>Single augmented call</strong></td><td>Nobody — one shot</td><td>Task fits one call (+tools/retrieval)</td><td>Forcing multi-step work into one prompt</td></tr><tr><td>1</td><td><strong>Prompt chain</strong> (fixed pipeline)</td><td>You, fixed order</td><td>Steps are known and stable; each gates the next</td><td>Brittle to inputs that don’t fit the fixed shape</td></tr><tr><td>2</td><td><strong>Routing</strong> (classify → dispatch)</td><td>A classifier, then fixed</td><td>Distinct input classes want different handling</td><td>Misroute cascades; needs a fallback class</td></tr><tr><td>3</td><td><strong>Parallelization</strong> (sectioning / voting)</td><td>You, fan-out then aggregate</td><td>Independent subtasks, or you want N votes</td><td>Aggregation/merge logic; correlated errors in votes</td></tr><tr><td>4</td><td><strong>Orchestrator–workers</strong></td><td>An LLM orchestrator, per task</td><td>Subtasks can’t be enumerated up front but are bounded</td><td>Orchestrator is a single point of failure</td></tr><tr><td>5</td><td><strong>Plan-then-execute</strong></td><td>Planner once, then fixed</td><td>Coherent plan worth paying a frontier model for</td><td>Plan staleness mid-execution; no replanning</td></tr><tr><td>6</td><td><strong>Evaluator–optimizer loop</strong></td><td>Generator + critic, bounded</td><td>Clear quality bar a critic can check; iteration helps</td><td>Infinite/empty loops; critic shares the generator’s blind spots</td></tr><tr><td>7</td><td><strong>Fully autonomous agent loop</strong></td><td>The model, every step</td><td>Open-ended task, unknowable step count, tools available</td><td>Non-determinism, runaway cost, hard to verify</td></tr></tbody></table></div>
+<p>Patterns 1–3 are pure <strong>workflows</strong> (control flow in code). 4–6 are <strong>hybrids</strong> — a model makes <em>some</em> routing/iteration decisions inside a structure you bounded. 7 is the <strong>agent</strong>. The “agent does it itself vs split into steps” choice is the gap between 7 and {1–6}. (The 0–7 ordering onto an autonomy gradient is this note’s synthesis; Anthropic’s essay names the patterns as coordinate options, not a linear rank.)</p>
+<h2 id="head-to-head-autonomous-agent-7-vs-decomposed-workflow-13">Head-to-head: autonomous agent (7) vs decomposed workflow (1–3)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#head-to-head-autonomous-agent-7-vs-decomposed-workflow-13" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>Autonomous agent — pros</strong></p>
+<ul>
+<li><strong>Handles the unknowable.</strong> When you can’t enumerate the steps (the count depends on what the model finds mid-task), the agent adapts where a fixed chain can’t.</li>
+<li><strong>Less to build and maintain.</strong> One loop + good tools + one prompt, versus a graph of steps, schemas, and glue. Capability rides on the model improving, not on your wiring.</li>
+<li><strong>Recovers in-context.</strong> A failed tool call, a surprising file — the agent reasons about it and tries another route without you having coded that branch.</li>
+<li><strong>Generalizes.</strong> The same loop serves many tasks; a workflow is shaped to one.</li>
+</ul>
+<p><strong>Autonomous agent — cons</strong></p>
+<ul>
+<li><strong>Reliability erodes with horizon.</strong> pass@1 ≠ pass^k: it may do the task once and not dependably across runs, and the gap widens as the flow gets longer (<a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/reliability-vs-capability-agents.md" class="external">reliability-vs-capability-agents<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>). Unattended loops need pass^k, which no single demo measures.</li>
+<li><strong>Cost and latency are unbounded and variable.</strong> Step count is decided at run time; a task that “should” take 4 steps can take 25. Needs explicit step/token circuit-breakers.</li>
+<li><strong>Opaque and hard to debug.</strong> The control flow only exists in the transcript. When it goes wrong, you reconstruct <em>why it chose that</em> after the fact (see <a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/debugging-agentic-failures.md" class="external">debugging-agentic-failures<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>).</li>
+<li><strong>All-or-nothing verification.</strong> One final output to check, with no confirmed-correct intermediate anchors. Errors compound silently across steps.</li>
+<li><strong>Larger blast radius.</strong> More autonomous tool use = more surface for prompt injection and unintended destructive actions (<a href="../ai/ai-agent-security" class="internal" data-slug="ai/ai-agent-security">ai-agent-security</a>).</li>
+</ul>
+<p><strong>Decomposed workflow — pros</strong></p>
+<ul>
+<li><strong>Deterministic, inspectable control flow.</strong> You can read the graph, unit-test each step, set a per-step schema, and log every transition. Observability is built in, not reconstructed.</li>
+<li><strong>Verification anchors at every seam.</strong> Each step produces a checkable intermediate; a failure is localized and recoverable from the last good anchor (<a href="../ai/task-decomposition-for-ai-plans" class="internal" data-slug="ai/task-decomposition-for-ai-plans">task-decomposition-for-ai-plans</a> “small victories”).</li>
+<li><strong>Bounded, predictable cost/latency.</strong> Fixed number of calls; you can pick the cheapest model per step (cheap classify, expensive reason).</li>
+<li><strong>Higher per-step reliability.</strong> A narrow, well-specified step beats an open-ended one; the model executes against your spec, not its training-data prior for a vague instruction.</li>
+<li><strong>Lets you mix deterministic code in.</strong> Rule-expressible transforms become real code, not prompts — cheaper and exact.</li>
+</ul>
+<p><strong>Decomposed workflow — cons</strong></p>
+<ul>
+<li><strong>Brittle to inputs outside the designed shape.</strong> The fixed path can’t handle a case you didn’t foresee; coverage is your problem.</li>
+<li><strong>More to build and maintain.</strong> Steps, schemas, routing, aggregation, glue — and it ages as the task changes.</li>
+<li><strong>Switching/handoff overhead.</strong> Context is re-established at each boundary; over-splitting pays setup cost twice and dilutes the larger goal (<a href="../ai/task-decomposition-for-ai-plans" class="internal" data-slug="ai/task-decomposition-for-ai-plans">task-decomposition-for-ai-plans</a> over-decomposition).</li>
+<li><strong>Caps at the wiring’s ceiling.</strong> It only does what you composed; it won’t surprise you usefully the way an agent can.</li>
+</ul>
+<h2 id="the-axes-that-actually-decide-it">The axes that actually decide it<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-axes-that-actually-decide-it" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>When unsure, score the task on these — they’re the dimensions the pros/cons collapse into:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Axis</th><th>Favors <strong>decomposed workflow</strong></th><th>Favors <strong>autonomous agent</strong></th></tr></thead><tbody><tr><td><strong>Step predictability</strong></td><td>Steps known and stable</td><td>Step count depends on run-time findings</td></tr><tr><td><strong>Stakes / reversibility</strong></td><td>High (irreversible, production)</td><td>Low (sandboxed, reversible, cheap to retry)</td></tr><tr><td><strong>Reliability need</strong></td><td>Unattended, must pass^k</td><td>Human-in-loop picks the good run (pass@k)</td></tr><tr><td><strong>Cost/latency sensitivity</strong></td><td>Tight budget, must be bounded</td><td>Can absorb variable cost for capability</td></tr><tr><td><strong>Verifiability</strong></td><td>Needs intermediate anchors</td><td>One end-output is cheaply checkable</td></tr><tr><td><strong>Task diversity</strong></td><td>One narrow task, high volume</td><td>Many varied tasks, one harness</td></tr><tr><td><strong>Maintenance appetite</strong></td><td>Willing to own a graph</td><td>Want capability to ride model upgrades</td></tr><tr><td><strong>Observability/compliance</strong></td><td>Audit trail required</td><td>Best-effort, transcript is enough</td></tr></tbody></table></div>
+<p>Rule of thumb: <strong>the more a wrong step costs and the harder it is to undo, the more control flow you keep in code.</strong> Reserve full autonomy for open-ended, low-stakes, reversible work — and even there, bound it.</p>
+<h2 id="intermediate-and-hybrid-moves-where-most-real-systems-land">Intermediate and hybrid moves (where most real systems land)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#intermediate-and-hybrid-moves-where-most-real-systems-land" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>You rarely pick a pure end. The high-leverage options sit in the middle:</p>
+<ul>
+<li><strong>Deterministic skeleton, agent in the cells.</strong> Code owns sequencing, gating, and irreversible actions; the LLM is reserved for the judgment steps. This is a common production pattern — see <a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/ai-code-review-deterministic-agent-hybrid.md" class="external">ai-code-review-deterministic-agent-hybrid<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> (“keep control flow, routing, resource gating in code; reserve the LLM for judgment”).</li>
+<li><strong>Plan-then-execute (“think expensive, act cheap”).</strong> A frontier model decomposes the task into a plan once; cheaper models execute each step. The plan supplies the coherence small models lack (<a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/agentic-ai-architecture.md" class="external">agentic-ai-architecture<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> planning/execution separation). Add <strong>replanning</strong> if mid-execution surprises are likely, or the plan goes stale.</li>
+<li><strong>Staged autonomy with human-in-the-loop (HITL) gates at bottlenecks.</strong> Let the agent run autonomously <em>between</em> checkpoints, but stop for confirmation at verification seams and before destructive steps. Put the gates at <a href="../ai/bottleneck-states-as-split-points" class="internal alias" data-slug="ai/bottleneck-states-as-split-points">bottleneck states</a>, not arbitrary boundaries. The trust granted should be horizon-indexed and grow as the agent earns it (<a href="../ai/hitl-progressive-autonomy" class="internal" data-slug="ai/hitl-progressive-autonomy">hitl-progressive-autonomy</a>).</li>
+<li><strong>Bounded agent.</strong> A full loop with hard circuit-breakers: max steps, token budget, max retries per tool, fail-closed on security-relevant errors. Many nominally “autonomous” production agents are really this.</li>
+<li><strong>Implementation intentions for branches.</strong> A flow with a single run-time fork need not become a full agent — express the fork as a deterministic IF-trigger-THEN-response so a workflow can carry it without ceding the whole control flow (<a href="../ai/implementation-intentions-for-ai-plans" class="internal" data-slug="ai/implementation-intentions-for-ai-plans">implementation-intentions-for-ai-plans</a>).</li>
+</ul>
+<h2 id="when-the-autonomous-loop-is-the-right-call">When the autonomous loop is the <em>right</em> call<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#when-the-autonomous-loop-is-the-right-call" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>The cons list shouldn’t read as “always decompose.” The agent wins cleanly when:</p>
+<ul>
+<li>The step count genuinely can’t be known up front (research, debugging, exploration).</li>
+<li>The task space is too diverse to wire a workflow per case, and one harness must serve all.</li>
+<li>The work is reversible and sandboxed, so an off run is cheap.</li>
+<li>A human (or a cheap oracle) filters outputs, so you’re operating at pass@k, not pass^k.</li>
+<li>You’d otherwise spend more engineering the workflow than the task is worth.</li>
+</ul>
+<p>Conversely, decomposition is over-applied when the task is short and single-concern: running an orchestration graph over a 3-step job is its own failure mode (switching overhead, diluted goal). For small, stable tasks, a single augmented call or a short chain beats both a graph and an agent.</p>
+<h2 id="counterargument-and-nuance">Counterargument and nuance<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#counterargument-and-nuance" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><strong>It’s a spectrum, and the binary framing misleads.</strong> Treating it as “agent vs workflow” hides the productive middle (patterns 4–6, hybrids). The real question is <em>where on the autonomy gradient</em> and <em>which steps</em> get ceded — not a single global choice.</li>
+<li><strong>The line moves with model capability — time-sensitive.</strong> As models get more reliable over long horizons, the autonomy that’s safe to grant rises, and tasks that needed decomposition in 2025 may run as a bounded agent later. Re-evaluate per model generation; don’t freeze this decision. (As of 2026-06, long-horizon reliability is still the binding constraint — <a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/reliability-vs-capability-agents.md" class="external">reliability-vs-capability-agents<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>.)</li>
+<li><strong>Decomposition can hurt.</strong> Splitting at non-bottlenecks pays setup cost without buying anchor stability; over-decomposed flows drift from the superordinate goal even as each step “succeeds.” Split at seams, keep the <em>why</em> visible at each boundary (<a href="../ai/task-decomposition-for-ai-plans" class="internal" data-slug="ai/task-decomposition-for-ai-plans">task-decomposition-for-ai-plans</a>).</li>
+<li><strong>Multi-agent is a different axis, not a higher rung.</strong> Decomposing into <em>steps</em> is orthogonal to decomposing across <em>agents</em>. Default to a single agent or a single-process workflow; only go multi-agent when subtasks are genuinely independent and a single agent can’t reach quality (<a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/multi-agent-diminishing-returns.md" class="external">multi-agent-diminishing-returns<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>, <a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/multi-agent-coordination-topologies.md" class="external">multi-agent-coordination-topologies<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>).</li>
+</ul>
+<h2 id="related">Related<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#related" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/agentic-loop-examples.md" class="external">agentic-loop-examples<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — the worked-example companion: a minimal pseudocode skeleton for each of the 0–7 patterns enumerated here, plus the Ralph brute-force variant</li>
+<li><a href="../ai/task-decomposition-for-ai-plans" class="internal" data-slug="ai/task-decomposition-for-ai-plans">task-decomposition-for-ai-plans</a> — the plan-level sibling: five structural signals for <em>whether</em> to split, plus the over-decomposition failure mode</li>
+<li><a href="../ai/bottleneck-states-as-split-points" class="internal" data-slug="ai/bottleneck-states-as-split-points">bottleneck-states-as-split-points</a> — <em>where</em> a split or HITL gate should land once you’ve decided to decompose</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/agentic-ai-architecture.md" class="external">agentic-ai-architecture<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — the autonomous loop’s mechanics: tool registry, permissions, planning/execution separation</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/reliability-vs-capability-agents.md" class="external">reliability-vs-capability-agents<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — pass@1/pass@k/pass^k; the reliability case for keeping control flow in code on unattended tasks</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/ai-code-review-deterministic-agent-hybrid.md" class="external">ai-code-review-deterministic-agent-hybrid<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — worked instance of the “deterministic skeleton, LLM for judgment” hybrid</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/agent-pipeline-feature-creation.md" class="external">agent-pipeline-feature-creation<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — a concrete decomposed workflow (spec → plan → code → test → review) with typed contracts</li>
+<li><a href="../ai/hitl-progressive-autonomy" class="internal" data-slug="ai/hitl-progressive-autonomy">hitl-progressive-autonomy</a> — staged autonomy and trust calibration for the HITL-gate option</li>
+<li><a href="../ai/implementation-intentions-for-ai-plans" class="internal" data-slug="ai/implementation-intentions-for-ai-plans">implementation-intentions-for-ai-plans</a> — carrying a single run-time branch in a workflow without going fully agentic</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/multi-agent-diminishing-returns.md" class="external">multi-agent-diminishing-returns<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> / <a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/multi-agent-coordination-topologies.md" class="external">multi-agent-coordination-topologies<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — the orthogonal across-agents decomposition axis</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/debugging-agentic-failures.md" class="external">debugging-agentic-failures<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — why the autonomous loop’s opacity raises the debugging cost</li>
+</ul>
+<h2 id="sources">Sources<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#sources" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>Schluntz, E. &amp; Zhang, B. (2024). <em>Building Effective Agents</em> — Anthropic engineering, published 2024-12-19 (<a href="https://www.anthropic.com/engineering/building-effective-agents" class="external">anthropic.com/engineering/building-effective-agents<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>). Source of the workflow-vs-agent distinction and the five workflow patterns (prompt chaining, routing, parallelization, orchestrator-workers, evaluator-optimizer) plus the augmented-LLM building block. Authors, date, definitions, and all five pattern names verified against the live article 2026-06-17.</li>
+<li>Internal: the reliability primitives, decomposition signals, and hybrid examples cited above are developed in the linked vault notes; this note synthesizes them into the autonomy-gradient decision rather than re-deriving them.</li>
+</ul></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>Graph View</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc desktop-only"><button type="button" class="toc-header" aria-controls="toc-content" aria-expanded="true"><h3>Table of Contents</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="toc-content"><ul id="h9l23p" class="overflow"><li class="depth-0"><a href="#autonomous-agent-vs-decomposed-workflow" data-for="autonomous-agent-vs-decomposed-workflow">Autonomous Agent vs Decomposed Workflow</a></li><li class="depth-1"><a href="#the-core-axis--who-owns-the-control-flow" data-for="the-core-axis--who-owns-the-control-flow">The core axis — who owns the control flow</a></li><li class="depth-1"><a href="#the-option-spectrum-low--high-agent-autonomy" data-for="the-option-spectrum-low--high-agent-autonomy">The option spectrum (low → high agent autonomy)</a></li><li class="depth-1"><a href="#head-to-head-autonomous-agent-7-vs-decomposed-workflow-13" data-for="head-to-head-autonomous-agent-7-vs-decomposed-workflow-13">Head-to-head: autonomous agent (7) vs decomposed workflow (1–3)</a></li><li class="depth-1"><a href="#the-axes-that-actually-decide-it" data-for="the-axes-that-actually-decide-it">The axes that actually decide it</a></li><li class="depth-1"><a href="#intermediate-and-hybrid-moves-where-most-real-systems-land" data-for="intermediate-and-hybrid-moves-where-most-real-systems-land">Intermediate and hybrid moves (where most real systems land)</a></li><li class="depth-1"><a href="#when-the-autonomous-loop-is-the-right-call" data-for="when-the-autonomous-loop-is-the-right-call">When the autonomous loop is the right call</a></li><li class="depth-1"><a href="#counterargument-and-nuance" data-for="counterargument-and-nuance">Counterargument and nuance</a></li><li class="depth-1"><a href="#related" data-for="related">Related</a></li><li class="depth-1"><a href="#sources" data-for="sources">Sources</a></li><li class="overflow-end"></li></ul></div></div><div class="backlinks"><h3>Backlinks</h3><ul id="xacmdj" class="overflow"><li><a href="../ai/agent-sandbox-isolation-tiers" class="internal">Agent Sandbox Isolation Tiers</a></li><li><a href="../ai/continuous-agent-task-fit" class="internal">Continuous Agents — What the Clock Buys, and What It Doesn't</a></li><li><a href="../ai/" class="internal">AI — Index</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v4.4.1</a> © 2026</p><ul><li><a href="https://github.com/oxzo/brains">source</a></li><li><a href="/index.xml">rss</a></li></ul></footer></div></div></body><script type="application/javascript">function o(){let t=this.parentElement;t.classList.toggle("is-collapsed");let e=t.classList.contains("is-collapsed")?this.scrollHeight:t.scrollHeight;t.style.maxHeight=e+"px";let c=t,l=t.parentElement;for(;l;){if(!l.classList.contains("callout"))return;let i=l.classList.contains("is-collapsed")?l.scrollHeight:l.scrollHeight+c.scrollHeight;l.style.maxHeight=i+"px",c=l,l=l.parentElement}}function n(){let t=document.getElementsByClassName("callout is-collapsible");for(let s of t){let e=s.firstElementChild;if(!e)continue;e.addEventListener("click",o),window.addCleanup(()=>e.removeEventListener("click",o));let l=s.classList.contains("is-collapsed")?e.scrollHeight:s.scrollHeight;s.style.maxHeight=l+"px"}}document.addEventListener("nav",n);
+</script><script type="module">function f(i,e){if(!i)return;function r(o){o.target===this&&(o.preventDefault(),o.stopPropagation(),e())}function t(o){o.key.startsWith("Esc")&&(o.preventDefault(),e())}i?.addEventListener("click",r),window.addCleanup(()=>i?.removeEventListener("click",r)),document.addEventListener("keydown",t),window.addCleanup(()=>document.removeEventListener("keydown",t))}function y(i){for(;i.firstChild;)i.removeChild(i.firstChild)}var h=class{constructor(e,r){this.container=e;this.content=r;this.setupEventListeners(),this.setupNavigationControls(),this.resetTransform()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;cleanups=[];setupEventListeners(){let e=this.onMouseDown.bind(this),r=this.onMouseMove.bind(this),t=this.onMouseUp.bind(this),o=this.resetTransform.bind(this);this.container.addEventListener("mousedown",e),document.addEventListener("mousemove",r),document.addEventListener("mouseup",t),window.addEventListener("resize",o),this.cleanups.push(()=>this.container.removeEventListener("mousedown",e),()=>document.removeEventListener("mousemove",r),()=>document.removeEventListener("mouseup",t),()=>window.removeEventListener("resize",o))}cleanup(){for(let e of this.cleanups)e()}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let r=this.createButton("+",()=>this.zoom(.1)),t=this.createButton("-",()=>this.zoom(-.1)),o=this.createButton("Reset",()=>this.resetTransform());e.appendChild(t),e.appendChild(o),e.appendChild(r),this.container.appendChild(e)}createButton(e,r){let t=document.createElement("button");return t.textContent=e,t.className="mermaid-control-button",t.addEventListener("click",r),window.addCleanup(()=>t.removeEventListener("click",r)),t}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}zoom(e){let r=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),t=this.content.getBoundingClientRect(),o=t.width/2,n=t.height/2,c=r-this.scale;this.currentPan.x-=o*c,this.currentPan.y-=n*c,this.scale=r,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){this.scale=1;let e=this.content.querySelector("svg");this.currentPan={x:e.getBoundingClientRect().width/2,y:e.getBoundingClientRect().height/2},this.updateTransform()}},C=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],E;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;E||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let r=E.default,t=new WeakMap;for(let n of e)t.set(n,n.innerText);async function o(){for(let s of e){s.removeAttribute("data-processed");let a=t.get(s);a&&(s.innerHTML=a)}let n=C.reduce((s,a)=>(s[a]=window.getComputedStyle(document.documentElement).getPropertyValue(a),s),{}),c=document.documentElement.getAttribute("saved-theme")==="dark";r.initialize({startOnLoad:!1,securityLevel:"loose",theme:c?"dark":"base",themeVariables:{fontFamily:n["--codeFont"],primaryColor:n["--light"],primaryTextColor:n["--darkgray"],primaryBorderColor:n["--tertiary"],lineColor:n["--darkgray"],secondaryColor:n["--secondary"],tertiaryColor:n["--tertiary"],clusterBkg:n["--light"],edgeLabelBackground:n["--highlight"]}}),await r.run({nodes:e})}await o(),document.addEventListener("themechange",o),window.addCleanup(()=>document.removeEventListener("themechange",o));for(let n=0;n<e.length;n++){let v=function(){let g=l.querySelector("#mermaid-space"),m=l.querySelector(".mermaid-content");if(!m)return;y(m);let w=c.querySelector("svg").cloneNode(!0);m.appendChild(w),l.classList.add("active"),g.style.cursor="grab",u=new h(g,m)},M=function(){l.classList.remove("active"),u?.cleanup(),u=null},c=e[n],s=c.parentElement,a=s.querySelector(".clipboard-button"),d=s.querySelector(".expand-button"),p=window.getComputedStyle(a),L=a.offsetWidth+parseFloat(p.marginLeft||"0")+parseFloat(p.marginRight||"0");d.style.right=`calc(${L}px + 0.3rem)`,s.prepend(d);let l=s.querySelector("#mermaid-container");if(!l)return;let u=null;d.addEventListener("click",v),f(l,M),window.addCleanup(()=>{u?.cleanup(),d.removeEventListener("click",v)})}});
+</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript"></script><script src="../postscript.00b09a8c.js" type="module"></script></html>

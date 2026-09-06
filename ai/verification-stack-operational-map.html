@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en"><head><title>Verification Stack Operational Map · second-brain</title><meta charset="utf-8"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400;1,600&amp;family=Inter:wght@400;700&amp;family=JetBrains Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="synapse"/><meta property="og:title" content="Verification Stack Operational Map · second-brain"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Verification Stack Operational Map · second-brain"/><meta name="twitter:description" content="Verification Stack Operational Map What it is A single decision tree across the 38 per-task skills installed in this vault (verification, ideation, planning, review, cognitive-burden, ..."/><meta property="og:description" content="Verification Stack Operational Map What it is A single decision tree across the 38 per-task skills installed in this vault (verification, ideation, planning, review, cognitive-burden, ..."/><meta property="og:image:alt" content="Verification Stack Operational Map What it is A single decision tree across the 38 per-task skills installed in this vault (verification, ideation, planning, review, cognitive-burden, ..."/><meta property="twitter:domain" content="oxzo.github.io/brains-site"/><meta property="og:url" content="https://oxzo.github.io/brains-site/ai/verification-stack-operational-map"/><meta property="twitter:url" content="https://oxzo.github.io/brains-site/ai/verification-stack-operational-map"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="Verification Stack Operational Map What it is A single decision tree across the 38 per-task skills installed in this vault (verification, ideation, planning, review, cognitive-burden, ..."/><meta name="generator" content="Quartz"/><link href="../index.322b98b4.css" rel="stylesheet" type="text/css" spa-preserve/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  padding: 2rem;
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL2hvbWUvcnVubmVyL3dvcmsvYnJhaW5zL2JyYWlucy9zaXRlL3F1YXJ0ei9jb21wb25lbnRzL3N0eWxlcyIsInNvdXJjZXMiOlsibWVybWFpZC5pbmxpbmUuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTs7QUFHRjtFQUNFO0VBQ0E7O0FBR0Y7RUFDRTs7O0FBS0Y7RUFDRTtFQUNBOzs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7O0FBR0Y7RUFDRTs7QUFJRjtFQUNFO0VBQ0E7RUFDQSIsInNvdXJjZXNDb250ZW50IjpbIi5leHBhbmQtYnV0dG9uIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbG9hdDogcmlnaHQ7XG4gIHBhZGRpbmc6IDAuNHJlbTtcbiAgbWFyZ2luOiAwLjNyZW07XG4gIHJpZ2h0OiAwOyAvLyBOT1RFOiByaWdodCB3aWxsIGJlIHNldCBpbiBtZXJtYWlkLmlubGluZS50c1xuICBjb2xvcjogdmFyKC0tZ3JheSk7XG4gIGJvcmRlci1jb2xvcjogdmFyKC0tZGFyayk7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWxpZ2h0KTtcbiAgYm9yZGVyOiAxcHggc29saWQ7XG4gIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgb3BhY2l0eTogMDtcbiAgdHJhbnNpdGlvbjogMC4ycztcblxuICAmID4gc3ZnIHtcbiAgICBmaWxsOiB2YXIoLS1saWdodCk7XG4gICAgZmlsdGVyOiBjb250cmFzdCgwLjMpO1xuICB9XG5cbiAgJjpob3ZlciB7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIGJvcmRlci1jb2xvcjogdmFyKC0tc2Vjb25kYXJ5KTtcbiAgfVxuXG4gICY6Zm9jdXMge1xuICAgIG91dGxpbmU6IDA7XG4gIH1cbn1cblxucHJlIHtcbiAgJjpob3ZlciA+IC5leHBhbmQtYnV0dG9uIHtcbiAgICBvcGFjaXR5OiAxO1xuICAgIHRyYW5zaXRpb246IDAuMnM7XG4gIH1cbn1cblxuI21lcm1haWQtY29udGFpbmVyIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICBjb250YWluOiBsYXlvdXQ7XG4gIHotaW5kZXg6IDk5OTtcbiAgbGVmdDogMDtcbiAgdG9wOiAwO1xuICB3aWR0aDogMTAwdnc7XG4gIGhlaWdodDogMTAwdmg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGRpc3BsYXk6IG5vbmU7XG4gIGJhY2tkcm9wLWZpbHRlcjogYmx1cig0cHgpO1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuNSk7XG5cbiAgJi5hY3RpdmUge1xuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgfVxuXG4gICYgPiAjbWVybWFpZC1zcGFjZSB7XG4gICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1saWdodCk7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDUwJTtcbiAgICBsZWZ0OiA1MCU7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gICAgaGVpZ2h0OiA4MHZoO1xuICAgIHdpZHRoOiA4MHZ3O1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG5cbiAgICAmID4gLm1lcm1haWQtY29udGVudCB7XG4gICAgICBwYWRkaW5nOiAycmVtO1xuICAgICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgICAgdHJhbnNmb3JtLW9yaWdpbjogMCAwO1xuICAgICAgdHJhbnNpdGlvbjogdHJhbnNmb3JtIDAuMXMgZWFzZTtcbiAgICAgIG92ZXJmbG93OiB2aXNpYmxlO1xuICAgICAgbWluLWhlaWdodDogMjAwcHg7XG4gICAgICBtaW4td2lkdGg6IDIwMHB4O1xuXG4gICAgICBwcmUge1xuICAgICAgICBtYXJnaW46IDA7XG4gICAgICAgIGJvcmRlcjogbm9uZTtcbiAgICAgIH1cblxuICAgICAgc3ZnIHtcbiAgICAgICAgbWF4LXdpZHRoOiBub25lO1xuICAgICAgICBoZWlnaHQ6IGF1dG87XG4gICAgICB9XG4gICAgfVxuXG4gICAgJiA+IC5tZXJtYWlkLWNvbnRyb2xzIHtcbiAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgIGJvdHRvbTogMjBweDtcbiAgICAgIHJpZ2h0OiAyMHB4O1xuICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgIGdhcDogOHB4O1xuICAgICAgcGFkZGluZzogOHB4O1xuICAgICAgYmFja2dyb3VuZDogdmFyKC0tbGlnaHQpO1xuICAgICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICAgIGJvcmRlci1yYWRpdXM6IDZweDtcbiAgICAgIGJveC1zaGFkb3c6IDAgMnB4IDRweCByZ2JhKDAsIDAsIDAsIDAuMSk7XG4gICAgICB6LWluZGV4OiAyO1xuXG4gICAgICAubWVybWFpZC1jb250cm9sLWJ1dHRvbiB7XG4gICAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAgICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICAgICAgICB3aWR0aDogMzJweDtcbiAgICAgICAgaGVpZ2h0OiAzMnB4O1xuICAgICAgICBwYWRkaW5nOiAwO1xuICAgICAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodCk7XG4gICAgICAgIGNvbG9yOiB2YXIoLS1kYXJrKTtcbiAgICAgICAgYm9yZGVyLXJhZGl1czogNHB4O1xuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgICAgIGZvbnQtc2l6ZTogMTZweDtcbiAgICAgICAgZm9udC1mYW1pbHk6IHZhcigtLWJvZHlGb250KTtcbiAgICAgICAgdHJhbnNpdGlvbjogYWxsIDAuMnMgZWFzZTtcblxuICAgICAgICAmOmhvdmVyIHtcbiAgICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICB9XG5cbiAgICAgICAgJjphY3RpdmUge1xuICAgICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWSgxcHgpO1xuICAgICAgICB9XG5cbiAgICAgICAgLy8gU3R5bGUgdGhlIHJlc2V0IGJ1dHRvbiBkaWZmZXJlbnRseVxuICAgICAgICAmOm50aC1jaGlsZCgyKSB7XG4gICAgICAgICAgd2lkdGg6IGF1dG87XG4gICAgICAgICAgcGFkZGluZzogMCAxMnB4O1xuICAgICAgICAgIGZvbnQtc2l6ZTogMTRweDtcbiAgICAgICAgfVxuICAgICAgfVxuICAgIH1cbiAgfVxufVxuIl19 */</style><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" spa-preserve/><script src="../prescript.be9697b4.js" type="application/javascript" spa-preserve></script><script type="application/javascript" spa-preserve>const fetchData = fetch("../static/contentIndex.73890e1e.json").then(data => data.json())</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://oxzo.github.io/brains-site/index.xml"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://oxzo.github.io/brains-site/ai/verification-stack-operational-map-og-image.webp"/><meta property="og:image:url" content="https://oxzo.github.io/brains-site/ai/verification-stack-operational-map-og-image.webp"/><meta name="twitter:image" content="https://oxzo.github.io/brains-site/ai/verification-stack-operational-map-og-image.webp"/><meta property="og:image:type" content="image/.webp"/></head><body data-slug="ai/verification-stack-operational-map"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">synapse</a></h2><div class="spacer mobile-only"></div><div style="display: flex; flex-direction: row; flex-wrap: nowrap; gap: 1rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button"><p>Search</p><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Search for something" placeholder="Search for something"/><div class="search-layout" data-preview="true"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Dark mode"><title>Dark mode</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Light mode"><title>Light mode</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div></div><div class="explorer" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a,b)=>!a.isFolder&amp;&amp;!b.isFolder||a.isFolder&amp;&amp;b.isFolder?a.displayName.localeCompare(b.displayName,void 0,{numeric:!0,sensitivity:\&quot;base\&quot;}):!a.isFolder&amp;&amp;b.isFolder?1:-1&quot;,&quot;filterFn&quot;:&quot;node=>node.slugSegment!==\&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;node=>node&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-content"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>Explorer</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="explorer-content" aria-expanded="false"><ul class="explorer-ul overflow" id="0x8mfk"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#"></a></li></template><template id="template-folder"><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../ai/">AI — Index</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>Verification Stack Operational Map</a></div></nav><h1 class="article-title">Verification Stack Operational Map</h1><p show-comma="true" class="content-meta"><time datetime="2026-07-19T00:00:00.000Z">Jul 19, 2026</time><span>23 min read</span></p><ul class="tags"><li><a href="../tags/ai" class="internal tag-link">ai</a></li><li><a href="../tags/verification" class="internal tag-link">verification</a></li><li><a href="../tags/workflow" class="internal tag-link">workflow</a></li><li><a href="../tags/skills" class="internal tag-link">skills</a></li><li><a href="../tags/methodology" class="internal tag-link">methodology</a></li><li><a href="../tags/publish" class="internal tag-link">publish</a></li></ul></div></div><article class="popover-hint"><h1 id="verification-stack-operational-map">Verification Stack Operational Map<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#verification-stack-operational-map" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h2 id="what-it-is">What it is<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#what-it-is" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>A single decision tree across the 38 per-task skills installed in this vault (verification, ideation, planning, review, cognitive-burden, authoring-quality, valuation, and corpus-maintenance) — when to run which, in what order, what each catches the others miss — plus the meta-router <code>/which-skill</code> that selects among them. The skills exist; the integrated picture didn’t.</p>
+<p>The 38 per-task skills (as of 2026-06-08, source: <code>.claude/skills/</code> directory): <code>ai-diff-judgment</code>, <code>assumption-reversal</code>, <code>bias-scan-ai</code>, <code>bias-scan-human</code>, <code>bias-scan-prompt</code>, <code>branch-resolve</code>, <code>calibration-loop</code>, <code>claim-function-scan</code>, <code>clarify-first</code>, <code>commitment-ledger</code>, <code>context-budget-scan</code>, <code>contradiction-scan</code>, <code>density-scan</code>, <code>disagree</code>, <code>falsifiability-scan</code>, <code>grill</code>, <code>handoff</code>, <code>intent-check</code>, <code>intent-fulfilment-check</code>, <code>lean-review</code>, <code>option-premium-check</code>, <code>persona-cluster-check</code>, <code>plan-options</code>, <code>plan-split-scan</code>, <code>red-team</code>, <code>reference-class</code>, <code>retrospective</code>, <code>reviewers-map</code>, <code>scamper</code>, <code>second-order</code>, <code>skill-quality-audit</code>, <code>skill-trigger-audit</code>, <code>staleness-decay-scan</code>, <code>starburst</code>, <code>structural-trace</code>, <code>task-decompose</code>, <code>whittle-scan</code>, <code>write-a-skill</code>.</p>
+<p>The 39th, <code>/which-skill</code>, sits outside the per-task taxonomy as a meta-router — given a request, it ranks 1–3 candidate skills with quoted trigger phrases and rejected near-misses. This map and <code>/which-skill</code> are complementary: the map is the static decision tree (read top-down to find an entry skill); <code>/which-skill</code> is the dynamic counterpart (describe the situation, get routed). At 38 per-task skills the catalog has outgrown casual scanning — in practice <code>/which-skill</code> is increasingly the working entry point, and this map is the auditable reference it routes against.</p>
+<p>Revision history: first revision mapped 15 skills; the 2026-05-10 revision added <code>claim-function-scan</code>, <code>density-scan</code>, <code>persona-cluster-check</code>, <code>skill-trigger-audit</code>, and the <code>/which-skill</code> meta-router (19+1). This revision (2026-06-05) adds fifteen: the work-cycle set (<code>intent-check</code>, <code>plan-options</code>, <code>plan-split-scan</code>, <code>branch-resolve</code>, <code>task-decompose</code>, <code>intent-fulfilment-check</code>, <code>retrospective</code>), the request-side <code>clarify-first</code>, the code-review pair (<code>lean-review</code>, <code>ai-diff-judgment</code>), the token-economy <code>context-budget-scan</code>, the valuation pair (<code>whittle-scan</code>, <code>option-premium-check</code>), and the corpus-maintenance pair (<code>contradiction-scan</code>, <code>staleness-decay-scan</code>). The taxonomy grows from seven clusters to twelve. A same-day addendum (2026-06-05) adds <code>skill-quality-audit</code> (35+1) — the body/structure complement to <code>skill-trigger-audit</code>, built from the deep-research note <a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/skill-quality-criteria.md" class="external">skill-quality-criteria<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>. A further revision (2026-06-08) adds three more, each folding into an existing cluster: <code>grill</code> (interactive plan interrogation → plan &amp; decomposition), <code>handoff</code> (next-agent continuation → cognitive-burden, beside <code>commitment-ledger</code>), and <code>write-a-skill</code> (the generative front of the skill-authoring trio → authoring-side). 38+1. The twelve clusters absorb all three — no new top-level mode.</p>
+<h2 id="why-this-exists">Why this exists<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#why-this-exists" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Two narrower maps already cover part of the surface:</p>
+<ul>
+<li><a href="../ai/bias-aware-verification-protocol" class="internal" data-slug="ai/bias-aware-verification-protocol">bias-aware-verification-protocol</a> — four-pass framework (<code>/bias-scan-prompt</code> → <code>/bias-scan-ai</code> → <code>/disagree</code> → <code>/red-team</code>) plus the orthogonal <code>/bias-scan-human</code>. <strong>Five of 38.</strong></li>
+<li><a href="../ai/cognitive-burden-of-ai-use" class="internal" data-slug="ai/cognitive-burden-of-ai-use">cognitive-burden-of-ai-use</a> — three cognitive-burden counters (<code>/reviewers-map</code>, <code>/commitment-ledger</code>, <code>/calibration-loop</code>). <strong>Three of 38.</strong></li>
+<li><a href="../ai/intent-to-retrospective-loop" class="internal" data-slug="ai/intent-to-retrospective-loop">intent-to-retrospective-loop</a> — the develop-and-verify loop across the seven work-cycle skills. <strong>Seven of 38.</strong></li>
+</ul>
+<p>Together: fifteen. The other twenty-three sit outside those anchors and have no shared decision surface. The existing notes also do not answer the cross-cutting question: <em>which skill fits this exact moment?</em></p>
+<p>The cost of not having this map is invocation-surface friction. Per <a href="../ai/cognitive-burden-of-ai-use" class="internal" data-slug="ai/cognitive-burden-of-ai-use">cognitive-burden-of-ai-use</a> (Lee et al., CHI 2025), the deliberate act of <em>choosing</em> to run a verification step is where verification dies. A decision tree replaces “remember which skill” with “what stage am I in.”</p>
+<h2 id="the-skills-by-purpose">The skills, by purpose<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-skills-by-purpose" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Twelve functional clusters across the 38 per-task skills. A per-task skill belongs to exactly one — the cluster captures <em>what mode the skill puts you in</em>, not what topics it can touch. <code>/which-skill</code> is the meta-router and is described separately below; it does not belong to a cluster because it does not put you in a working mode — it picks one for you.</p>
+<h3 id="pre-action-clarification--request-side">Pre-action clarification — request-side<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#pre-action-clarification--request-side" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>The only cluster that runs before the task itself is settled. Single member by design — it has no neighbor in invocation shape.</p>
+<ul>
+<li><strong><code>/clarify-first</code></strong> — research-then-ground-then-ask protocol on a vague but load-bearing request: mine the conversation and codebase first, then ask multiple-choice questions where every option traces to a real finding. Counters ungrounded clarification (options confabulated from training-data priors).</li>
+</ul>
+<h3 id="generative--pre-commitment-ideation">Generative — pre-commitment ideation<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#generative--pre-commitment-ideation" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Used before you have committed to a frame, an option set, or a problem definition. Output is divergent: alternatives, questions, frame breaks. None of these evaluate or select.</p>
+<ul>
+<li><strong><code>/assumption-reversal</code></strong> — surface 5 unstated assumptions in a problem; invert each as a one-line design brief. Frame attack.</li>
+<li><strong><code>/scamper</code></strong> — Substitute / Combine / Adapt / Modify / Put-to-another-use / Eliminate / Rearrange — structured divergent variants on a candidate idea.</li>
+<li><strong><code>/starburst</code></strong> — Who / What / Where / When / Why / How questions around an idea. Pre-commitment gap analysis.</li>
+</ul>
+<h3 id="intent-anchoring--loop-closure--the-cycles-bookends">Intent anchoring &amp; loop closure — the cycle’s bookends<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#intent-anchoring--loop-closure--the-cycles-bookends" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Bracket a work cycle: audit the goal before work starts, check the output against it after, convert the cycle into lessons. See <a href="../ai/intent-to-retrospective-loop" class="internal" data-slug="ai/intent-to-retrospective-loop">intent-to-retrospective-loop</a>.</p>
+<ul>
+<li><strong><code>/intent-check</code></strong> — four-axis test (form, completion-falsifiable, navigable, altitude) on a stated intent, goal, or objective. Counters theatrical intent — a goal too vague to anchor anything.</li>
+<li><strong><code>/intent-fulfilment-check</code></strong> — decompose the originating intent into clauses; mark each served / partial / substituted / unaddressed against the produced output; flag scope inflation. Counters silent goal-substitution. Requires both an intent and an output — route to <code>/intent-check</code> if the intent is missing.</li>
+<li><strong><code>/retrospective</code></strong> — convert a completed cycle into transferable lessons plus a resulting (process-vs-outcome) verdict; auto-feeds the calibration log.</li>
+</ul>
+<h3 id="plan--decomposition--before-execution">Plan &amp; decomposition — before execution<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#plan--decomposition--before-execution" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Operate on plans, not artifacts. Two generative (produce the plan), two diagnostic (audit it), one interactive (interrogate it).</p>
+<ul>
+<li><strong><code>/plan-options</code></strong> — generate 2–3 genuinely different candidate plans, each traced clause-by-clause to the intent, then collapse to one with the choice reason recorded. Counters median-collapse. Skips (and says so) on trivial tasks.</li>
+<li><strong><code>/task-decompose</code></strong> — decompose the chosen plan into tasks with a done-criterion + interface contract + risk-ordering at generation time. Refuses on routine work.</li>
+<li><strong><code>/plan-split-scan</code></strong> — scan a draft multi-step plan for five structural signals (concern count, state-carry depth, decision branches, verification seams, reversibility boundary); recommend split / consolidate / leave-alone. Executor-side load axis.</li>
+<li><strong><code>/branch-resolve</code></strong> — operationalize each unresolved decision branch: resolve up front, split at the determinant, or express as an IF-trigger-THEN-response implementation intention; hard split on branches with destructive downstream. Counters branch-collapse.</li>
+<li><strong><code>/grill</code></strong> — sustained one-question-at-a-time interview that walks an in-progress plan’s decision tree in dependency order, attaches a recommended answer to each question, and explores the codebase to settle a point rather than asking. Produces a resolved-decisions ledger, not an execution. The interactive member — distinct from the static scans, which read a finished draft.</li>
+</ul>
+<h3 id="detection-scans--bias-fingerprints-on-a-specific-artifact">Detection scans — bias fingerprints on a specific artifact<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#detection-scans--bias-fingerprints-on-a-specific-artifact" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Each scans one axis of bias on one target.</p>
+<ul>
+<li><strong><code>/bias-scan-prompt</code></strong> — input-side framing in a prompt about to be sent. Pass 1 of the verification protocol.</li>
+<li><strong><code>/bias-scan-ai</code></strong> — output-side fingerprints in an AI-drafted artifact. Pass 2; full seven-check sweep, backed by <a href="../ai/ai-output-bias-fingerprints" class="internal" data-slug="ai/ai-output-bias-fingerprints">ai-output-bias-fingerprints</a>.</li>
+<li><strong><code>/bias-scan-human</code></strong> — full cognitive-bias catalog (sunk cost, confirmation, FAE, narrative fallacy, planning fallacy, anchoring, etc.) on a human-authored artifact. Orthogonal to the four-pass AI protocol.</li>
+</ul>
+<h3 id="operationalization--claim-triage-sharpening-numeric-grounding">Operationalization — claim triage, sharpening, numeric grounding<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#operationalization--claim-triage-sharpening-numeric-grounding" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Take a draft and improve the testability or grounding of specific elements within it. Tag-and-fix shape, not whole-artifact verdict.</p>
+<ul>
+<li><strong><code>/claim-function-scan</code></strong> — triage claims into empirical / non-empirical / bundled. The actionable failure mode is the bundled case: an empirical claim wrapped in an identity or coordination frame, immune to challenge until split. Triage pass before <code>/falsifiability-scan</code> or <code>/reviewers-map</code> when claims may be bundled.</li>
+<li><strong><code>/falsifiability-scan</code></strong> — categorize claims by testability (<code>[OP]</code> / <code>[DEFER]</code> / <code>[VAGUE]</code> / <code>[SEAL]</code> / <code>[PROB]</code> / <code>[DEFN]</code>); operationalization checklist for the ones worth sharpening. Backed by <a href="../ai/falsifiability-claim-fingerprints" class="internal" data-slug="ai/falsifiability-claim-fingerprints">falsifiability-claim-fingerprints</a>.</li>
+<li><strong><code>/reference-class</code></strong> — apply outside-view forecasting to numeric estimates in a draft (durations, costs, sizes, percentages). Tag inside-view estimates against base-rate distributions. Backed by <a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/reference-class-forecasting.md" class="external">reference-class-forecasting<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>.</li>
+</ul>
+<h3 id="adversarial--post-draft">Adversarial — post-draft<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#adversarial--post-draft" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Run <em>after</em> a draft exists. Goal is to find it wrong, not improve it from inside.</p>
+<ul>
+<li><strong><code>/disagree</code></strong> — inversion drill on the most recent substantive assistant response. Argue the opposite. The variance under reframing is the calibration signal. Pass 3.</li>
+<li><strong><code>/red-team</code></strong> — adversarial critique of an artifact. Returns strongest objections, pre-mortem, weakest load-bearing claim. Pass 4.</li>
+</ul>
+<h3 id="code-review--diffs-not-prose">Code review — diffs, not prose<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#code-review--diffs-not-prose" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>The only cluster whose target is code. Pick by what question you’re asking, not by diff size alone.</p>
+<ul>
+<li><strong><code>/lean-review</code></strong> — token-frugal correctness review of the current diff: scope with <code>--stat</code> first, read only changed hunks, bounded <code>severity · file:line</code> findings. Provenance-irrelevant. The cheap default.</li>
+<li><strong><code>/ai-diff-judgment</code></strong> — post-green-CI merge judgment on an AI-authored diff: recover the originating intent, verify it clause-by-clause, read the test diff before the code diff, hunt spec drift / hollow tests / test tampering; altitude-ordered verdict ending in a net-improvement decision. Counters automation-bias merging.</li>
+</ul>
+<p>Built-in neighbors (not vault skills, but in the same routing space): <code>/code-review</code> (maximum-coverage correctness, effort-tiered) and <code>/verify</code> (run the app and observe behavior — the empirical complement both vault skills explicitly defer to).</p>
+<h3 id="forward-and-structural--action--system-tracing">Forward and structural — action / system tracing<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#forward-and-structural--action--system-tracing" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>These don’t scan an artifact for bias — they trace a <em>behavior</em> or <em>action</em> through time and structure.</p>
+<ul>
+<li><strong><code>/second-order</code></strong> — neutral forward simulation of a proposed action’s consequences across three orders, sign-neutral. Pairs with <code>/red-team</code> (which weaponizes the unfavorable branches).</li>
+<li><strong><code>/structural-trace</code></strong> — stocks-flows-feedback diagnosis of a recurring pattern. Senge archetypes, Meadows leverage points. Diagnostic, not prescriptive. Counters dispositional explanation (blaming actors when structure is the cause).</li>
+</ul>
+<h3 id="valuation--queues-options-commitments">Valuation — queues, options, commitments<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#valuation--queues-options-commitments" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Price what the other clusters don’t: the cost of <em>not</em> acting, and the flexibility a choice destroys.</p>
+<ul>
+<li><strong><code>/whittle-scan</code></strong> — surface queue items whose cost-of-inaction is invisible per-week (decay valuation): dated commitments and forecast-resolution-dates rotting quietly.</li>
+<li><strong><code>/option-premium-check</code></strong> — sign a proposed action or deferred-item list as flexibility-creating / flexibility-burning / dominant / optionality-hoarding; flags one-way doors with equal-payoff two-way alternatives, and deferral sets whose carrying cost exceeds the preserved option’s value.</li>
+</ul>
+<h3 id="cognitive-burden-counters--per-output--per-session--multi-session">Cognitive-burden counters — per-output / per-session / multi-session<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#cognitive-burden-counters--per-output--per-session--multi-session" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Address the <em>load</em> of verification and continuation, not the verification itself. Each operates at a different granularity.</p>
+<ul>
+<li><strong><code>/reviewers-map</code></strong> — per-output verification map: load-bearing claims tagged <code>[V]</code> / <code>[U]</code> / <code>[I]</code>, least-confident spots, five-minute check list, what was not done. Lighter than <code>/bias-scan-ai</code>. Counters cognitive decoupling.</li>
+<li><strong><code>/commitment-ledger</code></strong> — per-session closeout: files touched, claims accepted without verification, decisions, deferrals, what to check first tomorrow. Counters accountability without authorship. Optionally appends to <a href="https://github.com/oxzo/brains/tree/main/journal/commitments-log.md" class="external">journal/commitments-log<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>.</li>
+<li><strong><code>/handoff</code></strong> — per-session continuation doc for the <em>next</em> agent or session: compacts the conversation into carry-forward state (decisions, open threads, a mandatory suggested-skills routing section), dedup-by-reference, written to the OS temp dir out of version control. The next-agent-facing counterpart to <code>/commitment-ledger</code> (human-audit-facing). Counters continuation amnesia across a context boundary.</li>
+<li><strong><code>/calibration-loop</code></strong> — multi-session loop. <code>record</code> captures a binary prediction with resolution criterion; <code>resolve</code> closes predictions whose deadline has passed; <code>review</code> reports Brier score and calibration buckets. Reads/writes <a href="https://github.com/oxzo/brains/tree/main/journal/calibration-log.md" class="external">journal/calibration-log<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>. Counters uncalibrated confidence.</li>
+</ul>
+<h3 id="authoring-side-scans--prose-form-invocation-surface-token-budget">Authoring-side scans — prose form, invocation surface, token budget<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#authoring-side-scans--prose-form-invocation-surface-token-budget" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>These mostly don’t verify the <em>content</em> of an artifact — they audit the <em>form</em>, the <em>invocation surface</em>, and the <em>budget</em>. The cluster also holds one generator (<code>/write-a-skill</code>) that produces a skill the two audits then check. Each targets an axis where a fluent-looking artifact silently fails to do its job.</p>
+<ul>
+<li><strong><code>/density-scan</code></strong> — information-density failure modes in prose: surprisal spikes, sentence-length monotony, propositional density mismatched to channel, long-distance dependencies, the “shorter is better” compression trap. Reader-comprehension axis.</li>
+<li><strong><code>/context-budget-scan</code></strong> — token-economy scan in three modes (artifact / architecture / session): cache-unfriendly ordering, lost-in-middle placement, tool-output bloat, missing compaction strategy. Explicitly a different axis from <code>/density-scan</code> — what the artifact costs the <em>model</em>, not the reader.</li>
+<li><strong><code>/persona-cluster-check</code></strong> — for “You are an expert X” primes, surface the cluster of register, defaults, and biases the persona invokes from training data, then check fit to the actual job.</li>
+<li><strong><code>/write-a-skill</code></strong> — generator for a new SKILL.md from a capability description: produces the frontmatter (third-person what+when description), body structure, and output contract. The generative front of the skill-authoring trio — feed its output to <code>/skill-trigger-audit</code> then <code>/skill-quality-audit</code> before publishing.</li>
+<li><strong><code>/skill-trigger-audit</code></strong> — audit a SKILL.md description for retrieval-match quality (will the skill fire on the queries it was built for?).</li>
+<li><strong><code>/skill-quality-audit</code></strong> — deep structural audit of a SKILL.md body and metadata: description↔body truthfulness, procedure executability, output contract with a reachable clean verdict, catalog-sync integrity. The complement of <code>/skill-trigger-audit</code> — that one asks “will it fire”, this one asks “when it fires, is it built to do its job”.</li>
+</ul>
+<h3 id="corpus-maintenance--cross-note-scans">Corpus maintenance — cross-note scans<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#corpus-maintenance--cross-note-scans" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>The only skills that ingest more than one note and reason over the set. They counter the silent decay an append-mostly vault accumulates (see <a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/knowledge-base-entropy.md" class="external">knowledge-base-entropy<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>). Report-only: ledger or action table, never a rewrite.</p>
+<ul>
+<li><strong><code>/contradiction-scan</code></strong> — surface note-pairs that silently disagree about the same empirical claim (distributed inconsistency); emits a conflict ledger with both claims quoted.</li>
+<li><strong><code>/staleness-decay-scan</code></strong> — surface time-sensitive notes whose perishable claims have aged past a volatility-adjusted half-life; ranked re-verify / re-date / archive / promote-durable table. Owns perishable <em>static</em> facts; dated <em>commitments</em> go to <code>/whittle-scan</code>.</li>
+</ul>
+<h3 id="meta-router--selection-across-the-catalog">Meta-router — selection across the catalog<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#meta-router--selection-across-the-catalog" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Outside the per-task taxonomy. Operates one level above: given a request, returns the per-task skill(s) to invoke.</p>
+<ul>
+<li><strong><code>/which-skill</code></strong> — given a situation, artifact, or intent, ranks 1–3 candidate skills with quoted trigger phrases, one-line rationales, and what each won’t do — plus 1–2 rejected near-misses. Returns a “no skill fits” verdict when honest.</li>
+</ul>
+<h2 id="the-decision-tree">The decision tree<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-decision-tree" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Read top-down. The first matching trigger is the right entry skill. Multiple matches in a phase mean the skills compose — see Common chains below.</p>
+<h3 id="request-phase--before-the-task-is-settled">Request phase — before the task is settled<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#request-phase--before-the-task-is-settled" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Trigger</th><th>Skill</th></tr></thead><tbody><tr><td>Vague but load-bearing request; proceeding from base knowledge risks wrong-direction work</td><td><code>/clarify-first</code></td></tr></tbody></table></div>
+<h3 id="pre-commitment-phase">Pre-commitment phase<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#pre-commitment-phase" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Trigger</th><th>Skill</th></tr></thead><tbody><tr><td>Authoring or revising the goal/intent the work will be evaluated against</td><td><code>/intent-check</code></td></tr><tr><td>Frame feels stuck; current option set was inherited not generated</td><td><code>/assumption-reversal</code></td></tr><tr><td>Have one candidate idea, want structured variants</td><td><code>/scamper</code></td></tr><tr><td>Have a candidate idea, want to surface what I do not know</td><td><code>/starburst</code></td></tr><tr><td>Have a draft prompt for a model, will act on the output</td><td><code>/bias-scan-prompt</code></td></tr><tr><td>Proposed action is a one-way door, or reversibility is unclear</td><td><code>/option-premium-check</code></td></tr></tbody></table></div>
+<h3 id="planning-phase">Planning phase<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#planning-phase" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Trigger</th><th>Skill</th></tr></thead><tbody><tr><td>Non-trivial task, intent set, first plan feels like the obvious one</td><td><code>/plan-options</code></td></tr><tr><td>Draft multi-step plan exists, about to issue it to an agent or session</td><td><code>/plan-split-scan</code></td></tr><tr><td>Plan contains “if X then Y otherwise Z” branches the executor would evaluate at run time</td><td><code>/branch-resolve</code></td></tr><tr><td>In-progress plan or design; want to interrogate it interactively before building</td><td><code>/grill</code></td></tr><tr><td>Chosen plan needs to become tasks with done-criteria and interface contracts</td><td><code>/task-decompose</code></td></tr></tbody></table></div>
+<h3 id="drafting-phase">Drafting phase<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#drafting-phase" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>No skills run <em>during</em> drafting. Drafting produces the artifact the next-phase skills evaluate.</p>
+<h3 id="pre-commit--ai-drafted-artifact">Pre-commit — AI-drafted artifact<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#pre-commit--ai-drafted-artifact" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Trigger</th><th>Skill</th></tr></thead><tbody><tr><td>Quick verification map; reviewer needs a target list</td><td><code>/reviewers-map</code></td></tr><tr><td>Full output-side bias sweep, seven fingerprints</td><td><code>/bias-scan-ai</code></td></tr><tr><td>Numeric estimates in the draft</td><td><code>/reference-class</code></td></tr><tr><td>Load-bearing claims in prose</td><td><code>/falsifiability-scan</code></td></tr><tr><td>Mixes empirical and organizational claims; some seem immune to challenge</td><td><code>/claim-function-scan</code></td></tr><tr><td>High-stakes; want adversarial pass on the artifact</td><td><code>/red-team</code></td></tr><tr><td>Last assistant response is load-bearing; want inversion signal</td><td><code>/disagree</code></td></tr><tr><td>Prose where comprehension cost matters (notes, specs, instructions)</td><td><code>/density-scan</code></td></tr></tbody></table></div>
+<h3 id="pre-commit--human-authored-artifact">Pre-commit — human-authored artifact<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#pre-commit--human-authored-artifact" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Trigger</th><th>Skill</th></tr></thead><tbody><tr><td>Cognitive-bias catalog scan (sunk cost, FAE, planning fallacy, anchoring)</td><td><code>/bias-scan-human</code></td></tr><tr><td>Numeric estimates in the draft</td><td><code>/reference-class</code></td></tr><tr><td>Load-bearing claims in prose</td><td><code>/falsifiability-scan</code></td></tr><tr><td>Mixes empirical and organizational/cultural framing</td><td><code>/claim-function-scan</code></td></tr><tr><td>High-stakes; want adversarial pass on the artifact</td><td><code>/red-team</code></td></tr><tr><td>Prose where comprehension cost matters (notes, specs, instructions)</td><td><code>/density-scan</code></td></tr></tbody></table></div>
+<p>If a draft is mixed (you drafted, AI edited; or AI drafted, you edited), run both <code>/bias-scan-ai</code> and <code>/bias-scan-human</code>. The orthogonality holds — they ask different questions and the findings rarely duplicate.</p>
+<h3 id="code-review--the-artifact-is-a-diff">Code review — the artifact is a diff<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#code-review--the-artifact-is-a-diff" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Trigger</th><th>Skill</th></tr></thead><tbody><tr><td>Correctness review without burning context; provenance irrelevant</td><td><code>/lean-review</code></td></tr><tr><td>AI/agent wrote the change, CI is green, the question is merge-worthiness</td><td><code>/ai-diff-judgment</code></td></tr><tr><td>Maximum coverage, willing to spend tokens; uncertain-but-possible findings wanted</td><td>built-in <code>/code-review</code> (high/max)</td></tr><tr><td>Need to <em>run</em> the change and observe behavior</td><td>built-in <code>/verify</code></td></tr></tbody></table></div>
+<h3 id="action--system-phase">Action / system phase<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#action--system-phase" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Trigger</th><th>Skill</th></tr></thead><tbody><tr><td>Considering an action; first-order effect is the only one examined</td><td><code>/second-order</code></td></tr><tr><td>Recurring pattern; symptom keeps recurring despite point fixes</td><td><code>/structural-trace</code></td></tr></tbody></table></div>
+<h3 id="cycle-close--output-exists-before-declaring-done">Cycle close — output exists, before declaring done<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#cycle-close--output-exists-before-declaring-done" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Trigger</th><th>Skill</th></tr></thead><tbody><tr><td>Does the output actually serve the intent it started from?</td><td><code>/intent-fulfilment-check</code></td></tr><tr><td>Cycle complete; want transferable lessons + process-vs-outcome verdict</td><td><code>/retrospective</code></td></tr></tbody></table></div>
+<h3 id="authoring--prompts-skills-prompt-shaped-artifacts">Authoring — prompts, skills, prompt-shaped artifacts<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#authoring--prompts-skills-prompt-shaped-artifacts" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Trigger</th><th>Skill</th></tr></thead><tbody><tr><td>Prompt about to be sent or baked into a spec / subagent brief</td><td><code>/bias-scan-prompt</code></td></tr><tr><td>Persona prime (“You are an expert X”) in a prompt or skill body</td><td><code>/persona-cluster-check</code></td></tr><tr><td>Creating a new skill from a capability description</td><td><code>/write-a-skill</code></td></tr><tr><td>Publishing a new skill, or a skill is misfiring</td><td><code>/skill-trigger-audit</code></td></tr><tr><td>Skill fires fine but its output is weak, or pre-publish body review</td><td><code>/skill-quality-audit</code></td></tr><tr><td>Prose density on a published prompt or skill body</td><td><code>/density-scan</code></td></tr><tr><td>Prompt / CLAUDE.md / agent design / session feels token-bloated</td><td><code>/context-budget-scan</code></td></tr></tbody></table></div>
+<h3 id="queue--portfolio-level">Queue &amp; portfolio level<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#queue--portfolio-level" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Trigger</th><th>Skill</th></tr></thead><tbody><tr><td>Backlog items whose cost-of-inaction decays invisibly per-week</td><td><code>/whittle-scan</code></td></tr><tr><td>Deferred-item list sitting unresolved long enough to feel stale</td><td><code>/option-premium-check</code></td></tr></tbody></table></div>
+<h3 id="corpus-level--the-vault-itself">Corpus level — the vault itself<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#corpus-level--the-vault-itself" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Trigger</th><th>Skill</th></tr></thead><tbody><tr><td>Aging topic cluster; do its notes silently disagree? Also before integrating a new note into a dense cluster</td><td><code>/contradiction-scan</code></td></tr><tr><td>Fast-moving domain shifted; which dated claims still read as current?</td><td><code>/staleness-decay-scan</code></td></tr></tbody></table></div>
+<h3 id="session-level">Session-level<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#session-level" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Trigger</th><th>Skill</th></tr></thead><tbody><tr><td>Closing a session that touched files or made decisions</td><td><code>/commitment-ledger</code></td></tr><tr><td>Session getting long or compaction imminent; handing work to the next agent/session</td><td><code>/handoff</code></td></tr><tr><td>Recording a falsifiable prediction with a deadline</td><td><code>/calibration-loop record</code></td></tr><tr><td>A logged prediction’s deadline has passed</td><td><code>/calibration-loop resolve</code></td></tr><tr><td>Want Brier score / calibration patterns to date</td><td><code>/calibration-loop review</code></td></tr></tbody></table></div>
+<h2 id="common-chains--in-what-order">Common chains — in what order<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#common-chains--in-what-order" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Eight chains cover most non-trivial work. Skills are listed in execution order. Stop early if the artifact is exploratory; run the full chain only at high stakes.</p>
+<h3 id="chain-1--pre-commit-an-ai-drafted-artifact">Chain 1 — Pre-commit an AI-drafted artifact<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#chain-1--pre-commit-an-ai-drafted-artifact" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<pre><code>/bias-scan-prompt  →  drafting  →  /reviewers-map  →  /bias-scan-ai  →  /red-team  →  /calibration-loop record
+   (Pass 1)                         (light, fast)      (deep, 7-check)   (if high-stakes)   (if a prediction)
+</code></pre>
+<p><code>/reviewers-map</code> is the cheap default; <code>/bias-scan-ai</code> is the deep dive. Don’t run both by default — pick by stakes. Add <code>/falsifiability-scan</code> if the draft has load-bearing prose claims; add <code>/reference-class</code> if it has numeric estimates.</p>
+<h3 id="chain-2--pre-commit-a-human-authored-synthesis">Chain 2 — Pre-commit a human-authored synthesis<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#chain-2--pre-commit-a-human-authored-synthesis" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<pre><code>drafting  →  /bias-scan-human  →  /claim-function-scan (if mixed)  →  /falsifiability-scan  →  /reference-class (if numbers)  →  /red-team
+</code></pre>
+<p><code>/bias-scan-human</code> covers the cognitive-bias side; <code>/claim-function-scan</code> triages bundled claims before they reach the next pass; <code>/falsifiability-scan</code> and <code>/reference-class</code> cover the operational-shape side; <code>/red-team</code> covers the adversarial side. Skip <code>/claim-function-scan</code> if the artifact is purely technical or purely narrative.</p>
+<h3 id="chain-3--pre-commit-a-decision">Chain 3 — Pre-commit a decision<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#chain-3--pre-commit-a-decision" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<pre><code>/starburst  →  /second-order  →  /option-premium-check (if one-way door)  →  /red-team  →  /calibration-loop record
+  (gaps)        (consequences)     (what flexibility it burns)               (objections)    (close the loop)
+</code></pre>
+<p><code>/starburst</code> surfaces what you do not know; <code>/second-order</code> traces the cascade neutrally; <code>/option-premium-check</code> prices the reversibility; <code>/red-team</code> weaponizes the unfavorable branches; <code>/calibration-loop record</code> makes the decision a falsifiable prediction.</p>
+<h3 id="chain-4--diagnose-a-recurring-problem">Chain 4 — Diagnose a recurring problem<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#chain-4--diagnose-a-recurring-problem" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<pre><code>/structural-trace  →  /second-order
+  (diagnose the         (test the proposed action through the
+   standing system)     structure just diagnosed)
+</code></pre>
+<p>Don’t reverse the order. You need the structure first, or the action’s consequences are traced through the wrong system.</p>
+<h3 id="chain-5--break-a-stuck-frame">Chain 5 — Break a stuck frame<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#chain-5--break-a-stuck-frame" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<pre><code>/assumption-reversal  →  /scamper (or) /starburst
+  (frame attack)         (variants)     (gaps)
+</code></pre>
+<p>After <code>/assumption-reversal</code>, pick whichever next step matches what you have less of — options or questions.</p>
+<h3 id="chain-6--authoring-quality-on-a-prompt-or-skill-artifact">Chain 6 — Authoring quality on a prompt or skill artifact<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#chain-6--authoring-quality-on-a-prompt-or-skill-artifact" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<pre><code>[draft prompt or SKILL.md]  →  /persona-cluster-check (if persona prime)  →  /bias-scan-prompt (if runnable)  →  /density-scan  →  /context-budget-scan (if it will run many times)  →  /skill-quality-audit + /skill-trigger-audit (if SKILL.md — body/structure, then trigger surface)
+</code></pre>
+<p>Runs orthogonally to chains 1–5 — they verify <em>content</em>, this chain checks <em>form, budget, and invocation surface</em>. Apply the relevant content chain first, then run this on the final draft.</p>
+<h3 id="chain-7--full-work-cycle-develop-and-verify-loop">Chain 7 — Full work cycle (develop-and-verify loop)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#chain-7--full-work-cycle-develop-and-verify-loop" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<pre><code>/clarify-first (if request vague)  →  /intent-check  →  /plan-options  →  /plan-split-scan (+ /branch-resolve on flagged branches; + /grill to interrogate the plan interactively)  →  /task-decompose  →  [execute]  →  /lean-review or /ai-diff-judgment (if the output is a diff)  →  /intent-fulfilment-check  →  /retrospective
+</code></pre>
+<p>The skeleton of <a href="../ai/intent-to-retrospective-loop" class="internal" data-slug="ai/intent-to-retrospective-loop">intent-to-retrospective-loop</a>. Most stages are skippable on routine work — <code>/plan-options</code> and <code>/task-decompose</code> refuse trivial tasks by design; the load-bearing minimum is <code>/intent-check</code> at the front and <code>/intent-fulfilment-check</code> at the back, which together catch silent goal-substitution.</p>
+<h3 id="chain-8--corpus-maintenance-pass">Chain 8 — Corpus maintenance pass<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#chain-8--corpus-maintenance-pass" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<pre><code>/staleness-decay-scan  →  /contradiction-scan  →  /whittle-scan
+  (which dated claims        (which note-pairs          (which dated commitments
+   expired silently)          silently disagree)          are decaying in the queue)
+</code></pre>
+<p>Periodic, vault-level. The three are disjoint by design: perishable static facts / cross-note disagreement / dated commitments. Run when a fast-moving domain shifted or before relying on an aging cluster in new work.</p>
+<h2 id="what-each-catches-the-others-miss--non-overlap">What each catches the others miss — non-overlap<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#what-each-catches-the-others-miss--non-overlap" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>The skills tile the surface; each row is a different cut. The matrix is non-strict — <code>/red-team</code> partially overlaps <code>/bias-scan-ai</code>, <code>/falsifiability-scan</code> overlaps <code>/bias-scan-ai</code> rule 4. The point is that no skill is redundant: each owns a primary axis.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Axis</th><th>Skill that owns it</th><th>What others miss on this axis</th></tr></thead><tbody><tr><td>Request ambiguity (before the task is settled)</td><td><code>/clarify-first</code></td><td>Every other skill assumes the task is already known; ungrounded clarifying questions multiply ambiguity instead of resolving it</td></tr><tr><td>Intent quality (the goal itself)</td><td><code>/intent-check</code></td><td>Verification skills evaluate outputs against a goal; none audit whether the goal can anchor anything</td></tr><tr><td>Intent fulfilment (output vs originating goal)</td><td><code>/intent-fulfilment-check</code></td><td>Correctness review asks “is it right”; only this asks “is it the thing that was asked for”</td></tr><tr><td>Plan option-generation</td><td><code>/plan-options</code>, <code>/task-decompose</code></td><td>The diagnostic skills audit a plan that exists; these prevent median-collapse before it exists</td></tr><tr><td>Plan structure (executor-side load)</td><td><code>/plan-split-scan</code>, <code>/branch-resolve</code></td><td>Artifact scans see prose, not decomposition shape; branch-collapse and state-carry are invisible to them</td></tr><tr><td>Interactive plan interrogation</td><td><code>/grill</code></td><td>The static plan scans read a finished draft; only this walks the decision tree live and resolves each branch before execution</td></tr><tr><td>Input frame (prompt)</td><td><code>/bias-scan-prompt</code></td><td>All other scans look at outputs; biased prompts produce biased outputs that look internally coherent</td></tr><tr><td>AI-output fingerprints</td><td><code>/bias-scan-ai</code>, <code>/reviewers-map</code></td><td><code>/bias-scan-human</code> does not fit AI output; <code>/red-team</code> is adversarial, not detective</td></tr><tr><td>Human cognitive biases</td><td><code>/bias-scan-human</code></td><td>Sunk cost / FAE / planning fallacy do not show up as AI fingerprints</td></tr><tr><td>Claim function (empirical vs bundled)</td><td><code>/claim-function-scan</code></td><td>Falsifiability and bias scans assume the claim is empirical</td></tr><tr><td>Claim testability</td><td><code>/falsifiability-scan</code></td><td>Bias scans do not categorize claim <em>shape</em>; vague-but-unbiased claims slip through</td></tr><tr><td>Numeric magnitude</td><td><code>/reference-class</code></td><td>All other skills work on prose; planning fallacy in a number is invisible to them</td></tr><tr><td>Adversarial counter</td><td><code>/red-team</code>, <code>/disagree</code></td><td>Detection scans surface fingerprints but do not argue the artifact is wrong</td></tr><tr><td>Code correctness on a diff</td><td><code>/lean-review</code></td><td>Prose-artifact skills cannot read a diff; <code>/reviewers-map</code> maps claims in text, not bugs in code</td></tr><tr><td>Merge judgment on AI-authored code</td><td><code>/ai-diff-judgment</code></td><td>Correctness review checks the code against itself; only this checks it against the intent that produced it (spec drift, hollow tests)</td></tr><tr><td>Forward consequences</td><td><code>/second-order</code></td><td>Detection and adversarial scans evaluate the artifact; neither traces what happens <em>after</em> the action</td></tr><tr><td>Standing structure</td><td><code>/structural-trace</code></td><td>Forward simulation traces a chosen action; structure diagnoses the system producing the recurring behavior</td></tr><tr><td>Queue decay (cost of inaction)</td><td><code>/whittle-scan</code></td><td>Everything else prices the work; nothing else prices the <em>waiting</em></td></tr><tr><td>Flexibility / reversibility</td><td><code>/option-premium-check</code></td><td><code>/second-order</code> traces consequences; only this signs what options a choice destroys</td></tr><tr><td>Burden / invocation surface</td><td><code>/reviewers-map</code>, <code>/commitment-ledger</code>, <code>/calibration-loop</code></td><td>The verification skills do not address whether verification <em>gets done at all</em> over time</td></tr><tr><td>Cross-boundary continuation state</td><td><code>/handoff</code></td><td><code>/commitment-ledger</code> audits what you agreed to for a human reader; only this carries forward the state a fresh agent needs to continue the work</td></tr><tr><td>Prose density / reader load</td><td><code>/density-scan</code></td><td>Bias and claim scans evaluate truth and shape; density evaluates the reading cost</td></tr><tr><td>Token economy / model-side budget</td><td><code>/context-budget-scan</code></td><td><code>/density-scan</code> prices the reader; this prices the context window — cache, placement, bloat</td></tr><tr><td>Persona-prime cluster fit</td><td><code>/persona-cluster-check</code></td><td>No other skill audits the <em>defaults</em> a persona imports from training data</td></tr><tr><td>Skill-description retrieval match</td><td><code>/skill-trigger-audit</code></td><td>Density and content scans audit prose quality; trigger audit asks whether the description will fire</td></tr><tr><td>Skill body structure / output contract</td><td><code>/skill-quality-audit</code></td><td>Trigger audit stops at the description; only this audits whether the fired skill’s procedure and verdict design can do the job</td></tr><tr><td>Skill generation (producing the SKILL.md)</td><td><code>/write-a-skill</code></td><td>The two skill audits check an existing SKILL.md; only this produces one</td></tr><tr><td>Cross-note consistency</td><td><code>/contradiction-scan</code></td><td>Single-artifact scans never see both sides of a vault-internal contradiction</td></tr><tr><td>Temporal staleness of facts</td><td><code>/staleness-decay-scan</code></td><td>Content scans judge a claim as written; none ask whether its as-of date silently expired</td></tr><tr><td>Cycle lessons (process vs outcome)</td><td><code>/retrospective</code></td><td><code>/calibration-loop</code> scores predictions; only this separates process quality from outcome quality and extracts transferable lessons</td></tr><tr><td>Catalog routing — which skill to invoke</td><td><code>/which-skill</code></td><td>All other skills do work; this selects which skill should do that work</td></tr></tbody></table></div>
+<p>When in doubt about overlap, prefer running both — at vault-internal stakes, the cost of duplication is small. At higher stakes, pick by the load-bearing axis above.</p>
+<h2 id="how-to-pick-when-you-can-only-run-one">How to pick when you can only run one<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#how-to-pick-when-you-can-only-run-one" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Cost-calibrated default. Extends the table in <a href="../ai/bias-aware-verification-protocol" class="internal" data-slug="ai/bias-aware-verification-protocol">bias-aware-verification-protocol</a> to the full 38.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Stakes / time available</th><th>One-skill default</th></tr></thead><tbody><tr><td>Don’t know which skill applies</td><td><code>/which-skill</code></td></tr><tr><td>Throwaway / exploratory</td><td>None</td></tr><tr><td>Vague but load-bearing request just arrived</td><td><code>/clarify-first</code></td></tr><tr><td>Authoring the goal a cycle will run against</td><td><code>/intent-check</code></td></tr><tr><td>About to issue a non-trivial multi-step plan</td><td><code>/plan-split-scan</code></td></tr><tr><td>In-progress plan, want it interrogated before building</td><td><code>/grill</code></td></tr><tr><td>Vault commit, low-stakes, AI-drafted</td><td><code>/reviewers-map</code></td></tr><tr><td>Vault commit, low-stakes, self-drafted</td><td><code>/bias-scan-human</code></td></tr><tr><td>Vault commit, synthesis or hub</td><td><code>/red-team</code></td></tr><tr><td>Code diff, cheap correctness pass</td><td><code>/lean-review</code></td></tr><tr><td>AI-authored diff, green CI, merge or not</td><td><code>/ai-diff-judgment</code></td></tr><tr><td>Decision with downstream consequences</td><td><code>/second-order</code></td></tr><tr><td>Irreversible-looking commitment</td><td><code>/option-premium-check</code></td></tr><tr><td>Recurring problem</td><td><code>/structural-trace</code></td></tr><tr><td>Numeric prediction worth tracking</td><td><code>/calibration-loop record</code></td></tr><tr><td>Cycle finished, about to declare done</td><td><code>/intent-fulfilment-check</code></td></tr><tr><td>End of session that touched files</td><td><code>/commitment-ledger</code></td></tr><tr><td>Long session, handing off to the next agent/session</td><td><code>/handoff</code></td></tr><tr><td>Stuck on the framing of the problem</td><td><code>/assumption-reversal</code></td></tr><tr><td>Artifact mixes empirical + organizational claims</td><td><code>/claim-function-scan</code></td></tr><tr><td>Publishing prose where comprehension cost matters</td><td><code>/density-scan</code></td></tr><tr><td>Prompt or session feels token-bloated</td><td><code>/context-budget-scan</code></td></tr><tr><td>Baking a persona prime into a system prompt</td><td><code>/persona-cluster-check</code></td></tr><tr><td>Publishing a new skill, or a skill is misfiring</td><td><code>/skill-trigger-audit</code></td></tr><tr><td>A skill fires but underperforms, or deep pre-publish review</td><td><code>/skill-quality-audit</code></td></tr><tr><td>Authoring a new skill from scratch</td><td><code>/write-a-skill</code></td></tr><tr><td>Stale backlog, invisible decay</td><td><code>/whittle-scan</code></td></tr><tr><td>Aging topic cluster, periodic maintenance</td><td><code>/staleness-decay-scan</code> then <code>/contradiction-scan</code></td></tr></tbody></table></div>
+<p>When more than one fits, pick by the load-bearing axis (the matrix above).</p>
+<h2 id="anti-patterns">Anti-patterns<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#anti-patterns" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><strong>Map theater.</strong> Running every skill in every chain because the map says so. Per <a href="../ai/bias-aware-verification-protocol" class="internal" data-slug="ai/bias-aware-verification-protocol">bias-aware-verification-protocol</a>: “overhead unmatched to stakes is the main reason verification protocols get abandoned.” The same applies at this meta level — and applies harder at 38 skills than it did at 19.</li>
+<li><strong>Forcing a skill outside its cluster.</strong> <code>/red-team</code> is adversarial, not generative — running it for ideation gives objections to options that don’t exist yet. <code>/starburst</code> does not evaluate; it asks. <code>/lean-review</code> does not hunt intent drift; <code>/ai-diff-judgment</code> does not maximize correctness coverage.</li>
+<li><strong>Skipping the map.</strong> Picking by name-recognition (“<code>/red-team</code> sounds right”) instead of by trigger. The trigger language above is the entry point; the skill names are the exit.</li>
+<li><strong>Treating skill output as authoritative.</strong> Each skill is itself an AI output and is subject to the bias fingerprints <code>/bias-scan-ai</code> exists to detect. Skepticism does not bottom out. The map reduces friction; it does not produce correctness.</li>
+<li><strong>Letting the chain replace engagement.</strong> Running Chain 1 mechanically on an AI-drafted thesis without adjusting any probability table or rewriting any framing is the failure mode the <a href="https://github.com/oxzo/brains/tree/main/projects/augur/overview.md" class="external">augur project<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> explicitly guards against. Skills do not substitute for substantive editing.</li>
+<li><strong>Map-as-end-state.</strong> This map is unmeasured opinion until someone actually scores artifacts before/after the protocol and produces a delta. Until then, treat the operational picture as a working hypothesis and revise when chains fail in practice.</li>
+</ul>
+<h2 id="open-questions-for-the-next-revision">Open questions for the next revision<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#open-questions-for-the-next-revision" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><strong>Does the static map still scale at 38?</strong> The 2026-05-10 revision asked whether authoring-side checks deserved a higher-level split; the answer that growth gave is that the catalog now has at least four top-level <em>modes</em> (verify content / shape the work cycle / audit form &amp; budget / maintain the corpus). The 2026-06-08 additions folded into existing clusters without a new mode, so the four-mode structure held — but <code>/which-skill</code> is now the only practical per-request entry point, and if the count keeps growing the map may need to become a map of cluster-maps.</li>
+<li>Are Chain 1 and Chain 2 actually different chains, or is “AI-drafted” vs “self-drafted” a distinction without a difference once the artifact exists? Watch in practice; collapse if both behave the same.</li>
+<li>Should <code>/disagree</code> move out of the adversarial cluster? It targets the <em>last assistant turn</em>, not an artifact. Currently grouped with <code>/red-team</code> because they share the inversion intent.</li>
+<li>The code-review cluster routes by provenance (<code>/lean-review</code> any diff, <code>/ai-diff-judgment</code> AI-authored). As AI-authored becomes the default provenance, does the distinction collapse into cheap-vs-deep — and if so, does <code>/lean-review</code> survive as the cheap tier or fold into the built-in <code>/code-review</code> effort levels?</li>
+<li>Chain 7 (full work cycle) is nine skills end-to-end; nobody will run it whole. Which two-or-three-skill sub-chains of it actually recur in practice? Log real usage before prescribing more.</li>
+</ul>
+<h2 id="related">Related<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#related" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><a href="../skills" class="internal alias" data-slug="skills">Skills index</a> — per-skill reference notes (when to use, why each exists) for all 38 slash commands</li>
+<li><a href="../ai/bias-aware-verification-protocol" class="internal" data-slug="ai/bias-aware-verification-protocol">bias-aware-verification-protocol</a> — four-pass synthesis covering five of the 38 skills</li>
+<li><a href="../ai/cognitive-burden-of-ai-use" class="internal" data-slug="ai/cognitive-burden-of-ai-use">cognitive-burden-of-ai-use</a> — hub for the three cognitive-burden counters</li>
+<li><a href="../ai/intent-to-retrospective-loop" class="internal" data-slug="ai/intent-to-retrospective-loop">intent-to-retrospective-loop</a> — backing concept for the work-cycle skills (Chain 7)</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/knowledge-base-entropy.md" class="external">knowledge-base-entropy<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — backing concept for the corpus-maintenance scans (Chain 8)</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/general/prioritization-architecture-synthesis.md" class="external">prioritization-architecture-synthesis<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — architectural home for the valuation pair</li>
+<li><a href="../ai/falsifiability-claim-fingerprints" class="internal" data-slug="ai/falsifiability-claim-fingerprints">falsifiability-claim-fingerprints</a> — backing catalog for <code>/falsifiability-scan</code></li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/reference-class-forecasting.md" class="external">reference-class-forecasting<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — backing catalog for <code>/reference-class</code></li>
+<li><a href="../ai/ai-output-bias-fingerprints" class="internal" data-slug="ai/ai-output-bias-fingerprints">ai-output-bias-fingerprints</a> — backing catalog for <code>/bias-scan-ai</code></li>
+<li><a href="../ai/prompt-bias-diagnostics" class="internal" data-slug="ai/prompt-bias-diagnostics">prompt-bias-diagnostics</a> — backing catalog for <code>/bias-scan-prompt</code></li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/information-density-for-llm-prompts.md" class="external">information-density-for-llm-prompts<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — backing concept for <code>/density-scan</code></li>
+<li><a href="../ai/evaluating-ai-code-beyond-tests" class="internal" data-slug="ai/evaluating-ai-code-beyond-tests">evaluating-ai-code-beyond-tests</a> and <a href=".././tech/effective-code-review" class="internal" data-slug="tech/effective-code-review">effective-code-review</a> — backing notes for the code-review pair</li>
+<li><a href="../ai/ai-verification-stack-web" class="internal" data-slug="ai/ai-verification-stack-web">ai-verification-stack-web</a> — the stack this sits orthogonally on top of</li>
+<li><a href=".././general/cognitive-biases" class="internal" data-slug="general/cognitive-biases">cognitive-biases</a> — bias catalog used by <code>/bias-scan-human</code></li>
+<li><a href=".././general/debiasing-mental-models" class="internal" data-slug="general/debiasing-mental-models">debiasing-mental-models</a> — origin for inversion (Pass 3) and red-teaming (Pass 4)</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/journal/calibration-log.md" class="external">journal/calibration-log<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — the prediction track record <code>/calibration-loop</code> reads and writes</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/journal/commitments-log.md" class="external">journal/commitments-log<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — the persistent audit trail <code>/commitment-ledger</code> optionally appends to</li>
+</ul></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>Graph View</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc desktop-only"><button type="button" class="toc-header" aria-controls="toc-content" aria-expanded="true"><h3>Table of Contents</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="toc-content"><ul id="h9l23p" class="overflow"><li class="depth-0"><a href="#verification-stack-operational-map" data-for="verification-stack-operational-map">Verification Stack Operational Map</a></li><li class="depth-1"><a href="#what-it-is" data-for="what-it-is">What it is</a></li><li class="depth-1"><a href="#why-this-exists" data-for="why-this-exists">Why this exists</a></li><li class="depth-1"><a href="#the-skills-by-purpose" data-for="the-skills-by-purpose">The skills, by purpose</a></li><li class="depth-2"><a href="#pre-action-clarification--request-side" data-for="pre-action-clarification--request-side">Pre-action clarification — request-side</a></li><li class="depth-2"><a href="#generative--pre-commitment-ideation" data-for="generative--pre-commitment-ideation">Generative — pre-commitment ideation</a></li><li class="depth-2"><a href="#intent-anchoring--loop-closure--the-cycles-bookends" data-for="intent-anchoring--loop-closure--the-cycles-bookends">Intent anchoring &amp; loop closure — the cycle’s bookends</a></li><li class="depth-2"><a href="#plan--decomposition--before-execution" data-for="plan--decomposition--before-execution">Plan &amp; decomposition — before execution</a></li><li class="depth-2"><a href="#detection-scans--bias-fingerprints-on-a-specific-artifact" data-for="detection-scans--bias-fingerprints-on-a-specific-artifact">Detection scans — bias fingerprints on a specific artifact</a></li><li class="depth-2"><a href="#operationalization--claim-triage-sharpening-numeric-grounding" data-for="operationalization--claim-triage-sharpening-numeric-grounding">Operationalization — claim triage, sharpening, numeric grounding</a></li><li class="depth-2"><a href="#adversarial--post-draft" data-for="adversarial--post-draft">Adversarial — post-draft</a></li><li class="depth-2"><a href="#code-review--diffs-not-prose" data-for="code-review--diffs-not-prose">Code review — diffs, not prose</a></li><li class="depth-2"><a href="#forward-and-structural--action--system-tracing" data-for="forward-and-structural--action--system-tracing">Forward and structural — action / system tracing</a></li><li class="depth-2"><a href="#valuation--queues-options-commitments" data-for="valuation--queues-options-commitments">Valuation — queues, options, commitments</a></li><li class="depth-2"><a href="#cognitive-burden-counters--per-output--per-session--multi-session" data-for="cognitive-burden-counters--per-output--per-session--multi-session">Cognitive-burden counters — per-output / per-session / multi-session</a></li><li class="depth-2"><a href="#authoring-side-scans--prose-form-invocation-surface-token-budget" data-for="authoring-side-scans--prose-form-invocation-surface-token-budget">Authoring-side scans — prose form, invocation surface, token budget</a></li><li class="depth-2"><a href="#corpus-maintenance--cross-note-scans" data-for="corpus-maintenance--cross-note-scans">Corpus maintenance — cross-note scans</a></li><li class="depth-2"><a href="#meta-router--selection-across-the-catalog" data-for="meta-router--selection-across-the-catalog">Meta-router — selection across the catalog</a></li><li class="depth-1"><a href="#the-decision-tree" data-for="the-decision-tree">The decision tree</a></li><li class="depth-2"><a href="#request-phase--before-the-task-is-settled" data-for="request-phase--before-the-task-is-settled">Request phase — before the task is settled</a></li><li class="depth-2"><a href="#pre-commitment-phase" data-for="pre-commitment-phase">Pre-commitment phase</a></li><li class="depth-2"><a href="#planning-phase" data-for="planning-phase">Planning phase</a></li><li class="depth-2"><a href="#drafting-phase" data-for="drafting-phase">Drafting phase</a></li><li class="depth-2"><a href="#pre-commit--ai-drafted-artifact" data-for="pre-commit--ai-drafted-artifact">Pre-commit — AI-drafted artifact</a></li><li class="depth-2"><a href="#pre-commit--human-authored-artifact" data-for="pre-commit--human-authored-artifact">Pre-commit — human-authored artifact</a></li><li class="depth-2"><a href="#code-review--the-artifact-is-a-diff" data-for="code-review--the-artifact-is-a-diff">Code review — the artifact is a diff</a></li><li class="depth-2"><a href="#action--system-phase" data-for="action--system-phase">Action / system phase</a></li><li class="depth-2"><a href="#cycle-close--output-exists-before-declaring-done" data-for="cycle-close--output-exists-before-declaring-done">Cycle close — output exists, before declaring done</a></li><li class="depth-2"><a href="#authoring--prompts-skills-prompt-shaped-artifacts" data-for="authoring--prompts-skills-prompt-shaped-artifacts">Authoring — prompts, skills, prompt-shaped artifacts</a></li><li class="depth-2"><a href="#queue--portfolio-level" data-for="queue--portfolio-level">Queue &amp; portfolio level</a></li><li class="depth-2"><a href="#corpus-level--the-vault-itself" data-for="corpus-level--the-vault-itself">Corpus level — the vault itself</a></li><li class="depth-2"><a href="#session-level" data-for="session-level">Session-level</a></li><li class="depth-1"><a href="#common-chains--in-what-order" data-for="common-chains--in-what-order">Common chains — in what order</a></li><li class="depth-2"><a href="#chain-1--pre-commit-an-ai-drafted-artifact" data-for="chain-1--pre-commit-an-ai-drafted-artifact">Chain 1 — Pre-commit an AI-drafted artifact</a></li><li class="depth-2"><a href="#chain-2--pre-commit-a-human-authored-synthesis" data-for="chain-2--pre-commit-a-human-authored-synthesis">Chain 2 — Pre-commit a human-authored synthesis</a></li><li class="depth-2"><a href="#chain-3--pre-commit-a-decision" data-for="chain-3--pre-commit-a-decision">Chain 3 — Pre-commit a decision</a></li><li class="depth-2"><a href="#chain-4--diagnose-a-recurring-problem" data-for="chain-4--diagnose-a-recurring-problem">Chain 4 — Diagnose a recurring problem</a></li><li class="depth-2"><a href="#chain-5--break-a-stuck-frame" data-for="chain-5--break-a-stuck-frame">Chain 5 — Break a stuck frame</a></li><li class="depth-2"><a href="#chain-6--authoring-quality-on-a-prompt-or-skill-artifact" data-for="chain-6--authoring-quality-on-a-prompt-or-skill-artifact">Chain 6 — Authoring quality on a prompt or skill artifact</a></li><li class="depth-2"><a href="#chain-7--full-work-cycle-develop-and-verify-loop" data-for="chain-7--full-work-cycle-develop-and-verify-loop">Chain 7 — Full work cycle (develop-and-verify loop)</a></li><li class="depth-2"><a href="#chain-8--corpus-maintenance-pass" data-for="chain-8--corpus-maintenance-pass">Chain 8 — Corpus maintenance pass</a></li><li class="depth-1"><a href="#what-each-catches-the-others-miss--non-overlap" data-for="what-each-catches-the-others-miss--non-overlap">What each catches the others miss — non-overlap</a></li><li class="depth-1"><a href="#how-to-pick-when-you-can-only-run-one" data-for="how-to-pick-when-you-can-only-run-one">How to pick when you can only run one</a></li><li class="depth-1"><a href="#anti-patterns" data-for="anti-patterns">Anti-patterns</a></li><li class="depth-1"><a href="#open-questions-for-the-next-revision" data-for="open-questions-for-the-next-revision">Open questions for the next revision</a></li><li class="depth-1"><a href="#related" data-for="related">Related</a></li><li class="overflow-end"></li></ul></div></div><div class="backlinks"><h3>Backlinks</h3><ul id="xacmdj" class="overflow"><li><a href="../ai/external-skills/mattpocock/" class="internal">Matt Pocock Skills — Collection Analysis</a></li><li><a href="../ai/" class="internal">AI — Index</a></li><li><a href="../ai/intent-to-retrospective-loop" class="internal">The Intent-to-Retrospective Loop</a></li><li><a href="../ai/skills/" class="internal">AI Skills — Index</a></li><li><a href="../ai/skills/skill-assumption-reversal" class="internal">Skill: assumption-reversal</a></li><li><a href="../ai/skills/skill-bias-scan-ai" class="internal">Skill: bias-scan-ai</a></li><li><a href="../ai/skills/skill-bias-scan-human" class="internal">Skill: bias-scan-human</a></li><li><a href="../ai/skills/skill-bias-scan-prompt" class="internal">Skill: bias-scan-prompt</a></li><li><a href="../ai/skills/skill-branch-resolve" class="internal">Skill: branch-resolve</a></li><li><a href="../ai/skills/skill-calibration-loop" class="internal">Skill: calibration-loop</a></li><li><a href="../ai/skills/skill-claim-function-scan" class="internal">Skill: claim-function-scan</a></li><li><a href="../ai/skills/skill-commitment-ledger" class="internal">Skill: commitment-ledger</a></li><li><a href="../ai/skills/skill-context-budget-scan" class="internal">Skill: context-budget-scan</a></li><li><a href="../ai/skills/skill-contradiction-scan" class="internal">Skill: contradiction-scan</a></li><li><a href="../ai/skills/skill-deepen-architecture" class="internal">Skill: deepen-architecture</a></li><li><a href="../ai/skills/skill-deepen-thinking" class="internal">Skill: deepen-thinking</a></li><li><a href="../ai/skills/skill-density-scan" class="internal">Skill: density-scan</a></li><li><a href="../ai/skills/skill-disagree" class="internal">Skill: disagree</a></li><li><a href="../ai/skills/skill-falsifiability-scan" class="internal">Skill: falsifiability-scan</a></li><li><a href="../ai/skills/skill-intent-check" class="internal">Skill: intent-check</a></li><li><a href="../ai/skills/skill-intent-fulfilment-check" class="internal">Skill: intent-fulfilment-check</a></li><li><a href="../ai/skills/skill-lean-review" class="internal">Skill: lean-review</a></li><li><a href="../ai/skills/skill-note-value-scan" class="internal">Skill: note-value-scan</a></li><li><a href="../ai/skills/skill-option-premium-check" class="internal">Skill: option-premium-check</a></li><li><a href="../ai/skills/skill-persona-cluster-check" class="internal">Skill: persona-cluster-check</a></li><li><a href="../ai/skills/skill-plan-options" class="internal">Skill: plan-options</a></li><li><a href="../ai/skills/skill-plan-split-scan" class="internal">Skill: plan-split-scan</a></li><li><a href="../ai/skills/skill-predict-then-compare" class="internal">Skill: predict-then-compare</a></li><li><a href="../ai/skills/skill-readability-scan" class="internal">Skill: readability-scan</a></li><li><a href="../ai/skills/skill-red-team" class="internal">Skill: red-team</a></li><li><a href="../ai/skills/skill-reference-class" class="internal">Skill: reference-class</a></li><li><a href="../ai/skills/skill-retrospective" class="internal">Skill: retrospective</a></li><li><a href="../ai/skills/skill-reviewers-map" class="internal">Skill: reviewers-map</a></li><li><a href="../ai/skills/skill-scamper" class="internal">Skill: scamper</a></li><li><a href="../ai/skills/skill-second-order" class="internal">Skill: second-order</a></li><li><a href="../ai/skills/skill-skill-quality-audit" class="internal">Skill: skill-quality-audit</a></li><li><a href="../ai/skills/skill-skill-trigger-audit" class="internal">Skill: skill-trigger-audit</a></li><li><a href="../ai/skills/skill-staleness-decay-scan" class="internal">Skill: staleness-decay-scan</a></li><li><a href="../ai/skills/skill-starburst" class="internal">Skill: starburst</a></li><li><a href="../ai/skills/skill-structural-trace" class="internal">Skill: structural-trace</a></li><li><a href="../ai/skills/skill-task-decompose" class="internal">Skill: task-decompose</a></li><li><a href="../ai/skills/skill-to-prd" class="internal">Skill: to-prd</a></li><li><a href="../ai/skills/skill-which-skill" class="internal">Skill: which-skill</a></li><li><a href="../ai/skills/skill-whittle-scan" class="internal">Skill: whittle-scan</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v4.4.1</a> © 2026</p><ul><li><a href="https://github.com/oxzo/brains">source</a></li><li><a href="/index.xml">rss</a></li></ul></footer></div></div></body><script type="application/javascript">function o(){let t=this.parentElement;t.classList.toggle("is-collapsed");let e=t.classList.contains("is-collapsed")?this.scrollHeight:t.scrollHeight;t.style.maxHeight=e+"px";let c=t,l=t.parentElement;for(;l;){if(!l.classList.contains("callout"))return;let i=l.classList.contains("is-collapsed")?l.scrollHeight:l.scrollHeight+c.scrollHeight;l.style.maxHeight=i+"px",c=l,l=l.parentElement}}function n(){let t=document.getElementsByClassName("callout is-collapsible");for(let s of t){let e=s.firstElementChild;if(!e)continue;e.addEventListener("click",o),window.addCleanup(()=>e.removeEventListener("click",o));let l=s.classList.contains("is-collapsed")?e.scrollHeight:s.scrollHeight;s.style.maxHeight=l+"px"}}document.addEventListener("nav",n);
+</script><script type="module">function f(i,e){if(!i)return;function r(o){o.target===this&&(o.preventDefault(),o.stopPropagation(),e())}function t(o){o.key.startsWith("Esc")&&(o.preventDefault(),e())}i?.addEventListener("click",r),window.addCleanup(()=>i?.removeEventListener("click",r)),document.addEventListener("keydown",t),window.addCleanup(()=>document.removeEventListener("keydown",t))}function y(i){for(;i.firstChild;)i.removeChild(i.firstChild)}var h=class{constructor(e,r){this.container=e;this.content=r;this.setupEventListeners(),this.setupNavigationControls(),this.resetTransform()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;cleanups=[];setupEventListeners(){let e=this.onMouseDown.bind(this),r=this.onMouseMove.bind(this),t=this.onMouseUp.bind(this),o=this.resetTransform.bind(this);this.container.addEventListener("mousedown",e),document.addEventListener("mousemove",r),document.addEventListener("mouseup",t),window.addEventListener("resize",o),this.cleanups.push(()=>this.container.removeEventListener("mousedown",e),()=>document.removeEventListener("mousemove",r),()=>document.removeEventListener("mouseup",t),()=>window.removeEventListener("resize",o))}cleanup(){for(let e of this.cleanups)e()}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let r=this.createButton("+",()=>this.zoom(.1)),t=this.createButton("-",()=>this.zoom(-.1)),o=this.createButton("Reset",()=>this.resetTransform());e.appendChild(t),e.appendChild(o),e.appendChild(r),this.container.appendChild(e)}createButton(e,r){let t=document.createElement("button");return t.textContent=e,t.className="mermaid-control-button",t.addEventListener("click",r),window.addCleanup(()=>t.removeEventListener("click",r)),t}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}zoom(e){let r=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),t=this.content.getBoundingClientRect(),o=t.width/2,n=t.height/2,c=r-this.scale;this.currentPan.x-=o*c,this.currentPan.y-=n*c,this.scale=r,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){this.scale=1;let e=this.content.querySelector("svg");this.currentPan={x:e.getBoundingClientRect().width/2,y:e.getBoundingClientRect().height/2},this.updateTransform()}},C=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],E;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;E||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let r=E.default,t=new WeakMap;for(let n of e)t.set(n,n.innerText);async function o(){for(let s of e){s.removeAttribute("data-processed");let a=t.get(s);a&&(s.innerHTML=a)}let n=C.reduce((s,a)=>(s[a]=window.getComputedStyle(document.documentElement).getPropertyValue(a),s),{}),c=document.documentElement.getAttribute("saved-theme")==="dark";r.initialize({startOnLoad:!1,securityLevel:"loose",theme:c?"dark":"base",themeVariables:{fontFamily:n["--codeFont"],primaryColor:n["--light"],primaryTextColor:n["--darkgray"],primaryBorderColor:n["--tertiary"],lineColor:n["--darkgray"],secondaryColor:n["--secondary"],tertiaryColor:n["--tertiary"],clusterBkg:n["--light"],edgeLabelBackground:n["--highlight"]}}),await r.run({nodes:e})}await o(),document.addEventListener("themechange",o),window.addCleanup(()=>document.removeEventListener("themechange",o));for(let n=0;n<e.length;n++){let v=function(){let g=l.querySelector("#mermaid-space"),m=l.querySelector(".mermaid-content");if(!m)return;y(m);let w=c.querySelector("svg").cloneNode(!0);m.appendChild(w),l.classList.add("active"),g.style.cursor="grab",u=new h(g,m)},M=function(){l.classList.remove("active"),u?.cleanup(),u=null},c=e[n],s=c.parentElement,a=s.querySelector(".clipboard-button"),d=s.querySelector(".expand-button"),p=window.getComputedStyle(a),L=a.offsetWidth+parseFloat(p.marginLeft||"0")+parseFloat(p.marginRight||"0");d.style.right=`calc(${L}px + 0.3rem)`,s.prepend(d);let l=s.querySelector("#mermaid-container");if(!l)return;let u=null;d.addEventListener("click",v),f(l,M),window.addCleanup(()=>{u?.cleanup(),d.removeEventListener("click",v)})}});
+</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript"></script><script src="../postscript.00b09a8c.js" type="module"></script></html>

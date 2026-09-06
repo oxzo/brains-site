@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en"><head><title>Generative UI Security — Rendering Untrusted Interface in a Privileged Host · second-brain</title><meta charset="utf-8"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400;1,600&amp;family=Inter:wght@400;700&amp;family=JetBrains Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="synapse"/><meta property="og:title" content="Generative UI Security — Rendering Untrusted Interface in a Privileged Host · second-brain"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Generative UI Security — Rendering Untrusted Interface in a Privileged Host · second-brain"/><meta name="twitter:description" content="Generative UI Security — Rendering Untrusted Interface in a Privileged Host Extracted from generative-ui-landscape, which covers the field, the options, and the research ..."/><meta property="og:description" content="Generative UI Security — Rendering Untrusted Interface in a Privileged Host Extracted from generative-ui-landscape, which covers the field, the options, and the research ..."/><meta property="og:image:alt" content="Generative UI Security — Rendering Untrusted Interface in a Privileged Host Extracted from generative-ui-landscape, which covers the field, the options, and the research ..."/><meta property="twitter:domain" content="oxzo.github.io/brains-site"/><meta property="og:url" content="https://oxzo.github.io/brains-site/ai/generative-ui-security"/><meta property="twitter:url" content="https://oxzo.github.io/brains-site/ai/generative-ui-security"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="Generative UI Security — Rendering Untrusted Interface in a Privileged Host Extracted from generative-ui-landscape, which covers the field, the options, and the research ..."/><meta name="generator" content="Quartz"/><link href="../index.322b98b4.css" rel="stylesheet" type="text/css" spa-preserve/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  padding: 2rem;
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL2hvbWUvcnVubmVyL3dvcmsvYnJhaW5zL2JyYWlucy9zaXRlL3F1YXJ0ei9jb21wb25lbnRzL3N0eWxlcyIsInNvdXJjZXMiOlsibWVybWFpZC5pbmxpbmUuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTs7QUFHRjtFQUNFO0VBQ0E7O0FBR0Y7RUFDRTs7O0FBS0Y7RUFDRTtFQUNBOzs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7O0FBR0Y7RUFDRTs7QUFJRjtFQUNFO0VBQ0E7RUFDQSIsInNvdXJjZXNDb250ZW50IjpbIi5leHBhbmQtYnV0dG9uIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbG9hdDogcmlnaHQ7XG4gIHBhZGRpbmc6IDAuNHJlbTtcbiAgbWFyZ2luOiAwLjNyZW07XG4gIHJpZ2h0OiAwOyAvLyBOT1RFOiByaWdodCB3aWxsIGJlIHNldCBpbiBtZXJtYWlkLmlubGluZS50c1xuICBjb2xvcjogdmFyKC0tZ3JheSk7XG4gIGJvcmRlci1jb2xvcjogdmFyKC0tZGFyayk7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWxpZ2h0KTtcbiAgYm9yZGVyOiAxcHggc29saWQ7XG4gIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgb3BhY2l0eTogMDtcbiAgdHJhbnNpdGlvbjogMC4ycztcblxuICAmID4gc3ZnIHtcbiAgICBmaWxsOiB2YXIoLS1saWdodCk7XG4gICAgZmlsdGVyOiBjb250cmFzdCgwLjMpO1xuICB9XG5cbiAgJjpob3ZlciB7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIGJvcmRlci1jb2xvcjogdmFyKC0tc2Vjb25kYXJ5KTtcbiAgfVxuXG4gICY6Zm9jdXMge1xuICAgIG91dGxpbmU6IDA7XG4gIH1cbn1cblxucHJlIHtcbiAgJjpob3ZlciA+IC5leHBhbmQtYnV0dG9uIHtcbiAgICBvcGFjaXR5OiAxO1xuICAgIHRyYW5zaXRpb246IDAuMnM7XG4gIH1cbn1cblxuI21lcm1haWQtY29udGFpbmVyIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICBjb250YWluOiBsYXlvdXQ7XG4gIHotaW5kZXg6IDk5OTtcbiAgbGVmdDogMDtcbiAgdG9wOiAwO1xuICB3aWR0aDogMTAwdnc7XG4gIGhlaWdodDogMTAwdmg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGRpc3BsYXk6IG5vbmU7XG4gIGJhY2tkcm9wLWZpbHRlcjogYmx1cig0cHgpO1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuNSk7XG5cbiAgJi5hY3RpdmUge1xuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgfVxuXG4gICYgPiAjbWVybWFpZC1zcGFjZSB7XG4gICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1saWdodCk7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDUwJTtcbiAgICBsZWZ0OiA1MCU7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gICAgaGVpZ2h0OiA4MHZoO1xuICAgIHdpZHRoOiA4MHZ3O1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG5cbiAgICAmID4gLm1lcm1haWQtY29udGVudCB7XG4gICAgICBwYWRkaW5nOiAycmVtO1xuICAgICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgICAgdHJhbnNmb3JtLW9yaWdpbjogMCAwO1xuICAgICAgdHJhbnNpdGlvbjogdHJhbnNmb3JtIDAuMXMgZWFzZTtcbiAgICAgIG92ZXJmbG93OiB2aXNpYmxlO1xuICAgICAgbWluLWhlaWdodDogMjAwcHg7XG4gICAgICBtaW4td2lkdGg6IDIwMHB4O1xuXG4gICAgICBwcmUge1xuICAgICAgICBtYXJnaW46IDA7XG4gICAgICAgIGJvcmRlcjogbm9uZTtcbiAgICAgIH1cblxuICAgICAgc3ZnIHtcbiAgICAgICAgbWF4LXdpZHRoOiBub25lO1xuICAgICAgICBoZWlnaHQ6IGF1dG87XG4gICAgICB9XG4gICAgfVxuXG4gICAgJiA+IC5tZXJtYWlkLWNvbnRyb2xzIHtcbiAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgIGJvdHRvbTogMjBweDtcbiAgICAgIHJpZ2h0OiAyMHB4O1xuICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgIGdhcDogOHB4O1xuICAgICAgcGFkZGluZzogOHB4O1xuICAgICAgYmFja2dyb3VuZDogdmFyKC0tbGlnaHQpO1xuICAgICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICAgIGJvcmRlci1yYWRpdXM6IDZweDtcbiAgICAgIGJveC1zaGFkb3c6IDAgMnB4IDRweCByZ2JhKDAsIDAsIDAsIDAuMSk7XG4gICAgICB6LWluZGV4OiAyO1xuXG4gICAgICAubWVybWFpZC1jb250cm9sLWJ1dHRvbiB7XG4gICAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAgICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICAgICAgICB3aWR0aDogMzJweDtcbiAgICAgICAgaGVpZ2h0OiAzMnB4O1xuICAgICAgICBwYWRkaW5nOiAwO1xuICAgICAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodCk7XG4gICAgICAgIGNvbG9yOiB2YXIoLS1kYXJrKTtcbiAgICAgICAgYm9yZGVyLXJhZGl1czogNHB4O1xuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgICAgIGZvbnQtc2l6ZTogMTZweDtcbiAgICAgICAgZm9udC1mYW1pbHk6IHZhcigtLWJvZHlGb250KTtcbiAgICAgICAgdHJhbnNpdGlvbjogYWxsIDAuMnMgZWFzZTtcblxuICAgICAgICAmOmhvdmVyIHtcbiAgICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICB9XG5cbiAgICAgICAgJjphY3RpdmUge1xuICAgICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWSgxcHgpO1xuICAgICAgICB9XG5cbiAgICAgICAgLy8gU3R5bGUgdGhlIHJlc2V0IGJ1dHRvbiBkaWZmZXJlbnRseVxuICAgICAgICAmOm50aC1jaGlsZCgyKSB7XG4gICAgICAgICAgd2lkdGg6IGF1dG87XG4gICAgICAgICAgcGFkZGluZzogMCAxMnB4O1xuICAgICAgICAgIGZvbnQtc2l6ZTogMTRweDtcbiAgICAgICAgfVxuICAgICAgfVxuICAgIH1cbiAgfVxufVxuIl19 */</style><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" spa-preserve/><script src="../prescript.be9697b4.js" type="application/javascript" spa-preserve></script><script type="application/javascript" spa-preserve>const fetchData = fetch("../static/contentIndex.73890e1e.json").then(data => data.json())</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://oxzo.github.io/brains-site/index.xml"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://oxzo.github.io/brains-site/ai/generative-ui-security-og-image.webp"/><meta property="og:image:url" content="https://oxzo.github.io/brains-site/ai/generative-ui-security-og-image.webp"/><meta name="twitter:image" content="https://oxzo.github.io/brains-site/ai/generative-ui-security-og-image.webp"/><meta property="og:image:type" content="image/.webp"/></head><body data-slug="ai/generative-ui-security"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">synapse</a></h2><div class="spacer mobile-only"></div><div style="display: flex; flex-direction: row; flex-wrap: nowrap; gap: 1rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button"><p>Search</p><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Search for something" placeholder="Search for something"/><div class="search-layout" data-preview="true"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Dark mode"><title>Dark mode</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Light mode"><title>Light mode</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div></div><div class="explorer" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a,b)=>!a.isFolder&amp;&amp;!b.isFolder||a.isFolder&amp;&amp;b.isFolder?a.displayName.localeCompare(b.displayName,void 0,{numeric:!0,sensitivity:\&quot;base\&quot;}):!a.isFolder&amp;&amp;b.isFolder?1:-1&quot;,&quot;filterFn&quot;:&quot;node=>node.slugSegment!==\&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;node=>node&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-content"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>Explorer</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="explorer-content" aria-expanded="false"><ul class="explorer-ul overflow" id="0x8mfk"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#"></a></li></template><template id="template-folder"><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../ai/">AI — Index</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>Generative UI Security — Rendering Untrusted Interface in a Privileged Host</a></div></nav><h1 class="article-title">Generative UI Security — Rendering Untrusted Interface in a Privileged Host</h1><p show-comma="true" class="content-meta"><time datetime="2026-08-25T00:00:00.000Z">Aug 25, 2026</time><span>23 min read</span></p><ul class="tags"><li><a href="../tags/ai" class="internal tag-link">ai</a></li><li><a href="../tags/security" class="internal tag-link">security</a></li><li><a href="../tags/genui" class="internal tag-link">genui</a></li><li><a href="../tags/frontend" class="internal tag-link">frontend</a></li><li><a href="../tags/sandboxing" class="internal tag-link">sandboxing</a></li><li><a href="../tags/time-sensitive" class="internal tag-link">time-sensitive</a></li><li><a href="../tags/publish" class="internal tag-link">publish</a></li></ul></div></div><article class="popover-hint"><h1 id="generative-ui-security--rendering-untrusted-interface-in-a-privileged-host">Generative UI Security — Rendering Untrusted Interface in a Privileged Host<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#generative-ui-security--rendering-untrusted-interface-in-a-privileged-host" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>Extracted from <a href="../ai/generative-ui-landscape" class="internal" data-slug="ai/generative-ui-landscape">generative-ui-landscape</a>, which covers the field, the options, and the research. This note covers one question in the depth it needs: <strong>when a model or a third-party server supplies interface markup, what stops it from doing whatever it likes?</strong></p>
+<p><strong>Last verified: 2026-08-25.</strong> Every normative quote below is from a raw source file fetched and read directly — not a summary. See Corrections for why that is stated rather than assumed.</p>
+<blockquote class="callout tip" data-callout="tip">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>Which spec, and why it matters </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p><code>ext-apps</code> ships <strong>two</strong> files. <code>specification/2026-01-26/apps.mdx</code> is the <strong>Final</strong> one — what shipped as MCP’s first official extension, and what a host implements against. <code>specification/draft/apps.mdx</code> is the work in progress; it carries 73 normative statements to Final’s 56. <strong>Everything below is sourced to Final</strong>, with draft-only material labelled as such and never counted as an obligation. An earlier version of this note quoted the draft throughout while its sibling advertised MCP Apps as a finalized standard.</p>
+</div>
+</blockquote>
+<p>Different layer from the vault’s other isolation notes. <a href="../ai/agent-sandbox-isolation-tiers" class="internal" data-slug="ai/agent-sandbox-isolation-tiers">agent-sandbox-isolation-tiers</a> and <a href="../ai/agent-isolation-hardening" class="internal" data-slug="ai/agent-isolation-hardening">agent-isolation-hardening</a> contain a <em>coding agent</em> at the OS boundary, with containers and VMs. This note is further in: containing <em>rendered markup</em> inside a client the user already trusts.</p>
+<p>The browser’s primitives are <strong>not</strong> the only tools available. The high-privilege hosts in question are Electron apps, which have process-level controls sitting underneath the iframe. Because this premise carries the whole section, here is what actually backs it per product, at three different evidence grades:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Host</th><th>Electron?</th><th>How this note knows</th></tr></thead><tbody><tr><td><strong>VS Code</strong></td><td>Yes — <strong>verified first-hand</strong></td><td>A local install ships the Chromium/Electron runtime: <code>chrome_crashpad_handler</code>, <code>v8_context_snapshot.bin</code>, <code>libffmpeg.so</code>, <code>resources.pak</code>, <code>LICENSES.chromium.html</code>. Upstream <code>package.json</code> carries <code>@vscode/gulp-electron</code> and an <code>electron</code> build script. Checked 2026-08-25.</td></tr><tr><td><strong>Cursor</strong></td><td>Yes, by inheritance — <strong>secondary</strong></td><td>Consistently reported as a VS Code fork retaining its extension/runtime ecosystem. No vendor-documentation quote obtained; the fork claim is universal in coverage but not verified at Cursor’s own docs.</td></tr><tr><td><strong>Claude Desktop</strong></td><td>Yes — <strong>secondary, multi-source</strong></td><td>Multiple independent commentators discuss it as an Electron app, several critically. No Anthropic documentation states it. Treat as well-corroborated, not vendor-confirmed.</td></tr></tbody></table></div>
+<p><strong>And a caveat that matters more than the table.</strong> Establishing that a host is Electron says the controls below are <em>available</em>. It says nothing about whether they are <em>switched on</em> — an Electron app can ship <code>nodeIntegration: true</code> and have none of them. “Is it Electron” is the question that makes the next questions worth asking; it is not itself an assurance.</p>
+<p>Quoted from Electron’s own security docs, read directly 2026-08-25:</p>
+<ul>
+<li><strong>Process sandboxing</strong> — <em>“Starting from Electron 20, the sandbox is enabled for renderer processes without any further configuration.”</em> The checklist restates it: <em>“This recommendation is the default behavior in Electron since 20.0.0.”</em></li>
+<li><strong>Context isolation</strong> — <em>“Context Isolation is the default behavior in Electron since 12.0.0.”</em> It runs preload and Electron APIs in a dedicated JS context, so renderer scripts cannot modify globals like <code>Array.prototype.push</code> out from under the preload.</li>
+</ul>
+<p><strong>The coupling is the part worth knowing, and it is a single-flag cascade.</strong> These defaults are not independent, and one setting silently removes both:</p>
+<blockquote>
+<p><em>“Enabling Node.js integration for a renderer process by setting <code>nodeIntegration: true</code> disables the sandbox for the process.”</em>
+<em>“Disabling context isolation (see above) also disables process sandboxing, regardless of the default, <code>sandbox: false</code> or globally enabled sandboxing!”</em></p>
+</blockquote>
+<p>So <code>nodeIntegration: true</code> → context isolation off → <strong>process sandboxing off, even if you enabled it globally.</strong> A host can believe it has three layers and have one. Electron’s own verdict on that state: <em>“Loading, reading or processing any untrusted content in an unsandboxed process, including the main process, is not advised.”</em></p>
+<p>VS Code additionally moved its extension host out of the renderer into a separate utility process and replaced the Electron <code>webview</code> tag with a plain <code>iframe</code> — reported in its process-sandboxing write-up, <strong>not verified against VS Code source</strong>.</p>
+<p>Electron’s full security checklist is twenty items, not the handful summarised here; treat this as the subset that interacts with rendering untrusted UI.</p>
+<p>So there are three layers, not one: <strong>OS/process sandbox → renderer configuration → iframe isolation.</strong> This note owns the third and the seams around it. If you are building an Electron host, the first two are yours too and they are stronger controls than any <code>sandbox</code> token — verify them, and verify the cascade above has not quietly collapsed them, before spending effort on flags.</p>
+<h2 id="why-this-is-not-the-usual-iframe-problem">Why this is not the usual iframe problem<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#why-this-is-not-the-usual-iframe-problem" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Embedding untrusted third-party content in a web page is a solved-ish problem with well-worn answers. What changes here is <strong>what the embedding process is holding.</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th></th><th>Browser tab</th><th>IDE, desktop AI client, agent shell</th></tr></thead><tbody><tr><td>Assumed hostile content</td><td>Yes, by design</td><td>No, historically</td></tr><tr><td>Ambient authority</td><td>Site-scoped cookies and storage</td><td>SSH keys, cloud tokens, repo write, shell</td></tr><tr><td>Cost of an escape</td><td>That tab</td><td>Everything the user has</td></tr></tbody></table></div>
+<p>Backslash Security’s analysis of the 2026-07-28 MCP spec (published 2026-05-28) puts it in one line:</p>
+<blockquote>
+<p><em>“A sandbox escape in a tab costs you that tab. A sandbox escape here is a full IDE compromise.”</em></p>
+</blockquote>
+<p>Provenance matters: that is a <strong>security vendor’s blog</strong>, it is architectural analysis, and it describes <strong>no disclosed exploit</strong>. The framing is useful and the risk is real in principle; treat the urgency as marketing-adjacent until an incident exists. The web-platform mechanics in the rest of this note are independently checkable and carry more weight than the framing does.</p>
+<p>This is <a href="../security/ambient-authority-and-blast-radius" class="internal" data-slug="security/ambient-authority-and-blast-radius">ambient-authority-and-blast-radius</a> applied to a render path. The blast radius is not a property of how carefully the UI was generated. It is a property of what the host process can reach.</p>
+<h2 id="what-the-attacker-controls">What the attacker controls<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#what-the-attacker-controls" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Assume the markup is fully attacker-chosen. The Final spec’s threat model, verbatim:</p>
+<blockquote>
+<ul>
+<li><em>Malicious server delivers harmful HTML content</em></li>
+<li><em>Compromised View attempts to escape sandbox</em></li>
+<li><em>View attempts unauthorized tool execution</em></li>
+<li><em>View exfiltrates sensitive host data</em></li>
+<li><em>View performs phishing or social engineering</em></li>
+</ul>
+</blockquote>
+<p><strong>Note what that list assumes, and what this note inherited from it.</strong> Every entry names a <em>third party</em> — a hostile server, or a View compromised by one. It is the right model for MCP Apps, where markup arrives across an organizational boundary.</p>
+<p>It is <strong>not</strong> the model for the case <a href="../ai/generative-ui-landscape" class="internal" data-slug="ai/generative-ui-landscape">generative-ui-landscape</a> identifies as the largest deployment: a <strong>first-party model generating raw HTML/CSS/JS</strong> for its own host, with no server in the loop. There the markup is authored by a component you trust, and the failure modes are different — output steered by injected content that reached the model’s context (<a href="../ai/prompt-injection" class="internal" data-slug="ai/prompt-injection">prompt-injection</a>), or simply wrong markup with no adversary at all. Neither a server allowlist nor predeclared-resource hashing applies, because there is no predeclaration and no server.</p>
+<p>What still applies to the first-party case: the origin rule (§2), CSP as destination containment (§3), and the process layer. What does not: everything premised on reviewing a template before it arrives. <strong>This note is scoped to the third-party case. The first-party case needs its own treatment and does not have one here.</strong></p>
+<h3 id="ui-mimicry--the-threat-no-sandbox-flag-addresses">UI mimicry — the threat no sandbox flag addresses<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#ui-mimicry--the-threat-no-sandbox-flag-addresses" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>The spec files this under “Other risks” and its advice is one line: <em>“UI can still display misleading content. Hosts should clearly indicate sandboxed UI boundaries.”</em></p>
+<p>A server ships HTML that renders as a pixel-accurate copy of the host’s own authentication prompt or permission dialog. The sandbox works perfectly. The user types their credentials into it anyway. Defenses are presentational, not technical: visible provenance on every server-supplied surface, host chrome that generated content cannot reproduce, and never rendering third-party UI in a region where native dialogs also appear.</p>
+<h2 id="the-isolation-stack">The isolation stack<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-isolation-stack" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Five controls. They are not alternatives — each covers what the others miss, and the common failure is shipping one and assuming it is the sandbox.</p>
+<h3 id="1-the-sandbox-attribute-flag-by-flag">1. The <code>sandbox</code> attribute, flag by flag<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#1-the-sandbox-attribute-flag-by-flag" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>A bare <code>sandbox</code> is the strictest setting: no scripts, no forms, no storage, opaque origin. Every flag you add gives something back.</p>
+<p>All fourteen tokens defined for the <code>sandbox</code> attribute, enumerated from MDN’s <code>&lt;iframe></code> reference source (fetched 2026-08-25) rather than from memory — an earlier version listed eight without saying so, and a partial list reads as a completed check:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Flag</th><th>Grants</th><th>For untrusted UI</th></tr></thead><tbody><tr><td><code>allow-scripts</code></td><td>JS execution</td><td>Required for interactive UI. See the origin rule below.</td></tr><tr><td><code>allow-same-origin</code></td><td>The frame keeps a real origin</td><td>Depends entirely on <em>whose</em> origin. See below — this is the subtle one.</td></tr><tr><td><code>allow-forms</code></td><td>Form submission</td><td>Constrain with CSP <code>form-action</code>; do not assume CSP reaches the frame (see §3).</td></tr><tr><td><code>allow-modals</code></td><td><code>alert</code>/<code>confirm</code>/<code>prompt</code></td><td>Workable; mild phishing surface.</td></tr><tr><td><code>allow-popups</code></td><td><code>window.open</code></td><td>Popups inherit the sandbox unless the next flag is set.</td></tr><tr><td><code>allow-popups-to-escape-sandbox</code></td><td>Popups open <strong>unsandboxed</strong></td><td><strong>Never.</strong> A documented escape hatch, not a convenience.</td></tr><tr><td><code>allow-top-navigation</code></td><td>Navigate the whole host away</td><td><strong>No.</strong></td></tr><tr><td><code>allow-top-navigation-by-user-activation</code></td><td>Same, gated on a real gesture</td><td>Only if genuinely needed.</td></tr><tr><td><code>allow-top-navigation-to-custom-protocols</code></td><td>Invoke registered protocol handlers</td><td><strong>No</strong> on a desktop host — custom protocols are a route out of the web sandbox entirely.</td></tr><tr><td><code>allow-downloads</code></td><td>Trigger file downloads</td><td>No reason to grant. (The Final spec says nothing about downloads at all; a host-mediated <code>ui/download-file</code> flow exists only in the draft.)</td></tr><tr><td><code>allow-storage-access-by-user-activation</code></td><td>Request storage access</td><td>No.</td></tr><tr><td><code>allow-presentation</code></td><td>Presentation API</td><td>No reason to grant.</td></tr><tr><td><code>allow-pointer-lock</code></td><td>Pointer Lock API</td><td>Grant only for a genuine canvas/game surface.</td></tr><tr><td><code>allow-orientation-lock</code></td><td>Screen orientation lock</td><td>No reason to grant.</td></tr></tbody></table></div>
+<h3 id="2-allow-scripts--allow-same-origin-is-only-unsafe-relative-to-the-embedders-origin">2. <code>allow-scripts</code> + <code>allow-same-origin</code> is only unsafe <em>relative to the embedder’s origin</em><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#2-allow-scripts--allow-same-origin-is-only-unsafe-relative-to-the-embedders-origin" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>The single most important mechanic here, and the one most often stated wrongly — including by an earlier version of this note. The wrong version is the absolute one: <em>“<code>allow-scripts</code> plus <code>allow-same-origin</code> is not a sandbox; always omit <code>allow-same-origin</code>.”</em> Stated that way it would lead you to reject the MCP Apps spec’s own required design.</p>
+<p>Content granted both flags keeps a real origin. If that origin is <em>the embedder’s</em>, the content can reach the parent DOM or locate its own <code>&lt;iframe></code> element and delete the <code>sandbox</code> attribute — no containment at all. If the frame is served from a <strong>different origin than the host</strong>, the same flag pair is fine: same-origin policy separates it from the host, and it can hold its own storage without that meaning anything to the embedder.</p>
+<p>So the control doing the work is <strong>origin separation</strong>, not the flag in isolation. Two ways to get it:</p>
+<ul>
+<li><strong>Opaque origin</strong> — omit <code>allow-same-origin</code>. The frame gets a unique origin and cannot touch <code>localStorage</code>, <code>sessionStorage</code>, IndexedDB, or cookies at all. Strongest, and correct for content you never want to persist anything.</li>
+<li><strong>A different real origin</strong> — serve the frame from a separate origin you control. Keeps storage working, which a proxy layer needs. This is what <code>ext-apps</code> mandates (§5).</li>
+</ul>
+<p>Ask “which origin, relative to what?” rather than “is <code>allow-same-origin</code> set?“.</p>
+<h3 id="3-content-security-policy">3. Content Security Policy<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#3-content-security-policy" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>The sandbox governs <em>capabilities</em>. CSP governs <em>destinations</em> — and exfiltration is a destination problem. A frame with scripts and no network policy can encode whatever it can read into a request to a server the attacker controls.</p>
+<p><code>ext-apps</code> makes this a host obligation rather than advice. Verbatim from the spec’s host-behavior section: <em>“Host MUST construct CSP headers based on declared domains”</em>; <em>“Host MAY further restrict but MUST NOT allow undeclared domains”</em>; <em>“Host SHOULD log CSP configurations for security review.”</em></p>
+<p>When <code>ui.csp</code> is omitted the host <strong>MUST</strong> apply this default, which is worth reading closely because it is a good starting policy for any untrusted-UI frame:</p>
+<pre><code>default-src 'none';
+script-src 'self' 'unsafe-inline';
+style-src 'self' 'unsafe-inline';
+img-src 'self' data:;
+media-src 'self' data:;
+connect-src 'none';
+</code></pre>
+<p><code>connect-src 'none'</code> is the exfiltration control — no fetch, no XHR, no WebSocket. <code>default-src 'none'</code> denies everything not listed. <code>'unsafe-inline'</code> is present for scripts and styles, which is unavoidable for <code>srcdoc</code>-injected content and is exactly why the sandbox and origin controls have to carry the weight.</p>
+<p><strong>One gap worth catching if you copy this:</strong> the Final spec’s <em>restrictive default</em> omits <code>object-src 'none'</code>, while the CSP-construction example a few lines later in the same document includes it (and <code>font-src</code>, and <code>base-uri</code>). The draft’s default has <code>object-src</code> and Final’s does not. Add it yourself — a policy with <code>default-src 'none'</code> covers <code>object-src</code> by fallback, but do not rely on reading that subtlety correctly under time pressure.</p>
+<p>The spec’s construction example also maps declared <code>permissions</code> (camera, microphone, geolocation) onto the inner iframe’s <code>allow</code> attribute — <strong>Permissions Policy</strong>, a separate mechanism from both CSP and sandbox tokens. Three policy systems on one frame; know which one you are editing.</p>
+<p>Note that CSP also offers a <code>sandbox</code> directive as a header-level equivalent of the attribute, though coverage differs — some sandbox tokens are implemented only for the iframe attribute. Use the attribute as the primary control.</p>
+<h3 id="4-postmessage-origin-validation">4. <code>postMessage</code> origin validation<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#4-postmessage-origin-validation" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>The channel out of the sandbox is the channel in. A handler that does not check <code>event.origin</code> accepts messages from anything that can get a handle on the window. Validate the sender origin on every inbound message, and treat the message body as untrusted input rather than as a command — the same discipline <a href="../ai/prompt-injection" class="internal" data-slug="ai/prompt-injection">prompt-injection</a> demands of model input.</p>
+<p>Reusing a structured protocol helps here. <code>ext-apps</code> routes UI-to-host traffic over MCP’s JSON-RPC precisely so every message is typed and loggable, rather than a bespoke <code>postMessage</code> shape that nobody audits.</p>
+<h3 id="5-the-sandbox-proxy-pattern--and-who-it-actually-binds">5. The sandbox-proxy pattern — and who it actually binds<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#5-the-sandbox-proxy-pattern--and-who-it-actually-binds" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Read the first clause before the rest, because it inverts who this section is for:</p>
+<blockquote>
+<p><em>“<strong>If the Host is a web page</strong>, it MUST wrap the View and communicate with it through an intermediate Sandbox proxy.”</em></p>
+<ol>
+<li><em>“The Host and the Sandbox MUST have different origins.”</em></li>
+<li><em>“The Sandbox MUST have the following permissions: <code>allow-scripts</code>, <code>allow-same-origin</code>.”</em></li>
+</ol>
+</blockquote>
+<p>The proxy <strong>is</strong> sandboxed, <strong>with</strong> <code>allow-same-origin</code>, and its safety comes from sitting on a <strong>different origin than the host</strong> — exactly the case §2 describes. The frame holds a real origin; that origin just is not the host’s.</p>
+<p>The rest of the proxy’s obligations, from the Final spec:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Requirement</th><th>Level</th></tr></thead><tbody><tr><td>Sandbox announces readiness (<code>sandbox-proxy-ready</code>); Host then sends the raw HTML (<code>sandbox-resource-ready</code>)</td><td>MUST (both — the draft has these as SHOULD; Final is stricter)</td></tr><tr><td>Load the View’s raw HTML with CSP enforcing the domains declared in <code>ui.csp</code></td><td>MUST</td></tr><tr><td><code>frame-src 'none'</code> unless <code>frameDomains</code> declared; <code>base-uri 'self'</code> unless <code>baseUriDomains</code> declared; <code>object-src 'none'</code></td><td>MUST</td></tr><tr><td>Restrictive defaults when no CSP metadata is provided</td><td>MUST</td></tr><tr><td>Forward messages both ways, except methods starting <code>ui/notifications/sandbox-</code></td><td>MUST</td></tr><tr><td>Host must not send any request or notification to the View before receiving <code>initialized</code></td><td>MUST NOT</td></tr><tr><td>Proxy originates no requests of its own (it would have to synthesize request ids)</td><td>SHOULD NOT</td></tr><tr><td>Set the inner iframe’s <code>allow</code> attribute from declared <code>permissions</code></td><td>MAY</td></tr></tbody></table></div>
+<p><strong>The scope problem, stated plainly.</strong> That conditional — <em>if the Host is a web page</em> — means this entire contract binds for browser-based hosts, which this note’s own trust table calls the <strong>low-privilege</strong> case. For an Electron desktop host (VS Code, Cursor, Claude Desktop — the high-privilege case this note exists for), <strong>the sandbox-proxy MUST does not apply, and the spec prescribes nothing in its place.</strong></p>
+<p>That is a genuine gap in the standard, not an omission in this note, and it is worth knowing before you cite the spec as your desktop containment story. What fills it:</p>
+<ul>
+<li>The <strong>process layer</strong> documented at the top of this note — renderer sandboxing, context isolation, and not tripping the <code>nodeIntegration</code> cascade. This is the desktop host’s real containment, and it is Electron’s contract, not MCP’s.</li>
+<li>The <strong>origin rule</strong> in §2 holds regardless of host type: an opaque origin, or a real origin that is not yours. A desktop host is free to adopt the proxy pattern voluntarily and probably should; it simply is not obligated to.</li>
+<li>Mitigation 1 <em>does</em> bind universally: <em>“All View content MUST be rendered in sandboxed iframes with restricted permissions.”</em> That MUST has no host-type conditional. It just does not say which tokens.</li>
+</ul>
+<p>So the honest summary for a desktop host: one unconditional MUST (sandbox the iframe), no prescribed token set, no prescribed origin model, and the Electron layer doing the actual work.</p>
+<h2 id="what-mcp-apps-mandates-and-what-it-leaves-to-you">What MCP Apps mandates, and what it leaves to you<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#what-mcp-apps-mandates-and-what-it-leaves-to-you" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>From the <strong>Final</strong> spec. The gaps are where hosts differ and where a review should focus.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Control</th><th>Final spec position</th></tr></thead><tbody><tr><td>All View content rendered in sandboxed iframes</td><td><strong>MUST</strong> — unconditional, no host-type caveat</td></tr><tr><td>Sandbox-proxy contract (different origins, <code>allow-scripts</code>+<code>allow-same-origin</code>, CSP construction, message forwarding)</td><td><strong>MUST — but only “if the Host is a web page”</strong></td></tr><tr><td>CSP constructed from declared domains; block undeclared</td><td><strong>MUST</strong></td></tr><tr><td>Restrictive default CSP when <code>ui.csp</code> is absent</td><td><strong>MUST</strong></td></tr><tr><td>Warn users when UI requires external domain access</td><td>SHOULD</td></tr><tr><td>Validate incoming messages, reject malformed types, log View-initiated RPC</td><td>SHOULD-level host behavior</td></tr><tr><td>Predeclared review: inspect HTML at connection setup, hash/sign resources, allowlist or blocklist by hash</td><td>SHOULD-level host behavior</td></tr><tr><td>Indicate sandboxed-UI boundaries clearly (social-engineering mitigation)</td><td>“Other risks” — advisory</td></tr><tr><td>Resource limits against CPU/memory exhaustion</td><td>”Other risks” — advisory</td></tr><tr><td><strong>User confirmation before a View-initiated tool call</strong></td><td><strong>MAY</strong></td></tr><tr><td>Approval granularity, allowlists, audit-log persistence</td><td>Host discretion</td></tr></tbody></table></div>
+<h3 id="confirmation-one-direction-and-it-is-a-bare-may">Confirmation: one direction, and it is a bare MAY<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#confirmation-one-direction-and-it-is-a-bare-may" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>The only relevant flow in the Final spec is the View calling out — the app’s UI triggering a tool. It is governed by sandbox-proxy item 8:</p>
+<blockquote>
+<p><em>“The Host MAY forward any message from the View (coming via the Sandbox) to the MCP Apps server, for any method that doesn’t start with <code>ui/</code>. While the Host SHOULD ensure the View’s MCP connection is spec-compliant, it MAY decide to block some messages or subject them to further user approval.”</em></p>
+</blockquote>
+<p><code>MAY</code> on both blocking and approval, with no recommendation attached. <strong>A server cannot assume the host will prompt.</strong> That is the whole answer for the shipped standard.</p>
+<p><strong>Draft-only, and this note previously presented it as an obligation.</strong> The draft adds app-registered tools — an agent invoking a tool the <em>app</em> declared — under a <code>5. App-Provided Tools Security</code> section carrying SHOULD-level host protections, <em>“Require explicit user approval for tools with <code>readOnlyHint: false</code>”</em>, and a “user confirmation required” safe default for unannotated tools. <strong>None of that exists in Final.</strong> Grepping Final for <code>readOnlyHint</code>, <code>app tool</code>, or <code>register their own tools</code> returns nothing; its Mitigations run 1–4 plus “Other risks”, with no fifth section. If app tools land as specified, that second direction becomes real. Today it is not something a host is obligated to do or a server can rely on.</p>
+<p>The practical rule is the same either way and does not depend on the spec: <strong>do not use the host’s confirmation UI as your authorization boundary.</strong> That is guardrail 3 in <a href="../ai/generative-ui-landscape" class="internal" data-slug="ai/generative-ui-landscape">generative-ui-landscape</a>.</p>
+<h3 id="predeclared-review--the-control-most-likely-to-go-unused">Predeclared review — the control most likely to go unused<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#predeclared-review--the-control-most-likely-to-go-unused" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Worth pulling out because it is the spec’s most distinctive idea and the easiest for a host to skip silently. UI ships as <code>ui://</code> resources referenced by tool metadata rather than embedded in tool results, specifically so hosts receive templates <em>during connection setup, before tool execution</em>. The spec’s host behaviors: review HTML for obviously malicious patterns, <strong>generate a hash or signature per resource</strong>, warn users about suspicious content, and <strong>allowlist or blocklist by resource hash</strong>.</p>
+<p>Hashing is the part that turns this from a vague “review the HTML” into something operable — it gives you a stable identity for a template, so an approved template that later changes is detectable. If you are auditing a host, ask whether it does that or merely renders what arrives. The review window exists only if someone uses it.</p>
+<h2 id="review-checklist">Review checklist<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#review-checklist" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Split by role, because most of these controls are only actionable by one of the two.</p>
+<p><strong>If you are building or auditing a host</strong> (the controls actually live here):</p>
+<ol>
+<li><strong>How privileged is this process?</strong> Per-session, not per-product — the same IDE differs with and without cloud credentials loaded.</li>
+<li><strong>If Electron: is the renderer genuinely sandboxed?</strong> <code>sandbox: true</code>, <code>contextIsolation: true</code>, <code>nodeIntegration: false</code> — and confirm the cascade above has not silently collapsed all three.</li>
+<li><strong>Whose origin does the frame have?</strong> Not “is <code>allow-same-origin</code> set” — an opaque origin <em>or</em> a different real origin both work; the embedder’s own origin does not.</li>
+<li><strong>Are the dangerous tokens absent?</strong> <code>allow-popups-to-escape-sandbox</code>, <code>allow-top-navigation</code>, <code>allow-top-navigation-to-custom-protocols</code> (this one matters more on desktop than on web).</li>
+<li><strong>Is there a CSP, and does it block undeclared destinations?</strong> <code>connect-src</code> is the exfiltration control.</li>
+<li><strong>Does every <code>postMessage</code> handler validate <code>event.origin</code>?</strong></li>
+<li><strong>Is the predeclared-review window actually used</strong> — templates inspected and hashed at connection setup — or does the host just render what arrives?</li>
+<li><strong>Is a View-initiated tool call gated by something the host controls?</strong> The spec only says MAY; the decision is yours and nobody makes it for you.</li>
+<li><strong>Is server-supplied UI visually distinguishable from host chrome?</strong></li>
+<li><strong>Are View-initiated RPC calls logged?</strong> Post-incident this is the only record — <a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/agent-audit-trails-provenance.md" class="external">agent-audit-trails-provenance<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>, <a href="../security/post-breach-investigability" class="internal" data-slug="security/post-breach-investigability">post-breach-investigability</a>.</li>
+</ol>
+<p><strong>If you are shipping a server that supplies UI</strong> (you control almost none of the above):</p>
+<ol>
+<li><strong>Assume no host prompts before your tool calls.</strong> <code>MAY</code> is the spec’s word.</li>
+<li><strong>Do not let the UI be your authorization boundary.</strong> Enforce server-side; treat anything arriving from a View as an untrusted request regardless of which UI produced it.</li>
+<li><strong>Declare the narrowest CSP domains you can.</strong> Hosts may tighten what you declare but must not loosen it, so a tight declaration is a control you actually own.</li>
+<li><strong>Assume your template is inspected and hashed</strong> — and that changing it may invalidate an allowlist entry.</li>
+</ol>
+<h2 id="what-this-note-does-not-cover">What this note does not cover<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#what-this-note-does-not-cover" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><strong>No incident data.</strong> No CVE against MCP Apps, MCP-UI, or A2UI surfaced in this pass, and no public post-mortem of an attacked generative-UI system. Everything here is architectural.</li>
+<li><strong>No implementation was checked.</strong> This is the sharpest limit and it deserves stating first among them. Every claim here describes what a <em>document</em> requires. Nothing in this note establishes that Claude Desktop, VS Code, Cursor, or any other host actually implements the sandbox-proxy contract, the CSP default, or the predeclared-review window. A reviewer could complete every checklist item against an architecture no shipping product implements. Treat the checklist as questions to ask an implementation, not as a description of one.</li>
+<li><strong>First-party generation.</strong> Covered in the threat-model section: the model-generates-its-own-markup case needs separate treatment this note does not provide.</li>
+<li><strong>Server-side compromise.</strong> Contained markup from a malicious server is still a malicious server; this note bounds the damage the <em>UI</em> can do.</li>
+<li><strong>Model-level defenses.</strong> Stopping a model from being steered into hostile output is <a href="../ai/prompt-injection" class="internal" data-slug="ai/prompt-injection">prompt-injection</a>; this note assumes that failed.</li>
+<li><strong>OS-level containment of the agent itself</strong> — <a href="../ai/agent-sandbox-isolation-tiers" class="internal" data-slug="ai/agent-sandbox-isolation-tiers">agent-sandbox-isolation-tiers</a>, <a href="../ai/agent-isolation-hardening" class="internal" data-slug="ai/agent-isolation-hardening">agent-isolation-hardening</a>. The host <em>process</em> layer is now covered above; the agent-in-a-container layer is not.</li>
+<li><strong>Supply chain.</strong> A compromised renderer library, or a malicious UI template in a registry, sits upstream of every control listed here and defeats all of them. <a href="../ai/ai-supply-chain-risks" class="internal" data-slug="ai/ai-supply-chain-risks">ai-supply-chain-risks</a>, <a href="https://github.com/oxzo/brains/tree/main/knowledge/security/supply-chain-security.md" class="external">supply-chain-security<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>.</li>
+</ul>
+<h2 id="corrections">Corrections<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#corrections" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Kept in the note rather than only in git, because this is security guidance: a reader may have acted on an earlier version, and each of these was wrong in a way that would change what someone built. Four errors across two revisions, and the pattern in them is the useful part.</p>
+<ol>
+<li>
+<p><strong>The sandbox-proxy architecture was described backwards.</strong> An early version said the outer proxy is same-origin with the host and unsandboxed, with an opaque-origin inner frame. The spec requires the opposite: different origins for Host and Sandbox, and the Sandbox holding <code>allow-scripts</code> <em>and</em> <code>allow-same-origin</code>.</p>
+</li>
+<li>
+<p><strong>The origin mechanic was stated as an absolute</strong> — “<code>allow-scripts</code> + <code>allow-same-origin</code> is never a sandbox.” True only relative to the <em>embedder’s</em> origin. Stated absolutely it would lead a reader to reject the spec’s own mandated design as insecure.</p>
+</li>
+<li>
+<p><strong>The consent claim was wrong twice, in opposite directions.</strong> First flatly (“the spec does not mandate consent”). Then the correction quoted the <code>App-Provided Tools Security</code> recommendations — which govern the <em>agent invoking app tools</em> — to overturn a claim about <em>View-initiated calls</em>, a different flow with a bare <code>MAY</code>. The second version sounded better-sourced and was wrong about which question it answered.</p>
+</li>
+<li>
+<p><strong>An A2UI inner-frame sandbox flag list was published from a documentation summary.</strong> It is not what the specification requires. Removed rather than corrected.</p>
+</li>
+<li>
+<p><strong>The wrong specification file was quoted throughout.</strong> Every normative claim was sourced to <code>specification/draft/</code>, while the sibling note advertised MCP Apps as a finalized standard. The load-bearing requirements — sandbox proxy, CSP — turn out to be identical in Final, so most of the note survived on luck. Two things did not: the app-registered-tools consent model (<strong>draft-only; absent from Final entirely</strong>) and the <code>ui/download-file</code> flow (<strong>same</strong>). This also means error 3’s “correction” was arguing about a feature that has not shipped, and the original blunt claim was right for the Final spec all along.</p>
+</li>
+<li>
+<p><strong>The Electron premise was asserted about three named products without a source</strong>, in the very section added to fix an earlier premise error. Caught before it was wrong — all three check out — but it was the last unsourced specific in a note that had made a virtue of sourcing everything, and it was asserted from background knowledge, which is exactly what produced errors 1, 2 and 4. Now carries per-product evidence grades, two of which are secondary.</p>
+</li>
+</ol>
+<p><strong>The pattern, revised.</strong> Errors 1, 2 and 4 came from treating an LLM summary of a page as a source read — a diagnosis this note published after round two, which then made error 5 harder to see, because provenance had been so visibly fixed that nobody asked <em>which file</em>. Error 3 came from a confident correction of an earlier error; error 5 was underneath it the whole time and was the actual root cause. Error 6 is the interesting one because it was a near-miss rather than a mistake: the claim was true, and it was still unsourced in a note whose entire credibility rests on sourcing. Being right by luck reads identically to being right by method until someone checks.</p>
+<p>Four lessons, in order of how much they cost: <strong>name the document version, not just the document</strong>; <strong>fetch the raw file and grep normative keywords</strong>; <strong>when correcting, re-verify what question the new citation answers</strong>; and <strong>an unsourced specific is a defect even when it turns out to be true.</strong></p>
+<p>A reader is entitled to ask what this record implies about the claims that remain. The honest answer: every normative statement above is now quoted from the Final spec file and can be checked against it in a minute, which is the only assurance worth offering. The architectural reasoning around those quotes — the three-layer framing, the origin rule, the first-party gap — has not been tested against any implementation, and that limit is stated below rather than buried.</p>
+<h2 id="related">Related<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#related" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><a href="../ai/generative-ui-landscape" class="internal" data-slug="ai/generative-ui-landscape">generative-ui-landscape</a> — the field, the options, and the evidence; this note is its security half</li>
+<li><a href="../security/ambient-authority-and-blast-radius" class="internal" data-slug="security/ambient-authority-and-blast-radius">ambient-authority-and-blast-radius</a> — why host privilege, not code quality, sets the cost</li>
+<li><a href="../ai/ai-agent-security" class="internal" data-slug="ai/ai-agent-security">ai-agent-security</a> — defense architecture for autonomous agents generally</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/capability-combination-security-frames.md" class="external">capability-combination-security-frames<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — the lethal-trifecta test applied to what a rendered surface can reach</li>
+<li><a href="../ai/prompt-injection" class="internal" data-slug="ai/prompt-injection">prompt-injection</a> — the upstream attack this note assumes succeeded</li>
+<li><a href="../ai/vibe-coding-authorization-flaws" class="internal" data-slug="ai/vibe-coding-authorization-flaws">vibe-coding-authorization-flaws</a> — what checklist item 6 prevents</li>
+<li><a href="../security/web-application-security" class="internal" data-slug="security/web-application-security">web-application-security</a> — CSP fundamentals</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/model-context-protocol.md" class="external">model-context-protocol<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — the base protocol MCP Apps extends</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/agent-operable-web-ui.md" class="external">agent-operable-web-ui<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — the mirror case: a foreign agent operating <em>your</em> UI</li>
+</ul>
+<h2 id="sources">Sources<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#sources" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><a href="https://github.com/modelcontextprotocol/ext-apps/blob/main/specification/2026-01-26/apps.mdx" class="external"><code>ext-apps</code> <strong>Final</strong> specification, <code>specification/2026-01-26/apps.mdx</code><svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — <strong>the source for every normative claim above.</strong> Raw file fetched and read 2026-08-25; MUST/SHOULD quotes are literal.</li>
+<li><a href="https://github.com/modelcontextprotocol/ext-apps/blob/main/specification/draft/apps.mdx" class="external"><code>ext-apps</code> draft specification<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — read for comparison only. 73 normative statements to Final’s 56. Cited here <strong>solely</strong> to mark what is draft-only (app-registered tools and their consent model; the <code>ui/download-file</code> flow; <code>object-src</code> in the default CSP). Nothing draft-only is treated as an obligation.</li>
+<li><a href="https://modelcontextprotocol.io/seps/1865-mcp-apps-interactive-user-interfaces-for-mcp" class="external">SEP-1865<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — predeclared-resource rationale; fetched 2026-08-25</li>
+<li><a href="https://a2ui.org/guides/mcp-apps-in-a2ui/" class="external">a2ui.org — MCP Apps in A2UI<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — fetched 2026-08-25, but <strong>nothing in this note now rests on it</strong>; the flag list it was cited for has been removed (see Corrections). Listed only so the provenance trail is complete.</li>
+<li><a href="https://raw.githubusercontent.com/mdn/content/main/files/en-us/web/html/reference/elements/iframe/index.md" class="external">MDN <code>&lt;iframe></code> reference<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — raw source fetched 2026-08-25; the fourteen sandbox tokens were enumerated from it</li>
+<li><a href="https://github.com/electron/electron/tree/main/docs/tutorial" class="external">Electron <code>docs/tutorial/security.md</code> and <code>docs/tutorial/sandbox.md</code><svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — raw sources fetched 2026-08-25; version defaults and the nodeIntegration cascade quoted verbatim</li>
+<li><a href="https://www.backslash.security/blog/new-mcp-spec-opens-new-attack-surfaces" class="external">Backslash Security — New MCP Spec Opens Three New Attack Surfaces<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> (2026-05-28) — trust-inversion framing; <strong>vendor blog, no disclosed exploit</strong></li>
+<li>VS Code process-sandboxing write-up — secondary; the extension-host/utility-process claim is flagged unverified inline</li>
+<li>Local VS Code install (<code>com.visualstudio.code</code> flatpak, 1.130.0) inspected 2026-08-25 for Electron runtime artifacts; <code>microsoft/vscode</code> <code>package.json</code> fetched the same day</li>
+<li>Cursor-as-VS-Code-fork and Claude-Desktop-as-Electron: secondary sources only, graded in the table above; neither is vendor-documented here</li>
+<li><strong>Checked and dropped:</strong> an earlier version raised a residual concern about <code>allow-popups</code> citing Mozilla bug 1589845. That bug is <strong>RESOLVED DUPLICATE, filed 2019</strong>, and its duplicate target concerns sandboxes that <em>include</em> <code>allow-same-origin</code> — it does not support a concern about popups in an opaque-origin frame. Cited from a search result without checking status; removed.</li>
+</ul></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>Graph View</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc desktop-only"><button type="button" class="toc-header" aria-controls="toc-content" aria-expanded="true"><h3>Table of Contents</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="toc-content"><ul id="h9l23p" class="overflow"><li class="depth-0"><a href="#generative-ui-security--rendering-untrusted-interface-in-a-privileged-host" data-for="generative-ui-security--rendering-untrusted-interface-in-a-privileged-host">Generative UI Security — Rendering Untrusted Interface in a Privileged Host</a></li><li class="depth-1"><a href="#why-this-is-not-the-usual-iframe-problem" data-for="why-this-is-not-the-usual-iframe-problem">Why this is not the usual iframe problem</a></li><li class="depth-1"><a href="#what-the-attacker-controls" data-for="what-the-attacker-controls">What the attacker controls</a></li><li class="depth-2"><a href="#ui-mimicry--the-threat-no-sandbox-flag-addresses" data-for="ui-mimicry--the-threat-no-sandbox-flag-addresses">UI mimicry — the threat no sandbox flag addresses</a></li><li class="depth-1"><a href="#the-isolation-stack" data-for="the-isolation-stack">The isolation stack</a></li><li class="depth-2"><a href="#1-the-sandbox-attribute-flag-by-flag" data-for="1-the-sandbox-attribute-flag-by-flag">1. The sandbox attribute, flag by flag</a></li><li class="depth-2"><a href="#2-allow-scripts--allow-same-origin-is-only-unsafe-relative-to-the-embedders-origin" data-for="2-allow-scripts--allow-same-origin-is-only-unsafe-relative-to-the-embedders-origin">2. allow-scripts + allow-same-origin is only unsafe relative to the embedder’s origin</a></li><li class="depth-2"><a href="#3-content-security-policy" data-for="3-content-security-policy">3. Content Security Policy</a></li><li class="depth-2"><a href="#4-postmessage-origin-validation" data-for="4-postmessage-origin-validation">4. postMessage origin validation</a></li><li class="depth-2"><a href="#5-the-sandbox-proxy-pattern--and-who-it-actually-binds" data-for="5-the-sandbox-proxy-pattern--and-who-it-actually-binds">5. The sandbox-proxy pattern — and who it actually binds</a></li><li class="depth-1"><a href="#what-mcp-apps-mandates-and-what-it-leaves-to-you" data-for="what-mcp-apps-mandates-and-what-it-leaves-to-you">What MCP Apps mandates, and what it leaves to you</a></li><li class="depth-2"><a href="#confirmation-one-direction-and-it-is-a-bare-may" data-for="confirmation-one-direction-and-it-is-a-bare-may">Confirmation: one direction, and it is a bare MAY</a></li><li class="depth-2"><a href="#predeclared-review--the-control-most-likely-to-go-unused" data-for="predeclared-review--the-control-most-likely-to-go-unused">Predeclared review — the control most likely to go unused</a></li><li class="depth-1"><a href="#review-checklist" data-for="review-checklist">Review checklist</a></li><li class="depth-1"><a href="#what-this-note-does-not-cover" data-for="what-this-note-does-not-cover">What this note does not cover</a></li><li class="depth-1"><a href="#corrections" data-for="corrections">Corrections</a></li><li class="depth-1"><a href="#related" data-for="related">Related</a></li><li class="depth-1"><a href="#sources" data-for="sources">Sources</a></li><li class="overflow-end"></li></ul></div></div><div class="backlinks"><h3>Backlinks</h3><ul id="xacmdj" class="overflow"><li><a href="../ai/a2ui-vs-json-render" class="internal">A2UI vs json-render — Generative UI Protocol vs Framework</a></li><li><a href="../ai/generative-ui-landscape" class="internal">Generative UI — Runtime Landscape and Evidence Base</a></li><li><a href="../ai/" class="internal">AI — Index</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v4.4.1</a> © 2026</p><ul><li><a href="https://github.com/oxzo/brains">source</a></li><li><a href="/index.xml">rss</a></li></ul></footer></div></div></body><script type="application/javascript">function o(){let t=this.parentElement;t.classList.toggle("is-collapsed");let e=t.classList.contains("is-collapsed")?this.scrollHeight:t.scrollHeight;t.style.maxHeight=e+"px";let c=t,l=t.parentElement;for(;l;){if(!l.classList.contains("callout"))return;let i=l.classList.contains("is-collapsed")?l.scrollHeight:l.scrollHeight+c.scrollHeight;l.style.maxHeight=i+"px",c=l,l=l.parentElement}}function n(){let t=document.getElementsByClassName("callout is-collapsible");for(let s of t){let e=s.firstElementChild;if(!e)continue;e.addEventListener("click",o),window.addCleanup(()=>e.removeEventListener("click",o));let l=s.classList.contains("is-collapsed")?e.scrollHeight:s.scrollHeight;s.style.maxHeight=l+"px"}}document.addEventListener("nav",n);
+</script><script type="module">function f(i,e){if(!i)return;function r(o){o.target===this&&(o.preventDefault(),o.stopPropagation(),e())}function t(o){o.key.startsWith("Esc")&&(o.preventDefault(),e())}i?.addEventListener("click",r),window.addCleanup(()=>i?.removeEventListener("click",r)),document.addEventListener("keydown",t),window.addCleanup(()=>document.removeEventListener("keydown",t))}function y(i){for(;i.firstChild;)i.removeChild(i.firstChild)}var h=class{constructor(e,r){this.container=e;this.content=r;this.setupEventListeners(),this.setupNavigationControls(),this.resetTransform()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;cleanups=[];setupEventListeners(){let e=this.onMouseDown.bind(this),r=this.onMouseMove.bind(this),t=this.onMouseUp.bind(this),o=this.resetTransform.bind(this);this.container.addEventListener("mousedown",e),document.addEventListener("mousemove",r),document.addEventListener("mouseup",t),window.addEventListener("resize",o),this.cleanups.push(()=>this.container.removeEventListener("mousedown",e),()=>document.removeEventListener("mousemove",r),()=>document.removeEventListener("mouseup",t),()=>window.removeEventListener("resize",o))}cleanup(){for(let e of this.cleanups)e()}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let r=this.createButton("+",()=>this.zoom(.1)),t=this.createButton("-",()=>this.zoom(-.1)),o=this.createButton("Reset",()=>this.resetTransform());e.appendChild(t),e.appendChild(o),e.appendChild(r),this.container.appendChild(e)}createButton(e,r){let t=document.createElement("button");return t.textContent=e,t.className="mermaid-control-button",t.addEventListener("click",r),window.addCleanup(()=>t.removeEventListener("click",r)),t}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}zoom(e){let r=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),t=this.content.getBoundingClientRect(),o=t.width/2,n=t.height/2,c=r-this.scale;this.currentPan.x-=o*c,this.currentPan.y-=n*c,this.scale=r,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){this.scale=1;let e=this.content.querySelector("svg");this.currentPan={x:e.getBoundingClientRect().width/2,y:e.getBoundingClientRect().height/2},this.updateTransform()}},C=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],E;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;E||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let r=E.default,t=new WeakMap;for(let n of e)t.set(n,n.innerText);async function o(){for(let s of e){s.removeAttribute("data-processed");let a=t.get(s);a&&(s.innerHTML=a)}let n=C.reduce((s,a)=>(s[a]=window.getComputedStyle(document.documentElement).getPropertyValue(a),s),{}),c=document.documentElement.getAttribute("saved-theme")==="dark";r.initialize({startOnLoad:!1,securityLevel:"loose",theme:c?"dark":"base",themeVariables:{fontFamily:n["--codeFont"],primaryColor:n["--light"],primaryTextColor:n["--darkgray"],primaryBorderColor:n["--tertiary"],lineColor:n["--darkgray"],secondaryColor:n["--secondary"],tertiaryColor:n["--tertiary"],clusterBkg:n["--light"],edgeLabelBackground:n["--highlight"]}}),await r.run({nodes:e})}await o(),document.addEventListener("themechange",o),window.addCleanup(()=>document.removeEventListener("themechange",o));for(let n=0;n<e.length;n++){let v=function(){let g=l.querySelector("#mermaid-space"),m=l.querySelector(".mermaid-content");if(!m)return;y(m);let w=c.querySelector("svg").cloneNode(!0);m.appendChild(w),l.classList.add("active"),g.style.cursor="grab",u=new h(g,m)},M=function(){l.classList.remove("active"),u?.cleanup(),u=null},c=e[n],s=c.parentElement,a=s.querySelector(".clipboard-button"),d=s.querySelector(".expand-button"),p=window.getComputedStyle(a),L=a.offsetWidth+parseFloat(p.marginLeft||"0")+parseFloat(p.marginRight||"0");d.style.right=`calc(${L}px + 0.3rem)`,s.prepend(d);let l=s.querySelector("#mermaid-container");if(!l)return;let u=null;d.addEventListener("click",v),f(l,M),window.addCleanup(()=>{u?.cleanup(),d.removeEventListener("click",v)})}});
+</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript"></script><script src="../postscript.00b09a8c.js" type="module"></script></html>

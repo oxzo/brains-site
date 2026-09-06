@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en"><head><title>Systems Thinking — Engineering Lens · second-brain</title><meta charset="utf-8"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400;1,600&amp;family=Inter:wght@400;700&amp;family=JetBrains Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="synapse"/><meta property="og:title" content="Systems Thinking — Engineering Lens · second-brain"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Systems Thinking — Engineering Lens · second-brain"/><meta name="twitter:description" content="Systems Thinking — Engineering Lens Scope of this note Sibling to [[systems-thinking]], which covers the human / philosophical lens (the practitioner’s inner conditions as the ..."/><meta property="og:description" content="Systems Thinking — Engineering Lens Scope of this note Sibling to [[systems-thinking]], which covers the human / philosophical lens (the practitioner’s inner conditions as the ..."/><meta property="og:image:alt" content="Systems Thinking — Engineering Lens Scope of this note Sibling to [[systems-thinking]], which covers the human / philosophical lens (the practitioner’s inner conditions as the ..."/><meta property="twitter:domain" content="oxzo.github.io/brains-site"/><meta property="og:url" content="https://oxzo.github.io/brains-site/general/systems-thinking-engineering"/><meta property="twitter:url" content="https://oxzo.github.io/brains-site/general/systems-thinking-engineering"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="Systems Thinking — Engineering Lens Scope of this note Sibling to [[systems-thinking]], which covers the human / philosophical lens (the practitioner’s inner conditions as the ..."/><meta name="generator" content="Quartz"/><link href="../index.322b98b4.css" rel="stylesheet" type="text/css" spa-preserve/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  padding: 2rem;
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL2hvbWUvcnVubmVyL3dvcmsvYnJhaW5zL2JyYWlucy9zaXRlL3F1YXJ0ei9jb21wb25lbnRzL3N0eWxlcyIsInNvdXJjZXMiOlsibWVybWFpZC5pbmxpbmUuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTs7QUFHRjtFQUNFO0VBQ0E7O0FBR0Y7RUFDRTs7O0FBS0Y7RUFDRTtFQUNBOzs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7O0FBR0Y7RUFDRTs7QUFJRjtFQUNFO0VBQ0E7RUFDQSIsInNvdXJjZXNDb250ZW50IjpbIi5leHBhbmQtYnV0dG9uIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbG9hdDogcmlnaHQ7XG4gIHBhZGRpbmc6IDAuNHJlbTtcbiAgbWFyZ2luOiAwLjNyZW07XG4gIHJpZ2h0OiAwOyAvLyBOT1RFOiByaWdodCB3aWxsIGJlIHNldCBpbiBtZXJtYWlkLmlubGluZS50c1xuICBjb2xvcjogdmFyKC0tZ3JheSk7XG4gIGJvcmRlci1jb2xvcjogdmFyKC0tZGFyayk7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWxpZ2h0KTtcbiAgYm9yZGVyOiAxcHggc29saWQ7XG4gIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgb3BhY2l0eTogMDtcbiAgdHJhbnNpdGlvbjogMC4ycztcblxuICAmID4gc3ZnIHtcbiAgICBmaWxsOiB2YXIoLS1saWdodCk7XG4gICAgZmlsdGVyOiBjb250cmFzdCgwLjMpO1xuICB9XG5cbiAgJjpob3ZlciB7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIGJvcmRlci1jb2xvcjogdmFyKC0tc2Vjb25kYXJ5KTtcbiAgfVxuXG4gICY6Zm9jdXMge1xuICAgIG91dGxpbmU6IDA7XG4gIH1cbn1cblxucHJlIHtcbiAgJjpob3ZlciA+IC5leHBhbmQtYnV0dG9uIHtcbiAgICBvcGFjaXR5OiAxO1xuICAgIHRyYW5zaXRpb246IDAuMnM7XG4gIH1cbn1cblxuI21lcm1haWQtY29udGFpbmVyIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICBjb250YWluOiBsYXlvdXQ7XG4gIHotaW5kZXg6IDk5OTtcbiAgbGVmdDogMDtcbiAgdG9wOiAwO1xuICB3aWR0aDogMTAwdnc7XG4gIGhlaWdodDogMTAwdmg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGRpc3BsYXk6IG5vbmU7XG4gIGJhY2tkcm9wLWZpbHRlcjogYmx1cig0cHgpO1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuNSk7XG5cbiAgJi5hY3RpdmUge1xuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgfVxuXG4gICYgPiAjbWVybWFpZC1zcGFjZSB7XG4gICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1saWdodCk7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDUwJTtcbiAgICBsZWZ0OiA1MCU7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gICAgaGVpZ2h0OiA4MHZoO1xuICAgIHdpZHRoOiA4MHZ3O1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG5cbiAgICAmID4gLm1lcm1haWQtY29udGVudCB7XG4gICAgICBwYWRkaW5nOiAycmVtO1xuICAgICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgICAgdHJhbnNmb3JtLW9yaWdpbjogMCAwO1xuICAgICAgdHJhbnNpdGlvbjogdHJhbnNmb3JtIDAuMXMgZWFzZTtcbiAgICAgIG92ZXJmbG93OiB2aXNpYmxlO1xuICAgICAgbWluLWhlaWdodDogMjAwcHg7XG4gICAgICBtaW4td2lkdGg6IDIwMHB4O1xuXG4gICAgICBwcmUge1xuICAgICAgICBtYXJnaW46IDA7XG4gICAgICAgIGJvcmRlcjogbm9uZTtcbiAgICAgIH1cblxuICAgICAgc3ZnIHtcbiAgICAgICAgbWF4LXdpZHRoOiBub25lO1xuICAgICAgICBoZWlnaHQ6IGF1dG87XG4gICAgICB9XG4gICAgfVxuXG4gICAgJiA+IC5tZXJtYWlkLWNvbnRyb2xzIHtcbiAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgIGJvdHRvbTogMjBweDtcbiAgICAgIHJpZ2h0OiAyMHB4O1xuICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgIGdhcDogOHB4O1xuICAgICAgcGFkZGluZzogOHB4O1xuICAgICAgYmFja2dyb3VuZDogdmFyKC0tbGlnaHQpO1xuICAgICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICAgIGJvcmRlci1yYWRpdXM6IDZweDtcbiAgICAgIGJveC1zaGFkb3c6IDAgMnB4IDRweCByZ2JhKDAsIDAsIDAsIDAuMSk7XG4gICAgICB6LWluZGV4OiAyO1xuXG4gICAgICAubWVybWFpZC1jb250cm9sLWJ1dHRvbiB7XG4gICAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAgICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICAgICAgICB3aWR0aDogMzJweDtcbiAgICAgICAgaGVpZ2h0OiAzMnB4O1xuICAgICAgICBwYWRkaW5nOiAwO1xuICAgICAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodCk7XG4gICAgICAgIGNvbG9yOiB2YXIoLS1kYXJrKTtcbiAgICAgICAgYm9yZGVyLXJhZGl1czogNHB4O1xuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgICAgIGZvbnQtc2l6ZTogMTZweDtcbiAgICAgICAgZm9udC1mYW1pbHk6IHZhcigtLWJvZHlGb250KTtcbiAgICAgICAgdHJhbnNpdGlvbjogYWxsIDAuMnMgZWFzZTtcblxuICAgICAgICAmOmhvdmVyIHtcbiAgICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICB9XG5cbiAgICAgICAgJjphY3RpdmUge1xuICAgICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWSgxcHgpO1xuICAgICAgICB9XG5cbiAgICAgICAgLy8gU3R5bGUgdGhlIHJlc2V0IGJ1dHRvbiBkaWZmZXJlbnRseVxuICAgICAgICAmOm50aC1jaGlsZCgyKSB7XG4gICAgICAgICAgd2lkdGg6IGF1dG87XG4gICAgICAgICAgcGFkZGluZzogMCAxMnB4O1xuICAgICAgICAgIGZvbnQtc2l6ZTogMTRweDtcbiAgICAgICAgfVxuICAgICAgfVxuICAgIH1cbiAgfVxufVxuIl19 */</style><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" spa-preserve/><script src="../prescript.be9697b4.js" type="application/javascript" spa-preserve></script><script type="application/javascript" spa-preserve>const fetchData = fetch("../static/contentIndex.73890e1e.json").then(data => data.json())</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://oxzo.github.io/brains-site/index.xml"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://oxzo.github.io/brains-site/general/systems-thinking-engineering-og-image.webp"/><meta property="og:image:url" content="https://oxzo.github.io/brains-site/general/systems-thinking-engineering-og-image.webp"/><meta name="twitter:image" content="https://oxzo.github.io/brains-site/general/systems-thinking-engineering-og-image.webp"/><meta property="og:image:type" content="image/.webp"/></head><body data-slug="general/systems-thinking-engineering"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">synapse</a></h2><div class="spacer mobile-only"></div><div style="display: flex; flex-direction: row; flex-wrap: nowrap; gap: 1rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button"><p>Search</p><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Search for something" placeholder="Search for something"/><div class="search-layout" data-preview="true"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Dark mode"><title>Dark mode</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Light mode"><title>Light mode</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div></div><div class="explorer" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a,b)=>!a.isFolder&amp;&amp;!b.isFolder||a.isFolder&amp;&amp;b.isFolder?a.displayName.localeCompare(b.displayName,void 0,{numeric:!0,sensitivity:\&quot;base\&quot;}):!a.isFolder&amp;&amp;b.isFolder?1:-1&quot;,&quot;filterFn&quot;:&quot;node=>node.slugSegment!==\&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;node=>node&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-content"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>Explorer</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="explorer-content" aria-expanded="false"><ul class="explorer-ul overflow" id="0x8mfk"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#"></a></li></template><template id="template-folder"><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../general/">general</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>Systems Thinking — Engineering Lens</a></div></nav><h1 class="article-title">Systems Thinking — Engineering Lens</h1><p show-comma="true" class="content-meta"><time datetime="2026-07-19T00:00:00.000Z">Jul 19, 2026</time><span>14 min read</span></p><ul class="tags"><li><a href="../tags/general" class="internal tag-link">general</a></li><li><a href="../tags/decision-making" class="internal tag-link">decision-making</a></li><li><a href="../tags/mental-models" class="internal tag-link">mental-models</a></li><li><a href="../tags/systems" class="internal tag-link">systems</a></li><li><a href="../tags/publish" class="internal tag-link">publish</a></li></ul></div></div><article class="popover-hint"><h1 id="systems-thinking--engineering-lens">Systems Thinking — Engineering Lens<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#systems-thinking--engineering-lens" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<h2 id="scope-of-this-note">Scope of this note<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#scope-of-this-note" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Sibling to <code>[[systems-thinking]]</code>, which covers the human / philosophical lens (the practitioner’s inner conditions as the system to cultivate). This note covers the <strong>engineering / cybernetic lens</strong> rooted in Forrester’s system dynamics and popularized by Meadows (<em>Thinking in Systems</em>) and Senge (<em>The Fifth Discipline</em>). It treats organizations, ecologies, supply chains, and economies as objects that can be diagrammed in terms of stocks, flows, feedback loops, and delays — and intervened in at differentially-leveraged points.</p>
+<p>The two traditions are not interchangeable. They give different recommendations on the same problem; conflating them under the unmarked label “systems thinking” is the failure mode that prompted splitting the topic.</p>
+<h2 id="what-it-is">What it is<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#what-it-is" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>A vocabulary and a set of diagramming conventions for representing how a system’s structure produces its behavior over time. The core claim is that most pathological behavior in complex systems — overshoot, oscillation, collapse, addiction-to-quick-fixes — comes from structural features (loop polarity, delays, stock dynamics) rather than from the dispositions of the actors inside the system. Change the structure and behavior changes; exhort the actors and behavior usually does not.</p>
+<p>The minimum vocabulary:</p>
+<ul>
+<li><strong>Stock</strong> — an accumulation. Inventory in a warehouse, water in a reservoir, trust in a relationship, bug count in a codebase.</li>
+<li><strong>Flow</strong> — a rate of change in a stock. Hires per quarter, water flowing in or out, bugs created or fixed.</li>
+<li><strong>Feedback loop</strong> — a closed chain where a stock’s level influences the flows that change it.
+<ul>
+<li><strong>Balancing (negative) loop</strong> — drives the stock toward a goal or equilibrium. Thermostats, predator-prey limits, code review catching defects.</li>
+<li><strong>Reinforcing (positive) loop</strong> — amplifies; produces exponential growth or collapse. Compound interest, viral spread, runaway technical debt.</li>
+</ul>
+</li>
+<li><strong>Delay</strong> — time lag between a flow change and its observable effect on a stock, or between a signal and a corrective action. Long delays relative to a system’s response time are the dominant cause of oscillation and overshoot.</li>
+<li><strong>Leverage point</strong> — a place in the structure where a small change yields a large change in behavior. Meadows ordered these from lowest to highest leverage (see below).</li>
+</ul>
+<h2 id="why-it-matters">Why it matters<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#why-it-matters" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Most non-trivial dysfunction in organizations, codebases, and infrastructure is structural. A team that is “always firefighting” is usually not lazy or bad at prioritizing — they are inside a <em>Shifting the Burden</em> archetype where symptomatic relief atrophies the capacity for fundamental solutions. Naming the structure is what unlocks the intervention; addressing only the visible symptom feeds the loop.</p>
+<p>This lens is also the structural counterpart to vault tools that operate at adjacent layers:</p>
+<ul>
+<li><code>[[second-order-thinking]]</code> — Marks’s “and then what?” is the temporal-cascade question. The engineering lens supplies the <em>structure</em> through which the cascade flows: which loops amplify, which absorb, where the delays sit. Without structure, second-order thinking is an unconstrained branching exercise.</li>
+<li><code>[[cynefin-framework]]</code> — system dynamics dominates the <strong>Complicated</strong> domain (structure is knowable and analyzable by experts) and is partially useful in <strong>Complex</strong> (structure is real but maps are unreliable). It is the wrong tool in <strong>Clear</strong> (overkill) and in <strong>Chaotic</strong> (no time to model).</li>
+<li><code>[[systems-thinking]]</code> (human lens) — the actor inside the system. The two lenses cover different blind spots: the engineering lens optimizes structure but ignores the operator; the human lens optimizes the operator but ignores the structure. A practitioner with neither sees neither.</li>
+</ul>
+<h2 id="details">Details<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#details" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="stocks-flows-and-the-rate-vs-level-confusion">Stocks, flows, and the rate-vs-level confusion<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#stocks-flows-and-the-rate-vs-level-confusion" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Most reasoning errors about systems come from confusing a flow (rate) with a stock (level). A budget cut reduces the <em>rate</em> at which a deficit grows; the deficit (the stock) keeps growing until the rate goes negative. Cooling the climate requires net-negative emissions, not slowing emissions growth. Reducing hiring slows team growth but doesn’t shrink the team. The intuitive language (“we cut the deficit”) routinely conflates the two and produces policy that misses by years.</p>
+<h3 id="feedback-loops">Feedback loops<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#feedback-loops" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Reinforcing loops produce exponential dynamics in either direction — they don’t care whether the runaway is “good” (compounding savings, network effects, momentum on a project) or “bad” (technical debt, hostility spirals, bank runs). Their character is determined by which direction the system is currently running and what bounds it.</p>
+<p>Balancing loops produce goal-seeking behavior. The goal isn’t always intentional — a thermostat has an explicit setpoint, but a code review process has an implicit defect-tolerance setpoint that emerges from team norms and is rarely written down. Identifying the <em>implicit</em> goal of a balancing loop is often where leverage hides.</p>
+<p>Delays inside loops are where most counterintuitive behavior lives. A long delay in a balancing loop produces oscillation — over-corrections that themselves require correction. A long delay in a reinforcing loop produces overshoot — the runaway exceeds the bound before the bound becomes visible.</p>
+<h3 id="meadows-twelve-leverage-points">Meadows’ twelve leverage points<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#meadows-twelve-leverage-points" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>From Meadows, “Leverage Points: Places to Intervene in a System” (1999, The Sustainability Institute; expansion of an earlier 9-point version in <em>Whole Earth</em>, 1997). Conventionally listed from lowest to highest leverage:</p>
+<ol start="12">
+<li><strong>Constants, parameters, numbers</strong> — tax rates, interest rates, minimum wage. Where most policy debate happens; where the least leverage actually lives.</li>
+<li><strong>Sizes of buffers and stabilizing stocks</strong> — inventory levels, savings, reservoirs.</li>
+<li><strong>Structure of stocks and flows</strong> — physical infrastructure; once built, hard to change.</li>
+<li><strong>Length of delays</strong> — relative to the rate of system change.</li>
+<li><strong>Strength of balancing feedback loops</strong> — gain on corrective mechanisms relative to the impacts they’re trying to correct.</li>
+<li><strong>Strength of reinforcing feedback loops</strong> — usually higher leverage to <em>weaken</em> a runaway than to add another corrector.</li>
+<li><strong>Structure of information flows</strong> — who has access to what, when. Often a near-free intervention with large downstream effects.</li>
+<li><strong>Rules of the system</strong> — incentives, punishments, constraints. Higher leverage than the parameters those rules govern.</li>
+<li><strong>Power to add, change, evolve, or self-organize</strong> — capacity to alter rules and structure from within.</li>
+<li><strong>Goals of the system</strong> — the actual goal, which may differ from the stated one.</li>
+<li><strong>Paradigm out of which the system arises</strong> — the shared mental model that makes the goals seem natural.</li>
+<li><strong>Power to transcend paradigms</strong> — the meta-recognition that the paradigm is one of many.</li>
+</ol>
+<p>The ordering is intuitively useful, not exact — Meadows herself flagged that the relative leverage of points often depends on the specific system. The signal she insisted on: most action and debate happens at points 12–10, where leverage is lowest, because those are also the most visible and least threatening to existing power.</p>
+<h3 id="senges-system-archetypes">Senge’s system archetypes<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#senges-system-archetypes" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Recurring structural patterns described in <em>The Fifth Discipline</em> (Senge, 1990) and refined in subsequent system-dynamics literature. A short list of the most commonly invoked:</p>
+<ul>
+<li><strong>Limits to Growth</strong> — a reinforcing loop runs into a balancing constraint. The fix is rarely to push harder on the reinforcing loop; it is to find and address the constraint.</li>
+<li><strong>Shifting the Burden</strong> — a symptomatic fix relieves pressure on the fundamental solution, which then atrophies. Common in “we don’t have time for tests right now” cycles, in chronic personal coping patterns, in organizational reliance on heroic individuals.</li>
+<li><strong>Tragedy of the Commons</strong> — individually rational use of a shared resource produces collective irrationality. Hardin’s 1968 <em>Science</em> essay predates Senge; the archetype generalizes.</li>
+<li><strong>Fixes That Fail</strong> — a short-term fix worsens the long-term problem (painkiller masking a fracture). Distinct from Shifting the Burden in that the fix here is actively counterproductive, not merely lazy.</li>
+<li><strong>Eroding Goals</strong> — drift toward low performance as goals are gradually lowered to match degraded performance. Often invisible because each individual concession is small.</li>
+<li><strong>Escalation</strong> — two parties’ corrective actions strengthen each other’s reinforcing loops (arms races, price wars, escalating arguments).</li>
+<li><strong>Success to the Successful</strong> — initial advantage gets reinforced; resources flow toward those already winning. Underlies Matthew-effect dynamics in research funding, careers, platform economics.</li>
+<li><strong>Growth and Underinvestment</strong> — capacity grows below demand because the standards used to plan capacity drift down with realized performance.</li>
+</ul>
+<p>The archetypes are pedagogical, not exhaustive. Their value is as recognizable templates: when a situation matches the shape, the standard interventions are usually right and the obvious ones are usually wrong.</p>
+<h3 id="the-critical-systems-thinking-turn--who-benefits">The Critical Systems Thinking turn — who benefits<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-critical-systems-thinking-turn--who-benefits" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>A practical critique levelled at the engineering lens by the strand of literature called <strong>Critical Systems Thinking</strong> (CST). The lens, taken on its own, is technically rigorous but normatively quiet: the practitioner picks the system boundary, the variables, and the goal, then reasons inside that frame. CST’s claim is that those choices are themselves interventions — drawing the boundary in one place rather than another decides whose interests are inside the system and whose are externalities.</p>
+<p>Key questions CST adds to a structural analysis (drawn primarily from Werner Ulrich’s <em>Critical Systems Heuristics</em>, 1983):</p>
+<ul>
+<li><strong>Who benefits</strong> from the system as currently bounded?</li>
+<li><strong>Who decides</strong> what counts as improvement, and on what mandate?</li>
+<li><strong>Whose knowledge</strong> is treated as expertise, and whose is dismissed as anecdote?</li>
+<li><strong>Who is affected</strong> by the system but not represented in its design?</li>
+</ul>
+<p>Ulrich frames each of these in both an “is” mode (how the situation actually stands) and an “ought” mode (how the practitioner would defend it). The gap between the two is where the boundary judgments are doing political work that a stocks-and-flows diagram would leave invisible. The shorthand “boundary critique” is the move of treating the system boundary as itself something to argue about, not something to fix at the start of the analysis.</p>
+<p>For most engineering-lens applications inside an organisation — capacity planning, debt dynamics, reliability — the CST questions are rarely load-bearing and adding them adds friction. For analyses with distributional consequences (public policy, platform design, resource allocation across teams, anything where externalities fall on parties without voice in the system), skipping CST means producing a structurally clean recommendation that quietly encodes whose problem is being solved.</p>
+<p>The “three waves” framing often used in this literature comprises hard / functionalist (first wave), soft / interpretive (second wave; see <code>[[soft-systems-methodology]]</code>), and critical / emancipatory (third wave). The framing is most associated with Michael C. Jackson’s pedagogical schema rather than a settled historical fact about the field. It is useful as a map; treat the dates and ordering as approximate.</p>
+<h3 id="where-this-composes-with-vault-tools">Where this composes with vault tools<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#where-this-composes-with-vault-tools" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Layer</th><th>Question</th><th>Engineering-lens contribution</th></tr></thead><tbody><tr><td>Domain diagnosis</td><td><em>What kind of problem is this?</em></td><td>Use <code>[[cynefin-framework]]</code> first; engineering lens fits Complicated, partially Complex</td></tr><tr><td>Structure</td><td><em>What loops, stocks, delays are in play?</em></td><td>This note</td></tr><tr><td>Cascade</td><td><em>What follows from that structure over time?</em></td><td><code>[[second-order-thinking]]</code> traces; this lens supplies the rails</td></tr><tr><td>Calibration</td><td><em>Has this archetype produced the behavior I’m guessing at, in comparable cases?</em></td><td><code>[[ai/reference-class-forecasting]]</code></td></tr><tr><td>Operator</td><td><em>Who is acting in the system, and in what state?</em></td><td><code>[[systems-thinking]]</code> (human lens)</td></tr><tr><td>Process</td><td><em>How will I act on the diagnosis?</em></td><td><code>[[decision-making-frameworks]]</code> cluster</td></tr></tbody></table></div>
+<h3 id="failure-modes">Failure modes<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#failure-modes" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li><strong>Modeling fetish</strong> — building elaborate causal-loop diagrams that don’t match the actual system, then defending the diagram instead of revising it. Symptom: the diagram has been edited many times but the predictions haven’t been checked against outcomes.</li>
+<li><strong>False precision</strong> — treating system-dynamics simulation output as a forecast rather than a directional sketch. The numbers feel earned by the modeling work; they usually aren’t.</li>
+<li><strong>Reductionism creep</strong> — assuming any complex social system can be diagrammed as stocks and flows. Reflexive, agent-saturated systems resist closed-form structure — markets where participants read forecasts, organizations where the model itself changes behavior. The lens degrades gracefully here; treating it as exact does not.</li>
+<li><strong>Ignoring the operator</strong> — the inverse blind spot of the human lens. A correct structural model of an organization, applied by a leader whose inner conditions are scattered or status-protective, produces correct diagnosis and incoherent action. Pair with <code>[[systems-thinking]]</code>.</li>
+<li><strong>Quick-fix despite the lesson</strong> — even practitioners trained on <em>Shifting the Burden</em> still shift the burden. Knowing the archetype reduces the hit rate; it does not eliminate it. The robust counter is making the fundamental-solution work visible enough that abandoning it has political cost.</li>
+<li><strong>Leverage-point misranking</strong> — treating Meadows’ 12-to-1 ordering as universal. The ordering is a default sensibility, not a theorem; specific systems sometimes reward parameter changes (point 12) more than paradigm shifts (point 2) on practical timescales.</li>
+</ul>
+<h3 id="prompt-patterns">Prompt patterns<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#prompt-patterns" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>For analyzing a structural situation. Compose with the convergent-prep section of <code>[[decision-prompt-library]]</code>.</p>
+<pre><code>Situation: [the system or recurring pattern].
+
+Identify the stocks, the flows that change them, and at least one
+reinforcing and one balancing loop. Where are the delays? Which
+behavior of the system over time is best explained by structure
+rather than by the dispositions of the people inside it?
+</code></pre>
+<pre><code>Archetype check: does [the situation] match Limits to Growth,
+Shifting the Burden, Fixes That Fail, Tragedy of the Commons,
+Eroding Goals, Escalation, Success to the Successful, or Growth
+and Underinvestment? If yes, what does the archetype's standard
+intervention say to do that the obvious response would not?
+</code></pre>
+<pre><code>Leverage scan: list the candidate interventions for [the situation]
+and tag each by Meadows' rough leverage level (parameters, buffers,
+information flows, rules, goals, paradigm). Where is the action
+currently concentrated? Where would it be concentrated if the
+team were optimizing for leverage rather than visibility?
+</code></pre>
+<h2 id="related">Related<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#related" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><code>[[systems-thinking]]</code> — sibling note; the human / philosophical lens. The two together form the structure-and-operator pair the decision cluster otherwise lacks.</li>
+<li><code>[[soft-systems-methodology]]</code> — third sibling; Checkland’s interpretive method for messy situations where stakeholders disagree on what the system even is. CATWOE, rich pictures, root definitions. Natural follow-on when the engineering lens hits a worldview disagreement it cannot resolve internally.</li>
+<li><code>[[second-order-thinking]]</code> — temporal-cascade discipline; uses this lens’s structural primitives implicitly.</li>
+<li><code>[[cynefin-framework]]</code> — domain check; the engineering lens fits Complicated and partially Complex.</li>
+<li><code>[[decision-making-frameworks]]</code> — cluster this composes with on the structural-diagnosis side.</li>
+<li><code>[[levin-research-program-implications]]</code> — biological systems thinking as a third tradition; the loop-and-stock vocabulary maps onto Levin’s bioelectric circuits more directly than onto Saarinen’s lens.</li>
+<li><code>[[probability-judgment-biases]]</code> — base-rate and representativeness errors are common when reasoning informally about loop dynamics; the engineering lens forces explicit quantities that resist those errors.</li>
+<li><code>/structural-trace</code> — slash-command operationalisation of this lens; produces a stock/flow/loop/archetype/leverage diagnosis on a recurring pattern. Pairs with <code>/second-order</code> (which traces a chosen action forward through the diagnosed structure).</li>
+</ul>
+<h2 id="sources">Sources<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#sources" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>Meadows, D. — <em>Thinking in Systems: A Primer</em> (2008, edited posthumously from her unfinished manuscript by Diana Wright). The accessible primer; canonical introduction to stocks, flows, loops, and delays.</li>
+<li>Meadows, D. — “Leverage Points: Places to Intervene in a System” (1999, The Sustainability Institute). The 12-point list. Expansion of a 9-point version in <em>Whole Earth</em> (1997).</li>
+<li>Senge, P. — <em>The Fifth Discipline: The Art and Practice of the Learning Organization</em> (1990; revised edition 2006). Source for the system archetypes in their popularized form and for systems thinking as the integrating “fifth” of his five disciplines (personal mastery, mental models, shared vision, team learning, systems thinking).</li>
+<li>Forrester, J. — <em>Industrial Dynamics</em> (1961), <em>Urban Dynamics</em> (1969), <em>World Dynamics</em> (1971). Foundational system-dynamics work at MIT; differential-equation-based simulation methodology that underlies the lens.</li>
+<li>Meadows, D., Meadows, D. L., Randers, J., and Behrens III, W. W. — <em>The Limits to Growth</em> (1972; 30-year update 2004). Application of Forrester-style world modeling to global resource dynamics; the public on-ramp that shaped the lens’s reception.</li>
+<li>Sterman, J. — <em>Business Dynamics: Systems Thinking and Modeling for a Complex World</em> (2000). Standard practitioner textbook for those who want to build models, not just read about them. <em>(unverified — listed by reputation; specific edition details not independently confirmed.)</em></li>
+<li>Ulrich, W. — <em>Critical Heuristics of Social Planning: A New Approach to Practical Philosophy</em> (1983, Haupt). Source for the “boundary critique” / who-benefits framing in the CST section. The twelve boundary questions in their “is / ought” pairing are the canonical artefact.</li>
+<li>Jackson, M. C. — <em>Systems Thinking: Creative Holism for Managers</em> (2003, John Wiley). Practitioner-oriented overview that popularised the “three waves” pedagogical framing (functionalist / interpretive / emancipatory) used in the CST section. <em>(unverified — title and year cited from established literature; not re-checked against the volume for this draft.)</em></li>
+</ul>
+<p>Synthesis note (2026-04-29). The mapping table in <em>Where this composes with vault tools</em> and the failure-modes ranking are vault-internal contributions; treat them as my framing, not as Meadows’ or Senge’s. The leverage-point list is paraphrased; for citation purposes consult the 1999 Meadows essay directly. Senge’s archetypes are listed in their popularized form — academic system-dynamics literature often uses different names and finer-grained variants.</p>
+<p>Last verified: 2026-04-29 (canonical sources cited from established literature; Sterman text edition flagged as unverified)</p></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>Graph View</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc desktop-only"><button type="button" class="toc-header" aria-controls="toc-content" aria-expanded="true"><h3>Table of Contents</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="toc-content"><ul id="h9l23p" class="overflow"><li class="depth-0"><a href="#systems-thinking--engineering-lens" data-for="systems-thinking--engineering-lens">Systems Thinking — Engineering Lens</a></li><li class="depth-1"><a href="#scope-of-this-note" data-for="scope-of-this-note">Scope of this note</a></li><li class="depth-1"><a href="#what-it-is" data-for="what-it-is">What it is</a></li><li class="depth-1"><a href="#why-it-matters" data-for="why-it-matters">Why it matters</a></li><li class="depth-1"><a href="#details" data-for="details">Details</a></li><li class="depth-2"><a href="#stocks-flows-and-the-rate-vs-level-confusion" data-for="stocks-flows-and-the-rate-vs-level-confusion">Stocks, flows, and the rate-vs-level confusion</a></li><li class="depth-2"><a href="#feedback-loops" data-for="feedback-loops">Feedback loops</a></li><li class="depth-2"><a href="#meadows-twelve-leverage-points" data-for="meadows-twelve-leverage-points">Meadows’ twelve leverage points</a></li><li class="depth-2"><a href="#senges-system-archetypes" data-for="senges-system-archetypes">Senge’s system archetypes</a></li><li class="depth-2"><a href="#the-critical-systems-thinking-turn--who-benefits" data-for="the-critical-systems-thinking-turn--who-benefits">The Critical Systems Thinking turn — who benefits</a></li><li class="depth-2"><a href="#where-this-composes-with-vault-tools" data-for="where-this-composes-with-vault-tools">Where this composes with vault tools</a></li><li class="depth-2"><a href="#failure-modes" data-for="failure-modes">Failure modes</a></li><li class="depth-2"><a href="#prompt-patterns" data-for="prompt-patterns">Prompt patterns</a></li><li class="depth-1"><a href="#related" data-for="related">Related</a></li><li class="depth-1"><a href="#sources" data-for="sources">Sources</a></li><li class="overflow-end"></li></ul></div></div><div class="backlinks"><h3>Backlinks</h3><ul id="xacmdj" class="overflow"><li><a href="../ai/design-side-ai-adoption-stall" class="internal">Why Design-Side AI Adoption Stalls — a Structural Trace</a></li><li><a href="../general/diagrams-for-structure-and-process" class="internal">Diagrams for Structure, Relationships, and Process</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v4.4.1</a> © 2026</p><ul><li><a href="https://github.com/oxzo/brains">source</a></li><li><a href="/index.xml">rss</a></li></ul></footer></div></div></body><script type="application/javascript">function o(){let t=this.parentElement;t.classList.toggle("is-collapsed");let e=t.classList.contains("is-collapsed")?this.scrollHeight:t.scrollHeight;t.style.maxHeight=e+"px";let c=t,l=t.parentElement;for(;l;){if(!l.classList.contains("callout"))return;let i=l.classList.contains("is-collapsed")?l.scrollHeight:l.scrollHeight+c.scrollHeight;l.style.maxHeight=i+"px",c=l,l=l.parentElement}}function n(){let t=document.getElementsByClassName("callout is-collapsible");for(let s of t){let e=s.firstElementChild;if(!e)continue;e.addEventListener("click",o),window.addCleanup(()=>e.removeEventListener("click",o));let l=s.classList.contains("is-collapsed")?e.scrollHeight:s.scrollHeight;s.style.maxHeight=l+"px"}}document.addEventListener("nav",n);
+</script><script type="module">function f(i,e){if(!i)return;function r(o){o.target===this&&(o.preventDefault(),o.stopPropagation(),e())}function t(o){o.key.startsWith("Esc")&&(o.preventDefault(),e())}i?.addEventListener("click",r),window.addCleanup(()=>i?.removeEventListener("click",r)),document.addEventListener("keydown",t),window.addCleanup(()=>document.removeEventListener("keydown",t))}function y(i){for(;i.firstChild;)i.removeChild(i.firstChild)}var h=class{constructor(e,r){this.container=e;this.content=r;this.setupEventListeners(),this.setupNavigationControls(),this.resetTransform()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;cleanups=[];setupEventListeners(){let e=this.onMouseDown.bind(this),r=this.onMouseMove.bind(this),t=this.onMouseUp.bind(this),o=this.resetTransform.bind(this);this.container.addEventListener("mousedown",e),document.addEventListener("mousemove",r),document.addEventListener("mouseup",t),window.addEventListener("resize",o),this.cleanups.push(()=>this.container.removeEventListener("mousedown",e),()=>document.removeEventListener("mousemove",r),()=>document.removeEventListener("mouseup",t),()=>window.removeEventListener("resize",o))}cleanup(){for(let e of this.cleanups)e()}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let r=this.createButton("+",()=>this.zoom(.1)),t=this.createButton("-",()=>this.zoom(-.1)),o=this.createButton("Reset",()=>this.resetTransform());e.appendChild(t),e.appendChild(o),e.appendChild(r),this.container.appendChild(e)}createButton(e,r){let t=document.createElement("button");return t.textContent=e,t.className="mermaid-control-button",t.addEventListener("click",r),window.addCleanup(()=>t.removeEventListener("click",r)),t}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}zoom(e){let r=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),t=this.content.getBoundingClientRect(),o=t.width/2,n=t.height/2,c=r-this.scale;this.currentPan.x-=o*c,this.currentPan.y-=n*c,this.scale=r,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){this.scale=1;let e=this.content.querySelector("svg");this.currentPan={x:e.getBoundingClientRect().width/2,y:e.getBoundingClientRect().height/2},this.updateTransform()}},C=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],E;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;E||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let r=E.default,t=new WeakMap;for(let n of e)t.set(n,n.innerText);async function o(){for(let s of e){s.removeAttribute("data-processed");let a=t.get(s);a&&(s.innerHTML=a)}let n=C.reduce((s,a)=>(s[a]=window.getComputedStyle(document.documentElement).getPropertyValue(a),s),{}),c=document.documentElement.getAttribute("saved-theme")==="dark";r.initialize({startOnLoad:!1,securityLevel:"loose",theme:c?"dark":"base",themeVariables:{fontFamily:n["--codeFont"],primaryColor:n["--light"],primaryTextColor:n["--darkgray"],primaryBorderColor:n["--tertiary"],lineColor:n["--darkgray"],secondaryColor:n["--secondary"],tertiaryColor:n["--tertiary"],clusterBkg:n["--light"],edgeLabelBackground:n["--highlight"]}}),await r.run({nodes:e})}await o(),document.addEventListener("themechange",o),window.addCleanup(()=>document.removeEventListener("themechange",o));for(let n=0;n<e.length;n++){let v=function(){let g=l.querySelector("#mermaid-space"),m=l.querySelector(".mermaid-content");if(!m)return;y(m);let w=c.querySelector("svg").cloneNode(!0);m.appendChild(w),l.classList.add("active"),g.style.cursor="grab",u=new h(g,m)},M=function(){l.classList.remove("active"),u?.cleanup(),u=null},c=e[n],s=c.parentElement,a=s.querySelector(".clipboard-button"),d=s.querySelector(".expand-button"),p=window.getComputedStyle(a),L=a.offsetWidth+parseFloat(p.marginLeft||"0")+parseFloat(p.marginRight||"0");d.style.right=`calc(${L}px + 0.3rem)`,s.prepend(d);let l=s.querySelector("#mermaid-container");if(!l)return;let u=null;d.addEventListener("click",v),f(l,M),window.addCleanup(()=>{u?.cleanup(),d.removeEventListener("click",v)})}});
+</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript"></script><script src="../postscript.00b09a8c.js" type="module"></script></html>

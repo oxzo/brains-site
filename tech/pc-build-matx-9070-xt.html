@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en"><head><title>Micro-ATX Gaming PC Build — RX 9070 XT (silence-first) · second-brain</title><meta charset="utf-8"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400;1,600&amp;family=Inter:wght@400;700&amp;family=JetBrains Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="synapse"/><meta property="og:title" content="Micro-ATX Gaming PC Build — RX 9070 XT (silence-first) · second-brain"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Micro-ATX Gaming PC Build — RX 9070 XT (silence-first) · second-brain"/><meta name="twitter:description" content="Micro-ATX Gaming PC Build — RX 9070 XT (silence-first) Compact mATX build, 1440p, optimized for acoustics and build quality. Budget €2,200–3,000 incl. VAT."/><meta property="og:description" content="Micro-ATX Gaming PC Build — RX 9070 XT (silence-first) Compact mATX build, 1440p, optimized for acoustics and build quality. Budget €2,200–3,000 incl. VAT."/><meta property="og:image:alt" content="Micro-ATX Gaming PC Build — RX 9070 XT (silence-first) Compact mATX build, 1440p, optimized for acoustics and build quality. Budget €2,200–3,000 incl. VAT."/><meta property="twitter:domain" content="oxzo.github.io/brains-site"/><meta property="og:url" content="https://oxzo.github.io/brains-site/tech/pc-build-matx-9070-xt"/><meta property="twitter:url" content="https://oxzo.github.io/brains-site/tech/pc-build-matx-9070-xt"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="Micro-ATX Gaming PC Build — RX 9070 XT (silence-first) Compact mATX build, 1440p, optimized for acoustics and build quality. Budget €2,200–3,000 incl. VAT."/><meta name="generator" content="Quartz"/><link href="../index.322b98b4.css" rel="stylesheet" type="text/css" spa-preserve/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  padding: 2rem;
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL2hvbWUvcnVubmVyL3dvcmsvYnJhaW5zL2JyYWlucy9zaXRlL3F1YXJ0ei9jb21wb25lbnRzL3N0eWxlcyIsInNvdXJjZXMiOlsibWVybWFpZC5pbmxpbmUuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTs7QUFHRjtFQUNFO0VBQ0E7O0FBR0Y7RUFDRTs7O0FBS0Y7RUFDRTtFQUNBOzs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7O0FBR0Y7RUFDRTs7QUFJRjtFQUNFO0VBQ0E7RUFDQSIsInNvdXJjZXNDb250ZW50IjpbIi5leHBhbmQtYnV0dG9uIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbG9hdDogcmlnaHQ7XG4gIHBhZGRpbmc6IDAuNHJlbTtcbiAgbWFyZ2luOiAwLjNyZW07XG4gIHJpZ2h0OiAwOyAvLyBOT1RFOiByaWdodCB3aWxsIGJlIHNldCBpbiBtZXJtYWlkLmlubGluZS50c1xuICBjb2xvcjogdmFyKC0tZ3JheSk7XG4gIGJvcmRlci1jb2xvcjogdmFyKC0tZGFyayk7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWxpZ2h0KTtcbiAgYm9yZGVyOiAxcHggc29saWQ7XG4gIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgb3BhY2l0eTogMDtcbiAgdHJhbnNpdGlvbjogMC4ycztcblxuICAmID4gc3ZnIHtcbiAgICBmaWxsOiB2YXIoLS1saWdodCk7XG4gICAgZmlsdGVyOiBjb250cmFzdCgwLjMpO1xuICB9XG5cbiAgJjpob3ZlciB7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIGJvcmRlci1jb2xvcjogdmFyKC0tc2Vjb25kYXJ5KTtcbiAgfVxuXG4gICY6Zm9jdXMge1xuICAgIG91dGxpbmU6IDA7XG4gIH1cbn1cblxucHJlIHtcbiAgJjpob3ZlciA+IC5leHBhbmQtYnV0dG9uIHtcbiAgICBvcGFjaXR5OiAxO1xuICAgIHRyYW5zaXRpb246IDAuMnM7XG4gIH1cbn1cblxuI21lcm1haWQtY29udGFpbmVyIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICBjb250YWluOiBsYXlvdXQ7XG4gIHotaW5kZXg6IDk5OTtcbiAgbGVmdDogMDtcbiAgdG9wOiAwO1xuICB3aWR0aDogMTAwdnc7XG4gIGhlaWdodDogMTAwdmg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGRpc3BsYXk6IG5vbmU7XG4gIGJhY2tkcm9wLWZpbHRlcjogYmx1cig0cHgpO1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuNSk7XG5cbiAgJi5hY3RpdmUge1xuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgfVxuXG4gICYgPiAjbWVybWFpZC1zcGFjZSB7XG4gICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1saWdodCk7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDUwJTtcbiAgICBsZWZ0OiA1MCU7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gICAgaGVpZ2h0OiA4MHZoO1xuICAgIHdpZHRoOiA4MHZ3O1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG5cbiAgICAmID4gLm1lcm1haWQtY29udGVudCB7XG4gICAgICBwYWRkaW5nOiAycmVtO1xuICAgICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgICAgdHJhbnNmb3JtLW9yaWdpbjogMCAwO1xuICAgICAgdHJhbnNpdGlvbjogdHJhbnNmb3JtIDAuMXMgZWFzZTtcbiAgICAgIG92ZXJmbG93OiB2aXNpYmxlO1xuICAgICAgbWluLWhlaWdodDogMjAwcHg7XG4gICAgICBtaW4td2lkdGg6IDIwMHB4O1xuXG4gICAgICBwcmUge1xuICAgICAgICBtYXJnaW46IDA7XG4gICAgICAgIGJvcmRlcjogbm9uZTtcbiAgICAgIH1cblxuICAgICAgc3ZnIHtcbiAgICAgICAgbWF4LXdpZHRoOiBub25lO1xuICAgICAgICBoZWlnaHQ6IGF1dG87XG4gICAgICB9XG4gICAgfVxuXG4gICAgJiA+IC5tZXJtYWlkLWNvbnRyb2xzIHtcbiAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgIGJvdHRvbTogMjBweDtcbiAgICAgIHJpZ2h0OiAyMHB4O1xuICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgIGdhcDogOHB4O1xuICAgICAgcGFkZGluZzogOHB4O1xuICAgICAgYmFja2dyb3VuZDogdmFyKC0tbGlnaHQpO1xuICAgICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICAgIGJvcmRlci1yYWRpdXM6IDZweDtcbiAgICAgIGJveC1zaGFkb3c6IDAgMnB4IDRweCByZ2JhKDAsIDAsIDAsIDAuMSk7XG4gICAgICB6LWluZGV4OiAyO1xuXG4gICAgICAubWVybWFpZC1jb250cm9sLWJ1dHRvbiB7XG4gICAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAgICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICAgICAgICB3aWR0aDogMzJweDtcbiAgICAgICAgaGVpZ2h0OiAzMnB4O1xuICAgICAgICBwYWRkaW5nOiAwO1xuICAgICAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodCk7XG4gICAgICAgIGNvbG9yOiB2YXIoLS1kYXJrKTtcbiAgICAgICAgYm9yZGVyLXJhZGl1czogNHB4O1xuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgICAgIGZvbnQtc2l6ZTogMTZweDtcbiAgICAgICAgZm9udC1mYW1pbHk6IHZhcigtLWJvZHlGb250KTtcbiAgICAgICAgdHJhbnNpdGlvbjogYWxsIDAuMnMgZWFzZTtcblxuICAgICAgICAmOmhvdmVyIHtcbiAgICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICB9XG5cbiAgICAgICAgJjphY3RpdmUge1xuICAgICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWSgxcHgpO1xuICAgICAgICB9XG5cbiAgICAgICAgLy8gU3R5bGUgdGhlIHJlc2V0IGJ1dHRvbiBkaWZmZXJlbnRseVxuICAgICAgICAmOm50aC1jaGlsZCgyKSB7XG4gICAgICAgICAgd2lkdGg6IGF1dG87XG4gICAgICAgICAgcGFkZGluZzogMCAxMnB4O1xuICAgICAgICAgIGZvbnQtc2l6ZTogMTRweDtcbiAgICAgICAgfVxuICAgICAgfVxuICAgIH1cbiAgfVxufVxuIl19 */</style><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" spa-preserve/><script src="../prescript.be9697b4.js" type="application/javascript" spa-preserve></script><script type="application/javascript" spa-preserve>const fetchData = fetch("../static/contentIndex.73890e1e.json").then(data => data.json())</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://oxzo.github.io/brains-site/index.xml"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://oxzo.github.io/brains-site/tech/pc-build-matx-9070-xt-og-image.webp"/><meta property="og:image:url" content="https://oxzo.github.io/brains-site/tech/pc-build-matx-9070-xt-og-image.webp"/><meta name="twitter:image" content="https://oxzo.github.io/brains-site/tech/pc-build-matx-9070-xt-og-image.webp"/><meta property="og:image:type" content="image/.webp"/></head><body data-slug="tech/pc-build-matx-9070-xt"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">synapse</a></h2><div class="spacer mobile-only"></div><div style="display: flex; flex-direction: row; flex-wrap: nowrap; gap: 1rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button"><p>Search</p><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Search for something" placeholder="Search for something"/><div class="search-layout" data-preview="true"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Dark mode"><title>Dark mode</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Light mode"><title>Light mode</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div></div><div class="explorer" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a,b)=>!a.isFolder&amp;&amp;!b.isFolder||a.isFolder&amp;&amp;b.isFolder?a.displayName.localeCompare(b.displayName,void 0,{numeric:!0,sensitivity:\&quot;base\&quot;}):!a.isFolder&amp;&amp;b.isFolder?1:-1&quot;,&quot;filterFn&quot;:&quot;node=>node.slugSegment!==\&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;node=>node&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-content"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>Explorer</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="explorer-content" aria-expanded="false"><ul class="explorer-ul overflow" id="0x8mfk"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#"></a></li></template><template id="template-folder"><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../tech/">tech</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>Micro-ATX Gaming PC Build — RX 9070 XT (silence-first)</a></div></nav><h1 class="article-title">Micro-ATX Gaming PC Build — RX 9070 XT (silence-first)</h1><p show-comma="true" class="content-meta"><time datetime="2026-07-31T00:00:00.000Z">Jul 31, 2026</time><span>22 min read</span></p><ul class="tags"><li><a href="../tags/tech" class="internal tag-link">tech</a></li><li><a href="../tags/hardware" class="internal tag-link">hardware</a></li><li><a href="../tags/pc-build" class="internal tag-link">pc-build</a></li><li><a href="../tags/time-sensitive" class="internal tag-link">time-sensitive</a></li><li><a href="../tags/publish" class="internal tag-link">publish</a></li></ul></div></div><article class="popover-hint"><h1 id="micro-atx-gaming-pc-build--rx-9070-xt-silence-first">Micro-ATX Gaming PC Build — RX 9070 XT (silence-first)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#micro-atx-gaming-pc-build--rx-9070-xt-silence-first" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>Compact mATX build, 1440p, optimized for acoustics and build quality. Budget €2,200–3,000 incl. VAT. No purchase date. <strong>Current spec lands at €2596.40</strong> across two retailers (2026-07-27 pricing, excl. Windows and shipping).</p>
+<blockquote>
+<p>⏸ <strong>Deferred as of 2026-07-31 — this build is not being made for now.</strong> oxzo’s current 7900 XTX machine stays in service as his daily driver, and the household’s other machine is the kid-tier <a href="../tech/pc-build-matx-kids-9060-xt" class="internal" data-slug="tech/pc-build-matx-kids-9060-xt">pc-build-matx-kids-9060-xt</a>, which was bought and is being assembled. Everything below remains a valid spec, but treat prices as stale and re-price before ordering. One knock-on recorded during the kids’ build: the €104.10 fan line here is a candidate for deletion, since the current machine already holds <strong>6× Noctua 140 mm</strong> fans and this case’s top takes 2× 140 (rear is 120 only) — reuse rather than repurchase when this build reopens.</p>
+</blockquote>
+<p>Verdict as of 2026-07-26: <strong>compatibility is sound; the shopping list is not.</strong> Build it, but renegotiate RAM, SSD and fans first.</p>
+<p>For the kid-tier counterpart — same form factor and retailers, RX 9060 XT 16 GB + Ryzen 5 7500X3D + 32 GB, 1440p, €1717.82, Bazzite — see <a href="../tech/pc-build-matx-kids-9060-xt" class="internal" data-slug="tech/pc-build-matx-kids-9060-xt">pc-build-matx-kids-9060-xt</a>. It reaches the opposite conclusion on retailer splitting (€10.09 spread, so one order), and it resolves the Linux question the same way this build does, by moving the anti-cheat games to a console instead of buying Windows.</p>
+<blockquote>
+<p>Pricing and SKU detail below come from a build audit dated 2026-07-25, supplied by oxzo. Not independently re-verified here.</p>
+</blockquote>
+<h2 id="why-matx-and-not-mini-itx">Why mATX and not Mini-ITX<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#why-matx-and-not-mini-itx" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>The 9070 XT is a 304 W part. In ITX volumes that heat leaves via fan RPM, and quiet cards are physically fat cards — so silence pushes volume back up. The premium ITX cases are also thermally compromised: the Fractal Terra caps the CPU cooler at 48 mm once a ≥50 mm GPU forces Max GPU mode, the Mood’s fabric restricts airflow, and the Ncase M1 is discontinued. mATX also returns ~€150–250 in ITX board and SFX PSU premiums.</p>
+<p>Design rule: <strong>large volume, many fan mounts, everything spinning slowly.</strong> Airflow beats sound-damping foam for a 300 W GPU — foam muffles a fan working hard, airflow means it never has to.</p>
+<h3 id="why-not-a-premium-quiet-case-instead-considered-and-rejected-2026-07-27">Why not a “premium quiet” case instead (considered and rejected 2026-07-27)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#why-not-a-premium-quiet-case-instead-considered-and-rejected-2026-07-27" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>The category barely exists at this size, and the reason is physical. Dampened cases work by solid foam-lined panels, restricted intake, and enough volume to run big fans slowly — a formula that needs volume (Define 7 ≈ 45 L, Silent Base 802 ≈ 55 L). At 26 L with a 304 W GPU, restricted intake makes the fans spin faster, and fan noise at source exceeds what foam removes downstream. The one dampened mATX case, Fractal’s Pop Mini Silent, is documented as running hot with powerful parts and suited to efficient mid-range components.</p>
+<p>The A3-mATX’s real weakness is cable management, not acoustics — GN: “no channels or covers and there isn’t really any space behind the motherboard. Tie-down points are limited,” while otherwise rating it easy to work with and solidly built. A premium swap buys assembly experience, not quiet.</p>
+<p><strong>Fractal Design North (€174.90, Jimm’s)</strong> is the only serious alternative and fails on three counts: it is <strong>45.1 L vs 26.3 L</strong> (there is no mATX North — it is an ATX mid-tower that accepts mATX boards), its cooler clearance drops to <strong>145 mm with the front fan bracket</strong> fitted against the NH-U12A’s 158 mm, and it is itself a mesh airflow case rather than a damped one — the same philosophy for €88 more and nearly double the volume.</p>
+<p>The build’s two loudest parts are already handled (NITRO+ at 26 dBA measured; NH-U12A with two NF-A12x25). GN’s zero-case-fan run landed within 1.5 °C of their best config, which bounds how much the chassis is contributing. Case swapping is the lowest-leverage money in this build; the open value problem remains the €519.90 RAM.</p>
+<h2 id="order-sheet">Order sheet<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#order-sheet" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Final spec and where to buy it, as of 2026-07-27.</p>
+<p><strong>Gigantti — €2094.60</strong> (all ship immediately from web warehouse; all eligible for 30-min store pickup)</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Part</th><th>Model</th><th>Stock</th><th>Price</th></tr></thead><tbody><tr><td>GPU</td><td><a href="https://www.gigantti.fi/product/gaming/tietokonekomponentit/naytonohjaimet-gpu/sapphire-nitro-amd-radeon-rx-9070-xt-gaming-oc-16-gb-naytonohjain/928868" class="external">Sapphire NITRO+ RX 9070 XT Gaming OC 16 GB<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td><td>25+ heti</td><td>€855.90</td></tr><tr><td>RAM</td><td><a href="https://www.gigantti.fi/product/gaming/tietokonekomponentit/ram-keskusmuistit/kingston-fury-beast-32-gb-ddr5-ram-muisti-6000-mts-cl30-musta/854266" class="external">Kingston FURY Beast 32 GB DDR5-6000 CL30, musta<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td><td>50+ heti</td><td>€519.90</td></tr><tr><td>CPU</td><td><a href="https://www.gigantti.fi/product/gaming/tietokonekomponentit/prosessorit-cpu/amd-ryzen-7-9800x3d-prosessori/861201" class="external">AMD Ryzen 7 9800X3D<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td><td>100+ heti</td><td>€419.00</td></tr><tr><td>SSD</td><td><a href="https://www.gigantti.fi/product/gaming/tietokonekomponentit/sisainen-tallennustila/sisainen-ssd-muisti/sandisk-wd-black-sn7100-nvme-sisainen-ssd-muisti-1-tb/1015680" class="external">SanDisk WD_BLACK SN7100 NVMe 1 TB<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td><td>100+ heti</td><td>€169.90</td></tr><tr><td>Cooler</td><td><a href="https://www.gigantti.fi/product/gaming/tietokonekomponentit/pc-tuulettimet-ja-jaahdytys/ilmajaahdytys-prosessorille/noctua-nh-u12a-prosessorijaahdytin-chromaxmusta/873458" class="external">Noctua NH-U12A chromax.black<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td><td>25+ heti</td><td>€129.90</td></tr><tr><td>Fans</td><td><a href="https://www.gigantti.fi/product/gaming/tietokonekomponentit/pc-tuulettimet-ja-jaahdytys/tietokoneen-tuulettimet/noctua-nf-a12x25-120-mm-pwm-tuuletin-chromaxblackswap/390592" class="external">Noctua NF-A12x25 PWM chromax.black.swap<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> <strong>× 3</strong></td><td>heti</td><td>€104.10</td></tr></tbody></table></div>
+<p><strong>Jimm’s — €397.70</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Part</th><th>Model</th><th>Stock</th><th>Price</th></tr></thead><tbody><tr><td>Motherboard</td><td><a href="https://www.jimms.fi/fi/Product/Show/208587" class="external">ASUS TUF Gaming B850M-PLUS WIFI<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td><td>>25</td><td>€169.90 ⏳</td></tr><tr><td>PSU</td><td><a href="https://www.jimms.fi/fi/Product/Show/205870" class="external">Seasonic 850W FOCUS GX-850 ATX 3 (2024), musta<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td><td>>25</td><td>€140.90</td></tr><tr><td>Case</td><td><a href="https://www.jimms.fi/fi/Product/Show/205683/a3-matx-wd-black/lian-li-a3-matx-wood-edition-matx-kotelo-musta" class="external">Lian Li A3-mATX Wood Edition, musta<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td><td>9 kpl</td><td>€86.90</td></tr></tbody></table></div>
+<p><strong>Total €2596.40</strong> (Gigantti €2198.70 · Jimm’s €397.70). Excludes Windows and shipping.</p>
+<p>⏳ Board is a campaign price against €244.90 list — <strong>ends 16.8.2026</strong>.</p>
+<p>Why the split fell this way: Jimm’s holds only what it uniquely supplies — Gigantti has no Wood-edition case and shows the board as <em>ei saatavilla</em>. The PSU stays at Jimm’s for €0.20 more than Gigantti deliberately, because Gigantti’s Seasonic listing misstates the fan size and cable count, making its SKU identity unreliable. RAM sits at Gigantti at the identical €519.90 because Jimm’s had 2 units against Gigantti’s 50+.</p>
+<p>Reverting the GPU to the PURE (Jimm’s €828.90) drops the total to €2465.30 but reintroduces a 5–10 day supplier order; the same PURE costs €890.00 at Gigantti.</p>
+<h2 id="parts">Parts<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#parts" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Part</th><th>Pick</th><th>Status</th></tr></thead><tbody><tr><td>Case</td><td>Lian Li A3-mATX Wood — 26.3 L, 443 × 194 × 321.5 mm</td><td>Confirmed</td></tr><tr><td>GPU</td><td>Sapphire NITRO+ RX 9070 XT OC 16 GB — 327 × 141 × <strong>64 mm</strong>, triple-slot, 1× 12V-2x6</td><td>Switched from the PURE 2026-07-27 on price and measured acoustics — see GPU model selection</td></tr><tr><td>CPU</td><td>AMD Ryzen 7 9800X3D</td><td>Keep for 1440p high-refresh; a cheaper CPU is defensible only for predominantly 4K AAA</td></tr><tr><td>Cooler</td><td>Noctua NH-U12A chromax.black — 158 mm</td><td>Fits (7 mm margin). Cheaper alternative viable — see value problems</td></tr><tr><td>Motherboard</td><td>ASUS TUF Gaming B850M-PLUS WIFI</td><td>€169.90 at Jimm’s vs €244.90 list — <strong>campaign ends 16.8.2026</strong></td></tr><tr><td>RAM</td><td>32 GB DDR5-6000 CL30 EXPO — Kingston Fury Beast KF560C30BBEK2-32</td><td>⚠ €500–520 — largest value problem</td></tr><tr><td>SSD</td><td>WD_BLACK SN7100 <strong>1 TB</strong> — from €169.90 (Gigantti)</td><td>Dropped from 2 TB on 2026-07-27 to save €129. Newer BiCS8 TLC, faster than the rejected KC3000; DRAM-less (HMB) is the tradeoff. Expansion is cheap — see below</td></tr><tr><td>PSU</td><td>Seasonic FOCUS GX-850 ATX 3.1 (2024) — from €140.90 (Jimm’s)</td><td>Resolved 2026-07-27 — see PSU selection and retailer comparison</td></tr><tr><td>Fans</td><td>3× Noctua NF-A12x25 PWM chromax.black.swap — 2× top + 1× rear, all exhaust</td><td>Resolved 2026-07-27 — case ships with none; see Fan layout</td></tr></tbody></table></div>
+<h2 id="fan-layout">Fan layout<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#fan-layout" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Resolved 2026-07-27 against GamersNexus’s bench test of this chassis. <strong>The case ships with no fans at all</strong> — all three are a purchase.</p>
+<p><strong>3× 120 mm, all exhaust: 2× top (rear-most positions) + 1× rear. Side and bottom stay empty.</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Position</th><th>Fans</th><th>Direction</th><th>Why</th></tr></thead><tbody><tr><td>Rear</td><td>1</td><td>Exhaust</td><td>Sits behind the NH-U12A’s rear fan and continues the cooler’s front-to-back path out of the case. Highest-value single fan.</td></tr><tr><td>Top, rear two slots</td><td>2</td><td>Exhaust</td><td>Lifts the hot column off the CPU/VRM area.</td></tr><tr><td>Top-front</td><td>0</td><td>—</td><td>Sits above the front-mounted PSU at F2; would recirculate front-panel air instead of pulling from the CPU region.</td></tr><tr><td>Side</td><td>0</td><td>—</td><td>Feeds the GPU intake passively — see below.</td></tr><tr><td>Bottom</td><td>0</td><td>—</td><td>Forced by the 64 mm card.</td></tr></tbody></table></div>
+<p><strong>Side intake is the trap.</strong> GN measured <strong>~11 °C worse GPU temperature</strong> with 2× side intake versus none, and traced why: under top/rear-exhaust-only negative pressure the GPU pulls near-ambient air through the bottom mesh <em>and inward through the unused rear PCIe slot covers</em>. Side fans form a competing pressure system that shoots air <em>above</em> the card, stops the lower third of the side panel feeding it, and reverses the PCIe slot covers from intake to exhaust. GN names this build’s situation directly: a GPU this large “will effectively cut the case in half… will only be able to pull from the bottom and rear PCIe slot covers, meaning side intake will significantly hurt its performance.” Side fans do help the CPU substantially — it is a real trade, decided for the 304 W part over the ~120 W one.</p>
+<p><strong>GN’s own optimal config is unavailable here.</strong> Their winner was wood front + top exhaust + 2× bottom intake (GPU 47 °C over ambient, CPU 44 °C, 32 dBA). A 25 mm bottom fan caps GPU thickness at 61 mm; the NITRO+ is 64 mm.</p>
+<p><strong>Caveat on transferring GN’s numbers:</strong> they tested with a 240 mm AIO up top, which exhausts CPU heat directly. The NH-U12A dumps it into the case instead, so this build depends on top exhaust more than theirs did — hence two fans there rather than one.</p>
+<p><strong>Why not more.</strong> GN’s “wood stock” run — zero case fans, cooler only — finished just <strong>1.5 °C</strong> behind their best CPU configuration. The chassis is ventilated enough that marginal fans buy very little thermal headroom while each adds a noise source. Three is the sweet spot; two (1 top + 1 rear) is defensible; four or more is spending acoustics for nothing.</p>
+<p><strong>Fan choice — 3× Noctua NF-A12x25 PWM chromax.black.swap, €34.70 each (€104.10) at Gigantti</strong> (oxzo’s brand preference, 2026-07-27). Matches the NH-U12A chromax.black, which already carries two of the same fan. Cheapest of the three retailers for this SKU (Verkkokauppa €34.99; Jimm’s does not stock the chromax at all) and it joins the Gigantti order, so no third shipment. Supports Zero RPM, so the fans stop entirely at idle; ships with Low-Noise Adapters.</p>
+<p>Priced alternatives: NF-S12A ×3 €77.97 (Verkkokauppa); NF-A12x25 G2 ×3 €104.70 (Jimm’s, brown/beige); NF-A12x25 brown ×3 €101.97 (Verkkokauppa); NF-P12 redux-1300 ×3 €50.97 (Verkkokauppa); Corsair RS120 PWM 3-pack €29.90 (Gigantti); ARCTIC P12 Pro PST ×3 €32.70 (Jimm’s).</p>
+<p><strong>Open counterpoint worth revisiting if noise disappoints:</strong> Noctua splits its range by application — the <strong>S-series is airflow-optimised for unrestricted positions</strong>, the A- and F-series are pressure-optimised for radiators and heatsinks. All three positions here are free-air exhaust, which is exactly the S12A’s design case, at €26 less for the set. The chromax A12x25 was chosen on aesthetic match and order consolidation, not on blade-type fit; at the low RPMs expected the difference should be small, but this is the assumption to test first if the build is louder than hoped.</p>
+<p>Traps checked while pricing Corsair (recorded in case the brand question reopens): iCUE LINK QX120/RX120 need a System Hub that only the “Starter Kit” SKUs include, so “Expansion” fans bought alone will not run; RS120 MAX is a 30 mm-thick static-pressure fan wrong for free-air exhaust; and the AF120 Elite appears discontinued (0 kpl at Verkkokauppa, Jimm’s page 404s).</p>
+<h2 id="assembly-constraints">Assembly constraints<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#assembly-constraints" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>These are build-defining, not preferences:</p>
+<ul>
+<li><strong>PSU mounts at the front-offset bracket position F2.</strong></li>
+<li><strong>No bottom fans.</strong> The case’s GPU thickness limit drops to 61 mm when a 25 mm bottom fan is fitted; the NITRO+ is <strong>64 mm</strong>, so a bottom fan is now ruled out by clearance, not just by preference. (The PURE at 61–61.6 mm was already over the line.) The GPU instead draws fresh air directly through the filtered bottom mesh, with its own fans sitting close to that intake. The limit only binds <em>with</em> a bottom fan — Lian Li’s baseline clearance is a <strong>4-slot GPU up to 415 mm</strong> — but every extra millimetre of card is a millimetre less intake plenum above the mesh, which is the cost of the NITRO+ over the PURE.</li>
+<li><strong>Top-front position: leave empty.</strong></li>
+<li><strong>Rear and top: exhaust.</strong> All-exhaust negative pressure is the point, not a compromise — it is what lets the GPU feed off the bottom mesh and rear PCIe slot covers. See Fan layout.</li>
+<li><strong>No side fans.</strong> Bench-measured ~11 °C GPU penalty in this chassis. Helps the CPU, costs the GPU more.</li>
+<li>If bottom intake later proves necessary, use <strong>15 mm slim fans only</strong> — and test GPU temperature and noise without them first. With the 64 mm NITRO+ even this needs re-measuring before ordering fans.</li>
+<li><strong>Cooler ceiling is 165 mm.</strong> be quiet! Dark Rock Pro 5 and Noctua NH-D15 G2 are both 168 mm and do <strong>not</strong> fit. Verified fitting: NH-U12A chromax.black (158 mm), Dark Rock 5 (161 mm), Thermalright Phantom Spirit 120 SE (155 mm).</li>
+<li>Case accepts ATX/SFX/SFX-L PSUs up to 220 mm. Radiators if switching to liquid later: top 360/240, side 360/280/240, bottom 240.</li>
+</ul>
+<h2 id="gpu-model-selection">GPU model selection<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#gpu-model-selection" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Re-verified 2026-07-27 against the full Verkkokauppa 9070 XT range. <strong>The PURE holds — but availability, not merit, is what decides it.</strong></p>
+<p>Case clearance filters nothing: Lian Li’s baseline is a 4-slot GPU up to 415 mm, and the widest 9070 XT on the market (XFX Mercury, 349 × 142 × 72 mm) still fits. The binding filters are acoustics and stock.</p>
+<p>TechSpot’s 14-card roundup names five best-in-class models — XFX Mercury, Sapphire Nitro+, Sapphire Pure, PowerColor Red Devil, ASRock Taichi. Verkkokauppa stocks three, and the Taichi is out of stock. That leaves the PURE and the Nitro+.</p>
+<p>Verkkokauppa range, 2026-07-27:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Model</th><th>Price</th><th>Stock</th><th>Disposition</th></tr></thead><tbody><tr><td>ASUS Prime XT OC</td><td>€669.80</td><td>Ei saatavilla</td><td>Bottom of both thermal and gaming tests</td></tr><tr><td>ASRock Steel Legend</td><td>€699.99</td><td>Ei saatavilla</td><td>Hottest + loudest tier</td></tr><tr><td>Gigabyte GAMING OC</td><td>€769.99</td><td>Heti, >25</td><td>Hottest + loudest tier — best stock, wrong card</td></tr><tr><td>Gigabyte GAMING OC ICE</td><td>€787.99</td><td>Heti, 1</td><td>Same cooler</td></tr><tr><td>Sapphire PULSE</td><td>€789.99</td><td>~1–2 wk</td><td>Rejected — see below</td></tr><tr><td>ASRock Taichi OC</td><td>€814.99</td><td>Ei saatavilla</td><td>Top tier, unobtainable</td></tr><tr><td>Gigabyte AORUS ELITE</td><td>€829.99</td><td>Ei saatavilla</td><td>Mid-tier</td></tr><tr><td>ASUS TUF Gaming OC</td><td>€836.99</td><td>Ei saatavilla</td><td>Well built, unremarkable thermals</td></tr><tr><td><strong>Sapphire PURE OC</strong></td><td><strong>€899.99</strong></td><td><strong>~1 wk</strong></td><td><strong>Pick</strong></td></tr><tr><td>Sapphire NITRO+ OC</td><td>€955.99</td><td>~1 wk</td><td>Defensible upgrade</td></tr><tr><td>NITRO+ PhantomLink / Polar</td><td>€1129.99 / €1139.99</td><td>~1–3 wk</td><td>No case for the premium</td></tr></tbody></table></div>
+<p><strong>Why not the Pulse, despite looking like the value pick.</strong> TechPowerUp measured it at 25.5 dBA / 57 °C and called it the quietest 9070 XT they had tested. GamersNexus, testing in a hemi-anechoic chamber, found what buys that figure: memory at <strong>90 °C</strong> (“90 becomes 95 inside a case pretty fast”), and a fan that cycles 1560 → 1400 → 1300 → 1390 → 1100 → 1258 → 1000 → 1170 → 1130 RPM under a <em>fixed</em> workload — “an irregular and annoying ramp/de-ramp rapidly cycling within a 2-3 minute period.” The VBIOS chases core temperature, so the fans never learn the memory is cooking. Perceived annoyance tracks variation, not absolute level: a steady 28 dBA beats a cycling 25.5 dBA. This also explains TechSpot’s independent finding of the Pulse running the warmest average GPU temp (62 °C) and hottest VRM (86 °C) — same relaxed curve, different instrument.</p>
+<p><strong>Two caveats on the PURE.</strong> No top-tier lab published a sound-pressure figure for it — TechPowerUp reviewed the Pulse and Nitro+ but not the PURE. Its acoustic standing rests on TechSpot’s noise-normalized results (strong) rather than a measured dBA number; the 31.9/33.6 dBA figures cited under Sources are from a weaker outlet on a non-comparable methodology. And it is <strong>white</strong> (black PCB, silver heatsink, non-white bracket) against a Wood-edition case.</p>
+<p><strong>Defensible upgrade — Sapphire NITRO+ OC, €955.99 (+€56).</strong> TechPowerUp measured 26 dBA under load and an 83 °C hotspot, and rated its cooler the strongest of the four tested. The 12V-2x6 connector hides behind a magnetic backplate and routes toward the motherboard — worth real money in 26.3 L with the PSU at F2, and the Seasonic ships a native 12V-2x6 cable so no adapter is involved. Against it: 64 mm vs 61 mm costs 3 mm of the bottom-mesh intake plenum this build’s cooling depends on, 1894 g vs 1233 g, and the RAM line already strains the budget.</p>
+<p>Prices and stock as of 2026-07-27; re-check at order time.</p>
+<h2 id="psu-selection">PSU selection<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#psu-selection" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Resolved 2026-07-27 against Verkkokauppa stock. The two hard requirements — a zero-RPM (semi-passive) fan mode and <strong>two independently usable PCIe cable runs</strong>, meaning two separate cables rather than one daisy-chained pair — eliminate most 850 W ATX 3.1 Gold units on the shelf.</p>
+<p><strong>Pick: Seasonic FOCUS GX-850 ATX 3.1 (2024), €140.90 at Jimm’s.</strong> 80 PLUS Gold, ATX 3.1 / PCIe 5.1, fully modular, selectable semi-passive mode, 135 mm FDB fan, 10-year warranty. Ships <strong>3× PCIe 6+2 on three separate cables</strong> plus a 12V-2x6 600 W cable. At <strong>140 mm deep</strong> it is 20 mm shorter than the Corsair — real cable-bend room at the front-offset F2 bracket in 26.3 L. Stock was thin (3–4 units).</p>
+<p><strong>Alternative: Corsair RM850x ATX 3.1 (2024), €163.99.</strong> Same boxes ticked, plus Cybenetics Gold, a 140 mm FDB fan, and a manual fan-override knob; also 3× PCIe 6+2 all on separate cables. 160 mm deep, €21 dearer, but deep stock (>25 units) — the safer order if buying is not immediate.</p>
+<p>Rejected and why:</p>
+<ul>
+<li><strong>ASUS Prime 850W Gold ATX 3.1</strong> (€118.99) — no zero-RPM, one PCIe cable in box, not shippable at time of check. Fails both requirements.</li>
+<li><strong>MSI MAG A850GL PCIE5</strong> — no semi-passive operation; 4× PCIe on two daisy-chained cables; 5-year warranty.</li>
+<li><strong>Cooler Master MWE Gold 850 V3 ATX 3.1</strong> (€122.99) — has zero-RPM, but a 120 mm ball-bearing fan at 2300 RPM max; reviewed with “high fan noise at max load” and thermal stress. Wrong unit for a silence-first build.</li>
+<li><strong>Asus TUF Gaming 850W</strong> (€104.90) — cheapest, but the fan profile is tuned for component temperature rather than noise.</li>
+<li><strong>Corsair RM850e</strong> (€148.99), <strong>ASUS ROG Strix 850W Platinum</strong> (€161.99) — both advertise zero-RPM / 0 dB; PCIe cable-run counts not verified, and neither undercuts the RM850x enough to justify chasing.</li>
+</ul>
+<p>Both shortlisted units supply three independent PCIe runs, so the choice holds whether the ordered 9070 XT variant takes 2× or 3× 8-pin.</p>
+<p>Prices and stock as of 2026-07-27; re-check at order time.</p>
+<h2 id="retailer-comparison--full-build">Retailer comparison — full build<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#retailer-comparison--full-build" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Every line priced live 2026-07-27 across Verkkokauppa, Jimm’s and Gigantti.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Part</th><th>Verkkokauppa</th><th>Jimm’s</th><th>Gigantti</th></tr></thead><tbody><tr><td>Case — A3-mATX <strong>Wood</strong> black/walnut</td><td>€104.99 (4 kpl)</td><td><strong>€86.90</strong> (9 kpl)</td><td>✗ not stocked*</td></tr><tr><td>CPU — Ryzen 7 9800X3D</td><td>€449.99 (>25)</td><td>€459.90 (>25)</td><td><strong>€419.00</strong> (100+, 30 min nouto)</td></tr><tr><td>Cooler — NH-U12A chromax.black</td><td>€136.99 (5 kpl)</td><td>€135.90 (11 kpl)</td><td><strong>€129.90</strong> (25+)</td></tr><tr><td>Board — TUF B850M-PLUS WIFI</td><td>€208.99 (<strong>1 kpl</strong>)</td><td><strong>€169.90</strong> (>25)</td><td>€199.90 — ei saatavilla</td></tr><tr><td>RAM — FURY Beast KF560C30BBEK2-32</td><td>€529.99 (>25)</td><td>€519.90 (<strong>2 kpl</strong>)</td><td><strong>€519.90</strong> (50+)</td></tr><tr><td>SSD — WD_BLACK SN7100 <strong>1 TB</strong></td><td>€182.99 (>25)</td><td>€194.90 (>25)</td><td><strong>€169.90</strong> (100+, 30 min nouto)</td></tr><tr><td>PSU — Seasonic GX-850 ATX 3.1</td><td>€142.99 (3–4)</td><td><strong>€140.90</strong> (>25)</td><td>€141.10 (50+)</td></tr><tr><td>GPU — Sapphire PURE 9070 XT OC</td><td>€899.99 (~1 vk)</td><td><strong>€828.90</strong> (5–10 pv)</td><td>€890.00 (9 kpl)</td></tr><tr><td>GPU — Sapphire NITRO+ 9070 XT OC</td><td>€955.99 (~1 vk)</td><td>€888.90</td><td><strong>€855.90</strong> (25+ heti)</td></tr><tr><td>PSU alt — Corsair RM850x ATX 3.1</td><td>€163.99 (>25)</td><td>€172.90 (6 kpl)</td><td><strong>€163.90</strong> (10+)</td></tr><tr><td><strong>Basket total (PURE)</strong></td><td><strong>€2656.92</strong></td><td><strong>€2537.20</strong></td><td>incomplete</td></tr></tbody></table></div>
+<p>* Gigantti stocks the <em>plain</em> A3-mATX black at €76.90 — different SKU, no wood front, not comparable.</p>
+<p><strong>Order from two stores: Jimm’s + Gigantti. No third order improves it.</strong> With the PURE the optimum is €2465.30; with the NITRO+ chosen it is €2492.30 — see the order sheet for the per-store split and links.</p>
+<p>Jimm’s alone is €2537.20 (+€71.90) if one order and one warranty contact is worth that. The premium is three lines — CPU €459.90 vs €419.00 (+€40.90), SSD €194.90 vs €169.90 (+€25.00), cooler €135.90 vs €129.90 (+€6.00); Jimm’s wins the rest. Net of Gigantti’s shipping the real gap is smaller. Verkkokauppa alone is €2656.92 (+€191.62) and is cheapest on <strong>none</strong> of the eight lines — it held the SSD line at 2 TB (€298.99, and Gigantti didn’t stock that capacity), so dropping to 1 TB took its last win. An all-Gigantti build remains impossible: no Wood case, board unavailable.</p>
+<p>Price isn’t the only axis. Verkkokauppa and Jimm’s can each supply the whole build; Gigantti cannot. Verkkokauppa also has five pickup points and 1-hour Helsinki delivery against Jimm’s shipping from Turku, so the €191.62 narrows once shipping is priced — and it is the fallback if Jimm’s thin RAM stock or 5–10 day GPU lead time bites.</p>
+<p>The NITRO+ is the chosen GPU as of 2026-07-27 — at €855.90 from Gigantti it costs €27.00 over the Jimm’s PURE while shipping immediately instead of on a 5–10 day supplier order, and it is the only 9070 XT in the shortlist with a published load-noise measurement.</p>
+<p>Three conclusions that outlive the prices:</p>
+<ol>
+<li><strong>The board campaign is dated.</strong> Jimm’s B850M-PLUS WIFI at €169.90 against €244.90 list runs to <strong>16.8.2026</strong> or 30 units. This is the campaign the parts table flagged as “worth pursuing.”</li>
+<li><strong>Retailer arbitrage does not solve the RAM.</strong> €519.90 / €519.90 / €529.99 — a €10 spread on a €520 part. The largest value problem needs a different kit or a delay, not a different shop.</li>
+<li><strong>Two stock traps in the all-Jimm’s basket:</strong> RAM down to 2 units (Gigantti has 50+), and the GPU is a supplier order (5–10 days), not own stock.</li>
+</ol>
+<p>Totals exclude fans (no SKU chosen), Windows and shipping.</p>
+<p><strong>This changes the GPU verdict.</strong> Gigantti’s NITRO+ at €855.90 is €44 <em>below</em> Verkkokauppa’s PURE and only €27 above Jimm’s PURE, with 25+ units shipping immediately. The NITRO+ was previously reasoned about as a +€56 upgrade; at +€27, against a card with a lab-measured 26 dBA where the PURE has no equivalent measurement, the case is much stronger. The counterweights are unchanged and marginal: 64 mm vs 61 mm costs 3 mm of bottom-mesh intake plenum, and 1894 g vs 1233 g.</p>
+<p>Two cards from TechSpot’s best-five that Verkkokauppa never stocked are available at Jimm’s — <strong>PowerColor Red Devil Spectral White €869.90</strong> and Hellhound Spectral White €852.90 (mid-tier performer). Jimm’s also has the ASRock Taichi OC in stock at €1099.90, €285 over Verkkokauppa’s dead listing — not worth it.</p>
+<p>Two verification notes:</p>
+<ul>
+<li>A cached search result advertised the PURE at Jimm’s for €739.90. That campaign expired 31.1.2026; the live price is €828.90. Price-comparison and search snippets for this vault’s Finnish retailers go stale — open the product page.</li>
+<li>⚠ Gigantti’s Seasonic listing (product 854300) claims a <em>120 mm</em> fan and <em>six</em> 6+2-pin connectors. Hardware Busters measured a 135 mm fan and three PCIe 6+2 cables on the GX-850 V4 ATX 3.1. The price matches the ATX 3.1 model but the spec copy appears lifted from an older SKU — confirm before ordering there. Jimm’s and Verkkokauppa list it unambiguously.</li>
+</ul>
+<p>Prices and stock as of 2026-07-27; re-check at order time.</p>
+<h2 id="value-problems-to-resolve-before-ordering">Value problems to resolve before ordering<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#value-problems-to-resolve-before-ordering" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>In priority order:</p>
+<ol>
+<li><strong>RAM (€500–520).</strong> The single largest value problem. Replace or postpone. The AI-datacenter DRAM shortage tripled DDR5 prices through 2026 and mid-2026 forecasts point to continued tightness — so waiting is a gamble, not a plan. If 6000 CL30 EXPO is unavailable, a 5600–6000 CL36 kit in stock beats waiting.</li>
+<li><del><strong>SSD.</strong> Substitute a better-priced 2 TB TLC drive for the KC3000.</del> Resolved 2026-07-27 — dropped to WD_BLACK SN7100 <strong>1 TB</strong> at €169.90, saving €129 against the 2 TB option and €155 against the rejected KC3000 2 TB. Accepted tradeoff: 1 TB is roughly a five-or-six-game working set once Windows or Bazzite is on it, so installs get managed rather than hoarded. Expansion is deliberately cheap — the B850M-PLUS WIFI has <strong>3× M.2 slots</strong> and the case has <strong>3 drive bays</strong>, so a second NVMe later needs one drive and a side panel, no rebuild.</li>
+<li><strong>Case fans — deliberately not economised.</strong> The original concern was that three premium fans are over-spec, and on thermal grounds that still holds: cheaper sets were priced at €29.90–€50.97 and GN’s zero-fan run was within 1.5 °C of their best config. Three NF-A12x25 chromax.black at €104.10 were chosen anyway, on brand preference and match with the chromax cooler. This is the cheapest line to revisit if the budget tightens — roughly €55 recoverable. See Fan layout.</li>
+<li><strong>Cooler.</strong> A cheaper AM5 air cooler is fine if acoustics and long-term Noctua mounting support are not priorities.</li>
+<li><strong>Windows.</strong> Add its cost to the finished-system budget if needed. (Not required if running Bazzite/Fedora — see Linux notes.)</li>
+<li><strong>Retailers.</strong> Consolidate only after weighing component savings against added shipping and return complexity.</li>
+</ol>
+<h2 id="pre-order-checklist">Pre-order checklist<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#pre-order-checklist" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" checked disabled/> Recheck every SKU and live price — all eight lines repriced 2026-07-27 across three retailers (fans still unpriced)</li>
+<li class="task-list-item"><input type="checkbox" disabled/> Confirm stock, shipping, return terms, campaign expiry</li>
+<li class="task-list-item"><input type="checkbox" disabled/> Confirm RAM SKU KF560C30BBEK2-32, EXPO support, motherboard QVL listing</li>
+<li class="task-list-item"><input type="checkbox" checked disabled/> Confirm the GPU choice against the field — PURE re-verified 2026-07-27; thickness is not a binding constraint without a bottom fan</li>
+<li class="task-list-item"><input type="checkbox" disabled/> Do <strong>not</strong> order 25 mm bottom fans</li>
+<li class="task-list-item"><input type="checkbox" checked disabled/> Confirm the PSU ships two independently usable PCIe cable runs — Seasonic FOCUS GX-850 ATX 3.1 ships three separate PCIe 6+2 cables</li>
+<li class="task-list-item"><input type="checkbox" disabled/> Plan PSU installation at F2</li>
+<li class="task-list-item"><input type="checkbox" disabled/> Include Windows in the budget if required</li>
+<li class="task-list-item"><input type="checkbox" checked disabled/> Compare mixed-retailer savings against single-retailer warranty simplicity — done 2026-07-27; two orders (Jimm’s + Gigantti) hit the €2465.30 optimum, Jimm’s alone costs €65.90 more</li>
+<li class="task-list-item"><input type="checkbox" disabled/> Order the board before the Jimm’s campaign ends <strong>16.8.2026</strong> (or accept €244.90 list)</li>
+<li class="task-list-item"><input type="checkbox" checked disabled/> Pick case fans — 3× Noctua NF-A12x25 chromax.black.swap, 2× top + 1× rear, all exhaust; side and bottom empty</li>
+</ul>
+<p>All lines are compared across Verkkokauppa, Jimm’s and Gigantti above. Not yet checked: Proshop.fi, Datatarjous.fi; cross-check Hintaopas.fi.</p>
+<p><strong>Search snippets and price-comparison sites go stale on these retailers — open the product page.</strong> Three expired campaigns surfaced as current during this pass: the PURE at Jimm’s for €739.90 (expired 31.1.2026), the A3-mATX Wood at Jimm’s for €69.90 (expired 31.3.2026), and the 9800X3D at Gigantti for €439.90 (a dated April figure; live price €419.00).</p>
+<h2 id="undervolting">Undervolting<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#undervolting" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>The 9070 XT undervolts well — around −100 mV with a reduced power limit trades roughly 10 % performance for a substantial power drop (figures reported for the non-XT 9070; XT is directionally similar, not separately verified). At 1440p there are frames to spare, so this is close to free acoustic headroom. Tune after assembly rather than buying more cooling.</p>
+<h2 id="linux">Linux<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#linux" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>See <a href="https://github.com/oxzo/brains/tree/main/knowledge/tech/wine-proton-gaming-linux.md" class="external">wine-proton-gaming-linux<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>, <a href="https://github.com/oxzo/brains/tree/main/knowledge/tech/bazzite-brainhost-ops-runbook.md" class="external">bazzite-brainhost-ops-runbook<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>.</p>
+<ul>
+<li>RDNA 4 is well supported on current kernels/Mesa (RADV); Bazzite and Fedora 42+ handle the 9070 XT out of the box, avoiding NVIDIA driver-packaging friction on atomic distros.</li>
+<li>GPU undervolting needs <code>amdgpu.ppfeaturemask</code> set for full overdrive access; LACT is the usual tool (unverified against current Bazzite releases).</li>
+<li>FSR 4 works through recent Mesa/Proton paths (unverified — check Bazzite release notes at build time).</li>
+</ul>
+<h2 id="sources">Sources<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#sources" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>Case: <a href="https://lian-li.com/product/a3-matx/" class="external">Lian Li A3-mATX specs<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — 415 mm GPU length, 4-slot thickness, 165 mm cooler, 220 mm PSU</li>
+<li>GPU acoustics: <a href="https://www.techpowerup.com/review/sapphire-radeon-rx-9070-xt-pulse/44.html" class="external">TechPowerUp — Sapphire RX 9070 XT Pulse<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> (25.5 dBA), <a href="https://www.techpowerup.com/review/sapphire-radeon-rx-9070-xt-nitro/44.html" class="external">TechPowerUp — Sapphire RX 9070 XT Nitro+<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> (26 dBA), <a href="https://gamersnexus.net/gpus/tearing-down-sapphires-rx-9070-xt-pulse-thermals-fan-response-noise" class="external">GamersNexus — Pulse teardown, fan response and noise<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> (90 °C memory, erratic fan curve)</li>
+<li>GPU: <a href="https://www.techporn.ph/sapphire-pure-rx-9070-xt-oc-graphics-card-review/" class="external">Sapphire PURE RX 9070 XT OC review<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> (31.9 dBA idle / 33.6 dBA load, 0 dB fan-stop), <a href="https://www.techspot.com/review/3015-amd-radeon-9070-xt-roundup/" class="external">TechSpot 14-card 9070 XT roundup<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>Cooler heights: <a href="https://www.anandtech.com/show/21231/the-be-quiet-dark-rock-pro-5-cpu-cooler-review" class="external">AnandTech — Dark Rock Pro 5<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>, <a href="https://www.bequiet.com/en/cpucooler/5110" class="external">be quiet! Dark Rock 5<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>, <a href="https://www.thermalright.com/product/phantom-spirit-120-se/" class="external">Thermalright Phantom Spirit 120 SE<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>Rejected ITX cases: <a href="https://www.fractal-design.com/products/cases/terra/terra/jade/" class="external">Fractal Terra specs<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>, <a href="https://gamersnexus.net/cases/fractal-fumbles-mood-case-review-thermals-design-oversights" class="external">GamersNexus — Fractal Mood<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>Fan layout: <a href="https://gamersnexus.net/cases/excellent-budget-case-lian-li-dan-a3-matx-review-benchmarks" class="external">GamersNexus — Lian Li DAN A3-mATX review &amp; benchmarks<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> (side-intake GPU penalty, per-config thermals, ships with no fans), <a href="https://www.noctua.at/en/compatibility/by-components/cases/lian-li-dan-cases-a3-matx-white" class="external">Noctua A3-mATX cooler compatibility<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> (165 mm ceiling confirmed)</li>
+<li>Airflow vs damping: <a href="https://www.guru3d.com/review/fractal-design-define-7-compact-review/" class="external">Guru3D — Define 7 Compact<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>PSU cable runs and fan modes: <a href="https://hwbusters.com/psus/seasonic-focus-gx-850-v4-atx-v3-1-psu-review/" class="external">Hardware Busters — Seasonic Focus GX-850 V4 ATX v3.1<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>, <a href="https://www.kitguru.net/components/power-supplies/zardon/corsair-rm850x-atx-v3-1-3rd-gen-2024-review/all/1/" class="external">KitGuru — Corsair RM850x ATX v3.1 (2024)<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>, <a href="https://www.corsair.com/us/en/p/psu/cp-9020270-na/rmx-series-rm850x-fully-modular-power-supply-cp-9020270-na" class="external">Corsair RM850x spec sheet<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>, <a href="https://hwbusters.com/psus/msi-mag-a850gl-pcie5-850w-psu-review/" class="external">Hardware Busters — MSI MAG A850GL PCIE5<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>, <a href="https://www.tomshardware.com/pc-components/power-supplies/cooler-master-mwe-gold-850-v3-power-supply-review" class="external">Tom’s Hardware — Cooler Master MWE Gold 850 V3<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>RAM market: <a href="https://rampricehistory.com/us/ddr5-6000-cl30" class="external">RAM price history<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>, <a href="https://www.techtimes.com/articles/317872/20260605/ram-prices-2026-buy-now-wait-gartner-forecasts-130-memory-cost-surge.htm" class="external">2026 DRAM surge<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>Retailer pricing 2026-07-27 — <a href="https://www.jimms.fi/fi/Product/List/000-29M/komponentit--naytonohjaimet--amd-radeon--rx-9000-sarja--rx-9070-xt" class="external">Jimm’s RX 9070 XT range<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>, <a href="https://www.jimms.fi/fi/Product/Show/205683/a3-matx-wd-black/lian-li-a3-matx-wood-edition-matx-kotelo-musta" class="external">Jimm’s A3-mATX Wood<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>, <a href="https://www.jimms.fi/fi/Product/Show/208587" class="external">Jimm’s B850M-PLUS WIFI<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>, <a href="https://www.jimms.fi/fi/Product/Show/207359" class="external">Jimm’s 9800X3D<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>, <a href="https://www.jimms.fi/fi/Product/Show/202015" class="external">Jimm’s FURY Beast KF560C30BBEK2-32<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>, <a href="https://www.gigantti.fi/product/gaming/tietokonekomponentit/prosessorit-cpu/amd-ryzen-7-9800x3d-prosessori/861201" class="external">Gigantti 9800X3D<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>, <a href="https://www.gigantti.fi/product/gaming/tietokonekomponentit/naytonohjaimet-gpu/sapphire-nitro-amd-radeon-rx-9070-xt-gaming-oc-16-gb-naytonohjain/928868" class="external">Gigantti NITRO+ 9070 XT<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>, <a href="https://www.gigantti.fi/product/gaming/tietokonekomponentit/ram-keskusmuistit/kingston-fury-beast-32-gb-ddr5-ram-muisti-6000-mts-cl30-musta/854266" class="external">Gigantti FURY Beast CL30<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+</ul></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>Graph View</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc desktop-only"><button type="button" class="toc-header" aria-controls="toc-content" aria-expanded="true"><h3>Table of Contents</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="toc-content"><ul id="h9l23p" class="overflow"><li class="depth-0"><a href="#micro-atx-gaming-pc-build--rx-9070-xt-silence-first" data-for="micro-atx-gaming-pc-build--rx-9070-xt-silence-first">Micro-ATX Gaming PC Build — RX 9070 XT (silence-first)</a></li><li class="depth-1"><a href="#why-matx-and-not-mini-itx" data-for="why-matx-and-not-mini-itx">Why mATX and not Mini-ITX</a></li><li class="depth-2"><a href="#why-not-a-premium-quiet-case-instead-considered-and-rejected-2026-07-27" data-for="why-not-a-premium-quiet-case-instead-considered-and-rejected-2026-07-27">Why not a “premium quiet” case instead (considered and rejected 2026-07-27)</a></li><li class="depth-1"><a href="#order-sheet" data-for="order-sheet">Order sheet</a></li><li class="depth-1"><a href="#parts" data-for="parts">Parts</a></li><li class="depth-1"><a href="#fan-layout" data-for="fan-layout">Fan layout</a></li><li class="depth-1"><a href="#assembly-constraints" data-for="assembly-constraints">Assembly constraints</a></li><li class="depth-1"><a href="#gpu-model-selection" data-for="gpu-model-selection">GPU model selection</a></li><li class="depth-1"><a href="#psu-selection" data-for="psu-selection">PSU selection</a></li><li class="depth-1"><a href="#retailer-comparison--full-build" data-for="retailer-comparison--full-build">Retailer comparison — full build</a></li><li class="depth-1"><a href="#value-problems-to-resolve-before-ordering" data-for="value-problems-to-resolve-before-ordering">Value problems to resolve before ordering</a></li><li class="depth-1"><a href="#pre-order-checklist" data-for="pre-order-checklist">Pre-order checklist</a></li><li class="depth-1"><a href="#undervolting" data-for="undervolting">Undervolting</a></li><li class="depth-1"><a href="#linux" data-for="linux">Linux</a></li><li class="depth-1"><a href="#sources" data-for="sources">Sources</a></li><li class="overflow-end"></li></ul></div></div><div class="backlinks"><h3>Backlinks</h3><ul id="xacmdj" class="overflow"><li><a href="../tech/pc-build-matx-kids-9060-xt" class="internal">Micro-ATX Kids' Gaming PC — RX 9060 XT 16 GB (Hogwarts Legacy class, 1080p/1440p)</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v4.4.1</a> © 2026</p><ul><li><a href="https://github.com/oxzo/brains">source</a></li><li><a href="/index.xml">rss</a></li></ul></footer></div></div></body><script type="application/javascript">function o(){let t=this.parentElement;t.classList.toggle("is-collapsed");let e=t.classList.contains("is-collapsed")?this.scrollHeight:t.scrollHeight;t.style.maxHeight=e+"px";let c=t,l=t.parentElement;for(;l;){if(!l.classList.contains("callout"))return;let i=l.classList.contains("is-collapsed")?l.scrollHeight:l.scrollHeight+c.scrollHeight;l.style.maxHeight=i+"px",c=l,l=l.parentElement}}function n(){let t=document.getElementsByClassName("callout is-collapsible");for(let s of t){let e=s.firstElementChild;if(!e)continue;e.addEventListener("click",o),window.addCleanup(()=>e.removeEventListener("click",o));let l=s.classList.contains("is-collapsed")?e.scrollHeight:s.scrollHeight;s.style.maxHeight=l+"px"}}document.addEventListener("nav",n);
+</script><script type="module">function f(i,e){if(!i)return;function r(o){o.target===this&&(o.preventDefault(),o.stopPropagation(),e())}function t(o){o.key.startsWith("Esc")&&(o.preventDefault(),e())}i?.addEventListener("click",r),window.addCleanup(()=>i?.removeEventListener("click",r)),document.addEventListener("keydown",t),window.addCleanup(()=>document.removeEventListener("keydown",t))}function y(i){for(;i.firstChild;)i.removeChild(i.firstChild)}var h=class{constructor(e,r){this.container=e;this.content=r;this.setupEventListeners(),this.setupNavigationControls(),this.resetTransform()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;cleanups=[];setupEventListeners(){let e=this.onMouseDown.bind(this),r=this.onMouseMove.bind(this),t=this.onMouseUp.bind(this),o=this.resetTransform.bind(this);this.container.addEventListener("mousedown",e),document.addEventListener("mousemove",r),document.addEventListener("mouseup",t),window.addEventListener("resize",o),this.cleanups.push(()=>this.container.removeEventListener("mousedown",e),()=>document.removeEventListener("mousemove",r),()=>document.removeEventListener("mouseup",t),()=>window.removeEventListener("resize",o))}cleanup(){for(let e of this.cleanups)e()}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let r=this.createButton("+",()=>this.zoom(.1)),t=this.createButton("-",()=>this.zoom(-.1)),o=this.createButton("Reset",()=>this.resetTransform());e.appendChild(t),e.appendChild(o),e.appendChild(r),this.container.appendChild(e)}createButton(e,r){let t=document.createElement("button");return t.textContent=e,t.className="mermaid-control-button",t.addEventListener("click",r),window.addCleanup(()=>t.removeEventListener("click",r)),t}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}zoom(e){let r=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),t=this.content.getBoundingClientRect(),o=t.width/2,n=t.height/2,c=r-this.scale;this.currentPan.x-=o*c,this.currentPan.y-=n*c,this.scale=r,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){this.scale=1;let e=this.content.querySelector("svg");this.currentPan={x:e.getBoundingClientRect().width/2,y:e.getBoundingClientRect().height/2},this.updateTransform()}},C=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],E;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;E||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let r=E.default,t=new WeakMap;for(let n of e)t.set(n,n.innerText);async function o(){for(let s of e){s.removeAttribute("data-processed");let a=t.get(s);a&&(s.innerHTML=a)}let n=C.reduce((s,a)=>(s[a]=window.getComputedStyle(document.documentElement).getPropertyValue(a),s),{}),c=document.documentElement.getAttribute("saved-theme")==="dark";r.initialize({startOnLoad:!1,securityLevel:"loose",theme:c?"dark":"base",themeVariables:{fontFamily:n["--codeFont"],primaryColor:n["--light"],primaryTextColor:n["--darkgray"],primaryBorderColor:n["--tertiary"],lineColor:n["--darkgray"],secondaryColor:n["--secondary"],tertiaryColor:n["--tertiary"],clusterBkg:n["--light"],edgeLabelBackground:n["--highlight"]}}),await r.run({nodes:e})}await o(),document.addEventListener("themechange",o),window.addCleanup(()=>document.removeEventListener("themechange",o));for(let n=0;n<e.length;n++){let v=function(){let g=l.querySelector("#mermaid-space"),m=l.querySelector(".mermaid-content");if(!m)return;y(m);let w=c.querySelector("svg").cloneNode(!0);m.appendChild(w),l.classList.add("active"),g.style.cursor="grab",u=new h(g,m)},M=function(){l.classList.remove("active"),u?.cleanup(),u=null},c=e[n],s=c.parentElement,a=s.querySelector(".clipboard-button"),d=s.querySelector(".expand-button"),p=window.getComputedStyle(a),L=a.offsetWidth+parseFloat(p.marginLeft||"0")+parseFloat(p.marginRight||"0");d.style.right=`calc(${L}px + 0.3rem)`,s.prepend(d);let l=s.querySelector("#mermaid-container");if(!l)return;let u=null;d.addEventListener("click",v),f(l,M),window.addCleanup(()=>{u?.cleanup(),d.removeEventListener("click",v)})}});
+</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript"></script><script src="../postscript.00b09a8c.js" type="module"></script></html>

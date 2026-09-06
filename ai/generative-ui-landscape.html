@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en"><head><title>Generative UI — Runtime Landscape and Evidence Base · second-brain</title><meta charset="utf-8"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400;1,600&amp;family=Inter:wght@400;700&amp;family=JetBrains Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="synapse"/><meta property="og:title" content="Generative UI — Runtime Landscape and Evidence Base · second-brain"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Generative UI — Runtime Landscape and Evidence Base · second-brain"/><meta name="twitter:description" content="Generative UI — Runtime Landscape and Evidence Base Last verified: 2026-08-25 (npm registry + GitHub API queried directly; arXiv metadata via the arXiv API; spec, vendor, and ACM ..."/><meta property="og:description" content="Generative UI — Runtime Landscape and Evidence Base Last verified: 2026-08-25 (npm registry + GitHub API queried directly; arXiv metadata via the arXiv API; spec, vendor, and ACM ..."/><meta property="og:image:alt" content="Generative UI — Runtime Landscape and Evidence Base Last verified: 2026-08-25 (npm registry + GitHub API queried directly; arXiv metadata via the arXiv API; spec, vendor, and ACM ..."/><meta property="twitter:domain" content="oxzo.github.io/brains-site"/><meta property="og:url" content="https://oxzo.github.io/brains-site/ai/generative-ui-landscape"/><meta property="twitter:url" content="https://oxzo.github.io/brains-site/ai/generative-ui-landscape"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="Generative UI — Runtime Landscape and Evidence Base Last verified: 2026-08-25 (npm registry + GitHub API queried directly; arXiv metadata via the arXiv API; spec, vendor, and ACM ..."/><meta name="generator" content="Quartz"/><link href="../index.322b98b4.css" rel="stylesheet" type="text/css" spa-preserve/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  padding: 2rem;
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL2hvbWUvcnVubmVyL3dvcmsvYnJhaW5zL2JyYWlucy9zaXRlL3F1YXJ0ei9jb21wb25lbnRzL3N0eWxlcyIsInNvdXJjZXMiOlsibWVybWFpZC5pbmxpbmUuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTs7QUFHRjtFQUNFO0VBQ0E7O0FBR0Y7RUFDRTs7O0FBS0Y7RUFDRTtFQUNBOzs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7O0FBR0Y7RUFDRTs7QUFJRjtFQUNFO0VBQ0E7RUFDQSIsInNvdXJjZXNDb250ZW50IjpbIi5leHBhbmQtYnV0dG9uIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbG9hdDogcmlnaHQ7XG4gIHBhZGRpbmc6IDAuNHJlbTtcbiAgbWFyZ2luOiAwLjNyZW07XG4gIHJpZ2h0OiAwOyAvLyBOT1RFOiByaWdodCB3aWxsIGJlIHNldCBpbiBtZXJtYWlkLmlubGluZS50c1xuICBjb2xvcjogdmFyKC0tZ3JheSk7XG4gIGJvcmRlci1jb2xvcjogdmFyKC0tZGFyayk7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWxpZ2h0KTtcbiAgYm9yZGVyOiAxcHggc29saWQ7XG4gIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgb3BhY2l0eTogMDtcbiAgdHJhbnNpdGlvbjogMC4ycztcblxuICAmID4gc3ZnIHtcbiAgICBmaWxsOiB2YXIoLS1saWdodCk7XG4gICAgZmlsdGVyOiBjb250cmFzdCgwLjMpO1xuICB9XG5cbiAgJjpob3ZlciB7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIGJvcmRlci1jb2xvcjogdmFyKC0tc2Vjb25kYXJ5KTtcbiAgfVxuXG4gICY6Zm9jdXMge1xuICAgIG91dGxpbmU6IDA7XG4gIH1cbn1cblxucHJlIHtcbiAgJjpob3ZlciA+IC5leHBhbmQtYnV0dG9uIHtcbiAgICBvcGFjaXR5OiAxO1xuICAgIHRyYW5zaXRpb246IDAuMnM7XG4gIH1cbn1cblxuI21lcm1haWQtY29udGFpbmVyIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICBjb250YWluOiBsYXlvdXQ7XG4gIHotaW5kZXg6IDk5OTtcbiAgbGVmdDogMDtcbiAgdG9wOiAwO1xuICB3aWR0aDogMTAwdnc7XG4gIGhlaWdodDogMTAwdmg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGRpc3BsYXk6IG5vbmU7XG4gIGJhY2tkcm9wLWZpbHRlcjogYmx1cig0cHgpO1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuNSk7XG5cbiAgJi5hY3RpdmUge1xuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgfVxuXG4gICYgPiAjbWVybWFpZC1zcGFjZSB7XG4gICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1saWdodCk7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDUwJTtcbiAgICBsZWZ0OiA1MCU7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gICAgaGVpZ2h0OiA4MHZoO1xuICAgIHdpZHRoOiA4MHZ3O1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG5cbiAgICAmID4gLm1lcm1haWQtY29udGVudCB7XG4gICAgICBwYWRkaW5nOiAycmVtO1xuICAgICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgICAgdHJhbnNmb3JtLW9yaWdpbjogMCAwO1xuICAgICAgdHJhbnNpdGlvbjogdHJhbnNmb3JtIDAuMXMgZWFzZTtcbiAgICAgIG92ZXJmbG93OiB2aXNpYmxlO1xuICAgICAgbWluLWhlaWdodDogMjAwcHg7XG4gICAgICBtaW4td2lkdGg6IDIwMHB4O1xuXG4gICAgICBwcmUge1xuICAgICAgICBtYXJnaW46IDA7XG4gICAgICAgIGJvcmRlcjogbm9uZTtcbiAgICAgIH1cblxuICAgICAgc3ZnIHtcbiAgICAgICAgbWF4LXdpZHRoOiBub25lO1xuICAgICAgICBoZWlnaHQ6IGF1dG87XG4gICAgICB9XG4gICAgfVxuXG4gICAgJiA+IC5tZXJtYWlkLWNvbnRyb2xzIHtcbiAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgIGJvdHRvbTogMjBweDtcbiAgICAgIHJpZ2h0OiAyMHB4O1xuICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgIGdhcDogOHB4O1xuICAgICAgcGFkZGluZzogOHB4O1xuICAgICAgYmFja2dyb3VuZDogdmFyKC0tbGlnaHQpO1xuICAgICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICAgIGJvcmRlci1yYWRpdXM6IDZweDtcbiAgICAgIGJveC1zaGFkb3c6IDAgMnB4IDRweCByZ2JhKDAsIDAsIDAsIDAuMSk7XG4gICAgICB6LWluZGV4OiAyO1xuXG4gICAgICAubWVybWFpZC1jb250cm9sLWJ1dHRvbiB7XG4gICAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAgICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICAgICAgICB3aWR0aDogMzJweDtcbiAgICAgICAgaGVpZ2h0OiAzMnB4O1xuICAgICAgICBwYWRkaW5nOiAwO1xuICAgICAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodCk7XG4gICAgICAgIGNvbG9yOiB2YXIoLS1kYXJrKTtcbiAgICAgICAgYm9yZGVyLXJhZGl1czogNHB4O1xuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgICAgIGZvbnQtc2l6ZTogMTZweDtcbiAgICAgICAgZm9udC1mYW1pbHk6IHZhcigtLWJvZHlGb250KTtcbiAgICAgICAgdHJhbnNpdGlvbjogYWxsIDAuMnMgZWFzZTtcblxuICAgICAgICAmOmhvdmVyIHtcbiAgICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICB9XG5cbiAgICAgICAgJjphY3RpdmUge1xuICAgICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWSgxcHgpO1xuICAgICAgICB9XG5cbiAgICAgICAgLy8gU3R5bGUgdGhlIHJlc2V0IGJ1dHRvbiBkaWZmZXJlbnRseVxuICAgICAgICAmOm50aC1jaGlsZCgyKSB7XG4gICAgICAgICAgd2lkdGg6IGF1dG87XG4gICAgICAgICAgcGFkZGluZzogMCAxMnB4O1xuICAgICAgICAgIGZvbnQtc2l6ZTogMTRweDtcbiAgICAgICAgfVxuICAgICAgfVxuICAgIH1cbiAgfVxufVxuIl19 */</style><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" spa-preserve/><script src="../prescript.be9697b4.js" type="application/javascript" spa-preserve></script><script type="application/javascript" spa-preserve>const fetchData = fetch("../static/contentIndex.73890e1e.json").then(data => data.json())</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://oxzo.github.io/brains-site/index.xml"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://oxzo.github.io/brains-site/ai/generative-ui-landscape-og-image.webp"/><meta property="og:image:url" content="https://oxzo.github.io/brains-site/ai/generative-ui-landscape-og-image.webp"/><meta name="twitter:image" content="https://oxzo.github.io/brains-site/ai/generative-ui-landscape-og-image.webp"/><meta property="og:image:type" content="image/.webp"/></head><body data-slug="ai/generative-ui-landscape"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">synapse</a></h2><div class="spacer mobile-only"></div><div style="display: flex; flex-direction: row; flex-wrap: nowrap; gap: 1rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button"><p>Search</p><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Search for something" placeholder="Search for something"/><div class="search-layout" data-preview="true"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Dark mode"><title>Dark mode</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Light mode"><title>Light mode</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div></div><div class="explorer" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a,b)=>!a.isFolder&amp;&amp;!b.isFolder||a.isFolder&amp;&amp;b.isFolder?a.displayName.localeCompare(b.displayName,void 0,{numeric:!0,sensitivity:\&quot;base\&quot;}):!a.isFolder&amp;&amp;b.isFolder?1:-1&quot;,&quot;filterFn&quot;:&quot;node=>node.slugSegment!==\&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;node=>node&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-content"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>Explorer</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="explorer-content" aria-expanded="false"><ul class="explorer-ul overflow" id="0x8mfk"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#"></a></li></template><template id="template-folder"><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../ai/">AI — Index</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>Generative UI — Runtime Landscape and Evidence Base</a></div></nav><h1 class="article-title">Generative UI — Runtime Landscape and Evidence Base</h1><p show-comma="true" class="content-meta"><time datetime="2026-08-25T00:00:00.000Z">Aug 25, 2026</time><span>26 min read</span></p><ul class="tags"><li><a href="../tags/ai" class="internal tag-link">ai</a></li><li><a href="../tags/frontend" class="internal tag-link">frontend</a></li><li><a href="../tags/genui" class="internal tag-link">genui</a></li><li><a href="../tags/ui" class="internal tag-link">ui</a></li><li><a href="../tags/time-sensitive" class="internal tag-link">time-sensitive</a></li><li><a href="../tags/publish" class="internal tag-link">publish</a></li></ul></div></div><article class="popover-hint"><h1 id="generative-ui--runtime-landscape-and-evidence-base">Generative UI — Runtime Landscape and Evidence Base<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#generative-ui--runtime-landscape-and-evidence-base" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p><strong>Last verified: 2026-08-25</strong> (npm registry + GitHub API queried directly; arXiv metadata via the arXiv API; spec, vendor, and ACM pages fetched same day, with paywalled ACM abstracts via <code>tools/snapshot</code>). Version, star, and status claims below decay fast. The libraries in the table shipped releases the same week this was written.</p>
+<p>The vault already holds two narrow slices of this: <a href="../ai/a2ui-vs-json-render" class="internal" data-slug="ai/a2ui-vs-json-render">a2ui-vs-json-render</a> (one head-to-head, re-verified 2026-08-25) and <a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/ui-for-ai-products.md" class="external">ui-for-ai-products<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> (streaming and failure affordances). Neither covers the field, and neither carries the research. This note is the anchor: <strong>the two axes that organize the space, the current runtime options, and what the evidence actually shows.</strong></p>
+<p>Scope boundary, kept sharp throughout: <strong>design-time builders</strong> (v0, Bolt, Lovable — a human prompts, a human reviews, code lands in a repo) are a different problem from <strong>runtime generative UI</strong> (an agent produces interface for an end user, live, with no human in the loop). They share a name and almost nothing else. Most confusion in this space is the two being discussed as one thing.</p>
+<h2 id="two-axes-not-one">Two axes, not one<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#two-axes-not-one" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Every runtime approach answers <strong>what crosses the trust boundary</strong>. But what a failure <em>costs</em> depends on <strong>what the host is holding</strong> — and that second question does more predictive work than the first. Treating this as one axis is the common mistake, and it produces guardrail advice that is either ignored or over-applied.</p>
+<p><strong>Axis 1 — what crosses the boundary.</strong> CopilotKit’s 2026 developer guide splits it three ways (vendor-authored, and it positions CopilotKit as the answer at all three tiers); restated around the boundary rather than around their product:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Tier</th><th>What crosses</th><th>The model chooses</th><th>Characteristic failure</th></tr></thead><tbody><tr><td><strong>Static</strong></td><td>Nothing. A tool-call name + validated args.</td><td><em>Which</em> of your components to show, and with what data</td><td>Wrong component; bounded and inspectable</td></tr><tr><td><strong>Declarative</strong></td><td>A JSON tree naming components from a fixed catalog</td><td>Composition and layout, within the catalog</td><td>Catalog too narrow → generic output; too wide → unbounded surface</td></tr><tr><td><strong>Open-ended</strong></td><td>HTML/CSS/JS, or a whole UI surface</td><td>Everything</td><td>Arbitrary code from a probabilistic source; XSS, exfiltration, silent side effects</td></tr></tbody></table></div>
+<p><strong>Axis 2 — what a compromise costs.</strong> A browser tab in your own web app is a <em>low-privilege</em> host: the web’s threat model already assumes hostile content, and an escape costs you that tab. An IDE, a desktop AI client, or an agent shell is a <em>high-privilege</em> host holding SSH keys, tokens, and repo write access; an escape costs all of it.</p>
+<p>Risk is the <strong>product</strong> of the two, not either alone:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th></th><th>Low-privilege host (browser tab, your web app)</th><th>High-privilege host (IDE, desktop client, agent shell)</th></tr></thead><tbody><tr><td><strong>Static</strong></td><td>The baseline. Your components, your app.</td><td>Agent shell rendering components you already audited.</td></tr><tr><td><strong>Declarative</strong></td><td>Catalog-constrained genUI in a product.</td><td>A2UI across a vendor boundary — catalog is the contract.</td></tr><tr><td><strong>Open-ended</strong></td><td><strong>Google Gemini’s generative UI.</strong> Presentational, no privileged actions. Survivable.</td><td><strong>MCP Apps in an IDE.</strong> The worst cell in the grid.</td></tr></tbody></table></div>
+<p>A third property sits on neither axis and decides whether that bottom-right cell is survivable at all: <strong>isolation quality</strong>. It is a mitigator, available at any tier, and it is where the real engineering is — see <a href="../ai/generative-ui-security" class="internal" data-slug="ai/generative-ui-security">generative-ui-security</a>.</p>
+<p>This grid dissolves what otherwise looks like a contradiction later in this note: <strong>MCP Apps is the most open-ended thing here <em>and</em> has the most careful safety design in the space.</strong> Both are true because it occupies the worst cell. Predeclared reviewable resources, mandatory sandboxing, and auditable JSON-RPC are what that cell costs.</p>
+<h3 id="what-this-means-for-the-guardrail-everyone-repeats">What this means for the guardrail everyone repeats<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#what-this-means-for-the-guardrail-everyone-repeats" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Practitioner guardrail lists near-universally open with <em>“give the model a whitelisted component registry, not arbitrary HTML or JavaScript”</em> — stated flatly, as a rule. <strong>The condition is what matters, and it is almost always omitted.</strong></p>
+<p>Google ships open-ended code generation to consumers and violates nothing: presentational surface, low-privilege host, no privileged actions. That is not a counterexample to the rule; it is the rule’s scope, made visible. Two failure modes, and they are opposite. Repeating the guardrail unconditionally gets it ignored, because a very large visible counterexample exists. Abandoning it because Google does otherwise throws away the cases where it holds. The grid above is the condition. Know which cell you are in before you decide the rule applies.</p>
+<h2 id="the-runtime-options-all-figures-checked-2026-08-25">The runtime options (all figures checked 2026-08-25)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-runtime-options-all-figures-checked-2026-08-25" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Project</th><th>Layer</th><th>npm latest</th><th>GitHub ★</th><th>Created</th><th>License</th></tr></thead><tbody><tr><td>Vercel AI SDK (<code>ai</code>)</td><td>SDK / baseline</td><td><strong>7.0.79</strong></td><td>26.4k (<code>vercel/ai</code>)</td><td>2023-05</td><td>mixed¹</td></tr><tr><td>CopilotKit</td><td>React/Angular agent-UI framework</td><td>1.69.0</td><td><strong>37.0k</strong></td><td>2023-06</td><td>MIT</td></tr><tr><td>A2UI</td><td>cross-platform <em>protocol</em></td><td>—</td><td>16.2k</td><td>2025-09</td><td>Apache-2.0</td></tr><tr><td>json-render</td><td>multi-framework <em>rendering library</em> (Vercel Labs)</td><td>0.20.0</td><td>16.0k</td><td>2026-01</td><td>Apache-2.0</td></tr><tr><td>AG-UI</td><td>agent↔frontend event <em>protocol</em></td><td>0.0.58</td><td>15.5k</td><td>2025-05</td><td>MIT</td></tr><tr><td>assistant-ui</td><td>React chat/agent primitives</td><td>0.15.16</td><td>11.8k</td><td>2023-11</td><td>MIT</td></tr><tr><td>Tambo</td><td>React generative-UI SDK</td><td><strong>1.3.0</strong></td><td>11.2k</td><td>2024-06</td><td>MIT</td></tr><tr><td>MCP Apps (<code>ext-apps</code>)</td><td>MCP extension</td><td>—</td><td>2.8k</td><td>2025-11</td><td>—</td></tr></tbody></table></div>
+<p>¹ GitHub reports a non-standard license for <code>vercel/ai</code>; check before assuming Apache/MIT.</p>
+<p>Version numbers carry more signal than stars here:</p>
+<ul>
+<li><strong>Tambo at 1.3.0 and CopilotKit at 1.69.0 are the only options here past 1.0.</strong> (142 and 1,120 published versions respectively.) Everything else is 0.x or a pre-1.0 spec. If a stable semver contract matters, that is the whole shortlist — and the two are not equivalent: Tambo is a dedicated generative-UI SDK, CopilotKit a broader agent-UI framework that includes generative UI.</li>
+<li><strong>AG-UI at 0.0.58 is a 0.0.x protocol</strong> despite Google/LangChain/AWS/Microsoft/Mastra/PydanticAI adoption claims and 15.5k stars. Adoption breadth and interface stability are independent; do not read one as the other.</li>
+<li><strong>A2UI’s v1.0 is still a “Candidate”</strong> — the same status it held at the 2026-06-12 verification in <a href="../ai/a2ui-vs-json-render" class="internal" data-slug="ai/a2ui-vs-json-render">a2ui-vs-json-render</a>. v0.9.1 remains the designated production release. A release candidate that has not landed in ~2.5 months is a mild negative signal, not a fatal one.</li>
+<li><strong>json-render moved 0.19.0 → 0.20.0 in that same window</strong> — one minor in ~2 months, against 29 versions in its first 5 months. Either the API is settling or attention moved. Still 0.x, still Vercel Labs.</li>
+<li><strong>json-render is not a React library, despite its own homepage.</strong> The site advertises “React &amp; React Native”; the repo README and the published packages cover <strong>React, Vue, Svelte, Solid, and React Native from one catalog</strong>, plus non-DOM renderers for Next.js, PDF, email, Remotion video, React Three Fiber, terminal (Ink), and Satori images — all at 0.20.0, with Vue/Svelte/Solid on npm since Feb–Mar 2026. It also ships <code>@json-render/mcp</code> for MCP Apps hosts. Treating it as React-only understates its reach and is the specific error <a href="../ai/a2ui-vs-json-render" class="internal" data-slug="ai/a2ui-vs-json-render">a2ui-vs-json-render</a> carried until 2026-08-25; the marketing page is the least complete source about it.</li>
+<li><strong>CopilotKit is the mature one by age and volume</strong> (publishing since 2023) and is now the largest by stars. It also authored AG-UI, so “CopilotKit + AG-UI” is one vendor’s stack, not two independent endorsements.</li>
+</ul>
+<p><strong>Vercel AI SDK is at v7, not v6</strong> — released 2026-06-25, a correction to what <a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/ui-for-ai-products.md" class="external">ui-for-ai-products<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> currently states. v7 is positioned as an agent-runtime upgrade (typed per-tool <code>contextSchema</code> + <code>toolsContext</code>, <code>WorkflowAgent</code> durability, approvals, telemetry, first-class timeout config at total/step/chunk/tool granularity). Migration is <code>npx @ai-sdk/codemod v7</code>. Generative UI in the SDK remains the tool-call→React-component binding, i.e. the <strong>static</strong> tier.</p>
+<h3 id="mcp-apps--the-one-with-a-finished-spec">MCP Apps — the one with a finished spec<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#mcp-apps--the-one-with-a-finished-spec" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>SEP-1865 reached <strong>Final</strong> status on the Extensions Track (created 2025-11-21; authored by Ido Salomon, Liad Yosef, Olivier Chafik and six others; shipped as the first official MCP extension, per secondary sources, on 2026-01-26 — a date the <code>ext-apps</code> repo path <code>specification/2026-01-26/apps.mdx</code> corroborates).</p>
+<p>It sits in the grid’s worst cell, open-ended content in a high-privilege host. The design answers that directly:</p>
+<ul>
+<li>UI ships as <strong>predeclared</strong> resources under a <code>ui://</code> URI scheme, typed <code>text/html;profile=mcp-app</code> — <em>not</em> embedded in tool results. The SEP is explicit that this was chosen over MCP-UI’s embedded-resource approach specifically so hosts can <strong>prefetch, cache, and security-review the HTML before anything runs</strong>.</li>
+<li>Bi-directional traffic reuses MCP’s <strong>JSON-RPC</strong>, so every UI→host message is loggable and auditable rather than a bespoke <code>postMessage</code> channel.</li>
+<li><strong>Mandatory iframe sandboxing</strong>; hosts may require explicit user consent for UI-initiated tool calls.</li>
+<li>Optional, negotiated, backwards-compatible.</li>
+</ul>
+<p>The provenance is worth keeping. It unifies two prior systems, community MCP-UI (adopters cited in the SEP: Postman, HuggingFace, Shopify, Goose, ElevenLabs) and OpenAI’s Apps SDK (launched November 2025). This is the “UI runs inside someone else’s AI client” case, and it is the only one here with a finalized standard.</p>
+<h2 id="what-the-research-actually-shows">What the research actually shows<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#what-the-research-actually-shows" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Six papers, all metadata confirmed against the arXiv API on 2026-08-25. A community index at <a href="https://awesomegenerativeui.com/papers" class="external">awesomegenerativeui.com<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> tracks ~28 and is a better entry point than any single reading list.</p>
+<h3 id="the-capability-is-real--and-its-shipped">The capability is real — and it’s shipped<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-capability-is-real--and-its-shipped" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>“Generative UI: LLMs are Effective UI Generators”</strong> (arXiv <a href="https://arxiv.org/abs/2604.09577" class="external">2604.09577<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>, Leviathan et al., Google; arXiv metadata reports 2026-02-24 — note the <code>2604</code> ID prefix would normally imply April, an inconsistency left unresolved. Author count is <em>not</em> stated here: the arXiv API returns 13 author nodes while the abstract page lists 12). Claims, verbatim from the abstract: results are <em>“overwhelmingly preferred by humans over the standard LLM markdown output”</em>; worse than human experts but <em>“at least comparable in 50% of cases”</em>; the capability is <em>“emergent, with substantial improvements from previous models.”</em> Releases <strong>PAGEN</strong>, an expert-crafted evaluation dataset.</p>
+<p>The important part is not the paper — it is that <strong>Google shipped this before publishing it.</strong> The Google Research blog post (2025-11-18) predates the arXiv posting and describes it live in the Gemini app (<em>dynamic view</em>, <em>visual layout</em>) and in Search AI Mode for AI Pro/Ultra subscribers in the US. The implementation: Gemini 3 Pro, a server exposing tools (image generation, web search), heavy system instructions, and <strong>post-processing to fix common issues</strong> — generating HTML/CSS/JS that runs in the user’s browser. Stated limitation: generation <em>“can sometimes take a minute or more.”</em></p>
+<p>So the most visible consumer deployment of runtime generative UI is <strong>raw code generation with a post-processing cleanup pass</strong> — bottom-left cell of the grid above. Not a violation of the registry guardrail; outside its scope. Worth stating what is inference rather than fact: Google does not say “we ship this because the surface has no privileged actions.” That reading is mine, and it is the load-bearing assumption behind treating this deployment as safely replicable in a low-privilege host.</p>
+<p><strong>Two independent corroborations</strong>, so the capability claim does not rest on Google evaluating Google:</p>
+<ul>
+<li><strong>“Generative Interfaces for Language Models”</strong> (arXiv <a href="https://arxiv.org/abs/2508.19227" class="external">2508.19227v3<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>, Chen, Zhang, Zhang, Shao et al. — SALT-NLP; <strong>ACL 2026 Findings</strong>). LLMs respond by generating a task-specific UI rather than prose, via structured interface representations plus iterative refinement. Reports <strong>up to 72% improvement in human preference</strong> over chat, across a multidimensional framework covering functional, interactive, and emotional dimensions. Independent team, independent evaluation, same direction as Google’s result.</li>
+<li><strong>“The Keyhole Effect: Why Chat Interfaces Fail at Data Analysis”</strong> (arXiv <a href="https://arxiv.org/abs/2602.00947" class="external">2602.00947<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>, Mohan Reddy, 2026-02-01) is the <em>mechanistic</em> case, and the most useful framing here for anyone who has to justify the work. It argues chat degrades multi-step analytical tasks through five named mechanisms — content displacement defeating spatial memory, hidden state exceeding working memory (~4 chunks under load), forced verbalization triggering verbal overshadowing that degrades visual pattern recognition, linear text blocking epistemic action and cognitive offloading, and serialization penalties scaling with data dimensionality. Generative UI appears as one of eight proposed remedies. Note what this reframes: <strong>the argument for generative UI is not “prettier than markdown” but “markdown is a cognitive bottleneck for state-dependent work.”</strong> That is a falsifiable claim about tasks, which tells you <em>where</em> generative UI earns its cost — and by implication where it does not. It also connects the whole axis to <a href="../ai/cognitive-load-theory-for-ai" class="internal" data-slug="ai/cognitive-load-theory-for-ai">cognitive-load-theory-for-ai</a> and <a href="../general/how-much-information-at-once" class="internal" data-slug="general/how-much-information-at-once">how-much-information-at-once</a>.</li>
+</ul>
+<h3 id="the-explanations-are-unreliable--measured">The explanations are unreliable — measured<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-explanations-are-unreliable--measured" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>“Design Theater: Evaluating the Gap Between User-Facing Design Reasoning and Implementation in Generative UI Tools”</strong> (arXiv <a href="https://arxiv.org/abs/2607.22928" class="external">2607.22928v2<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>, Imteyaz et al., 6 authors, 2026-07-24, <strong>accepted at AAAI/AIES</strong>). The strongest result in the set and the one to actually act on.</p>
+<p>24 benchmark tasks × 5 tools = 120 interfaces. Tools evaluated: <strong>ChatGPT, Claude, Firebase Studio, Vercel v0, and Bolt.</strong> Findings:</p>
+<ul>
+<li><strong>~25% of user-facing design rationales are not implemented</strong> in the interface produced.</li>
+<li><strong>34% for functional requirements.</strong></li>
+<li>Tools recognize <strong>roughly half</strong> the UX principles embedded in prompts (mean = 0.54).</li>
+<li><strong>Four of the five tools implemented ≤6% of functional principles.</strong></li>
+<li>Interfaces <strong>converge</strong> across tools in appearance and layout, varying mainly in color.</li>
+</ul>
+<p>“Design Theater” names the failure precisely: <em>“plausible and confident design rationales that have little relationship to the actual implementation.”</em></p>
+<p>Note the scope carefully — these are <strong>design-time builders</strong>, not the runtime frameworks in the table above. The paper does not measure json-render or Tambo. What transfers is the mechanism, not the number: <strong>an LLM’s stated reasoning about its own UI output is not evidence about that output.</strong> That indicts one specific workflow, reading the rationale instead of testing the interface. It is the same generation-vs-verification asymmetry as <a href="../ai/cognitive-burden-of-ai-use" class="internal" data-slug="ai/cognitive-burden-of-ai-use">cognitive-burden-of-ai-use</a> and the <a href="../ai/oracle-problem-verification" class="internal" data-slug="ai/oracle-problem-verification">oracle-problem-verification</a> framing. The convergence finding also lands squarely on <a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/visual-ai-slop-fingerprints.md" class="external">visual-ai-slop-fingerprints<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>.</p>
+<h3 id="good-ui-has-no-single-ground-truth">”Good UI” has no single ground truth<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#good-ui-has-no-single-ground-truth" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>“Efficient Personalization of Generative User Interfaces”</strong> (arXiv <a href="https://arxiv.org/abs/2604.09876" class="external">2604.09876<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>, Peng, Das, Bigham, Wu — CMU/Purdue, 2026-04-10). 20 trained designers made pairwise judgments over the same 600 generated UIs. <strong>Average kappa = 0.25</strong> — substantial disagreement among <em>trained designers</em>, and written rationales show they diverge on how they define and prioritize shared concepts like “hierarchy” or “cleanliness.”</p>
+<p>This is the quiet load-bearing result for anyone building evals here. A fixed design rubric encodes one designer’s preferences and calls it quality. Their method instead represents a new user in terms of prior designers, and beat both a pretrained UI evaluator and a larger multimodal model. Direct read-through: <strong>an LLM-as-judge for UI quality inherits whichever designer population its rubric was written from.</strong> But do not over-read the disagreement — the paper’s actual contribution runs the other way. Low inter-rater agreement did <em>not</em> mean preference was arbitrary; their model learned it from sparse feedback and beat both baselines. The lesson is that “good UI” is <strong>learnable but not universal</strong>: a single fixed rubric asserting global quality is the thing that fails, while a judge calibrated to a named population can work. Pairs with <a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/llm-evaluation-methodology.md" class="external">llm-evaluation-methodology<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>.</p>
+<h3 id="accessibility--two-separate-bodies-of-work-deliberately-not-merged">Accessibility — two separate bodies of work, deliberately not merged<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#accessibility--two-separate-bodies-of-work-deliberately-not-merged" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>There are two literatures here. They are often cited together as if one answered the other. They do not: they use different tools, tasks, output artifacts, metrics, and populations, and neither is positioned to confirm or contradict the other. Kept apart on purpose.</p>
+<h4 id="a-generation-used-as-a-remediation-layer-over-existing-pages">(a) Generation used as a <em>remediation layer</em> over existing pages<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#a-generation-used-as-a-remediation-layer-over-existing-pages" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p>“Generative UI as an Accessibility Bridge: Lessons from C2C E-Commerce” (arXiv <a href="https://arxiv.org/abs/2604.25455" class="external">2604.25455<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>, Bektur Ryskeldiev, Mercari R4D / Univ. of Tsukuba, 2026-04-28) synthesizes six studies (2022–2025) with blind, low-vision, and older-adult users. Its ASSETS ‘25 browser extension used GPT-4o to restructure existing e-commerce HTML for screen-reader users; 15 screen-reader users rated three conditions:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Condition</th><th>Overall browsing experience (5-pt Likert)</th></tr></thead><tbody><tr><td>Fully regenerated, text-only</td><td><strong>5.0</strong></td></tr><tr><td>Tag-level reorganization (visual layout unchanged)</td><td>4.57</td></tr><tr><td>Original Mercari site</td><td>3.14</td></tr></tbody></table></div>
+<p>Median task-completion time fell from ~130 s to ~25 s. Semantic similarity between original and regenerated pages averaged 96.3% (range 91.60–99.36%), so content meaning was largely preserved. Scope: n=15 on one site class, and the author states the wider program’s samples run 8–15. This is a promising result on a narrow task, not a general finding about accessibility.</p>
+<p>What makes this case tractable is structural and worth naming: the system has <strong>a source document to be faithful to</strong>, so fidelity is measurable, and it inherits content rather than inventing it. That property does not transfer to generation from a prompt.</p>
+<h4 id="b-accessibility-of-interfaces-generated-from-a-prompt">(b) Accessibility <em>of</em> interfaces generated from a prompt<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#b-accessibility-of-interfaces-generated-from-a-prompt" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p>Three results, and they need their scopes attached — the headline number in particular is weaker than it reads:</p>
+<ul>
+<li><strong>“Generated Inaccessible: Measuring WCAG Violations in AI UI Design Tools”</strong> (W4A 2026). Reports <strong>29.0% compliance</strong> across 21,880 assessments (color contrast 26.8%, use of color 19.2%), and <strong>39% of AI violations needing “major redesign”</strong> versus 22% for manual. <strong>Read the scope before quoting the number:</strong> the tools are <em>design-mockup</em> tools (Figma Make, Google Stitch, Visely, UXPilot, Banani, SketchFlow AI) — not runtime generative UI and not code generation; the 54 participants were “primarily students and early-career designers”; and the five WCAG criteria were chosen <em>because</em> participants lacked the background to assess code-dependent criteria like semantic structure, keyboard operability, or ARIA correctness. So this is <strong>what novices could see by visual inspection of mockups</strong>, not a WCAG audit. It is real evidence about a real tool class, and it is not evidence about generated code.</li>
+<li><strong>“Measuring the Semantic Accessibility Gap in LLM-Generated Web UIs”</strong> (CHI 2026 EA, Calò et al.). The stronger result for our purposes, because it works at code level: <strong>300 UIs from three frontier models (Claude, Gemini, GPT)</strong> yielded <strong>541 semantic violations that pass automated checks</strong> — <code>alt=&quot;image&quot;</code>, “Click here” links. Detection by LLM-as-judge, validated by controlled fault injection at <strong>80–92% recall</strong>, triangulated against four expert annotators over 324 components.</li>
+<li><strong>A11YN</strong> (arXiv <a href="https://arxiv.org/abs/2510.13914" class="external">2510.13914<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>, Yoon et al., Yonsei/SNU, <strong>2025-10-15</strong>). RL (GRPO) against an axe-core-severity-weighted reward cut a Qwen2.5-Coder-7B baseline <strong>inaccessibility rate from 0.38 to 0.15</strong> on RealUIReq-300, reportedly beating GPT-4.1 and Claude Sonnet 4. <strong>Those baselines are two model generations old</strong> — treat the comparison as historical and the <em>method</em> (severity-weighted automated signal as an RL reward) as the transferable part.</li>
+</ul>
+<h4 id="the-one-claim-that-survives-from-both">The one claim that survives from both<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-one-claim-that-survives-from-both" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p>Not a synthesis of the two literatures — a finding each reaches separately about the same instrument. <strong>The automated accessibility gate is the wrong gate here.</strong> From (a): <em>“every test page passed some automated audits while still failing real users.”</em> From (b): an image with <code>alt=&quot;image&quot;</code> <em>“passes every check yet conveys nothing.”</em> Axe-core’s ~30–40% WCAG coverage is already noted in <a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/ai-augmented-ui-development.md" class="external">ai-augmented-ui-development<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>; the semantic-gap paper is direct code-level evidence that generated UI fails predominantly in the <em>uncovered</em> remainder. A green axe run on generated UI is weak evidence. See <a href="../ai/visual-verification-ai-ui" class="internal" data-slug="ai/visual-verification-ai-ui">visual-verification-ai-ui</a> and <a href="../tech/design-system-accessibility" class="internal" data-slug="tech/design-system-accessibility">design-system-accessibility</a>.</p>
+<p><strong>And one counterintuitive result, scoped to its tool class:</strong> in the W4A mockup-tool study, <strong>explicitly specifying accessibility requirements in the prompt <em>decreased</em> compliance</strong> — prompts naming 4.5:1 contrast, 44×44px touch targets, and no-color-alone did worse than prompts that did not. The authors read it as misalignment between how designers express accessibility and how these systems operationalize constraints. Whether it generalizes to code-generating models is untested. Within that tool class, “just put it in the prompt” is falsified.</p>
+<h3 id="the-definitional-work">The definitional work<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-definitional-work" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>“The GenUI Study”</strong> (arXiv <a href="https://arxiv.org/abs/2501.13145" class="external">2501.13145v3<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>, Chen, Knearem, Li — UCLA/Google/DeepMind, DIS 2025): 37 UX professionals across four roles, week-long mini-projects with journals and interviews. The field’s main empirical account of <em>practitioner adoption</em>, which is the axis relevant to <a href="../ai/design-side-ai-adoption-stall" class="internal" data-slug="ai/design-side-ai-adoption-stall">design-side-ai-adoption-stall</a> and <a href="../ai/designer-seat-under-ai" class="internal" data-slug="ai/designer-seat-under-ai">designer-seat-under-ai</a>.</p>
+<p><strong>“Towards a Working Definition of Designing Generative User Interfaces”</strong> (arXiv <a href="https://arxiv.org/abs/2505.15049" class="external">2505.15049<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>, Kyungho Lee, DIS 2025 companion): 127-publication review + 18 expert interviews + 12 case studies. Its definition is the useful export — humans and AI collaborate at <strong>design time</strong> to generate interfaces; users interact with AI-generated interfaces at <strong>runtime</strong>. That is the boundary this note opens with, and the reason to trust it is that a 127-publication review landed on it, not that this note asserts it.</p>
+<h2 id="the-security-surface">The security surface<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-security-surface" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Extracted to its own note: <strong><a href="../ai/generative-ui-security" class="internal" data-slug="ai/generative-ui-security">generative-ui-security</a></strong> — the isolation stack flag by flag, what the MCP Apps spec actually mandates versus leaves to hosts, A2UI’s double-iframe pattern, and a review checklist. The short version, because axis 2 depends on it:</p>
+<p><strong>Where the host-privilege axis comes from.</strong> Backslash Security’s analysis of the 2026-07-28 MCP spec (published 2026-05-28), on MCP Apps rendering in IDE iframes:</p>
+<blockquote>
+<p><em>“A sandbox escape in a tab costs you that tab. A sandbox escape here is a full IDE compromise.”</em></p>
+</blockquote>
+<p>Vendor blog, architectural analysis, no disclosed exploit. The framing is the origin of axis 2; the mechanics are independently checkable and carry more weight.</p>
+<p><strong>The one mechanism to remember:</strong> the question is not whether <code>allow-same-origin</code> is set, it is <strong>whose origin the frame has</strong>. <code>allow-scripts</code> plus <code>allow-same-origin</code> gives no containment when the frame shares the <em>embedder’s</em> origin — it can reach the parent DOM or delete its own <code>sandbox</code> attribute. On a <em>different</em> origin the same pair is fine, and MCP Apps requires exactly that: <em>“The Host and the Sandbox MUST have different origins”</em>, and the Sandbox <em>“MUST have the following permissions: <code>allow-scripts</code>, <code>allow-same-origin</code>.”</em></p>
+<p>The spec is also more prescriptive than “mandates sandboxing and leaves the rest to hosts” — it specifies the sandbox-proxy contract, a mandatory CSP built from declared domains, and a restrictive default policy (<code>default-src 'none'</code>, <code>connect-src 'none'</code>) when an app declares none. On confirmation the Final spec is blunt: a View-initiated tool call is governed by a bare <em>“MAY … subject them to further user approval.”</em> <strong>A server cannot assume the host prompts.</strong> (An agent-invokes-app-tool direction with stronger language exists only in the draft — it is not in the shipped standard.) Either way, do not use the host’s confirmation UI as your authorization boundary; that is guardrail 3.</p>
+<p>One scope trap worth carrying: the sandbox-proxy contract binds <em>“if the Host is a web page”</em> — so it does <strong>not</strong> bind for the Electron desktop hosts that make up the high-privilege case, where the spec prescribes nothing beyond “sandbox the iframe” and Electron’s own process controls do the real work. Detail and a corrections log in <a href="../ai/generative-ui-security" class="internal" data-slug="ai/generative-ui-security">generative-ui-security</a>.</p>
+<h2 id="evaluating-generated-ui--what-actually-exists">Evaluating generated UI — what actually exists<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#evaluating-generated-ui--what-actually-exists" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>“Evaluate task success, not screenshot plausibility” is easy to say. Three things now make it doable.</p>
+<ul>
+<li><strong>PAGEN</strong> — Google’s released dataset of expert-crafted reference results, from the Leviathan paper. Reference set, not a metric.</li>
+<li><strong>FlowEval</strong> (arXiv <a href="https://arxiv.org/abs/2605.04165" class="external">2605.04165<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>, Wu, Vaithilingam, Schoop, Nichols — Apple-affiliated, 2026-05-05). The most useful idea in the set. It measures whether a generated UI supports realistic interaction flows, by driving a computer-use agent through validated tasks on a real site and its generated analog, then comparing navigation traces with reference-based similarity metrics (e.g. dynamic time warping). Expert-evaluator study reports strong correlation with human judgment and better-aligned rankings than an MLLM-judge baseline. This is the closest thing to “task success, measured, at scale” — and note it evaluates <em>behavior under interaction</em>, not appearance, which is precisely the axis Design Theater found tools failing on.</li>
+<li><strong>LLM-as-judge, validated by fault injection</strong> — the semantic-accessibility method above: inject known faults, measure recall (80–92%), then trust the judge proportionally on unmodified samples. Worth stealing as a general technique for any LLM judge, well beyond accessibility. Pairs with <a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/llm-evaluation-methodology.md" class="external">llm-evaluation-methodology<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>.</li>
+</ul>
+<p>The constraint on all of it remains the kappa = 0.25 ceiling: trained designers agree with each other weakly, so a judge aligned to “human preference” is aligned to <em>some</em> humans. FlowEval partly sidesteps this by measuring flow support rather than design quality — a reason to prefer behavioral metrics where the task allows.</p>
+<h2 id="cost-and-latency--the-constraint-nobodys-guardrail-list-mentions">Cost and latency — the constraint nobody’s guardrail list mentions<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#cost-and-latency--the-constraint-nobodys-guardrail-list-mentions" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Hard numbers, from the bridge paper’s ASSETS ‘25 study: full-page HTML regeneration took <strong>one to five minutes per page</strong> and consumed <strong>roughly 220,000 tokens per session</strong>. Google’s own blog concedes generation <em>“can sometimes take a minute or more.”</em></p>
+<p>The author’s conclusion is the one to carry: <em>“For a screen reader user browsing quickly, minute-scale latency is a regression, not an improvement.”</em> Practical deployment needs caching, smaller specialized models, or regeneration only on first visit. The companion failure from the same program runs the other way — an object-detection loop at every 100 ms for responsive audio framing, bounded by battery and thermal headroom, not by tokens.</p>
+<p>Two design consequences:</p>
+<ol>
+<li><strong>Generative UI has a latency floor that conventional UI does not</strong>, and it lands in exactly the range where interactive use breaks. This is a stronger argument for the static tier than any safety argument — the static tier renders your components at component speed.</li>
+<li><strong>Output tokens are the expensive ones.</strong> A UI response is billed as output. Full-page HTML regeneration at ~220k tokens per session is not a rounding error, and it recurs per user per session. <a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/llm-cost-optimization.md" class="external">llm-cost-optimization<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> applies directly.</li>
+</ol>
+<h2 id="guardrails-and-which-ones-survive-contact">Guardrails, and which ones survive contact<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#guardrails-and-which-ones-survive-contact" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>The standard list is sound but under-specified about <em>when</em> each item is load-bearing. Sharpened:</p>
+<ol>
+<li><strong>Whitelisted component registry, not arbitrary markup.</strong> Non-negotiable <em>when the generated surface can trigger actions</em>, and non-negotiable <em>when the host is high-privilege</em> (IDE, desktop AI client, agent shell) regardless of actions — that is the trust inversion above. Google’s consumer deployment shows the rule is negotiable for a purely presentational surface in a browser tab; neither exemption transfers to an IDE. Be able to state which case you are in.</li>
+<li><strong>Validate every prop</strong> (Zod / JSON Schema) at the render boundary. Cheap, catches malformed and partial streams, and is the mechanism <a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/structured-output-json-mode.md" class="external">structured-output-json-mode<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> already covers.</li>
+<li><strong>Separate rendering from authorization.</strong> The single most important item. Generated UI must never be the thing that authorizes a side effect — see <a href="../ai/vibe-coding-authorization-flaws" class="internal" data-slug="ai/vibe-coding-authorization-flaws">vibe-coding-authorization-flaws</a> for what this looks like when it fails. Confirmation gates on purchases, deletion, publishing, account changes.</li>
+<li><strong>Deterministic fallback, on a latency budget.</strong> Text or conventional UI when generation fails, times out, or validates badly. Measured generation is one-to-five minutes for a full page — set the timeout from a real interaction budget and fall back, rather than letting the user watch a spinner. This is an availability requirement, not an error path.</li>
+<li><strong>Persist the spec, the tool calls, the validation result, and the user’s action.</strong> Without it, a generative UI bug is unreproducible by construction. This is <a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/agent-audit-trails-provenance.md" class="external">agent-audit-trails-provenance<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> applied to the render path; MCP Apps’ JSON-RPC choice bakes it into the protocol.</li>
+<li><strong>Test the stream, not just the output</strong> — malformed, partial, delayed, duplicated, out-of-order.</li>
+<li><strong>Evaluate task success and workload, not screenshot plausibility.</strong> Design Theater and the kappa = 0.25 result are the two reasons: convincing-looking output and unreliable self-reported reasoning are exactly what these systems produce well. FlowEval’s trace-comparison approach is the concrete method; an MLLM judge scoring screenshots is the thing it beat.</li>
+<li><strong>Do not treat a green accessibility audit as evidence.</strong> The load-bearing measurement is the code-level one: <strong>541 semantic violations across 300 UIs from three frontier models, all passing automated checks.</strong> Automated a11y tooling covers the syntactic layer; generated UI fails predominantly in the semantic layer beneath it. Manual assistive-tech testing is not optional here in the way teams have learned to pretend it is elsewhere. (The 29.0%-compliance figure is about design-mockup tools assessed visually by novices — real, but not about generated code; don’t use it to carry this guardrail.)</li>
+<li><strong>Give untrusted UI an origin that is not yours</strong> — either opaque (omit <code>allow-same-origin</code>) or a separate real origin behind a sandbox proxy, which is what MCP Apps mandates. With <code>allow-scripts</code> on <em>your</em> origin there is no containment at all. Full checklist in <a href="../ai/generative-ui-security" class="internal" data-slug="ai/generative-ui-security">generative-ui-security</a>.</li>
+</ol>
+<p>Guardrail 7 deserves its own line: <strong>do not accept the model’s design rationale as evidence.</strong> It is the specific thing that was measured and found ~25–34% detached from implementation.</p>
+<p><strong>The failure record, such as it is.</strong> One documented content-integrity failure in a deployed system: the bridge paper’s HTML-regeneration extension silently dropped a link to an extended-warranty option on an Amazon product page while condensing promotional sections (the author’s own disclosure; mitigated with a semantic-similarity threshold and targeted link re-insertion). Plus a substantive security-analysis literature on the MCP Apps surface, architectural, with no disclosed exploit. This pass found no public post-mortem of a runtime generative-UI system attacked or failing at scale, and no CVE against MCP Apps or A2UI; that is a statement about what one search pass found, not about what exists.</p>
+<p>The dropped-warranty-link failure is worth holding onto as the canonical shape: <strong>not a crash, not a refusal, not a visible error — a silent omission inside output that looked entirely correct.</strong> That is what generative UI failure looks like, and it is invisible to every automated gate in the stack.</p>
+<h2 id="how-to-choose">How to choose<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#how-to-choose" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Answer the two axis questions first — they narrow the field faster than any feature comparison.</p>
+<p><strong>1. What must cross the boundary?</strong> If your components can express the output, nothing needs to. <strong>2. What is the host holding?</strong> If it holds credentials, treat every open-ended option as a security project, not a UI project.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Situation</th><th>Reach for</th><th>Why</th></tr></thead><tbody><tr><td>Agent renders <em>your</em> components in <em>your</em> React app</td><td><strong>Vercel AI SDK</strong> tool-call binding</td><td>No generation-latency floor, no untrusted markup, no a11y regression — the components were already built and audited</td></tr><tr><td>Composition freedom inside a fixed catalog</td><td><strong>json-render</strong> or <strong>Tambo</strong></td><td>json-render exports to plain React (bounded lock-in); Tambo has a stable major</td></tr><tr><td>UI crosses a vendor or platform boundary</td><td><strong>A2UI</strong></td><td>Cross-platform renderers; catalog is the contract</td></tr><tr><td>Agent and frontend are separate systems</td><td><strong>AG-UI</strong></td><td>Portable event stream</td></tr><tr><td>Chat/agent shell — tool calls, approvals, artifacts</td><td><strong>assistant-ui</strong> or <strong>CopilotKit</strong></td><td>Shell primitives, not a genUI mechanism per se</td></tr><tr><td>UI runs inside someone else’s AI client</td><td><strong>MCP Apps</strong></td><td>Only finalized standard — and the grid’s worst cell; audit the host’s sandbox rather than trusting the spec’s mandate</td></tr><tr><td>Anything open-ended in a high-privilege host</td><td><strong>Isolation first</strong></td><td>A2UI’s double-iframe is the published reference; this is the primary design problem, not an implementation detail</td></tr><tr><td>A reference application to read</td><td><strong>Morphic</strong></td><td>Complete app rather than framework samples</td></tr></tbody></table></div>
+<p><strong>The static tier is the default, and the burden of proof is on leaving it.</strong> That is a claim about the state of the field on 2026-08-25 — generation latency measured in minutes, an unresolved security surface in privileged hosts, and a measured accessibility regression. Each is a thing the field is actively optimizing. <strong>Re-examine the default when any one of them moves</strong>, rather than treating it as a principle; it is a reading of current evidence, not a law.</p>
+<p>The version-dependent claims decay fastest of anything here, and they drive several rows above: which projects are past 1.0, which specs have landed, which npm majors are current. Re-query npm and the spec sites before relying on them. A single release changes the answer.</p>
+<h2 id="related">Related<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#related" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><a href="../ai/generative-ui-security" class="internal" data-slug="ai/generative-ui-security">generative-ui-security</a> — this note’s security half: isolation stack, spec obligations, review checklist</li>
+<li><a href="../ai/a2ui-vs-json-render" class="internal" data-slug="ai/a2ui-vs-json-render">a2ui-vs-json-render</a> — the head-to-head this note supersedes as an entry point (still the detail source for those two)</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/ui-for-ai-products.md" class="external">ui-for-ai-products<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — streaming, status lifecycle, trust affordances; note its AI SDK version claim is behind</li>
+<li><a href="../ai/genui-vs-vibe-coding-nng-review" class="internal" data-slug="ai/genui-vs-vibe-coding-nng-review">genui-vs-vibe-coding-nng-review</a> — the design-time/runtime framing debate, and its unresolved internal crack</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/agent-operable-web-ui.md" class="external">agent-operable-web-ui<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — the inverse trust boundary: a foreign agent operating <em>your</em> UI</li>
+<li><a href="../ai/vibe-coding-authorization-flaws" class="internal" data-slug="ai/vibe-coding-authorization-flaws">vibe-coding-authorization-flaws</a> — what guardrail 3 prevents</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/structured-output-json-mode.md" class="external">structured-output-json-mode<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — the constrained-generation mechanism the declarative tier rests on</li>
+<li><a href="../ai/visual-verification-ai-ui" class="internal" data-slug="ai/visual-verification-ai-ui">visual-verification-ai-ui</a> — how you’d actually test generated interfaces</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/model-context-protocol.md" class="external">model-context-protocol<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — the base protocol MCP Apps extends</li>
+<li><a href="../ai/ai-agent-security" class="internal" data-slug="ai/ai-agent-security">ai-agent-security</a>, <a href="../ai/prompt-injection" class="internal" data-slug="ai/prompt-injection">prompt-injection</a> — the threat model the open-ended tier inherits</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/llm-evaluation-methodology.md" class="external">llm-evaluation-methodology<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — where FlowEval and fault-injection-validated judges belong</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/llm-cost-optimization.md" class="external">llm-cost-optimization<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — the ~220k-tokens-per-session problem</li>
+<li><a href="../ai/cognitive-load-theory-for-ai" class="internal" data-slug="ai/cognitive-load-theory-for-ai">cognitive-load-theory-for-ai</a>, <a href="../general/how-much-information-at-once" class="internal" data-slug="general/how-much-information-at-once">how-much-information-at-once</a> — the Keyhole Effect’s mechanism</li>
+<li><a href="../tech/design-system-accessibility" class="internal" data-slug="tech/design-system-accessibility">design-system-accessibility</a> — the accessibility baseline generated UI regresses against</li>
+</ul>
+<h2 id="sources">Sources<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#sources" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>npm registry API — <code>ai</code>, <code>@json-render/core</code>, <code>@tambo-ai/react</code>, <code>@copilotkit/react-core</code>, <code>@assistant-ui/react</code>, <code>@ag-ui/core</code>; queried 2026-08-25</li>
+<li>GitHub API — the nine repositories in the table; stars/created/pushed/license queried 2026-08-25</li>
+<li>arXiv API — metadata and abstracts for all six papers; queried 2026-08-25</li>
+<li><a href="https://modelcontextprotocol.io/seps/1865-mcp-apps-interactive-user-interfaces-for-mcp" class="external">SEP-1865<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — fetched 2026-08-25</li>
+<li><a href="https://research.google/blog/generative-ui-a-rich-custom-visual-interactive-user-experience-for-any-prompt/" class="external">research.google — Generative UI<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> (2025-11-18) — fetched 2026-08-25</li>
+<li><a href="https://a2ui.org/" class="external">a2ui.org<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — fetched 2026-08-25</li>
+<li><a href="https://www.copilotkit.ai/blog/the-developer-s-guide-to-generative-ui-in-2026" class="external">CopilotKit — Developer’s Guide to Generative UI in 2026<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — vendor-authored; fetched 2026-08-25</li>
+<li><a href="https://awesomegenerativeui.com/papers" class="external">awesomegenerativeui.com<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — community paper index, ~28 entries; fetched 2026-08-25</li>
+<li>AI SDK 7 release date and feature list: Vercel blog + secondary coverage, <strong>not re-confirmed at primary source</strong> — treat the 2026-06-25 date as unverified</li>
+</ul>
+<p>Second pass (2026-08-25):</p>
+<ul>
+<li>arXiv API + PDF — <code>2604.25455</code> (bridge paper; the Likert/latency/token figures are quoted from its §4.1 and §6.2), <code>2605.04165</code> (FlowEval), <code>2508.19227</code> (Generative Interfaces, ACL 2026 Findings), <code>2602.00947</code> (Keyhole Effect), <code>2510.13914</code> (A11YN), <code>2605.13873</code> (LLM/web-accessibility SLR)</li>
+<li><a href="https://dl.acm.org/doi/10.1145/3800424.3800430" class="external">Generated Inaccessible: Measuring WCAG Violations in AI UI Design Tools<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — W4A 2026; abstract + method retrieved via <code>tools/snapshot</code> 2026-08-25 (WebFetch 403)</li>
+<li><a href="https://dl.acm.org/doi/10.1145/3772363.3799364" class="external">Measuring the Semantic Accessibility Gap in LLM-Generated Web UIs<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — CHI 2026 EA; same retrieval path</li>
+<li><a href="https://www.backslash.security/blog/new-mcp-spec-opens-new-attack-surfaces" class="external">Backslash Security — New MCP Spec Opens Three New Attack Surfaces<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> (2026-05-28) — vendor security blog; architectural analysis, <strong>no disclosed exploit</strong></li>
+<li><a href="https://a2ui.org/guides/mcp-apps-in-a2ui/" class="external">a2ui.org — MCP Apps in A2UI<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — double-iframe isolation pattern; fetched 2026-08-25</li>
+<li><strong>Assessed and rejected:</strong> a TestParty blog citing MIT/CMU/Stanford figures with no paper titles or authors; the Thesys/OpenUI “State of Generative UI 2026” self-run benchmark against a named competitor. Neither contributes a figure here — noted so they aren’t re-litigated.</li>
+</ul></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>Graph View</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc desktop-only"><button type="button" class="toc-header" aria-controls="toc-content" aria-expanded="true"><h3>Table of Contents</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="toc-content"><ul id="h9l23p" class="overflow"><li class="depth-0"><a href="#generative-ui--runtime-landscape-and-evidence-base" data-for="generative-ui--runtime-landscape-and-evidence-base">Generative UI — Runtime Landscape and Evidence Base</a></li><li class="depth-1"><a href="#two-axes-not-one" data-for="two-axes-not-one">Two axes, not one</a></li><li class="depth-2"><a href="#what-this-means-for-the-guardrail-everyone-repeats" data-for="what-this-means-for-the-guardrail-everyone-repeats">What this means for the guardrail everyone repeats</a></li><li class="depth-1"><a href="#the-runtime-options-all-figures-checked-2026-08-25" data-for="the-runtime-options-all-figures-checked-2026-08-25">The runtime options (all figures checked 2026-08-25)</a></li><li class="depth-2"><a href="#mcp-apps--the-one-with-a-finished-spec" data-for="mcp-apps--the-one-with-a-finished-spec">MCP Apps — the one with a finished spec</a></li><li class="depth-1"><a href="#what-the-research-actually-shows" data-for="what-the-research-actually-shows">What the research actually shows</a></li><li class="depth-2"><a href="#the-capability-is-real--and-its-shipped" data-for="the-capability-is-real--and-its-shipped">The capability is real — and it’s shipped</a></li><li class="depth-2"><a href="#the-explanations-are-unreliable--measured" data-for="the-explanations-are-unreliable--measured">The explanations are unreliable — measured</a></li><li class="depth-2"><a href="#good-ui-has-no-single-ground-truth" data-for="good-ui-has-no-single-ground-truth">”Good UI” has no single ground truth</a></li><li class="depth-2"><a href="#accessibility--two-separate-bodies-of-work-deliberately-not-merged" data-for="accessibility--two-separate-bodies-of-work-deliberately-not-merged">Accessibility — two separate bodies of work, deliberately not merged</a></li><li class="depth-2"><a href="#the-definitional-work" data-for="the-definitional-work">The definitional work</a></li><li class="depth-1"><a href="#the-security-surface" data-for="the-security-surface">The security surface</a></li><li class="depth-1"><a href="#evaluating-generated-ui--what-actually-exists" data-for="evaluating-generated-ui--what-actually-exists">Evaluating generated UI — what actually exists</a></li><li class="depth-1"><a href="#cost-and-latency--the-constraint-nobodys-guardrail-list-mentions" data-for="cost-and-latency--the-constraint-nobodys-guardrail-list-mentions">Cost and latency — the constraint nobody’s guardrail list mentions</a></li><li class="depth-1"><a href="#guardrails-and-which-ones-survive-contact" data-for="guardrails-and-which-ones-survive-contact">Guardrails, and which ones survive contact</a></li><li class="depth-1"><a href="#how-to-choose" data-for="how-to-choose">How to choose</a></li><li class="depth-1"><a href="#related" data-for="related">Related</a></li><li class="depth-1"><a href="#sources" data-for="sources">Sources</a></li><li class="overflow-end"></li></ul></div></div><div class="backlinks"><h3>Backlinks</h3><ul id="xacmdj" class="overflow"><li><a href="../ai/a2ui-vs-json-render" class="internal">A2UI vs json-render — Generative UI Protocol vs Framework</a></li><li><a href="../ai/generative-ui-security" class="internal">Generative UI Security — Rendering Untrusted Interface in a Privileged Host</a></li><li><a href="../ai/" class="internal">AI — Index</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v4.4.1</a> © 2026</p><ul><li><a href="https://github.com/oxzo/brains">source</a></li><li><a href="/index.xml">rss</a></li></ul></footer></div></div></body><script type="application/javascript">function o(){let t=this.parentElement;t.classList.toggle("is-collapsed");let e=t.classList.contains("is-collapsed")?this.scrollHeight:t.scrollHeight;t.style.maxHeight=e+"px";let c=t,l=t.parentElement;for(;l;){if(!l.classList.contains("callout"))return;let i=l.classList.contains("is-collapsed")?l.scrollHeight:l.scrollHeight+c.scrollHeight;l.style.maxHeight=i+"px",c=l,l=l.parentElement}}function n(){let t=document.getElementsByClassName("callout is-collapsible");for(let s of t){let e=s.firstElementChild;if(!e)continue;e.addEventListener("click",o),window.addCleanup(()=>e.removeEventListener("click",o));let l=s.classList.contains("is-collapsed")?e.scrollHeight:s.scrollHeight;s.style.maxHeight=l+"px"}}document.addEventListener("nav",n);
+</script><script type="module">function f(i,e){if(!i)return;function r(o){o.target===this&&(o.preventDefault(),o.stopPropagation(),e())}function t(o){o.key.startsWith("Esc")&&(o.preventDefault(),e())}i?.addEventListener("click",r),window.addCleanup(()=>i?.removeEventListener("click",r)),document.addEventListener("keydown",t),window.addCleanup(()=>document.removeEventListener("keydown",t))}function y(i){for(;i.firstChild;)i.removeChild(i.firstChild)}var h=class{constructor(e,r){this.container=e;this.content=r;this.setupEventListeners(),this.setupNavigationControls(),this.resetTransform()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;cleanups=[];setupEventListeners(){let e=this.onMouseDown.bind(this),r=this.onMouseMove.bind(this),t=this.onMouseUp.bind(this),o=this.resetTransform.bind(this);this.container.addEventListener("mousedown",e),document.addEventListener("mousemove",r),document.addEventListener("mouseup",t),window.addEventListener("resize",o),this.cleanups.push(()=>this.container.removeEventListener("mousedown",e),()=>document.removeEventListener("mousemove",r),()=>document.removeEventListener("mouseup",t),()=>window.removeEventListener("resize",o))}cleanup(){for(let e of this.cleanups)e()}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let r=this.createButton("+",()=>this.zoom(.1)),t=this.createButton("-",()=>this.zoom(-.1)),o=this.createButton("Reset",()=>this.resetTransform());e.appendChild(t),e.appendChild(o),e.appendChild(r),this.container.appendChild(e)}createButton(e,r){let t=document.createElement("button");return t.textContent=e,t.className="mermaid-control-button",t.addEventListener("click",r),window.addCleanup(()=>t.removeEventListener("click",r)),t}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}zoom(e){let r=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),t=this.content.getBoundingClientRect(),o=t.width/2,n=t.height/2,c=r-this.scale;this.currentPan.x-=o*c,this.currentPan.y-=n*c,this.scale=r,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){this.scale=1;let e=this.content.querySelector("svg");this.currentPan={x:e.getBoundingClientRect().width/2,y:e.getBoundingClientRect().height/2},this.updateTransform()}},C=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],E;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;E||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let r=E.default,t=new WeakMap;for(let n of e)t.set(n,n.innerText);async function o(){for(let s of e){s.removeAttribute("data-processed");let a=t.get(s);a&&(s.innerHTML=a)}let n=C.reduce((s,a)=>(s[a]=window.getComputedStyle(document.documentElement).getPropertyValue(a),s),{}),c=document.documentElement.getAttribute("saved-theme")==="dark";r.initialize({startOnLoad:!1,securityLevel:"loose",theme:c?"dark":"base",themeVariables:{fontFamily:n["--codeFont"],primaryColor:n["--light"],primaryTextColor:n["--darkgray"],primaryBorderColor:n["--tertiary"],lineColor:n["--darkgray"],secondaryColor:n["--secondary"],tertiaryColor:n["--tertiary"],clusterBkg:n["--light"],edgeLabelBackground:n["--highlight"]}}),await r.run({nodes:e})}await o(),document.addEventListener("themechange",o),window.addCleanup(()=>document.removeEventListener("themechange",o));for(let n=0;n<e.length;n++){let v=function(){let g=l.querySelector("#mermaid-space"),m=l.querySelector(".mermaid-content");if(!m)return;y(m);let w=c.querySelector("svg").cloneNode(!0);m.appendChild(w),l.classList.add("active"),g.style.cursor="grab",u=new h(g,m)},M=function(){l.classList.remove("active"),u?.cleanup(),u=null},c=e[n],s=c.parentElement,a=s.querySelector(".clipboard-button"),d=s.querySelector(".expand-button"),p=window.getComputedStyle(a),L=a.offsetWidth+parseFloat(p.marginLeft||"0")+parseFloat(p.marginRight||"0");d.style.right=`calc(${L}px + 0.3rem)`,s.prepend(d);let l=s.querySelector("#mermaid-container");if(!l)return;let u=null;d.addEventListener("click",v),f(l,M),window.addCleanup(()=>{u?.cleanup(),d.removeEventListener("click",v)})}});
+</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript"></script><script src="../postscript.00b09a8c.js" type="module"></script></html>

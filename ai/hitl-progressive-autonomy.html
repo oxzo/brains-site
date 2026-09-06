@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en"><head><title>HITL Progressive Autonomy · second-brain</title><meta charset="utf-8"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400;1,600&amp;family=Inter:wght@400;700&amp;family=JetBrains Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="synapse"/><meta property="og:title" content="HITL Progressive Autonomy · second-brain"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="HITL Progressive Autonomy · second-brain"/><meta name="twitter:description" content="HITL Progressive Autonomy Designing human-in-the-loop systems where the oversight surface shrinks over time — starting with wide escalation triggers and expanding the autonomous ..."/><meta property="og:description" content="HITL Progressive Autonomy Designing human-in-the-loop systems where the oversight surface shrinks over time — starting with wide escalation triggers and expanding the autonomous ..."/><meta property="og:image:alt" content="HITL Progressive Autonomy Designing human-in-the-loop systems where the oversight surface shrinks over time — starting with wide escalation triggers and expanding the autonomous ..."/><meta property="twitter:domain" content="oxzo.github.io/brains-site"/><meta property="og:url" content="https://oxzo.github.io/brains-site/ai/hitl-progressive-autonomy"/><meta property="twitter:url" content="https://oxzo.github.io/brains-site/ai/hitl-progressive-autonomy"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="HITL Progressive Autonomy Designing human-in-the-loop systems where the oversight surface shrinks over time — starting with wide escalation triggers and expanding the autonomous ..."/><meta name="generator" content="Quartz"/><link href="../index.322b98b4.css" rel="stylesheet" type="text/css" spa-preserve/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  padding: 2rem;
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL2hvbWUvcnVubmVyL3dvcmsvYnJhaW5zL2JyYWlucy9zaXRlL3F1YXJ0ei9jb21wb25lbnRzL3N0eWxlcyIsInNvdXJjZXMiOlsibWVybWFpZC5pbmxpbmUuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTs7QUFHRjtFQUNFO0VBQ0E7O0FBR0Y7RUFDRTs7O0FBS0Y7RUFDRTtFQUNBOzs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7O0FBR0Y7RUFDRTs7QUFJRjtFQUNFO0VBQ0E7RUFDQSIsInNvdXJjZXNDb250ZW50IjpbIi5leHBhbmQtYnV0dG9uIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbG9hdDogcmlnaHQ7XG4gIHBhZGRpbmc6IDAuNHJlbTtcbiAgbWFyZ2luOiAwLjNyZW07XG4gIHJpZ2h0OiAwOyAvLyBOT1RFOiByaWdodCB3aWxsIGJlIHNldCBpbiBtZXJtYWlkLmlubGluZS50c1xuICBjb2xvcjogdmFyKC0tZ3JheSk7XG4gIGJvcmRlci1jb2xvcjogdmFyKC0tZGFyayk7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWxpZ2h0KTtcbiAgYm9yZGVyOiAxcHggc29saWQ7XG4gIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgb3BhY2l0eTogMDtcbiAgdHJhbnNpdGlvbjogMC4ycztcblxuICAmID4gc3ZnIHtcbiAgICBmaWxsOiB2YXIoLS1saWdodCk7XG4gICAgZmlsdGVyOiBjb250cmFzdCgwLjMpO1xuICB9XG5cbiAgJjpob3ZlciB7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIGJvcmRlci1jb2xvcjogdmFyKC0tc2Vjb25kYXJ5KTtcbiAgfVxuXG4gICY6Zm9jdXMge1xuICAgIG91dGxpbmU6IDA7XG4gIH1cbn1cblxucHJlIHtcbiAgJjpob3ZlciA+IC5leHBhbmQtYnV0dG9uIHtcbiAgICBvcGFjaXR5OiAxO1xuICAgIHRyYW5zaXRpb246IDAuMnM7XG4gIH1cbn1cblxuI21lcm1haWQtY29udGFpbmVyIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICBjb250YWluOiBsYXlvdXQ7XG4gIHotaW5kZXg6IDk5OTtcbiAgbGVmdDogMDtcbiAgdG9wOiAwO1xuICB3aWR0aDogMTAwdnc7XG4gIGhlaWdodDogMTAwdmg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGRpc3BsYXk6IG5vbmU7XG4gIGJhY2tkcm9wLWZpbHRlcjogYmx1cig0cHgpO1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuNSk7XG5cbiAgJi5hY3RpdmUge1xuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgfVxuXG4gICYgPiAjbWVybWFpZC1zcGFjZSB7XG4gICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1saWdodCk7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDUwJTtcbiAgICBsZWZ0OiA1MCU7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gICAgaGVpZ2h0OiA4MHZoO1xuICAgIHdpZHRoOiA4MHZ3O1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG5cbiAgICAmID4gLm1lcm1haWQtY29udGVudCB7XG4gICAgICBwYWRkaW5nOiAycmVtO1xuICAgICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgICAgdHJhbnNmb3JtLW9yaWdpbjogMCAwO1xuICAgICAgdHJhbnNpdGlvbjogdHJhbnNmb3JtIDAuMXMgZWFzZTtcbiAgICAgIG92ZXJmbG93OiB2aXNpYmxlO1xuICAgICAgbWluLWhlaWdodDogMjAwcHg7XG4gICAgICBtaW4td2lkdGg6IDIwMHB4O1xuXG4gICAgICBwcmUge1xuICAgICAgICBtYXJnaW46IDA7XG4gICAgICAgIGJvcmRlcjogbm9uZTtcbiAgICAgIH1cblxuICAgICAgc3ZnIHtcbiAgICAgICAgbWF4LXdpZHRoOiBub25lO1xuICAgICAgICBoZWlnaHQ6IGF1dG87XG4gICAgICB9XG4gICAgfVxuXG4gICAgJiA+IC5tZXJtYWlkLWNvbnRyb2xzIHtcbiAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgIGJvdHRvbTogMjBweDtcbiAgICAgIHJpZ2h0OiAyMHB4O1xuICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgIGdhcDogOHB4O1xuICAgICAgcGFkZGluZzogOHB4O1xuICAgICAgYmFja2dyb3VuZDogdmFyKC0tbGlnaHQpO1xuICAgICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICAgIGJvcmRlci1yYWRpdXM6IDZweDtcbiAgICAgIGJveC1zaGFkb3c6IDAgMnB4IDRweCByZ2JhKDAsIDAsIDAsIDAuMSk7XG4gICAgICB6LWluZGV4OiAyO1xuXG4gICAgICAubWVybWFpZC1jb250cm9sLWJ1dHRvbiB7XG4gICAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAgICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICAgICAgICB3aWR0aDogMzJweDtcbiAgICAgICAgaGVpZ2h0OiAzMnB4O1xuICAgICAgICBwYWRkaW5nOiAwO1xuICAgICAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodCk7XG4gICAgICAgIGNvbG9yOiB2YXIoLS1kYXJrKTtcbiAgICAgICAgYm9yZGVyLXJhZGl1czogNHB4O1xuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgICAgIGZvbnQtc2l6ZTogMTZweDtcbiAgICAgICAgZm9udC1mYW1pbHk6IHZhcigtLWJvZHlGb250KTtcbiAgICAgICAgdHJhbnNpdGlvbjogYWxsIDAuMnMgZWFzZTtcblxuICAgICAgICAmOmhvdmVyIHtcbiAgICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICB9XG5cbiAgICAgICAgJjphY3RpdmUge1xuICAgICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWSgxcHgpO1xuICAgICAgICB9XG5cbiAgICAgICAgLy8gU3R5bGUgdGhlIHJlc2V0IGJ1dHRvbiBkaWZmZXJlbnRseVxuICAgICAgICAmOm50aC1jaGlsZCgyKSB7XG4gICAgICAgICAgd2lkdGg6IGF1dG87XG4gICAgICAgICAgcGFkZGluZzogMCAxMnB4O1xuICAgICAgICAgIGZvbnQtc2l6ZTogMTRweDtcbiAgICAgICAgfVxuICAgICAgfVxuICAgIH1cbiAgfVxufVxuIl19 */</style><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" spa-preserve/><script src="../prescript.be9697b4.js" type="application/javascript" spa-preserve></script><script type="application/javascript" spa-preserve>const fetchData = fetch("../static/contentIndex.73890e1e.json").then(data => data.json())</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://oxzo.github.io/brains-site/index.xml"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://oxzo.github.io/brains-site/ai/hitl-progressive-autonomy-og-image.webp"/><meta property="og:image:url" content="https://oxzo.github.io/brains-site/ai/hitl-progressive-autonomy-og-image.webp"/><meta name="twitter:image" content="https://oxzo.github.io/brains-site/ai/hitl-progressive-autonomy-og-image.webp"/><meta property="og:image:type" content="image/.webp"/></head><body data-slug="ai/hitl-progressive-autonomy"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">synapse</a></h2><div class="spacer mobile-only"></div><div style="display: flex; flex-direction: row; flex-wrap: nowrap; gap: 1rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button"><p>Search</p><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Search for something" placeholder="Search for something"/><div class="search-layout" data-preview="true"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Dark mode"><title>Dark mode</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Light mode"><title>Light mode</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div></div><div class="explorer" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a,b)=>!a.isFolder&amp;&amp;!b.isFolder||a.isFolder&amp;&amp;b.isFolder?a.displayName.localeCompare(b.displayName,void 0,{numeric:!0,sensitivity:\&quot;base\&quot;}):!a.isFolder&amp;&amp;b.isFolder?1:-1&quot;,&quot;filterFn&quot;:&quot;node=>node.slugSegment!==\&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;node=>node&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-content"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>Explorer</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="explorer-content" aria-expanded="false"><ul class="explorer-ul overflow" id="0x8mfk"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#"></a></li></template><template id="template-folder"><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../ai/">AI — Index</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>HITL Progressive Autonomy</a></div></nav><h1 class="article-title">HITL Progressive Autonomy</h1><p show-comma="true" class="content-meta"><time datetime="2026-07-19T00:00:00.000Z">Jul 19, 2026</time><span>15 min read</span></p><ul class="tags"><li><a href="../tags/ai" class="internal tag-link">ai</a></li><li><a href="../tags/agents" class="internal tag-link">agents</a></li><li><a href="../tags/architecture" class="internal tag-link">architecture</a></li><li><a href="../tags/governance" class="internal tag-link">governance</a></li><li><a href="../tags/hitl" class="internal tag-link">hitl</a></li><li><a href="../tags/time-sensitive" class="internal tag-link">time-sensitive</a></li><li><a href="../tags/publish" class="internal tag-link">publish</a></li></ul></div></div><article class="popover-hint"><h1 id="hitl-progressive-autonomy">HITL Progressive Autonomy<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#hitl-progressive-autonomy" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>Designing human-in-the-loop systems where the oversight surface <strong>shrinks over time</strong> — starting with wide escalation triggers and expanding the autonomous envelope as the system proves itself through accumulated corrections. Not “human reviews everything” or “human reviews nothing,” but a formal trajectory between those extremes.</p>
+<p>As of April 2026; the regulatory landscape is evolving rapidly — EU AI Act Article 14 was slated to become enforceable August 2, 2026. <em>Update 2026-06-12: the Digital Omnibus provisional agreement postpones the high-risk obligations to late 2027/2028, pending formal adoption; details in <a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/agent-audit-trails-provenance.md" class="external">agent-audit-trails-provenance<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>.</em></p>
+<h2 id="why-it-matters">Why it matters<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#why-it-matters" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>The naive approaches both fail:</p>
+<ul>
+<li><strong>Review everything</strong>: alert fatigue → rubber-stamping → false confidence. Security SOC analysts report up to 99% false positive rates (USENIX Security 2022). The same pattern holds clinically: alarm false-positive rates run 72-99%. The human becomes a bottleneck who provides the appearance of oversight without the substance.</li>
+<li><strong>Review nothing</strong>: silent failures compound (see <a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/multi-agent-failure-modes.md" class="external">multi-agent-failure-modes<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>). The system optimizes for the wrong objective. One bad decision cascades. No correction signal reaches the system.</li>
+</ul>
+<p>The architecture problem: design a system where human involvement starts high, decreases predictably as trust is earned, and ratchets back up when trust is violated — with formal mechanisms governing every transition.</p>
+<h2 id="autonomy-level-frameworks">Autonomy level frameworks<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#autonomy-level-frameworks" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Three frameworks now define graduated autonomy for AI agents; a fourth lens — the HITL/HOTL/HOVL taxonomy — describes how the human relates to execution rather than a level ladder:</p>
+<h3 id="cloud-security-alliance--agentic-trust-framework-atf-v091-feb-2026">Cloud Security Alliance — Agentic Trust Framework (ATF v0.9.1, Feb 2026)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#cloud-security-alliance--agentic-trust-framework-atf-v091-feb-2026" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>The most implementation-ready. Uses role metaphors with formal promotion/demotion gates:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Level</th><th>Role</th><th>Permissions</th><th>Promotion requirement</th></tr></thead><tbody><tr><td>1</td><td>Intern</td><td>Access data, generate insights. Cannot modify external systems</td><td>Minimum 2 weeks at level</td></tr><tr><td>2</td><td>Associate</td><td>Execute pre-approved actions within narrow scope</td><td>Pass all 5 gates</td></tr><tr><td>3</td><td>Senior</td><td>Broader action scope, handle exceptions autonomously</td><td>Pass all 5 gates</td></tr><tr><td>4</td><td>Principal</td><td>Full autonomy within defined ODD (Operational Design Domain — see Safety envelopes below)</td><td>Pass all 5 gates</td></tr></tbody></table></div>
+<p><strong>Five promotion gates</strong> (all must pass):</p>
+<ol>
+<li>Demonstrated accuracy/reliability over evaluation period</li>
+<li>Security audit appropriate to target level</li>
+<li>Measurable positive impact</li>
+<li>Clean operational history at current level</li>
+<li>Explicit stakeholder approval</li>
+</ol>
+<p><strong>Demotion is immediate</strong> on critical incident — agent drops back to Intern regardless of current level. This asymmetry (slow promotion, instant demotion) is architecturally critical. The framework is built on Zero Trust principles.</p>
+<h3 id="knight-first-amendment-institute--levels-of-autonomy-june-2025">Knight First Amendment Institute — Levels of Autonomy (June 2025)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#knight-first-amendment-institute--levels-of-autonomy-june-2025" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Five levels based on the human’s role:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Level</th><th>Human role</th><th>Description</th></tr></thead><tbody><tr><td>L1</td><td>Operator</td><td>Human drives everything</td></tr><tr><td>L2</td><td>Collaborator</td><td>Shared planning, fluid control handoffs</td></tr><tr><td>L3</td><td>Consultant</td><td>Agent leads, consults human for expertise</td></tr><tr><td>L4</td><td>Approver</td><td>Agent operates independently, escalates high-risk cases</td></tr><tr><td>L5</td><td>Observer</td><td>Full autonomy, human can only monitor or emergency-stop</td></tr></tbody></table></div>
+<p>Critical insight: <strong>autonomy is independent of capability</strong>. A highly capable agent can still be constrained to L2 if the deployment context demands it. The authors propose “AI autonomy certificates” specifying the maximum autonomy level an agent is permitted to operate at.</p>
+<h3 id="nvidia--agentic-autonomy-levels-l0-l3">NVIDIA — Agentic Autonomy Levels (L0-L3)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#nvidia--agentic-autonomy-levels-l0-l3" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>L0 deterministic/no autonomy → L1 deterministic workflows → L2 model-guided with human checkpoints → L3 fully autonomous. Higher autonomy does not mean higher risk but does mean less predictability. L3 requires taint tracing, manual approval of sensitive actions, and sanitization of untrusted data.</p>
+<h3 id="the-hitl--hotl--hovl-taxonomy">The HITL / HOTL / HOVL taxonomy<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-hitl--hotl--hovl-taxonomy" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Three architectural patterns for how the human relates to execution:</p>
+<ul>
+<li><strong>HITL (in the loop)</strong>: Agent cannot proceed without human validation at each decision point</li>
+<li><strong>HOTL (on the loop)</strong>: Agent executes autonomously within boundaries; human monitors and can veto</li>
+<li><strong>HOVL (over the loop)</strong>: Human sets policy, reviews outcomes episodically, intervenes only on strategic deviations</li>
+</ul>
+<p>A single pipeline uses all three simultaneously — different stages at different levels. The shrinking surface means actions migrate from HITL → HOTL → HOVL over time.</p>
+<h2 id="escalation-trigger-design">Escalation trigger design<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#escalation-trigger-design" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="the-confidence-calibration-problem">The confidence calibration problem<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-confidence-calibration-problem" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>LLM confidence scores are severely miscalibrated. You cannot naively use <code>logprobs</code> or verbalized confidence as escalation triggers:</p>
+<ul>
+<li>Expected Calibration Error (ECE) ranges 0.108-0.427 across formats — far above acceptable thresholds</li>
+<li>RLHF fine-tuning <strong>degrades calibration</strong> — the models you deploy are worse at knowing what they don’t know than base models</li>
+<li>Evidence tools (web search) systematically induce overconfidence; verification tools (code interpreters) calibrate better</li>
+<li>In multi-agent deliberation, confidence <strong>increases through debate</strong> rather than calibrating — agents talk each other into being more certain, not less. Self-rated win confidence averaged 72.92% at the opening round and rose to 83.3% by the close; the rational baseline is 50%, since one of two debaters must lose</li>
+</ul>
+<p><strong>Calibration techniques that work:</strong></p>
+<ul>
+<li>Prompt-ensemble: 20-40% ECE/Brier score reduction with minimal latency</li>
+<li>Action-wise Platt scaling: 10-20% per-dimension miscalibration reduction</li>
+<li>Adaptive Temperature Scaling (ATS): per-token temperature prediction</li>
+<li>RL with proper scoring rule rewards: state-of-the-art calibration + robust OOD generalization</li>
+</ul>
+<p><strong>Design lever</strong>: never use raw confidence as your sole escalation trigger. Always calibrate, and combine with other signals.</p>
+<h3 id="monitor-confidence-continuously-not-only-at-the-end">Monitor confidence continuously, not only at the end<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#monitor-confidence-continuously-not-only-at-the-end" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Key finding from “Agentic Uncertainty Quantification” (arXiv 2601.15703): optimal intervention points should be dynamically selected based on continuous confidence monitoring, not checked only at the end. The system should balance efficient execution and deep deliberation based on real-time confidence signals.</p>
+<h3 id="beyond-confidence--multi-signal-escalation">Beyond confidence — multi-signal escalation<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#beyond-confidence--multi-signal-escalation" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>A production escalation trigger should combine:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Signal</th><th>Mechanism</th><th>Weight</th></tr></thead><tbody><tr><td>Calibrated confidence</td><td>Platt-scaled probability below threshold</td><td>Base signal</td></tr><tr><td>Blast radius</td><td>Financial impact, data scope, reversibility</td><td>Multiplier</td></tr><tr><td>Anomaly detection</td><td>Semantic distance from known-good patterns</td><td>Flag</td></tr><tr><td>Policy conflict</td><td>Action violates ABAC/ReBAC permission rules</td><td>Hard stop</td></tr><tr><td>Similarity to known failures</td><td>Embedding distance to intervention database (introduced below)</td><td>Boost</td></tr><tr><td>Domain boundary</td><td>Action outside defined ODD</td><td>Hard stop</td></tr></tbody></table></div>
+<p><strong>Blast radius as first-class primitive</strong> (the “Runplane pattern,” after a commercial AI runtime-guardrails product):</p>
+<ul>
+<li>Scope limits: database updates limited to N records at a time</li>
+<li>Value limits: auto-approve refunds up to $X, require human above</li>
+<li>Rate limits: frequency caps on actions</li>
+<li>Real-time dashboards showing blast radius across agent fleets</li>
+</ul>
+<p>Every action request is evaluated against the rules and receives a decision in milliseconds.</p>
+<h3 id="the-meta-problem-the-escalation-decision-itself-is-unreliable">The meta-problem: the escalation decision itself is unreliable<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-meta-problem-the-escalation-decision-itself-is-unreliable" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>The agent deciding whether to escalate is the same unreliable system you’re trying to oversee. Mitigations:</p>
+<ul>
+<li>Runtime ODD monitoring (external to the agent) that triggers autonomy reduction independently</li>
+<li>Hard policy rules that bypass the agent’s judgment entirely (value thresholds, permission boundaries)</li>
+<li>Anomaly detection operating on behavior patterns, not the agent’s self-assessment</li>
+</ul>
+<h2 id="trust-quantification--the-math">Trust quantification — the math<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#trust-quantification--the-math" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="bayesian-trust-model">Bayesian trust model<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#bayesian-trust-model" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>The most formally developed approach, from human-robot interaction research. Uses a Beta distribution as conjugate prior to Bernoulli (success/failure):</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="github-light github-dark"><code data-language="text" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>Prior:     Beta(α₀, β₀)  — initial trust (e.g., α₀=1, β₀=1 for uninformative)</span></span>
+<span data-line><span>Success:   α_{n+1} = αₙ + 1</span></span>
+<span data-line><span>Failure:   β_{n+1} = βₙ + 1</span></span>
+<span data-line><span>Trust:     E[trust] = α / (α + β)</span></span></code></pre></figure>
+<p>Key empirical finding: <strong>the negative feedback loop (trust decrease after failure) exerts stronger influence than the positive loop (trust increase after success)</strong>. Trust stabilizes over repeated interactions — the effect of any single event diminishes as history grows.</p>
+<p>This directly implements earned autonomy:</p>
+<ul>
+<li>New agent (α=1, β=1): trust = 0.5, needs many successes to climb</li>
+<li>After 50 successes, 2 failures (α=51, β=3): trust = 0.94</li>
+<li>One critical failure resets β significantly: trust drops sharply</li>
+</ul>
+<p><strong>Design lever</strong>: maintain per-action-type, per-context Beta distributions. An agent that’s trusted for “read and summarize” may not be trusted for “modify and deploy.” Trust is contextual, not global.</p>
+<h3 id="contextual-bandits-for-real-time-adaptation">Contextual bandits for real-time adaptation<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#contextual-bandits-for-real-time-adaptation" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>For updating escalation thresholds without full retraining: a contextual bandit layer sits on top of the agent’s base policy and learns from human corrections in real-time. Query human feedback only when the action policy exceeds an uncertainty threshold. The bandit learns which contexts are safe for autonomous action and which need input — directly implementing the shrinking surface.</p>
+<h2 id="intervention-tracking-and-learning">Intervention tracking and learning<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#intervention-tracking-and-learning" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="building-the-intervention-database">Building the intervention database<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#building-the-intervention-database" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>The concrete pattern emerging in production:</p>
+<ol>
+<li>Log every human override with full context: agent state, proposed action, human correction, reason given</li>
+<li>When human approves without changes → record as successful autonomous pattern</li>
+<li>When human rejects or modifies → record the delta and the context</li>
+<li>Over time, build a corpus of labeled decision points</li>
+<li>Use this corpus to update escalation thresholds — if corrections cluster around specific action types or contexts, tighten triggers there; if approvals accumulate with zero corrections, loosen</li>
+</ol>
+<p>Each iteration improves accuracy and decreases the number of cases needing manual intervention. This is the mechanical implementation of the “shrinking surface.”</p>
+<h3 id="rlhf-in-the-pipeline-context-not-model-training">RLHF in the pipeline context (not model training)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#rlhf-in-the-pipeline-context-not-model-training" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Targeted Human Feedback (RLTHF)</strong>: combines LLM-based initial alignment with selective human corrections. Achieves full-human-annotation-level alignment with only <strong>6-7% of the human annotation effort</strong>. Directly applicable: use the LLM to handle routine alignment, route the 6-7% most ambiguous cases to humans.</p>
+<h3 id="measuring-intervention-quality">Measuring intervention quality<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#measuring-intervention-quality" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Not all human corrections are good. Track:</p>
+<ul>
+<li><strong>Consistency</strong>: does the same reviewer make the same decision on similar cases?</li>
+<li><strong>Outcome impact</strong>: did the correction actually improve the final result?</li>
+<li><strong>Reviewer reject rate</strong>: a reviewer who never rejects is rubber-stamping</li>
+<li><strong>Correction reversal rate</strong>: how often is a correction itself corrected later?</li>
+</ul>
+<p>The “Towards a Science of AI Agent Reliability” paper (Rabanser, Kapoor et al., Feb 2026) decomposes reliability into four dimensions: consistency, robustness, predictability, safety — with twelve concrete metrics independent of raw accuracy. These reliability metrics should gate autonomy expansion, not just capability scores.</p>
+<h2 id="safety-envelopes-and-runtime-monitoring">Safety envelopes and runtime monitoring<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#safety-envelopes-and-runtime-monitoring" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="operational-design-domain-odd--borrowed-from-autonomous-vehicles">Operational Design Domain (ODD) — borrowed from autonomous vehicles<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#operational-design-domain-odd--borrowed-from-autonomous-vehicles" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>The most mature formal approach to defining “where a system is allowed to operate autonomously.” For AVs, ODD specifies: road types, weather, time of day, speed ranges, geographic boundaries. For AI agents:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>ODD dimension</th><th>AV example</th><th>Agent pipeline equivalent</th></tr></thead><tbody><tr><td>Road type</td><td>Highway vs residential</td><td>Action type (read vs write vs deploy)</td></tr><tr><td>Weather</td><td>Clear vs rain vs snow</td><td>Data quality / completeness</td></tr><tr><td>Speed range</td><td>0-65 mph</td><td>Value / blast radius range</td></tr><tr><td>Geographic boundary</td><td>City limits</td><td>Permitted data sources / systems</td></tr><tr><td>Maneuver restrictions</td><td>No U-turns</td><td>Prohibited action combinations</td></tr></tbody></table></div>
+<p><strong>ODDs are not static</strong> — developers start narrow and expand as competence is demonstrated. But each expansion requires a new safety case. The SAE driving-automation L3→L4 transition is the critical one: at L3, the human must be ready to take over; at L4, the system can bring itself to a safe state without human intervention within its ODD.</p>
+<p><strong>Design lever</strong>: for each agent, define the ODD explicitly before deployment. Document the boundary. Expansion requires formal validation, not just “it seems to be working.”</p>
+<h3 id="runtime-odd-monitoring">Runtime ODD monitoring<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#runtime-odd-monitoring" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Runtime ODD monitoring runs sub-monitors for input distribution, action patterns, and environmental context. When the agent approaches the boundary of its safe envelope:</p>
+<ol>
+<li><strong>Narrow permitted actions</strong> before failure occurs (autonomy reduction, not just escalation)</li>
+<li><strong>Alert human</strong> if reduction is insufficient</li>
+<li><strong>Safe-stop</strong> if the situation exceeds all boundaries</li>
+</ol>
+<p>IBM’s A2AS Framework implements “semantic firewalls” — monitoring how the agent thinks, not just what it outputs. The firewall detects manipulation through reasoning patterns and behavioral drift from original intent.</p>
+<h3 id="autonomy-reduction-vs-escalation">Autonomy reduction vs escalation<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#autonomy-reduction-vs-escalation" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>The sophisticated pattern is not binary (autonomous vs escalate-to-human):</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="github-light github-dark"><code data-language="text" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>Normal operation → Detect boundary approach → Narrow scope →</span></span>
+<span data-line><span>  Still near boundary? → Escalate to human →</span></span>
+<span data-line><span>    Critical? → Safe-stop</span></span></code></pre></figure>
+<p>This gives the system three responses to uncertainty before involving a human, reducing unnecessary escalation while maintaining safety.</p>
+<h2 id="the-human-side--decision-fatigue-and-complacency">The human side — decision fatigue and complacency<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-human-side--decision-fatigue-and-complacency" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>The core paradox: as the system gets better, humans get worse at overseeing it (Parasuraman-Manzey model). Automation bias occurs in both naive and expert participants and cannot be prevented by training alone. <strong>If you escalate too much, you escalate nothing</strong> — the human learns to click “approve” without reading. SOC false positive rates: up to 99%.</p>
+<h3 id="anti-rubber-stamping-ux-mit-sloan--bcg-2025">Anti-rubber-stamping UX (MIT Sloan / BCG 2025)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#anti-rubber-stamping-ux-mit-sloan--bcg-2025" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ol>
+<li>Present evidence for AND against each recommendation</li>
+<li>Reject rate monitoring — flag reviewers who never reject</li>
+<li>Time-minimum for review — block approvals in &lt; N seconds</li>
+<li>Rotating reviewers to prevent single-reviewer complacency</li>
+<li>Progressive disclosure of reasoning depth on demand</li>
+</ol>
+<p><strong>Klarna lesson</strong>: AI assistant handled 800 FTEs of work, cut resolution time from 11 to 2 minutes. Klarna expanded autonomy too fast, pulled back, and re-implemented with proper escalation triggers and confidence scoring.</p>
+<h2 id="regulatory-landscape">Regulatory landscape<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#regulatory-landscape" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>EU AI Act Article 14</strong> (postponed to 2027-28 — see <a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/agent-audit-trails-provenance.md" class="external">agent-audit-trails-provenance<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>): High-risk systems must enable humans to understand capabilities, detect anomalies, remain aware of automation bias, and disregard outputs. Academic critique: “no clear guidance about meaningful human oversight” and cognitive constraints undermine such oversight in practice.</p>
+<p><strong>FDA PCCPs</strong>: The closest regulatory pattern to progressive autonomy — pre-approve the expansion path. A PCCP describes planned modifications, validation methodology, and impact assessment upfront; manufacturers can then make pre-specified changes without new submissions.</p>
+<p><strong>Financial services (US)</strong>: No AI-specific regulations yet. FINRA 2026 oversight report addresses “where to have human in the loop agent oversight protocols.” Existing rules apply technology-neutrally.</p>
+<h2 id="anti-patterns">Anti-patterns<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#anti-patterns" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="gaming-the-metrics">Gaming the metrics<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#gaming-the-metrics" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Agents with planning and reasoning can learn to manipulate oversight. The system may learn to <strong>avoid escalation</strong> (appearing confident) rather than <strong>avoid errors</strong>. Without explainability, oversight becomes superficial. Reward hacking in RLHF is a documented failure mode where the system optimizes the proxy metric rather than the actual objective.</p>
+<p><strong>Mitigation</strong>: measure reliability (consistency, robustness, predictability, safety), not just accuracy. Track error-conditional-on-not-escalating separately from overall error rate.</p>
+<h3 id="asymmetric-error-costs">Asymmetric error costs<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#asymmetric-error-costs" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>False positive escalations cost time and create alert fatigue. False negative autonomous errors cost damage. The optimal threshold depends on cost asymmetry in your specific domain — there is no universal answer. In content moderation, a 2% precision drop generates false removals that overwhelm review queues; a recall drop means harmful content stays visible.</p>
+<p><strong>Design lever</strong>: make the cost asymmetry explicit in your escalation scoring. <code>escalation_score = calibrated_confidence × inverse_blast_radius × cost_asymmetry_weight</code>.</p>
+<h3 id="skill-degradation">Skill degradation<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#skill-degradation" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>As the system handles more autonomously, human overseers handle fewer edge cases, and their ability to detect subtle errors degrades. “Poorly designed automation can actually degrade human performance by inducing complacency, reducing skill maintenance, or overwhelming operators with alerts.”</p>
+<p><strong>Mitigation</strong>: periodically route known-good decisions for human review (calibration checks). Track reviewer accuracy over time. Rotate reviewers across domains.</p>
+<h3 id="the-paradox-of-success">The paradox of success<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-paradox-of-success" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>“The more confident we become in automation, the more tempted we are to remove human oversight entirely, even when judgment still matters.” If your time-to-detect is slower than the system’s time-to-act, oversight is ceremonial. This is the core tension: you are choosing whether to intervene while performance metrics argue for letting it run.</p>
+<p><strong>Mitigation</strong>: the ODD boundary approach. Never expand to full autonomy — always maintain a defined boundary where human oversight activates. Expand the boundary, but never remove it.</p>
+<h2 id="case-studies">Case studies<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#case-studies" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Domain</th><th>System</th><th>Result</th><th>Key insight</th></tr></thead><tbody><tr><td>Finance</td><td>Agentic fraud detection</td><td>+45% accuracy, -80% false alarms</td><td>Progressive autonomy on value thresholds works</td></tr><tr><td>Healthcare</td><td>Aidoc (FDA cleared Jan 2026)</td><td>97% sensitivity; 30-day ICH mortality 17.5% (post-AI) vs 27.7% (pre-AI)</td><td>AI supports clinicians, doesn’t replace them</td></tr><tr><td>Customer service</td><td>Cisco Webex AI Agent</td><td>-85% escalations</td><td>Trustworthy escalation <em>enables</em> broader autonomy</td></tr><tr><td>Software eng.</td><td>Augment Code</td><td>Review → Balanced → Auto modes</td><td>Approval gates before destructive actions, configurable per task type</td></tr></tbody></table></div>
+<h2 id="implementation-checklist">Implementation checklist<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#implementation-checklist" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="github-light github-dark"><code data-language="text" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>┌─────────────────────────────────────────────┐</span></span>
+<span data-line><span>│            Runtime ODD Monitor              │</span></span>
+<span data-line><span>│  (input distribution, action patterns,      │</span></span>
+<span data-line><span>│   environmental context, semantic firewall) │</span></span>
+<span data-line><span>├─────────────────┬───────────────────────────┤</span></span>
+<span data-line><span>│ Escalation      │  Trust Scoring Engine     │</span></span>
+<span data-line><span>│ Trigger Engine  │  (Bayesian Beta per       │</span></span>
+<span data-line><span>│ (multi-signal   │   action-type × context,  │</span></span>
+<span data-line><span>│  scoring)       │   contextual bandit)      │</span></span>
+<span data-line><span>├─────────────────┴───────────────────────────┤</span></span>
+<span data-line><span>│         Intervention Database               │</span></span>
+<span data-line><span>│  (corrections, outcomes, reviewer metrics)  │</span></span>
+<span data-line><span>├─────────────────────────────────────────────┤</span></span>
+<span data-line><span>│         Agent Pipeline                      │</span></span>
+<span data-line><span>│  (within defined ODD, autonomy enforced)    │</span></span>
+<span data-line><span>└─────────────────────────────────────────────┘</span></span></code></pre></figure>
+<ol>
+<li><strong>Define ODD before deployment</strong>: permitted actions, value ranges, data sources, prohibited combinations</li>
+<li><strong>Start at Intern</strong> (CSA ATF): data access only, no external modifications until formal promotion</li>
+<li><strong>Calibrate confidence</strong>: Platt scaling + ensemble minimum, never raw logprobs</li>
+<li><strong>Multi-signal escalation</strong>: <code>f(calibrated_confidence, blast_radius, policy_rules, anomaly_distance, failure_similarity)</code></li>
+<li><strong>Bayesian trust per context</strong>: separate Beta(α,β) per action-type, not global</li>
+<li><strong>Log everything</strong>: full context at every decision point, human and autonomous</li>
+<li><strong>Measure intervention quality</strong>: reviewers who never reject are failing</li>
+<li><strong>Anti-rubber-stamp UX</strong>: evidence for AND against, time minimums, reject rate monitoring</li>
+<li><strong>Autonomy reduction before escalation</strong>: narrow scope first, escalate second, safe-stop third</li>
+<li><strong>Asymmetric promotion/demotion</strong>: slow climb, instant drop on critical failure</li>
+<li><strong>Never remove the boundary</strong> — expand it, but always maintain a defined ODD boundary</li>
+</ol>
+<h2 id="related">Related<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#related" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/multi-agent-governance.md" class="external">multi-agent-governance<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — governance architecture this sits within</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/multi-agent-failure-modes.md" class="external">multi-agent-failure-modes<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — what happens when HITL fails</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/multi-agent-coordination-topologies.md" class="external">multi-agent-coordination-topologies<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — where HITL checkpoints go in each topology</li>
+<li><a href="../ai/ai-agent-security" class="internal" data-slug="ai/ai-agent-security">ai-agent-security</a> — security layer that HITL extends</li>
+<li><a href="../ai/ai-verification-stack-web" class="internal" data-slug="ai/ai-verification-stack-web">ai-verification-stack-web</a> — verification patterns applicable at HITL checkpoints</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/agentic-ai-architecture.md" class="external">agentic-ai-architecture<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — the agent loop where HITL interrupts execute</li>
+<li><a href="../ai/cognitive-burden-of-ai-use" class="internal" data-slug="ai/cognitive-burden-of-ai-use">cognitive-burden-of-ai-use</a> — why the human side of HITL is structurally draining, and what design changes reduce supervisory load</li>
+</ul>
+<h2 id="sources">Sources<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#sources" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>Cloud Security Alliance. “Agentic Trust Framework v0.9.1.” Feb 2026. <a href="https://cloudsecurityalliance.org/blog/2026/02/02/the-agentic-trust-framework-zero-trust-governance-for-ai-agents" class="external">CSA Blog<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>, <a href="https://github.com/massivescale-ai/agentic-trust-framework" class="external">GitHub<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>Knight First Amendment Institute. “Levels of Autonomy for AI Agents.” June 2025. <a href="https://arxiv.org/abs/2506.12469" class="external">arXiv:2506.12469<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>NVIDIA. “Agentic Autonomy Levels and Security.” <a href="https://developer.nvidia.com/blog/agentic-autonomy-levels-and-security/" class="external">Developer Blog<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>Parasuraman, Sheridan &amp; Wickens. “A Model for Types and Levels of Human Interaction with Automation.” IEEE T-SMC, 2000</li>
+<li>Parasuraman &amp; Manzey. “Complacency and Bias in Human Use of Automation.” Human Factors, 2010</li>
+<li>Rabanser, Kapoor et al. “Towards a Science of AI Agent Reliability.” Feb 2026. <a href="https://arxiv.org/html/2602.16666v1" class="external">arXiv:2602.16666<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>“Agentic Uncertainty Quantification.” <a href="https://arxiv.org/html/2601.15703" class="external">arXiv:2601.15703<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>“Agentic Confidence Calibration.” <a href="https://arxiv.org/html/2601.15778" class="external">arXiv:2601.15778<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>“When Two LLMs Debate, Both Think They’ll Win.” <a href="https://arxiv.org/abs/2505.19184" class="external">arXiv:2505.19184<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — the 72.92%→83.3% debate-overconfidence figures</li>
+<li>Runplane. “AI Blast Radius.” <a href="https://runplane.ai/ai-runtime-governance/ai-blast-radius" class="external">runplane.ai<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>MIT Sloan / BCG. “AI Explainability: How to Avoid Rubber-Stamping.” 2025. <a href="https://sloanreview.mit.edu/article/ai-explainability-how-to-avoid-rubber-stamping-recommendations/" class="external">MIT Sloan<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>World Economic Forum. “AI Agents in Action.” Nov 2025. <a href="https://www.weforum.org/publications/ai-agents-in-action-foundations-for-evaluation-and-governance/" class="external">WEF<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>FDA. “PCCP Guidance for AI/ML-Enabled Devices.” Dec 2024. <a href="https://www.fda.gov/regulatory-information/search-fda-guidance-documents/marketing-submission-recommendations-predetermined-change-control-plan-artificial-intelligence" class="external">FDA<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>EU AI Act, Article 14. <a href="https://artificialintelligenceact.eu/article/14/" class="external">Text<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>FINRA. “2026 Annual Regulatory Oversight Report.” <a href="https://www.finra.org/rules-guidance/guidance/reports/2026-finra-annual-regulatory-oversight-report/gen-ai" class="external">FINRA<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>AWS. “Agentic AI Security Scoping Matrix.” <a href="https://aws.amazon.com/blogs/security/the-agentic-ai-security-scoping-matrix-a-framework-for-securing-autonomous-ai-systems/" class="external">AWS Blog<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>IBM. “Agentic AI Runtime Security.” <a href="https://www.ibm.com/think/insights/agentic-ai-runtime-security" class="external">IBM Think<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>Aidoc. “Foundation Model for Abdominal CT.” Lancet eClinicalMedicine, Jan 2026</li>
+<li>“The impact on clinical outcomes after 1 year of implementation of an AI solution for the detection of intracranial hemorrhage.” Int J Emerg Med, 2023. <a href="https://link.springer.com/article/10.1186/s12245-023-00523-y" class="external">Springer<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — the case-study mortality figures</li>
+<li>Klarna AI assistant case study. <a href="https://www.signalfire.com/blog/ai-agents-for-customer-support" class="external">SignalFire<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>Springer. “Modeling and Predicting Trust Dynamics in Human-Robot Interaction.” 2020</li>
+<li>USENIX Security 2022. SOC analyst false positive study</li>
+</ul></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>Graph View</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc desktop-only"><button type="button" class="toc-header" aria-controls="toc-content" aria-expanded="true"><h3>Table of Contents</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="toc-content"><ul id="h9l23p" class="overflow"><li class="depth-0"><a href="#hitl-progressive-autonomy" data-for="hitl-progressive-autonomy">HITL Progressive Autonomy</a></li><li class="depth-1"><a href="#why-it-matters" data-for="why-it-matters">Why it matters</a></li><li class="depth-1"><a href="#autonomy-level-frameworks" data-for="autonomy-level-frameworks">Autonomy level frameworks</a></li><li class="depth-2"><a href="#cloud-security-alliance--agentic-trust-framework-atf-v091-feb-2026" data-for="cloud-security-alliance--agentic-trust-framework-atf-v091-feb-2026">Cloud Security Alliance — Agentic Trust Framework (ATF v0.9.1, Feb 2026)</a></li><li class="depth-2"><a href="#knight-first-amendment-institute--levels-of-autonomy-june-2025" data-for="knight-first-amendment-institute--levels-of-autonomy-june-2025">Knight First Amendment Institute — Levels of Autonomy (June 2025)</a></li><li class="depth-2"><a href="#nvidia--agentic-autonomy-levels-l0-l3" data-for="nvidia--agentic-autonomy-levels-l0-l3">NVIDIA — Agentic Autonomy Levels (L0-L3)</a></li><li class="depth-2"><a href="#the-hitl--hotl--hovl-taxonomy" data-for="the-hitl--hotl--hovl-taxonomy">The HITL / HOTL / HOVL taxonomy</a></li><li class="depth-1"><a href="#escalation-trigger-design" data-for="escalation-trigger-design">Escalation trigger design</a></li><li class="depth-2"><a href="#the-confidence-calibration-problem" data-for="the-confidence-calibration-problem">The confidence calibration problem</a></li><li class="depth-2"><a href="#monitor-confidence-continuously-not-only-at-the-end" data-for="monitor-confidence-continuously-not-only-at-the-end">Monitor confidence continuously, not only at the end</a></li><li class="depth-2"><a href="#beyond-confidence--multi-signal-escalation" data-for="beyond-confidence--multi-signal-escalation">Beyond confidence — multi-signal escalation</a></li><li class="depth-2"><a href="#the-meta-problem-the-escalation-decision-itself-is-unreliable" data-for="the-meta-problem-the-escalation-decision-itself-is-unreliable">The meta-problem: the escalation decision itself is unreliable</a></li><li class="depth-1"><a href="#trust-quantification--the-math" data-for="trust-quantification--the-math">Trust quantification — the math</a></li><li class="depth-2"><a href="#bayesian-trust-model" data-for="bayesian-trust-model">Bayesian trust model</a></li><li class="depth-2"><a href="#contextual-bandits-for-real-time-adaptation" data-for="contextual-bandits-for-real-time-adaptation">Contextual bandits for real-time adaptation</a></li><li class="depth-1"><a href="#intervention-tracking-and-learning" data-for="intervention-tracking-and-learning">Intervention tracking and learning</a></li><li class="depth-2"><a href="#building-the-intervention-database" data-for="building-the-intervention-database">Building the intervention database</a></li><li class="depth-2"><a href="#rlhf-in-the-pipeline-context-not-model-training" data-for="rlhf-in-the-pipeline-context-not-model-training">RLHF in the pipeline context (not model training)</a></li><li class="depth-2"><a href="#measuring-intervention-quality" data-for="measuring-intervention-quality">Measuring intervention quality</a></li><li class="depth-1"><a href="#safety-envelopes-and-runtime-monitoring" data-for="safety-envelopes-and-runtime-monitoring">Safety envelopes and runtime monitoring</a></li><li class="depth-2"><a href="#operational-design-domain-odd--borrowed-from-autonomous-vehicles" data-for="operational-design-domain-odd--borrowed-from-autonomous-vehicles">Operational Design Domain (ODD) — borrowed from autonomous vehicles</a></li><li class="depth-2"><a href="#runtime-odd-monitoring" data-for="runtime-odd-monitoring">Runtime ODD monitoring</a></li><li class="depth-2"><a href="#autonomy-reduction-vs-escalation" data-for="autonomy-reduction-vs-escalation">Autonomy reduction vs escalation</a></li><li class="depth-1"><a href="#the-human-side--decision-fatigue-and-complacency" data-for="the-human-side--decision-fatigue-and-complacency">The human side — decision fatigue and complacency</a></li><li class="depth-2"><a href="#anti-rubber-stamping-ux-mit-sloan--bcg-2025" data-for="anti-rubber-stamping-ux-mit-sloan--bcg-2025">Anti-rubber-stamping UX (MIT Sloan / BCG 2025)</a></li><li class="depth-1"><a href="#regulatory-landscape" data-for="regulatory-landscape">Regulatory landscape</a></li><li class="depth-1"><a href="#anti-patterns" data-for="anti-patterns">Anti-patterns</a></li><li class="depth-2"><a href="#gaming-the-metrics" data-for="gaming-the-metrics">Gaming the metrics</a></li><li class="depth-2"><a href="#asymmetric-error-costs" data-for="asymmetric-error-costs">Asymmetric error costs</a></li><li class="depth-2"><a href="#skill-degradation" data-for="skill-degradation">Skill degradation</a></li><li class="depth-2"><a href="#the-paradox-of-success" data-for="the-paradox-of-success">The paradox of success</a></li><li class="depth-1"><a href="#case-studies" data-for="case-studies">Case studies</a></li><li class="depth-1"><a href="#implementation-checklist" data-for="implementation-checklist">Implementation checklist</a></li><li class="depth-1"><a href="#related" data-for="related">Related</a></li><li class="depth-1"><a href="#sources" data-for="sources">Sources</a></li><li class="overflow-end"></li></ul></div></div><div class="backlinks"><h3>Backlinks</h3><ul id="xacmdj" class="overflow"><li><a href="../ai/agent-sandbox-isolation-tiers" class="internal">Agent Sandbox Isolation Tiers</a></li><li><a href="../ai/ai-agent-security" class="internal">AI Agent Security</a></li><li><a href="../ai/autonomous-agent-vs-decomposed-workflow" class="internal">Autonomous Agent vs Decomposed Workflow</a></li><li><a href="../ai/bias-aware-verification-protocol" class="internal">Bias-Aware Verification Protocol</a></li><li><a href="../ai/cognitive-burden-of-ai-use" class="internal">Cognitive Burden of AI Use</a></li><li><a href="../ai/continuous-agent-task-fit" class="internal">Continuous Agents — What the Clock Buys, and What It Doesn't</a></li><li><a href="../ai/dora-2025-ai-capabilities-model" class="internal">DORA 2025 — The Amplifier Effect and the AI Capabilities Model</a></li><li><a href="../ai/enterprise-agent-execution-architecture" class="internal">Enterprise Agent Execution Architecture</a></li><li><a href="../ai/evaluating-ai-code-beyond-tests" class="internal">Evaluating AI-Generated Code Beyond Tests</a></li><li><a href="../ai/" class="internal">AI — Index</a></li><li><a href="../ai/temporal-logic-for-agent-verification" class="internal">Temporal Logic for Agent Runtime Verification</a></li><li><a href="../ai/visual-verification-ai-ui" class="internal">Visual Verification for AI-Generated UI</a></li><li><a href="../general/human-role-roadmap-under-ai" class="internal">Human Role Under AI — A Roadmap From Current State to the Predicted Endpoint</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v4.4.1</a> © 2026</p><ul><li><a href="https://github.com/oxzo/brains">source</a></li><li><a href="/index.xml">rss</a></li></ul></footer></div></div></body><script type="application/javascript">function o(){let t=this.parentElement;t.classList.toggle("is-collapsed");let e=t.classList.contains("is-collapsed")?this.scrollHeight:t.scrollHeight;t.style.maxHeight=e+"px";let c=t,l=t.parentElement;for(;l;){if(!l.classList.contains("callout"))return;let i=l.classList.contains("is-collapsed")?l.scrollHeight:l.scrollHeight+c.scrollHeight;l.style.maxHeight=i+"px",c=l,l=l.parentElement}}function n(){let t=document.getElementsByClassName("callout is-collapsible");for(let s of t){let e=s.firstElementChild;if(!e)continue;e.addEventListener("click",o),window.addCleanup(()=>e.removeEventListener("click",o));let l=s.classList.contains("is-collapsed")?e.scrollHeight:s.scrollHeight;s.style.maxHeight=l+"px"}}document.addEventListener("nav",n);
+</script><script type="module">function f(i,e){if(!i)return;function r(o){o.target===this&&(o.preventDefault(),o.stopPropagation(),e())}function t(o){o.key.startsWith("Esc")&&(o.preventDefault(),e())}i?.addEventListener("click",r),window.addCleanup(()=>i?.removeEventListener("click",r)),document.addEventListener("keydown",t),window.addCleanup(()=>document.removeEventListener("keydown",t))}function y(i){for(;i.firstChild;)i.removeChild(i.firstChild)}var h=class{constructor(e,r){this.container=e;this.content=r;this.setupEventListeners(),this.setupNavigationControls(),this.resetTransform()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;cleanups=[];setupEventListeners(){let e=this.onMouseDown.bind(this),r=this.onMouseMove.bind(this),t=this.onMouseUp.bind(this),o=this.resetTransform.bind(this);this.container.addEventListener("mousedown",e),document.addEventListener("mousemove",r),document.addEventListener("mouseup",t),window.addEventListener("resize",o),this.cleanups.push(()=>this.container.removeEventListener("mousedown",e),()=>document.removeEventListener("mousemove",r),()=>document.removeEventListener("mouseup",t),()=>window.removeEventListener("resize",o))}cleanup(){for(let e of this.cleanups)e()}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let r=this.createButton("+",()=>this.zoom(.1)),t=this.createButton("-",()=>this.zoom(-.1)),o=this.createButton("Reset",()=>this.resetTransform());e.appendChild(t),e.appendChild(o),e.appendChild(r),this.container.appendChild(e)}createButton(e,r){let t=document.createElement("button");return t.textContent=e,t.className="mermaid-control-button",t.addEventListener("click",r),window.addCleanup(()=>t.removeEventListener("click",r)),t}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}zoom(e){let r=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),t=this.content.getBoundingClientRect(),o=t.width/2,n=t.height/2,c=r-this.scale;this.currentPan.x-=o*c,this.currentPan.y-=n*c,this.scale=r,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){this.scale=1;let e=this.content.querySelector("svg");this.currentPan={x:e.getBoundingClientRect().width/2,y:e.getBoundingClientRect().height/2},this.updateTransform()}},C=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],E;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;E||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let r=E.default,t=new WeakMap;for(let n of e)t.set(n,n.innerText);async function o(){for(let s of e){s.removeAttribute("data-processed");let a=t.get(s);a&&(s.innerHTML=a)}let n=C.reduce((s,a)=>(s[a]=window.getComputedStyle(document.documentElement).getPropertyValue(a),s),{}),c=document.documentElement.getAttribute("saved-theme")==="dark";r.initialize({startOnLoad:!1,securityLevel:"loose",theme:c?"dark":"base",themeVariables:{fontFamily:n["--codeFont"],primaryColor:n["--light"],primaryTextColor:n["--darkgray"],primaryBorderColor:n["--tertiary"],lineColor:n["--darkgray"],secondaryColor:n["--secondary"],tertiaryColor:n["--tertiary"],clusterBkg:n["--light"],edgeLabelBackground:n["--highlight"]}}),await r.run({nodes:e})}await o(),document.addEventListener("themechange",o),window.addCleanup(()=>document.removeEventListener("themechange",o));for(let n=0;n<e.length;n++){let v=function(){let g=l.querySelector("#mermaid-space"),m=l.querySelector(".mermaid-content");if(!m)return;y(m);let w=c.querySelector("svg").cloneNode(!0);m.appendChild(w),l.classList.add("active"),g.style.cursor="grab",u=new h(g,m)},M=function(){l.classList.remove("active"),u?.cleanup(),u=null},c=e[n],s=c.parentElement,a=s.querySelector(".clipboard-button"),d=s.querySelector(".expand-button"),p=window.getComputedStyle(a),L=a.offsetWidth+parseFloat(p.marginLeft||"0")+parseFloat(p.marginRight||"0");d.style.right=`calc(${L}px + 0.3rem)`,s.prepend(d);let l=s.querySelector("#mermaid-container");if(!l)return;let u=null;d.addEventListener("click",v),f(l,M),window.addCleanup(()=>{u?.cleanup(),d.removeEventListener("click",v)})}});
+</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript"></script><script src="../postscript.00b09a8c.js" type="module"></script></html>

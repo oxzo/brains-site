@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en"><head><title>Clause Loop · second-brain</title><meta charset="utf-8"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400;1,600&amp;family=Inter:wght@400;700&amp;family=JetBrains Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="synapse"/><meta property="og:title" content="Clause Loop · second-brain"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Clause Loop · second-brain"/><meta name="twitter:description" content="Clause Loop A development method for one person and one AI agent — plus the fresh contexts that agent dispatches for reader checks and spot-checks — for any work whose output can be checked: ..."/><meta property="og:description" content="Clause Loop A development method for one person and one AI agent — plus the fresh contexts that agent dispatches for reader checks and spot-checks — for any work whose output can be checked: ..."/><meta property="og:image:alt" content="Clause Loop A development method for one person and one AI agent — plus the fresh contexts that agent dispatches for reader checks and spot-checks — for any work whose output can be checked: ..."/><meta property="twitter:domain" content="oxzo.github.io/brains-site"/><meta property="og:url" content="https://oxzo.github.io/brains-site/ai/clause-loop"/><meta property="twitter:url" content="https://oxzo.github.io/brains-site/ai/clause-loop"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="Clause Loop A development method for one person and one AI agent — plus the fresh contexts that agent dispatches for reader checks and spot-checks — for any work whose output can be checked: ..."/><meta name="generator" content="Quartz"/><link href="../index.322b98b4.css" rel="stylesheet" type="text/css" spa-preserve/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  padding: 2rem;
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL2hvbWUvcnVubmVyL3dvcmsvYnJhaW5zL2JyYWlucy9zaXRlL3F1YXJ0ei9jb21wb25lbnRzL3N0eWxlcyIsInNvdXJjZXMiOlsibWVybWFpZC5pbmxpbmUuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTs7QUFHRjtFQUNFO0VBQ0E7O0FBR0Y7RUFDRTs7O0FBS0Y7RUFDRTtFQUNBOzs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7O0FBR0Y7RUFDRTs7QUFJRjtFQUNFO0VBQ0E7RUFDQSIsInNvdXJjZXNDb250ZW50IjpbIi5leHBhbmQtYnV0dG9uIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbG9hdDogcmlnaHQ7XG4gIHBhZGRpbmc6IDAuNHJlbTtcbiAgbWFyZ2luOiAwLjNyZW07XG4gIHJpZ2h0OiAwOyAvLyBOT1RFOiByaWdodCB3aWxsIGJlIHNldCBpbiBtZXJtYWlkLmlubGluZS50c1xuICBjb2xvcjogdmFyKC0tZ3JheSk7XG4gIGJvcmRlci1jb2xvcjogdmFyKC0tZGFyayk7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWxpZ2h0KTtcbiAgYm9yZGVyOiAxcHggc29saWQ7XG4gIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgb3BhY2l0eTogMDtcbiAgdHJhbnNpdGlvbjogMC4ycztcblxuICAmID4gc3ZnIHtcbiAgICBmaWxsOiB2YXIoLS1saWdodCk7XG4gICAgZmlsdGVyOiBjb250cmFzdCgwLjMpO1xuICB9XG5cbiAgJjpob3ZlciB7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIGJvcmRlci1jb2xvcjogdmFyKC0tc2Vjb25kYXJ5KTtcbiAgfVxuXG4gICY6Zm9jdXMge1xuICAgIG91dGxpbmU6IDA7XG4gIH1cbn1cblxucHJlIHtcbiAgJjpob3ZlciA+IC5leHBhbmQtYnV0dG9uIHtcbiAgICBvcGFjaXR5OiAxO1xuICAgIHRyYW5zaXRpb246IDAuMnM7XG4gIH1cbn1cblxuI21lcm1haWQtY29udGFpbmVyIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICBjb250YWluOiBsYXlvdXQ7XG4gIHotaW5kZXg6IDk5OTtcbiAgbGVmdDogMDtcbiAgdG9wOiAwO1xuICB3aWR0aDogMTAwdnc7XG4gIGhlaWdodDogMTAwdmg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGRpc3BsYXk6IG5vbmU7XG4gIGJhY2tkcm9wLWZpbHRlcjogYmx1cig0cHgpO1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuNSk7XG5cbiAgJi5hY3RpdmUge1xuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgfVxuXG4gICYgPiAjbWVybWFpZC1zcGFjZSB7XG4gICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1saWdodCk7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDUwJTtcbiAgICBsZWZ0OiA1MCU7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gICAgaGVpZ2h0OiA4MHZoO1xuICAgIHdpZHRoOiA4MHZ3O1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG5cbiAgICAmID4gLm1lcm1haWQtY29udGVudCB7XG4gICAgICBwYWRkaW5nOiAycmVtO1xuICAgICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgICAgdHJhbnNmb3JtLW9yaWdpbjogMCAwO1xuICAgICAgdHJhbnNpdGlvbjogdHJhbnNmb3JtIDAuMXMgZWFzZTtcbiAgICAgIG92ZXJmbG93OiB2aXNpYmxlO1xuICAgICAgbWluLWhlaWdodDogMjAwcHg7XG4gICAgICBtaW4td2lkdGg6IDIwMHB4O1xuXG4gICAgICBwcmUge1xuICAgICAgICBtYXJnaW46IDA7XG4gICAgICAgIGJvcmRlcjogbm9uZTtcbiAgICAgIH1cblxuICAgICAgc3ZnIHtcbiAgICAgICAgbWF4LXdpZHRoOiBub25lO1xuICAgICAgICBoZWlnaHQ6IGF1dG87XG4gICAgICB9XG4gICAgfVxuXG4gICAgJiA+IC5tZXJtYWlkLWNvbnRyb2xzIHtcbiAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgIGJvdHRvbTogMjBweDtcbiAgICAgIHJpZ2h0OiAyMHB4O1xuICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgIGdhcDogOHB4O1xuICAgICAgcGFkZGluZzogOHB4O1xuICAgICAgYmFja2dyb3VuZDogdmFyKC0tbGlnaHQpO1xuICAgICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICAgIGJvcmRlci1yYWRpdXM6IDZweDtcbiAgICAgIGJveC1zaGFkb3c6IDAgMnB4IDRweCByZ2JhKDAsIDAsIDAsIDAuMSk7XG4gICAgICB6LWluZGV4OiAyO1xuXG4gICAgICAubWVybWFpZC1jb250cm9sLWJ1dHRvbiB7XG4gICAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAgICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICAgICAgICB3aWR0aDogMzJweDtcbiAgICAgICAgaGVpZ2h0OiAzMnB4O1xuICAgICAgICBwYWRkaW5nOiAwO1xuICAgICAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodCk7XG4gICAgICAgIGNvbG9yOiB2YXIoLS1kYXJrKTtcbiAgICAgICAgYm9yZGVyLXJhZGl1czogNHB4O1xuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgICAgIGZvbnQtc2l6ZTogMTZweDtcbiAgICAgICAgZm9udC1mYW1pbHk6IHZhcigtLWJvZHlGb250KTtcbiAgICAgICAgdHJhbnNpdGlvbjogYWxsIDAuMnMgZWFzZTtcblxuICAgICAgICAmOmhvdmVyIHtcbiAgICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICB9XG5cbiAgICAgICAgJjphY3RpdmUge1xuICAgICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWSgxcHgpO1xuICAgICAgICB9XG5cbiAgICAgICAgLy8gU3R5bGUgdGhlIHJlc2V0IGJ1dHRvbiBkaWZmZXJlbnRseVxuICAgICAgICAmOm50aC1jaGlsZCgyKSB7XG4gICAgICAgICAgd2lkdGg6IGF1dG87XG4gICAgICAgICAgcGFkZGluZzogMCAxMnB4O1xuICAgICAgICAgIGZvbnQtc2l6ZTogMTRweDtcbiAgICAgICAgfVxuICAgICAgfVxuICAgIH1cbiAgfVxufVxuIl19 */</style><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" spa-preserve/><script src="../prescript.be9697b4.js" type="application/javascript" spa-preserve></script><script type="application/javascript" spa-preserve>const fetchData = fetch("../static/contentIndex.73890e1e.json").then(data => data.json())</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://oxzo.github.io/brains-site/index.xml"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://oxzo.github.io/brains-site/ai/clause-loop-og-image.webp"/><meta property="og:image:url" content="https://oxzo.github.io/brains-site/ai/clause-loop-og-image.webp"/><meta name="twitter:image" content="https://oxzo.github.io/brains-site/ai/clause-loop-og-image.webp"/><meta property="og:image:type" content="image/.webp"/></head><body data-slug="ai/clause-loop"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">synapse</a></h2><div class="spacer mobile-only"></div><div style="display: flex; flex-direction: row; flex-wrap: nowrap; gap: 1rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button"><p>Search</p><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Search for something" placeholder="Search for something"/><div class="search-layout" data-preview="true"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Dark mode"><title>Dark mode</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Light mode"><title>Light mode</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div></div><div class="explorer" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a,b)=>!a.isFolder&amp;&amp;!b.isFolder||a.isFolder&amp;&amp;b.isFolder?a.displayName.localeCompare(b.displayName,void 0,{numeric:!0,sensitivity:\&quot;base\&quot;}):!a.isFolder&amp;&amp;b.isFolder?1:-1&quot;,&quot;filterFn&quot;:&quot;node=>node.slugSegment!==\&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;node=>node&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-content"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>Explorer</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="explorer-content" aria-expanded="false"><ul class="explorer-ul overflow" id="0x8mfk"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#"></a></li></template><template id="template-folder"><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../ai/">AI — Index</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>Clause Loop</a></div></nav><h1 class="article-title">Clause Loop</h1><p show-comma="true" class="content-meta"><time datetime="2026-09-05T00:00:00.000Z">Sep 05, 2026</time><span>59 min read</span></p><ul class="tags"><li><a href="../tags/ai" class="internal tag-link">ai</a></li><li><a href="../tags/dev-workflow" class="internal tag-link">dev-workflow</a></li><li><a href="../tags/spec" class="internal tag-link">spec</a></li><li><a href="../tags/verification" class="internal tag-link">verification</a></li><li><a href="../tags/publish" class="internal tag-link">publish</a></li></ul></div></div><article class="popover-hint"><h1 id="clause-loop">Clause Loop<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#clause-loop" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>A development method for <strong>one person and one AI agent</strong> — plus the fresh contexts that agent dispatches for reader checks and spot-checks — for any work whose output can be checked: code on a greenfield or a brownfield, a feature on a live system, a throwaway prototype, a specification, a document. You say what should be true next and what would prove it false; the agent builds the smallest thing that could settle it inside a declared envelope; you decide, from a short packet, what deserves to become a <em>clause</em> — a requirement pinned to a check that has been shown to fail for the right reason. The spec is a byproduct of building, not a prerequisite, and it grows one chosen clause at a time.</p>
+<p>This note is the normative description of the method: where it and its two parent notes disagree, this note wins, and the parents link here rather than restate. The engine it runs is <a href="../ai/accretive-spec-development" class="internal" data-slug="ai/accretive-spec-development">accretive-spec-development</a>; the reasoning for why the requirement gates some builds and the check gates others, and how the loop and spec-driven development run as one system, is <a href="../ai/spec-driven-development-operating-model" class="internal" data-slug="ai/spec-driven-development-operating-model">spec-driven-development-operating-model</a>. Read those for the argument; read this to do the work.</p>
+<h2 id="the-idea">The idea<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-idea" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>The problem it answers.</strong> Working with a coding agent, there are two familiar ways to keep the work honest and both cost something. Spec-first methods (Spec Kit, Kiro, OpenSpec and their kin) derive the code from requirements, design and tasks agreed first, a document per phase. That buys agreement before building, at the price of committing to a reading of the problem before anything has run. Their specs do evolve — OpenSpec’s accumulate change by change — so what separates this method from them is the direction of derivation and the grain, not whether the spec grows. Building with no spec at all is fast, but nothing stops the agent from quietly solving a slightly different problem than the one you asked for — and the tests it writes to check its own work only ever encode its own reading of your intent.</p>
+<p><strong>The bet.</strong> Sit between the two. State an intent plus a falsifier, build the smallest probe that could falsify it, confront the running result, harvest clauses from what held. Exploration stays fast because you react to a running artifact, not a document; the spec you end with can be trusted because every clause in it is pinned to a check that has failed on demand for a named reason. Once a domain of the spec has been exercised and its clauses all chosen, freeze it — and a frozen domain is a contract other agents and services build against, which is where spec-first practice takes over. The loop is the on-ramp to a contract, not a replacement for one. Its distinctive value is turning explored behaviour into an explicitly chosen, evidence-linked contract — not the number of documents or gates it accumulates.</p>
+<p><strong>The pieces that make it hold.</strong> Each is a rule below; here is why it exists.</p>
+<ul>
+<li><strong>A clause is a SHALL sentence, a WHEN/THEN scenario, and a pin.</strong> The pin carries a stable id, the check, and the <em>evidence</em> — the mutant the check was watched failing against, with the assertion that caught it named. A check that cannot fail is not a check; a check that fails for an unrelated reason proves nothing; and a requirement with no check drifts from the code the day after it is written. Nothing enters the spec without all three.</li>
+<li><strong>Independence comes from the human, at decision boundaries.</strong> The agent writes the probe, the check and the proposed clause, so left alone every check would encode the agent’s interpretation of the intent. The human <em>owns</em> the falsifier — writes it, or substantively revises the agent’s candidate counterexamples — at every user-visible outcome and every consequential decision; mechanical tasks inherit it. The human decides which harvested clauses are wanted, and chooses and reads the spot-check of the evidence while a trusted runner executes it. Ownership of intent is not the same as typing every line, and the method asks for the first.</li>
+<li><strong>Observed is not wanted.</strong> Harvest records what the artifact does; promotion records what you want. The two are separate acts so that accidental behaviour — especially on brownfield code, where the first harvest captures everything that happens to be true — never becomes contract by default. Turning a clause down is three decisions, not one: whether it is contract, whether the behaviour stays in the artifact, and whether its check stays as characterization coverage.</li>
+<li><strong>Wanted is not verified.</strong> Acceptance is a human decision and changes rarely; verification is what the last run says and changes every run. A wanted clause whose check fails is still wanted — it is wanted and failing, and the failure is a stop, not a change of mind. Keeping the two axes apart is what lets a stale reader check, a flaky dispatch, or a known implementation debt be named without rewriting what was agreed.</li>
+<li><strong>Permission and impact gate the build, not file layout.</strong> Every probe declares an execution envelope. Hard gates — production writes, destructive operations, credentials, externally visible actions, anything on the irreversibility list, edits to a frozen verification surface — stop for permission whatever the path. Planning heuristics — uncertainty, rework, growth, cross-domain coordination, a contract change — send work to a proposal before the expensive probe. Both stay active inside an approved proposal, and what the agent actually changed is compared to what it declared.</li>
+<li><strong>Freeze is a mechanism, not a label.</strong> A domain whose clauses are all wanted and all currently verified gets a manifest naming its verification surface, and a guard fails the build on an unapproved change to that surface or on a required check that did not run. This is the guarantee, stated at its honest size: <strong>the guard rejects missing or failing required checks and unapproved changes to the declared verification surface. It does not prove that the checks express the requirement, or your intent.</strong> Drift between the spec and your intent is bounded by the human-owned falsifier, the locked checks and the evidence rule with its spot-check; it is not prevented.</li>
+<li><strong>Consolidate, or the spec becomes a test index.</strong> Harvest order is a changelog. Every ten or so archives the domain spec is rewritten by concept, scanned for clauses that contradict each other at intent level while both pass, and its expired re-check dates and exceptions listed.</li>
+</ul>
+<p><strong>Why one method for code and prose.</strong> A clause is the same object whether the artifact is a service or a quickstart; only the <em>oracle</em> changes — what runs the check and what counts as evidence it can fail. For code that is a test. For a document it is a <em>reader</em> check: a fresh context, given the artifact and nothing else, must complete a task from it, and the mutant is deleting everything that carries the clause’s content and watching the reader fail. The generalisation strains at the grammar — <code>SHALL</code> is borrowed from requirements engineering and sits stiffly on prose. What carries over is the scenario and the pin, so if the SHALL sentence reads as ceremony for a document, keep the scenario and drop the keyword.</p>
+<p><strong>Where it comes from.</strong> The change-folder skeleton follows the shape of OpenSpec-style tools; the requirement-to-check link follows the shape Kiro-style tools build, run in the opposite direction. The <code>reader</code> and <code>consistency</code> oracles, the mutant-by-deletion rule for documents, the spec rule and the profile table generalise the accretive note’s architecture mapping (spike, fitness function, scenario walk) to non-code work; they are <strong>this vault’s own design, precedent check deferred</strong>. The 2026-09-05 revision — the envelope and hard gates, the acceptance-versus-verification split, the three-decision rejection, the evidence record, the four-action surface and the contract guard’s approval boundary — came from an external design review of the previous version, applied in one pass and then corrected against three fresh-context reviews of the result.</p>
+<p><strong>It has not been run end to end.</strong> The first rule of the method is that the human owns the falsifier, so here is this note’s own: the method is wrong if, in the first month of real use, hard gates or heuristics fire on most probes so nothing is ever harvested; if a task you later judge consequential ran on an inherited falsifier because the agent did not flag it; if <code>DECISIONS.log</code> goes unwritten after a few sessions; or if the pilot in <em>What to test next</em> finds, by its independent read, an intent substitution that the loop’s own packet did not surface. The two worked examples below are constructed illustrations — the paths, dates and log lines in them are invented to show the shape, not records of anything that happened.</p>
+<h2 id="vocabulary">Vocabulary<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#vocabulary" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Six words carry a loop. About twenty more carry setup, most of them at Ground, once; they arrive as you meet them.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Day one</th><th>Meaning</th></tr></thead><tbody><tr><td><strong>intent</strong></td><td>One sentence of what should be true next.</td></tr><tr><td><strong>falsifier</strong></td><td>One line, owned by the human: the observation that would prove the intent false. Written by you, or an agent candidate you substantively revised; the origin is recorded.</td></tr><tr><td><strong>envelope</strong></td><td>What a probe may touch: allowed writes, allowed external actions, data and environment, contracts potentially affected, budget in minutes and loops, rollback or disposal.</td></tr><tr><td><strong>probe</strong></td><td>The smallest build that could falsify the intent, plus its check, ending with a <strong>not-exercised list</strong> of what it does not cover.</td></tr><tr><td><strong>clause</strong></td><td>A SHALL sentence plus a WHEN/THEN scenario plus a filled <code>Pin:</code> line with a stable id.</td></tr><tr><td><strong>packet</strong></td><td>The short record the agent hands you at Decide: what was asked, what ran, what is untested, what is proposed, the evidence and relevant failures, actual-versus-declared, the log lines written since the last packet, and the decision needed.</td></tr></tbody></table></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Later</th><th>Meaning</th></tr></thead><tbody><tr><td><strong>artifact</strong></td><td>Whatever the work produces: the codebase, a prototype, <code>specs/&lt;domain>/spec.md</code> itself, a document. Named in Ground.</td></tr><tr><td><strong>domain</strong></td><td>The unit a spec file and a manifest cover; one folder under <code>specs/</code>. Both parent notes call the same thing a <em>region</em>.</td></tr><tr><td><strong>Ground</strong></td><td><code>GROUND.md</code>: profile, context, constraints, preferences, irreversibility list, domain table, how checks run, envelope defaults, the approval boundary, the contract guard’s behaviour. A screen or less.</td></tr><tr><td><strong>profile</strong></td><td>One line in Ground naming the kind of work, which sets the usual oracles and what the rules relax.</td></tr><tr><td><strong>hard gate / heuristic</strong></td><td>A hard gate stops for permission before an action whatever the path; a heuristic sends work to a proposal. Both read the envelope.</td></tr><tr><td><strong>change</strong></td><td>A folder under <code>changes/</code> holding one intent’s proposal, loop log, decisions and delta spec; archived when done.</td></tr><tr><td><strong>loop</strong></td><td>One probe-confront pass inside a change, logged with predicted and observed outcome, evidence, actual-versus-declared writes, and minutes.</td></tr><tr><td><strong>pin</strong></td><td>The line under a scenario carrying the clause’s id, acceptance, oracle, check id, birth change, and evidence. The one canonical record for now; the manifest is written from it.</td></tr><tr><td><strong>oracle</strong></td><td>What runs a check: <code>test</code>, <code>property</code>, <code>guard</code>, <code>consistency</code>, <code>reader</code>, <code>walk</code>, <code>manual</code>.</td></tr><tr><td><strong>evidence / mutant</strong></td><td>For a re-runnable check: the four-step record — baseline passes, mutant applied to a scratch copy, the named assertion fails, restore passes. <code>mutant=</code> names the sabotage; the loop log names the assertion.</td></tr><tr><td><strong>reader check</strong></td><td>A file naming a question (locate or complete), a task, a closed list of what a fresh context is given, what is withheld, whether it may execute, a repeat policy, a pass criterion, the mutant, and a Runs table.</td></tr><tr><td><strong>walk check</strong></td><td>A dated hand procedure through the artifact; no mutant, so the pin carries the date of the last walk.</td></tr><tr><td><strong>acceptance</strong></td><td>The human axis: <code>observed</code> (harvested, provisional), <code>wanted</code> (chosen, check locked), <code>retired</code> (withdrawn, evidence kept in the archive).</td></tr><tr><td><strong>verification</strong></td><td>The run axis, read from the latest recorded run rather than kept as a pin field: <code>passing</code>, <code>failing</code>, <code>stale</code>, <code>unknown</code>.</td></tr><tr><td><strong>exception</strong></td><td>A logged, expiring excuse for a wanted clause that is failing or unverifiable while its domain is harvesting: owner, scope, expiry. None may be open at freeze and none exist under contract. Replaces the old <code>debt</code> state.</td></tr><tr><td><strong>delta</strong></td><td>A change’s <code>specs/&lt;domain>/spec.md</code>: ADDED, MODIFIED and RETIRED requirements, merged into the domain spec at Close.</td></tr><tr><td><strong>guarded invariant</strong></td><td>Tier two: a requirement with no cheap check, carried with an owner and a re-check date instead of a drift guarantee.</td></tr><tr><td><strong>verification surface</strong></td><td>The files whose change could weaken a domain’s checks: the check files, the fixtures and helpers they use, runner and discovery config, the CI job, the spec file, the manifest, <code>GROUND.md</code>, and for a reader or walk id the artifact section the check covers.</td></tr><tr><td><strong>freeze / manifest / under contract</strong></td><td>Freeze writes a manifest from a domain’s pins — clause ids, check ids, the surface, the export, the approval — and the domain is then under contract, guarded.</td></tr><tr><td><strong>contract guard</strong></td><td>Two halves. The <em>surface guard</em> fails a diff that touches the surface without a <code>permit</code> line, while the boundary itself refuses the merge without your review. The <em>execution guard</em> fails a run in which a manifest-listed check did not execute and pass.</td></tr><tr><td><strong>approval boundary</strong></td><td>Named in Ground: where a human decision is recorded in a way the agent cannot impersonate — on GitHub a protected-branch review on the exact commit or an environment approval, elsewhere your forge’s equivalent, or a chat decision a separate controller records, which is a design slot, not built here. It holds only if the agent commits under its own identity, not yours, and admins cannot bypass the protection.</td></tr><tr><td><strong><code>DECISIONS.log</code></strong></td><td>Append-only, one line per decision or close: <code>reject</code> · <code>retire</code> · <code>permit</code> · <code>freeze</code> · <code>unfreeze</code> · <code>exception</code> · <code>amend</code> · <code>archive</code> · <code>consolidate</code>. Written by the agent from your packet reply, which it quotes verbatim in the proposal; you do not edit it, and the next packet echoes what it wrote.</td></tr><tr><td><strong>consolidate</strong></td><td>The periodic rewrite of a domain spec by concept, with a conflict scan, re-pointed pins, and the list of expired dates and exceptions.</td></tr></tbody></table></div>
+<h2 id="the-four-actions">The four actions<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-four-actions" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Four things you do, in a loop: <strong>Start</strong>, <strong>Probe</strong>, <strong>Decide</strong>, <strong>Close</strong>. Everything else — grounding, proposals, freezing, consolidating — is machinery the agent runs when one of the four asks for it, listed under <em>Operations</em> in the reference. The action names are steps you write in a prompt, not installed skills.</p>
+<ol>
+<li><strong>Start.</strong> You give one sentence of intent. The agent copies <code>changes/_template/</code> to <code>changes/&lt;name>/</code>, copies its <code>specs/_domain/</code> once per domain the intent touches, renamed, writes the intent into <code>proposal.md</code>, proposes two or three candidate counterexamples marked as its own, and drafts the envelope. You write the falsifier — from scratch or by substantively revising a candidate — and confirm or tighten the envelope. Probe refuses to run while the falsifier’s origin is missing or reads <code>agent, unrevised</code>.</li>
+<li><strong>Probe.</strong> The agent checks the envelope against the hard gates and the heuristics. A hard gate stops for your permission on that specific action; a heuristic hands the change to a proposal. Otherwise it builds the smallest thing that could falsify the intent, together with the check, runs it against a prediction of pass and fail drafted from your falsifier, records what it actually wrote and did against what the envelope declared, and ends with the not-exercised list. For each check it earns the evidence: baseline passes, mutant on a scratch copy, the named assertion goes red, restore passes. A crash or compile error is logged as an attempt, not as evidence. It logs the loop with minutes.</li>
+<li><strong>Decide.</strong> The agent hands you a packet: what you asked for, what ran and what happened, what remains untested, the clauses it proposes with their evidence and any relevant failures, the actual-versus-declared envelope, the log lines written since the last packet, and the decisions it needs. You answer in chat. Per clause: <strong>contract</strong> — wanted or not; if not, whether the <strong>behaviour stays</strong> in the artifact and whether the <strong>check stays</strong> as characterization. On a brownfield first harvest you may answer once for the batch — not contract, behaviour kept, checks kept as characterization — and name only the exceptions; the default is yours because you said it. Plus: loop again on a gap the not-exercised list named, escalate, or permit a gated action. The agent writes the pins and the log lines from your answer, quoting the answer verbatim in the proposal’s Decisions section, and you spot-check one piece of evidence per change by choosing which and reading a trusted runner’s re-application of it. Cap about five loops per intent; the cap is a signal the intent should be split or escalated, not extended.</li>
+<li><strong>Close.</strong> The agent runs every check, reports verification per clause, lists any clause you never ruled on and refuses to close until you have — silence is not a decision — gates on every scenario or invariant outside RETIRED carrying a <code>wanted</code> pin with evidence, compares the change’s total writes and actions to the envelope, reads the intent against the promoted clauses for anything quietly substituted, merges the delta into <code>specs/&lt;domain>/spec.md</code>, writes the <code>archive</code> line, and moves the folder to <code>changes/archive/&lt;date>-&lt;name>/</code>. If the domain was under contract, the manifest is rewritten and the surface change goes through the approval boundary.</li>
+</ol>
+<p>When a heuristic fires at Probe, the requirement gates instead: the agent writes a proposal and design, they are red-teamed, you agree the delta spec <em>before</em> the build, and each task then runs Probe and Decide inside the change folder. Tasks inherit the change’s falsifier unless a task introduces a new assumption, trade-off or externally visible behaviour, in which case it gets its own decision; the agent flags which tasks it thinks qualify, and the flag is its judgement, which you can overrule either way. Hard gates and the envelope stay live inside the proposal; exceeding the envelope pauses for an amendment, not a second proposal. Worked example A shows both paths on the same codebase; example B shows a document.</p>
+<h2 id="getting-started">Getting started<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#getting-started" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ol>
+<li><strong>Copy the kit.</strong> <code>cp -r templates/clause-loop &lt;repo>/clauses</code> — the kit lives at <code>templates/clause-loop/</code> in this vault and carries its own README with the target tree. Everything the method’s own bookkeeping writes lives under that one root; the artifact and its checks stay wherever the project keeps them.</li>
+<li><strong>Ground the project.</strong> Fill <code>GROUND.md</code>: the profile (one of <code>greenfield-code</code>, <code>brownfield-code</code>, <code>feature</code>, <code>prototype</code>, <code>specification</code>, <code>documentation</code>) and, for the last three, the artifact — a folder or a single file; two or three sentences of context; constraints, each with a check id, a manual procedure, or an <code>exception</code> reference, which <code>ground</code> writes into their domain specs once step 3 has created them; preferences; the irreversibility list; the domain table; the <strong>Checks</strong> section — how to run all checks, how to run one, how the runner reports which check ids executed, the command that dispatches a reader check, how a walk is performed, the id form per oracle, and the evidence rule; the <strong>Envelope defaults</strong> — which environments a probe may touch without permission; and the <strong>Approval boundary</strong> — where your decisions on gated actions and surface changes are recorded so the agent cannot write them itself. Keep it to a screen: past that you are sneaking upfront design back in.</li>
+<li><strong>Create the domains.</strong> Copy <code>specs/_domain/spec.md</code> once per domain Ground names, stripping the placeholder requirement and invariant and setting <code>Status: open</code> — then let <code>ground</code> write each constraint into its domain as a wanted clause with <code>born=ground</code>, which moves that domain to harvesting — and leave <code>manifest</code> where it is — it is the template freeze fills, not a file an open domain owns. A file that belongs to no domain leaves the cross-domain heuristic unreadable, and Probe refuses an envelope it cannot read; if two people would draw the boundary differently, settle it in Ground before the first intent.</li>
+<li><strong>Wire the contract guard.</strong> The kit ships no guard script; you write one for your CI from the behaviour Ground describes, and until it exists rule 6 is a convention like the others. Both halves run in CI on the protected branch. The surface guard reads each frozen domain’s manifest <em>as it stands on the protected branch</em>, so removing an entry is itself a surface change, and fails when a listed surface file changes in a diff that adds no <code>permit</code> line naming it; the boundary — on GitHub, branch protection with required code-owner review on the surface paths — is what refuses the merge without your review. The execution guard compares the manifest’s check ids to the ids the runner reports as executed and passed, and fails on any that are missing, skipped or failing. Define the guard where the candidate diff cannot reach it — a workflow the forge requires from outside the repository, where that exists — because a job defined in the candidate tree can be skipped, and on GitHub a skipped required job reports success (checked 2026-09-05 against GitHub’s documentation). If it must live in the repository, its workflow file is the one surface file the guard cannot protect from a skip, and your review of any change to it is the only enforcer. A pre-push hook is advisory: the agent can edit or skip it. Describe the behaviour in Ground rather than the hook’s path. Outside a version-controlled repo — a standard drafted in a shared drive, a report — there is no diff, so the guard has no enforcer and the <code>consistency</code> oracle usually has no runner; what survives is the pin, the reader check and the log. Say so in Ground rather than pretending the guard exists.</li>
+<li><strong>Pick the first intent by profile.</strong> On brownfield code it is <em>harvest what is already true</em> — everything lands <code>observed</code>, so nothing accidental becomes contract. On greenfield it is <em>the skeleton runs end to end</em>. On a prototype it is the riskiest assumption, written as a falsifier. On a documentation or specification project the document, not the code, is what the clauses are about; the first intent is <em>a fresh reader can do X from this alone</em>. The profile table in the reference names the usual oracles for each.</li>
+<li><strong>Run changes.</strong> Copy <code>changes/_template/</code> per change and follow the four actions. Once Probe reports no heuristic fired, delete <code>design.md</code>, <code>tasks.md</code> and the proposal’s proposal-path sections — they are requirement-first files, and an empty one archived beside a check-gated change is noise.</li>
+<li><strong>Run until a domain qualifies for freeze.</strong> On code, the bet is that the first freeze is when the method starts paying: before it, this is bookkeeping; after it, the contract guard holds. On a prototype, which never freezes, or a document, which rarely does, the payoff is the pin itself: a claim about the artifact that a fresh reader has been shown to fail without. Walk and manual clauses get a scheduled re-check instead, an unmanifested reader clause is re-dispatched whenever the section it covers changes, and a mutant shows a check is not vacuous, not that it is adequate.</li>
+</ol>
+<p>Turn the operations that earn it into skills after a real run, not before. If the method is too heavy, keep the pin, the evidence rule and the manifest and relax everything else first; the bet is that the likeliest failure is not a bookkeeping error but dropping the method.</p>
+<h2 id="reference">Reference<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#reference" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="the-seven-rules">The seven rules<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-seven-rules" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Each rule names what it prevents and where it is checked. Only rule 6 is machine-enforced. The rest are conventions the agent follows because the prompt says so — “Probe refuses” means the agent is instructed to refuse, and nothing detects an agent that does not — which is why the loop log, the packet and the actual-versus-declared comparison are mandatory: they are where a human can see that a step was taken.</p>
+<ol>
+<li><strong>The human owns the falsifier at every decision boundary.</strong> One line in <code>proposal.md</code>, before the agent builds, with its origin recorded: <code>human</code>, or <code>agent, revised</code> when you substantively changed a candidate the agent proposed. An unrevised candidate does not count, and Probe refuses while the origin is missing or unrevised. The boundaries are the change’s intent — a user-visible outcome — and any task inside a proposal that introduces a new assumption, trade-off or externally visible behaviour; every other task inherits the change’s falsifier and says so. The agent flags which tasks it thinks cross that line; the flag is its judgement, and you may overrule it either way. The agent proposes candidate counterexamples first so you are checking for omissions rather than composing from nothing; a narrow falsifier leaves the same interpretation gap an agent’s would, so the candidates are there to widen yours. Prevents the agent authoring both the intent and the test of it. Checked at Probe.</li>
+<li><strong>A clause is a SHALL plus a scenario plus a pin with evidence.</strong> The <code>Pin:</code> line carries a stable <code>id=</code>, and its evidence field must be filled: <code>mutant=</code> for every oracle that re-runs without a person walking it (<code>test</code>, <code>property</code>, <code>guard</code>, <code>consistency</code>, <code>reader</code>), <code>last=</code> for a walk, <code>owner=</code> and <code>next=</code> for a manual check. <code>mutant=</code> names something that happened — the four-step record in <em>Evidence</em> below, with the assertion that caught it named in the loop log. Anything less is a note, not a clause. A clause you already mean to reject earns none of this; only a clause you promote needs a pin. The agent earns the evidence and reports it, so you are trusting its report on the one piece of evidence every pin rests on: spot-check one per change by choosing which mutant and reading a trusted runner’s re-application, or <code>mutant=</code> decays into a slug. Checked at Decide.</li>
+<li><strong>Acceptance is yours; verification is the run’s.</strong> Clauses arrive <code>observed</code>, with <code>mutant=pending</code> until you promote them; only you flip one to <code>wanted</code>, and only you <code>retire</code> one. A wanted clause’s check is locked — the agent may change the artifact but not that check — and the lock is a rule the agent follows until freeze makes it machine-enforced. Turning a harvested clause down deletes its block from the delta — the <code>reject</code> line is its record — and is three decisions, recorded on that line: it is not contract; whether the behaviour stays in the artifact or is removed; whether its check stays as characterization coverage or is deleted. “Not promised” does not mean “not worth testing”: a brownfield characterization test may protect callers who depend on the accident, guard a regression while a migration is planned, or cover behaviour a wanted clause shares. Delete a check only when its purpose is obsolete. A kept characterization check is written in the loop that observed the behaviour, so the <code>reject</code> line can name it, and carries a comment with the clause id and the reject date. A <code>reject</code> whose <code>ref</code> is a change name records a deliberate omission from the artifact, not a clause, and carries no decisions. Close refuses while any clause is still <code>observed</code>, so accidental behaviour never becomes contract by default and never leaves by default either: you rule on it, in the packet. Verification — <code>passing</code>, <code>failing</code>, <code>stale</code>, <code>unknown</code> — is not a pin field; it is read off the latest recorded run, and a wanted clause that is failing is a stop until the artifact is fixed, the clause is revised by a new decision, or — while the domain is harvesting — an <code>exception</code> with owner, scope and expiry is logged. Prevents brownfield habits and agent guesses being promoted silently, and prevents a failing check being read as a change of mind. Checked at Decide and Close; the prototype profile is the one exception on promotion.</li>
+<li><strong>The envelope gates the build: hard gates stop, heuristics escalate, and actual is compared to declared.</strong> Every probe declares an envelope before building. <strong>Hard gates</strong> read it against Ground and stop for your permission on that specific action, on either path, recorded as a <code>permit</code> line with an approval reference: a write to production or any shared environment; a destructive operation — delete, drop, migrate, overwrite; a credential or secret; an externally visible action — send, publish, pay, deploy; any item on the irreversibility list; any edit to a frozen domain’s verification surface. <strong>Heuristics</strong> are judged, not computed, and send the change to a proposal: uncertainty the agent names about the approach; rework — two <code>reject</code> lines naming a clause of this domain across the last three changes that touched it, or a wanted clause currently failing; growth — the envelope’s minute budget exceeds the summed minutes of the project’s last three building loops, read from the loop logs of open and archived changes, where a building loop is one that changed the artifact, and it cannot fire until three exist; cross-domain coordination — the intent spans two or more domains and at least one is under contract; contract change — the intent would modify or retire a wanted clause in a domain under contract, which is where spec-first practice takes over. Inside an approved proposal the heuristics are not re-evaluated, but the hard gates and the envelope stay live: exceeding the envelope pauses for an <code>amend</code> decision, not a second proposal. At every loop and at Close the agent lists what it actually wrote and did against what it declared, because a rule that reads only what the agent says it will do cannot see undeclared work. Prevents an irreversible action riding on a small diff, and an unrelated test added to a frozen file being treated as a design question. Checked at Probe and Close.</li>
+<li><strong>One spec file per domain; every change is a delta.</strong> <code>specs/&lt;domain>/spec.md</code> is the only spec; a change writes <code>changes/&lt;name>/specs/&lt;domain>/spec.md</code> and the merge at Close carries pins verbatim: ADDED blocks are appended under the domain’s Requirements — or, for an <code>### Invariant:</code> block, under its Guarded invariants — MODIFIED replaces the block of the same name, RETIRED removes it from the domain spec and keeps the block with its last pin in the archived delta, and the delta’s own headings do not survive. The pin is the canonical record: the manifest, the packet’s clause list and the consolidate report are written from the pins, never maintained as a second copy. Ground constraints, written by <code>ground</code> with <code>born=ground</code>, are the one entry that arrives without a delta. Prevents a second set of books. Checked at Close.</li>
+<li><strong>A frozen domain has a manifest and a contract guard.</strong> Freeze writes the manifest from the domain’s pins — clause id, check id, the verification surface, the contract-test export, the approval reference — and the guard’s two halves enforce it: the surface guard fails a change to any listed surface file that carries no <code>permit</code> line, reading the manifest from the protected branch; the execution guard fails a run in which any listed check id did not execute and pass. Authorization is the boundary Ground names — a review the agent cannot give itself, bound to the exact commit; the <code>permit</code> line is the record, and its <code>approval=</code> is a pointer for the reader, not a credential the guard verifies. A check changed under a permit re-earns its evidence before Close and its clause appears as MODIFIED in the delta. Reader and walk ids count, so freezing a document is expensive in a way freezing code is not: every edit to a section a reader check covers is a surface change. Freeze a document only once it is genuinely a published contract. Prevents check-tampering after the fact, including the indirect kinds — a fixture, a helper, discovery, a runner-level skip, the manifest, the requirement’s wording. Enforced by the guard you wire in Ground.</li>
+<li><strong>Every departure is a line in <code>DECISIONS.log</code>, written by the agent from your reply.</strong> Kinds: <code>reject</code> · <code>retire</code> · <code>permit</code> · <code>freeze</code> · <code>unfreeze</code> · <code>exception</code> · <code>amend</code> · <code>archive</code> · <code>consolidate</code>. You decide in chat on a packet; the agent records, quoting your reply verbatim in the proposal’s Decisions section. The log trusts that transcription — nothing else in the repository holds your words — so every packet echoes the lines written since the last one, and a mismatch is yours to catch there. Every ~10 archives, and at every freeze, consolidate rewrites the domain spec by concept rather than birth order, runs a clause-versus-clause conflict scan, re-points any <code>check=</code> the rewrite breaks — never an <code>id=</code> — and lists overdue <code>next=</code> and <code>last=</code> dates and expired exceptions. Without it the spec converges on a check index with prose labels.</li>
+</ol>
+<h3 id="evidence">Evidence<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#evidence" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>A pin’s <code>mutant=</code> is the one thing every clause rests on, so what counts is defined narrowly.</p>
+<p><strong>The record.</strong> For every re-runnable check, four steps on a scratch copy, logged in the loop entry:</p>
+<ol>
+<li><strong>Baseline.</strong> The unmodified artifact passes the check.</li>
+<li><strong>Mutant.</strong> A sabotage that introduces the specific behavioural violation the scenario forbids — the guard removed, the store moved before the validation, the sentence and the example line deleted.</li>
+<li><strong>Named failure.</strong> The check fails <em>at the assertion that carries the scenario’s THEN</em>, and the log names it. A THEN with two parts — “the request fails <em>and</em> nothing is stored” — needs an assertion for each, and a mutant that trips only the first leaves the second unproven; either add a second mutant or record the second part as unproven.</li>
+<li><strong>Restore.</strong> The scratch copy is discarded and the check passes again.</li>
+</ol>
+<p><strong>What does not count.</strong> A compile error, a missing dependency, a runner crash, a timeout, or a failure in a different check are logged as attempts with their class, never as evidence. A red result is not a mutant kill unless step 3 names the assertion.</p>
+<p><strong>A failing baseline.</strong> When the check fails before any mutant, that is the falsifier firing — not evidence and not an attempt. Log it as the loop’s observed outcome and start the record once the artifact passes.</p>
+<p><strong>The contrast twin.</strong> A scenario that forbids something — rejects, refuses, never — carries a companion scenario under the same requirement showing the accepted case, or “reject everything” satisfies the check. The twin has its own pin and its own mutant; one twin per requirement covers every forbidding scenario under it.</p>
+<p><strong>Strength by consequence.</strong> One targeted mutant per scenario is the baseline and is cheap. Where a clause sits on the irreversibility list or in a domain under contract, add what the consequence warrants: a mutation score over the check (<a href="../ai/mutation-testing-ai-generated-code" class="internal" data-slug="ai/mutation-testing-ai-generated-code">mutation-testing-ai-generated-code</a>), a <code>property</code> oracle, or a hidden test the agent has not seen. A mutant shows a check is not vacuous, not that it is adequate.</p>
+<p><strong>Spot-check.</strong> Once per change you choose one clause and a trusted runner — a CI job, a script, a second agent with no stake in the result — re-applies its mutant while you read the outcome. Independent selection and interpretation is what the spot-check buys; operating the terminal yourself is not required.</p>
+<h3 id="oracles">Oracles<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#oracles" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Seven types. What separates them is re-run cost and what counts as evidence the check <em>can</em> fail.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Oracle</th><th>Re-run cost</th><th>How it fails</th><th>Can-fail evidence</th><th><code>check=</code> points at</th></tr></thead><tbody><tr><td><code>test</code></td><td>free</td><td>an assertion fails</td><td><code>mutant=</code> — a one-line sabotage of the implementation, named assertion</td><td><code>&lt;path>::&lt;name></code></td></tr><tr><td><code>property</code></td><td>free</td><td>a generated input violates the invariant</td><td><code>mutant=</code></td><td><code>&lt;path>::&lt;name></code></td></tr><tr><td><code>guard</code></td><td>free</td><td>a lint rule, CI rule or structure scan rejects</td><td><code>mutant=</code></td><td><code>&lt;path>::&lt;name></code></td></tr><tr><td><code>consistency</code></td><td>free</td><td>the artifact disagrees with a source of truth — examples execute, links resolve, generated sections match, claims match their cited source</td><td><code>mutant=</code> — break the example or the claim the clause names</td><td><code>&lt;path>::&lt;name></code></td></tr><tr><td><code>reader</code></td><td>tokens per dispatch, times the repeat policy, plus one judgement</td><td>a fresh context cannot complete the task from the artifact alone</td><td><code>mutant=</code> — delete or invert the clause’s content and the reader must fail</td><td><code>checks/readers/&lt;name>.md</code></td></tr><tr><td><code>walk</code></td><td>attention</td><td>the scenario does not hold when walked by hand</td><td>none; the pin carries <code>last=&lt;date></code></td><td><code>checks/walks/&lt;name>.md</code></td></tr><tr><td><code>manual</code></td><td>attention</td><td>tier two: no cheap check exists</td><td>none; the pin carries <code>owner=</code> and <code>next=&lt;date></code></td><td>a procedure slug, or <code>checks/manual/&lt;name>.md</code></td></tr></tbody></table></div>
+<p>A <strong>reader check</strong> is a file naming a question, a task, a closed list of what the reader is given, what is withheld, whether the reader may run anything, a repeat policy, a pass criterion, the mutant, and a Runs table. Running it means dispatching a fresh context — an agent, or a person who has not seen the work — with the check file as the task and exactly the files it names, nothing else; every dispatch goes in the check’s Runs table. Six decisions determine whether the check can fail at all and what a pass means, so the file states them:</p>
+<ul>
+<li><strong>Which question.</strong> <code>locate</code>: can a reader find and interpret the required information from the artifact, with everything that answers the task another way withheld? <code>complete</code>: can a reader finish the real task under realistic conditions, with whatever a real reader would have? Withholding the source makes the <code>locate</code> mutant bite and distorts <code>complete</code>; the two are both legitimate and never share one pass label. A clause about the document pins to <code>locate</code>; a <code>complete</code> run is recorded beside it as a realism check.</li>
+<li><strong>What is withheld.</strong> A <code>locate</code> check on a document <em>about</em> a system has to withhold the system — including what the reader could reach but must not open, such as a source tree it has just cloned. Give the reader the quickstart <em>and</em> the source and the mutant proves nothing: with the line deleted, the reader reads the source and passes anyway.</li>
+<li><strong>Whether the reader may execute.</strong> A text-only reader and a reader with a machine can return opposite verdicts on the same document — the first sees a coherent narrative, the second hits the error. Name which this check is.</li>
+<li><strong>That the reader states blocking questions instead of guessing.</strong> A dispatched agent has nobody to ask, so left alone it invents a plausible value and reports success, and the oracle degrades into whether it bluffed convincingly.</li>
+<li><strong>Whose context it is.</strong> A fresh context from the same model family that drafted the artifact shares training data and fails in correlated ways (<a href="../ai/oracle-problem-verification" class="internal" data-slug="ai/oracle-problem-verification">oracle-problem-verification</a>); dispatch cross-family where the clause matters, as diversity, not as a guarantee of independence.</li>
+<li><strong>The repeat policy.</strong> The check is stochastic in a way <code>test</code> is not. Fix the count before dispatching — three is the kit’s default — and the rule: unanimous is the result; a majority with one dissent is the result marked <code>mixed</code>; anything less is <code>uncertain</code>, which cannot promote a clause. Every dispatch is recorded, so “re-dispatch a disagreement” cannot become “run until it passes”.</li>
+</ul>
+<p>The mutant removes <em>everything</em> that carries the clause’s content, not only the one sentence, and is applied to a scratch copy rather than the artifact. In the Runs table <code>mutant-fail</code> means the reader failed <em>under the mutant</em> — the check proving it can fail. Re-run whenever the section the check covers changes, not on every edit: at the default policy a pin costs nine dispatches — baseline, mutant and restore, three each — and each re-check costs three more. A reader completing a task does not establish that the document’s claims are true; a factual document keeps a separate <code>consistency</code> check against its sources for that.</p>
+<p>A <strong>walk check</strong> is a dated procedure: a stimulus, the response the artifact promises, a measure, and the steps you take through the artifact to see whether it holds. It has no mutant because it cannot be re-run for free; the pin carries the date of the last walk instead, and consolidate lists walks that have gone stale.</p>
+<h3 id="states">States<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#states" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>A clause has two axes. <strong>Acceptance</strong> is the human’s and lives in the pin: <code>observed</code> (harvested, provisional, dropped at Close unless promoted), <code>wanted</code> (chosen by you, check locked, eligible to freeze), <code>retired</code> (withdrawn by you with a <code>retire</code> line; the block and its last pin stay readable in the archived delta). <strong>Verification</strong> is the run’s and is not a pin field: <code>passing</code> (the latest recorded run passed and nothing the clause covers has changed since), <code>failing</code> (the latest run failed), <code>stale</code> (what the clause covers changed after the latest run — on free oracles a run clears it, on readers and walks a re-dispatch or re-walk does), <code>unknown</code> (no run recorded in this environment). For free oracles the run record is the runner’s output; for readers and walks it is the check file’s Runs table, written by whoever dispatched or walked — usually the agent — and trusted the way the log is, through the packet’s echo. Close reports verification per clause; under contract, <code>failing</code> fails the build.</p>
+<p>An <strong>exception</strong> is the third thing, logged separately and only while the domain is harvesting: a wanted clause that is failing or cannot currently be verified, excused by you with an owner, a scope and an expiry, so the clause stays wanted and the gap stays visible. A Ground constraint is the one clause that does not arrive through a delta: the <code>ground</code> operation writes it into its domain’s spec as a wanted clause with <code>born=ground</code> — evidence earned then if it has a check, a guarded invariant if it has none — and that domain is harvesting from that moment; one the artifact violates carries an open exception from day one. Consolidate lists expired exceptions, and an expired one counts as failing. Freeze requires none open, and under contract there are none: a failing check fails the build until the artifact is fixed or the clause is changed through a proposal, so the agent has no excuse path it can write for itself.</p>
+<p>A domain is <strong>open</strong> (no clauses), <strong>harvesting</strong> (clauses exist; checks may well run in CI, but no manifest guards them), or <strong>under contract</strong> (frozen: every clause wanted and verified, a manifest written from the pins, a contract test exported to consumers). The state is the <code>Status:</code> line at the top of <code>specs/&lt;domain>/spec.md</code>: <code>open</code> when the file is copied from the template; a Ground constraint written into it, or the first Close that touches it whether or not that Close promoted anything, moves it to harvesting; freeze and unfreeze move the last edge. Harvesting is a legitimate resting place — a domain with every clause wanted and no consumers to contract with stays there, and most documentation domains never leave it. A domain keeps its state while a proposal runs against it: a frozen domain stays frozen, its surface edits take permits, and it is re-frozen at Close. The full transition table is in <a href="../ai/spec-driven-development-operating-model" class="internal" data-slug="ai/spec-driven-development-operating-model">spec-driven-development-operating-model</a>.</p>
+<p>Retiring is not the same as failing. A failing clause’s check <em>fails</em>; a retired requirement’s check still passes, so retirement is deliberate — a <code>retire</code> line carrying the decisions on behaviour and check, at Close — or a dead clause survives as a green test.</p>
+<h3 id="the-contract-guard">The contract guard<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-contract-guard" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>What “under contract” means mechanically, and what it does not.</p>
+<p><strong>The surface.</strong> Freeze declares, per domain, the files whose change could weaken its checks: the check files; the fixtures, helpers and assertion utilities they import; runner configuration and test discovery; the CI job that runs the execution guard; <code>specs/&lt;domain>/spec.md</code>; the manifest itself; <code>GROUND.md</code>, whose irreversibility list, envelope defaults and approval boundary the hard gates read; and, for a reader or walk id, the artifact section the check covers. Before the first freeze, an <code>amend</code> to those three Ground sections is a packet decision you make, echoed back like any other. The manifest lists the surface explicitly, so the guard is a path check on a diff, not a heuristic.</p>
+<p><strong>The approval boundary.</strong> A change to the surface needs an approval the implementing agent cannot produce, bound to the exact candidate commit. Ground names which. On GitHub: a protected-branch review by you on that commit, with code owners on the surface paths and stale reviews dismissed on new pushes, or an environment approval; other forges have equivalents. A chat decision you post that a separate controller records with the commit is the headless shape — a design slot, not built here. Two preconditions make any of these hold, and the guarantee is void without them: the agent commits under its own identity, not yours, since an author cannot approve its own pull request and you could not approve one pushed under your account; and administrators cannot bypass the protection, which on GitHub is off by default and must be switched on (both checked 2026-09-05 against GitHub’s documentation). A permit for a gated <em>action</em> rather than a diff — a migration, a send — binds to the reviewed commit that adds the script or the decision reference the boundary provides. You never edit the log or the manifest. The <code>permit</code> line’s <code>approval=</code> field carries the reference; the line is the record, the boundary is the authorization, and the guard does not verify the string.</p>
+<p><strong>The execution guard.</strong> The CI job on the protected branch reads each frozen manifest <em>as it stands on the base</em>, not in the candidate, and compares the listed check ids to the ids the runner reports as executed and passed. Missing, skipped, or failing fails the build. It is a required status check, defined where the candidate diff cannot reach it wherever the forge allows, because a skipped required job reports success on GitHub. This is what catches a test skipped through the runner’s configuration, a discovery change, a deleted test, and a manifest entry removed in the same diff.</p>
+<p><strong>The export.</strong> Freeze also writes a contract test for consumers — the domain’s wanted scenarios and the ids of their checks, in whatever form the project’s consumers can run: a test file they import, a schema, a fixture set — and names it in the manifest as <code>export:</code>, or <code>none</code> where consumers have nothing to run, as on most documentation freezes. It is what makes “other agents build against it” a mechanism rather than a sentence: a downstream service runs it on its side and learns of a contract change from a failure, not a message.</p>
+<p><strong>What it covers.</strong> Unapproved changes to the declared surface, and required checks that did not run or did not pass.</p>
+<p><strong>What it does not cover.</strong> Whether the checks express the requirement, whether the requirement expresses your intent, a mutant that was weak, a surface file you forgot to declare, its own workflow file if that lives in the repository, an agent committing under your identity, or anything outside a version-controlled repo. Those are bounded by the human-owned falsifier, the locked checks and the evidence rule with its spot-check, and only bounded.</p>
+<h3 id="files-and-the-pin-line">Files and the pin line<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#files-and-the-pin-line" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>The method’s own files live under one root, so adopting it is one copy; the artifact and its checks stay where the project keeps them.</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="github-light github-dark"><code data-language="text" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>clauses/</span></span>
+<span data-line><span>├── GROUND.md                       # profile, context, constraints, preferences,</span></span>
+<span data-line><span>│                                   #   irreversibility list, domains, how checks run,</span></span>
+<span data-line><span>│                                   #   envelope defaults, approval boundary, contract guard</span></span>
+<span data-line><span>├── DECISIONS.log                   # append-only; nine kinds; agent-written</span></span>
+<span data-line><span>├── specs/&lt;domain>/spec.md          # wanted clauses, each scenario carrying a Pin,</span></span>
+<span data-line><span>│                                   #   plus guarded invariants: the requirements with no</span></span>
+<span data-line><span>│                                   #   cheap check (negative, cross-cutting, non-functional),</span></span>
+<span data-line><span>│                                   #   which count as spec but get a re-check date, not a guarantee</span></span>
+<span data-line><span>├── specs/&lt;domain>/manifest         # written by the agent from the pins at freeze: clause ids,</span></span>
+<span data-line><span>│                                   #   check ids, the surface, the export, the approval; never hand-edited after</span></span>
+<span data-line><span>├── checks/readers/&lt;name>.md        # reader checks</span></span>
+<span data-line><span>├── checks/walks/&lt;name>.md          # walk checks</span></span>
+<span data-line><span>├── checks/manual/&lt;name>.md         # optional; a manual pin may be a bare slug instead</span></span>
+<span data-line><span>└── changes/</span></span>
+<span data-line><span>    ├── _template/                  # copied per change; delete design.md and</span></span>
+<span data-line><span>    │                               #   tasks.md on a check-gated change</span></span>
+<span data-line><span>    ├── &lt;name>/</span></span>
+<span data-line><span>    │   ├── proposal.md             # intent, falsifier with origin, envelope, gates, loop log, decisions</span></span>
+<span data-line><span>    │   ├── design.md               # proposal path only</span></span>
+<span data-line><span>    │   ├── specs/&lt;domain>/spec.md  # the delta: ADDED / MODIFIED / RETIRED</span></span>
+<span data-line><span>    │   └── tasks.md                # proposal path only</span></span>
+<span data-line><span>    └── archive/&lt;date>-&lt;name>/</span></span></code></pre></figure>
+<p>The folder shape matches the root an OpenSpec-style tool uses; whether such a tool’s CLI tolerates the extra <code>Pin:</code> line, or <code>RETIRED</code> where it writes <code>REMOVED</code>, is unverified, and nothing here depends on one. Ground and the log sit inside the root rather than beside it.</p>
+<p>The <code>Pin:</code> line goes directly under each <code>#### Scenario:</code> and each <code>### Invariant:</code>, one line, no spaces inside values:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="github-light github-dark"><code data-language="text" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>Pin: id=&lt;domain>.&lt;slug> acceptance=&lt;observed|wanted|retired> oracle=&lt;type> check=&lt;id> born=&lt;change-name> mutant=&lt;slug></span></span></code></pre></figure>
+<p><code>id=</code> is assigned at harvest and never changes; consolidate may re-point <code>check=</code> and logs it, and nothing re-points <code>id=</code>. <code>born=</code> names the change that harvested the clause, or <code>ground</code> for a constraint entered at Ground. A THEN with two parts takes two mutants, joined with <code>+</code>. <code>walk</code> swaps <code>mutant=</code> for <code>last=&lt;date></code>; <code>manual</code> swaps it for <code>owner=&lt;name> next=&lt;date></code>, and its <code>check=</code> is either a procedure slug or a file under <code>checks/manual/</code>. Two roots are in play and the grammar does not distinguish them: a <code>checks/...</code> or <code>specs/...</code> id or path, and the kit’s own <code>GROUND.md</code> and <code>DECISIONS.log</code>, are relative to the <code>clauses/</code> root; every other id is relative to the repo root, which is the folder <code>clauses/</code> sits in. <code>pending</code> is legal for <code>check=</code> and <code>mutant=</code> only inside a delta — an agreed scenario before its task, an observed one before promotion — and Close refuses it. Verification is not a pin field; it is read from the run record. A decisions line is <code>YYYY-MM-DD | kind | domain | ref | text</code>, where <code>ref</code> is a clause id, a check id, a surface file, a change name, a manifest path, a gated action or irreversibility-list item, or <code>-</code>.</p>
+<p>The pin is the one record for now. Once tooling exists, the shape to move to is a small structured file per domain from which the readable pins, the manifest and the packet’s clause list are rendered; until then the pin line is that file, one line per clause, and the agent writes the manifest from it at freeze rather than maintaining a second copy.</p>
+<h3 id="operations">Operations<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#operations" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>The machinery under the four actions. Named steps, not skills: the agent runs them when an action calls for them, and you write only the action name — plus <code>explore</code> or <code>converge</code> when you want one.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Operation</th><th>Called from</th><th>Needs</th><th>The agent returns</th><th>Rule</th></tr></thead><tbody><tr><td><code>ground</code></td><td>before the first Start</td><td>the project, its constraints, what is expensive to get wrong, where approvals live</td><td><code>GROUND.md</code> filled, and each constraint written into its domain’s spec as a wanted clause with <code>born=ground</code> — evidence earned if it has a check, a guarded invariant if not, an open exception if the artifact violates it</td><td>2, 4, 6</td></tr><tr><td><code>explore</code></td><td>any time; optional</td><td>a question about the existing artifact</td><td>a read-only map; no writes</td><td>—</td></tr><tr><td><code>intent</code></td><td>Start</td><td>one sentence</td><td><code>changes/&lt;name>/proposal.md</code> with the intent, candidate counterexamples marked <code>agent</code>, a drafted envelope, the falsifier blank</td><td>1, 4</td></tr><tr><td><code>probe</code></td><td>Probe</td><td>the falsifier with origin, the envelope</td><td>either a stopped hard gate or a fired heuristic, or the smallest falsifier plus its check plus the evidence record plus the not-exercised list plus actual-versus-declared, logged as one loop with minutes</td><td>1, 2, 4</td></tr><tr><td><code>confront</code></td><td>Probe</td><td>nothing; the prediction is drafted from your falsifier and you may amend it (<a href="../skills/skill-predict-then-compare" class="internal alias" data-slug="skills/skill-predict-then-compare">predict-then-compare</a> is one way)</td><td>the run, against the prediction and against the not-exercised list</td><td>—</td></tr><tr><td><code>harvest</code></td><td>Decide</td><td>your packet reply</td><td>pins written on promoted clauses with their evidence, <code>reject</code> lines with the three decisions on the rest and their blocks removed from the delta, kept characterization checks commented with the clause id, the spot-check recorded</td><td>2, 3, 7</td></tr><tr><td><code>propose</code></td><td>Probe, when a heuristic fires</td><td>the heuristic</td><td><code>proposal.md</code> and <code>design.md</code>, adversarially reviewed (<a href="../skills/skill-red-team" class="internal alias" data-slug="skills/skill-red-team">red-team</a>) with the strongest objection given a destination; a proposal with no falsifiable scenario is rejected, not improved (<a href="../skills/skill-intent-check" class="internal alias" data-slug="skills/skill-intent-check">intent-check</a>)</td><td>4</td></tr><tr><td><code>archive</code></td><td>Close</td><td>the finished change</td><td>the run, verification per clause, the gate — no clause still <code>observed</code>, no <code>pending</code> field, every scenario or invariant outside RETIRED carrying a <code>wanted</code> pin with evidence, envelope actual matches declared, and a read of the intent against the promoted clauses that finds nothing quietly substituted (<a href="../skills/skill-intent-fulfilment-check" class="internal alias" data-slug="skills/skill-intent-fulfilment-check">intent-fulfilment-check</a> automates it) — then the merge, the move to <code>changes/archive/&lt;date>-&lt;name>/</code>, and an <code>archive</code> line. Under the prototype profile there is no merge: the findings go into <code>proposal.md</code> instead</td><td>3, 4, 5</td></tr><tr><td><code>freeze</code></td><td>Close, when a domain qualifies</td><td>a domain you want to contract</td><td>the manifest written from the pins, the contract-test export, a <code>freeze</code> line through the approval boundary</td><td>6</td></tr><tr><td><code>consolidate</code></td><td>every ~10 archives and every freeze</td><td>nothing</td><td>the domain spec rewritten by concept, a conflict scan, re-pointed <code>check=</code> fields, overdue dates and expired exceptions</td><td>7</td></tr><tr><td><code>converge</code></td><td>any time; optional</td><td>nothing</td><td>the gaps between the spec and the artifact, as candidate intents you may take or drop</td><td>—</td></tr></tbody></table></div>
+<p>Converge’s output enters only as new intents with a human-owned falsifier — never as tasks the agent runs.</p>
+<h3 id="the-proposal-path">The proposal path<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-proposal-path" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>A heuristic fired inside Probe, so the requirement gates the build.</p>
+<ol>
+<li><code>propose</code> writes <code>proposal.md</code> (why, what changes, the heuristic) and <code>design.md</code> (approach, at least one alternative, files and domains touched, the envelope for the whole change, rollback). <a href="../skills/skill-red-team" class="internal alias" data-slug="skills/skill-red-team">red-team</a> runs on both; the strongest objection becomes either a <code>#### Scenario:</code> in the delta or a <code>reject</code> line. A red team whose findings go nowhere is theatre.</li>
+<li>You review and agree. The delta spec is written before the build — this is the agreement the check-gated path gives up — with each agreed scenario carrying <code>acceptance=wanted</code> and <code>check=pending mutant=pending</code> until its task earns them; Close refuses a <code>pending</code>. Agreeing also permits the hard-gated items the proposal names, one <code>permit</code> line each with the agreement’s approval reference.</li>
+<li><code>tasks.md</code> decomposes the work (<a href="../skills/skill-task-decompose" class="internal alias" data-slug="skills/skill-task-decompose">task-decompose</a> shape). Every row names its falsifier as <code>inherited</code> or its own; a row gets its own — human-owned, per rule 1 — when it introduces a new assumption, a trade-off or externally visible behaviour, and the agent flags which rows it thinks do.</li>
+<li>Each row runs Probe and Decide inside the change folder until the scenario it names has its check and evidence; it was <code>wanted</code> at agreement. Heuristics are not re-evaluated inside a proposal; the escalation already happened. The hard gates, the envelope and the evidence rule stay live: an action outside the envelope pauses for an <code>amend</code> decision on the proposal, not a new proposal.</li>
+<li>Close merges, then re-freezes if the domain was under contract, which kept its state throughout: a <code>permit</code> line per surface change made during the tasks, its <code>ref</code> the check id or file, and one <code>freeze</code> line whose approval covers the rewritten manifest and spec.</li>
+</ol>
+<p>For drafting the proposal itself, <a href="../skills/skill-to-prd" class="internal alias" data-slug="skills/skill-to-prd">to-prd</a> produces the requirement shape this path wants.</p>
+<h3 id="profiles">Profiles<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#profiles" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>One line in <code>GROUND.md</code> names the kind of work. The rules do not change; what is relaxed is explicit.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Profile</th><th>Artifact</th><th>First intent</th><th>Usual oracles</th><th>Freeze means</th><th>Relaxed</th></tr></thead><tbody><tr><td>Greenfield code (<code>greenfield-code</code>)</td><td>a walking skeleton, then features</td><td>”the skeleton runs end to end”</td><td><code>test</code>, <code>guard</code></td><td>the domain has consumers</td><td>Ground is thin; domains are added as they are discovered, each addition a Ground edit logged as <code>amend</code></td></tr><tr><td>Brownfield code (<code>brownfield-code</code>)</td><td>the existing system</td><td>”harvest what is already true” — everything lands <code>observed</code>, and a violated Ground constraint lands wanted with an open exception</td><td><code>test</code>, <code>guard</code></td><td>only after every clause is verified in the freeze run</td><td>nothing; expect most first-harvest checks to be kept as characterization rather than promoted</td></tr><tr><td>Feature on a live system (<code>feature</code>)</td><td>the codebase</td><td>the feature’s smallest visible effect</td><td><code>test</code>, <code>guard</code>, <code>consistency</code></td><td>the domain’s consumers are live; a touched frozen domain re-freezes at Close, and an unfrozen domain on the same codebase harvests as brownfield</td><td>nothing — the proposal path is the common one here</td></tr><tr><td>Prototype (<code>prototype</code>)</td><td>a throwaway build</td><td>the riskiest assumption, written as a falsifier</td><td><code>reader</code>, <code>walk</code></td><td>never</td><td>promotion is not required and nothing freezes; the deliverable is <code>DECISIONS.log</code> plus the findings Close writes; the code is discarded or moved into a real change</td></tr><tr><td>Specification (<code>specification</code>)</td><td><code>specs/&lt;domain>/spec.md</code> itself</td><td>the first requirement group a consumer needs</td><td><code>walk</code>, <code>reader</code>, re-pointed to <code>test</code> later</td><td>the version consumers build against</td><td><a href="../skills/skill-red-team" class="internal alias" data-slug="skills/skill-red-team">red-team</a> per requirement group replaces the probe’s not-exercised list</td></tr><tr><td>Documentation (<code>documentation</code>)</td><td>the document</td><td>”a fresh reader can do X from this alone”</td><td><code>reader</code> (<code>locate</code> for the clause, <code>complete</code> beside it), <code>consistency</code> for factuality</td><td>the published version</td><td>consolidate runs per section rewrite; <code>DECISIONS.log</code> records what was deliberately left out as <code>reject</code> lines with the change as <code>ref</code></td></tr></tbody></table></div>
+<p><strong>The spec rule.</strong> If what you are writing will later have executable checks, write it <em>as</em> clauses in <code>specs/&lt;domain>/spec.md</code>, pinned to <code>walk</code> or <code>reader</code> now, and re-point the pin to <code>test</code> when the code lands — an oracle upgrade, logged as <code>consolidate</code>. If instead it is read by people — documentation, a standard, a brief, a report — the document is the artifact and the clauses are <em>about</em> it, pinned to <code>reader</code> and <code>consistency</code>.</p>
+<h3 id="cadences-and-stop-rules">Cadences and stop rules<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#cadences-and-stop-rules" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li><strong>Per loop:</strong> the envelope before the build; a prediction before the run; the evidence record; actual-versus-declared; minutes; the not-exercised list.</li>
+<li><strong>Per intent:</strong> cap about five loops.</li>
+<li><strong>Per change:</strong> Close refuses while any clause is still <code>observed</code>, then gates on every scenario or invariant outside RETIRED carrying a <code>wanted</code> pin with evidence, envelope actual matching declared, and the intent read.</li>
+<li><strong>Freeze eligibility:</strong> every clause in the domain is <code>wanted</code>, every free-oracle check executed and passed in the freeze run, every reader check dispatched and every walk walked since the section it covers last changed, no manual <code>next=</code> overdue, and no open exception. One recent probe of the domain is not enough; freeze needs current evidence for every clause it lists.</li>
+<li><strong>Consolidate:</strong> every ~10 archives and at every freeze.</li>
+<li><strong>Re-checks:</strong> <code>last=</code> on walks and <code>next=</code> on manual pins are dates that expire, and so is every exception; consolidate lists the overdue ones.</li>
+<li><strong>The numbers are starting values, not measurements.</strong> Five loops, three changes, ten archives, three building loops, three reader dispatches — none of these has been calibrated against a real project. Recalibrate them after the first one.</li>
+</ul>
+<h2 id="worked-example-a--a-feature-on-brownfield-code">Worked example A — a feature on brownfield code<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#worked-example-a--a-feature-on-brownfield-code" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Profile <code>feature</code> — the domains already exist. Ground names <code>comments</code>, <code>auth</code> and <code>api</code>; <code>comments</code> is harvesting, with clauses from earlier changes, and <code>auth</code> was frozen by an earlier change, its manifest listing <code>tests/auth.test.ts</code>, the fixtures it imports, the runner config, the CI job, <code>specs/auth/spec.md</code>, the manifest itself and <code>GROUND.md</code>. Ground names the approval boundary as a protected-branch review on the exact commit. (A fresh adoption has none of this: every domain starts <code>open</code>, and the first brownfield intent is the harvest that the profile table names.)</p>
+<p><strong><code>empty-comment</code>, check-gated.</strong> <em>Start.</em> Intent: <em>an empty comment is rejected before it is stored</em>. The agent proposes three candidates, marked <code>agent</code>: posting an empty body returns 201; the request fails but a comment record is still created; a whitespace-only body is accepted. You write the falsifier from the first two — <em>an empty comment is accepted, or any comment record is created by the rejected request</em> — and leave whitespace to the not-exercised list; origin <code>agent, revised</code>. Envelope: writes to the request handler and <code>tests/comments.test.ts</code>; no external actions; local environment; contracts affected none, since <code>comments</code> is harvesting and nothing in <code>auth</code> is touched; budget forty minutes and three loops; rollback is a revert.</p>
+<p><em>Probe.</em> Hard gates: nothing on the irreversibility list, no shared environment, no surface file. Heuristics: no rework lines, forty minutes under the summed minutes of the last three building loops, one domain, no wanted clause touched. L1 adds a validation guard to the handler and two tests: <code>rejects-empty-body</code>, asserting the status <em>and</em> that the store count is unchanged, and <code>stores-non-empty-body</code>, the contrast twin. Evidence for the first: baseline passes; mutant <code>guard-removed</code> fails at the status assertion, which leaves the not-stored assertion unproven, so a second mutant <code>store-before-validate</code> — the store call moved ahead of the guard — fails at the store-count assertion; restore passes. Evidence for the twin, whose THEN also has two parts: mutant <code>reject-all</code> fails at the status assertion and mutant <code>drop-store</code> fails at the stored assertion. Actual writes match the envelope. Not exercised: whitespace-only bodies. While reading the handler the agent also notices existing behaviour — the stored body has its trailing whitespace stripped — and writes a characterization test for it in the same loop, so the packet can name a check.</p>
+<p><em>Decide.</em> The packet lists the three proposed clauses — (a) <em>empty body is refused</em>, its twin <em>non-empty body is stored</em>, and (b) <em>trailing whitespace is trimmed</em> — the evidence, the actual-versus-declared line, and the decisions. You answer: (a) and its twin — contract, yes. (b) <em>trailing whitespace is trimmed</em> — not contract; it is incidental normalisation you never asked for, but callers may depend on it, so the behaviour stays and its check stays as characterization. The agent writes:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="github-light github-dark"><code data-language="text" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>2026-06-18 | reject | comments | comments.trailing-whitespace-trimmed | not contract; behaviour kept, callers unknown; check kept as characterization, tests/comments.test.ts::trims-trailing-whitespace</span></span></code></pre></figure>
+<p>The <code>ref</code> names the clause id: this is a harvested clause turned down, the kind the rework heuristic counts. L2 probes the gap the not-exercised list named and harvests (c) <em>whitespace-only bodies are refused</em> — a second scenario under the same requirement, with the same two-mutant evidence — which you promote; your spot-check this change is <code>store-before-validate</code>, re-applied by the CI scratch job while you read its output.</p>
+<p><em>Close.</em> Every check runs; (a), its twin and (c) are passing; the change’s writes match the envelope; the intent read finds nothing substituted. The delta merges into <code>specs/comments/spec.md</code> and the folder moves to <code>changes/archive/2026-06-18-empty-comment/</code>. The delta header and the promoted pin:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="github-light github-dark"><code data-language="text" data-theme="github-light github-dark" style="display:grid;"><span data-line><span># Delta: comments — empty-comment</span></span>
+<span data-line> </span>
+<span data-line><span>## ADDED Requirements</span></span>
+<span data-line> </span>
+<span data-line><span>### Requirement: empty comments are refused</span></span>
+<span data-line><span>The system SHALL reject a comment with an empty body before storing it.</span></span>
+<span data-line> </span>
+<span data-line><span>#### Scenario: empty body is refused</span></span>
+<span data-line><span>- WHEN a client posts a comment whose body is the empty string</span></span>
+<span data-line><span>- THEN the request fails and nothing is stored</span></span>
+<span data-line><span>Pin: id=comments.empty-body-refused acceptance=wanted oracle=test check=tests/comments.test.ts::rejects-empty-body born=empty-comment mutant=guard-removed+store-before-validate</span></span>
+<span data-line> </span>
+<span data-line><span>#### Scenario: non-empty body is stored</span></span>
+<span data-line><span>- WHEN a client posts a comment with a non-empty body</span></span>
+<span data-line><span>- THEN the request succeeds and one record is stored</span></span>
+<span data-line><span>Pin: id=comments.non-empty-body-stored acceptance=wanted oracle=test check=tests/comments.test.ts::stores-non-empty-body born=empty-comment mutant=reject-all+drop-store</span></span>
+<span data-line> </span>
+<span data-line><span>#### Scenario: whitespace-only body is refused</span></span>
+<span data-line><span>- WHEN a client posts a comment whose body is only whitespace</span></span>
+<span data-line><span>- THEN the request fails and nothing is stored</span></span>
+<span data-line><span>Pin: id=comments.whitespace-only-body-refused acceptance=wanted oracle=test check=tests/comments.test.ts::rejects-whitespace-only-body born=empty-comment mutant=guard-skips-trim+store-before-validate</span></span></code></pre></figure>
+<p><strong><code>comments-service</code>, proposal path.</strong> Intent: <em>comments are served by their own service with no visible change to callers</em>. Your falsifier: <em>a request that succeeded before the extraction fails after it, or a comment is stored without an authenticated session</em>. Extracting comments names the public API contract, which is on the irreversibility list — a hard gate; spans <code>comments</code>, <code>auth</code> and <code>api</code> with <code>auth</code> under contract — the cross-domain heuristic; and carries a whole-change minute budget over the last three building loops — growth. Probe stops and returns all three. <code>propose</code> writes the proposal and design with a whole-change envelope; the red team’s strongest objection — <em>existing permalinks break when ids change</em> — earns a destination as <code>#### Scenario: existing permalinks resolve after migration</code> in the delta rather than a note in a review thread. You agree the delta, whose scenarios carry <code>check=pending mutant=pending</code>, and the agreement permits the gated contract change:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="github-light github-dark"><code data-language="text" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>2026-06-26 | permit | api | public-api-contract | proposal comments-service agreed; approval=pr-review:#40@7e2d9b1</span></span></code></pre></figure>
+<p><code>tasks.md</code> holds three rows: the extraction and the routing inherit the change’s falsifier; the id migration introduces externally visible behaviour, so it gets its own, which you write. Task two needs to widen an assertion in <code>tests/auth.test.ts::session-required-for-post</code>, a check on the <code>auth</code> surface, to accept the service’s session header: the agent stops, you approve that commit through the branch review, the log gets <code>2026-06-27 | permit | auth | tests/auth.test.ts::session-required-for-post | assertion widened for the service session header; approval=pr-review:#41@a1b2c3d</code>, and the check re-earns its evidence before Close. Task three finds it needs a data migration the envelope did not declare: it pauses, you <code>amend</code> the envelope, and the migration — destructive, a hard gate — takes a permit through the same review, bound to the commit that adds the migration script. <code>auth</code> stays frozen throughout. Close merges, rewrites the <code>auth</code> manifest, and re-freezes through the boundary with one <code>freeze</code> line.</p>
+<h2 id="worked-example-b--documentation">Worked example B — documentation<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#worked-example-b--documentation" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Artifact <code>docs/quickstart.md</code>, domain <code>onboarding</code>, change <code>quickstart-env</code>, check-gated.</p>
+<p><em>Start.</em> Intent: <em>a reader with the quickstart and a clean machine reaches a running server</em>. The agent’s candidates: the reader stops to ask a question; the reader reaches a server that answers on the wrong port; the reader succeeds only by opening the source. You take the first — <em>a fresh reader stops to ask a question before the server responds</em> — and add the third to the withheld list; origin <code>agent, revised</code>. Envelope: writes to the quickstart and a CI script; no external actions; a clean container for dispatches; no contracts affected; budget an hour and three loops; disposal is a revert.</p>
+<p><em>Probe.</em> The agent writes the smallest quickstart it can and the check that could fail it — <code>checks/readers/quickstart-to-running.md</code>, question <code>locate</code>, naming the task (reach a running server), what the reader gets (<code>docs/quickstart.md</code> and a clean machine; it may run what the quickstart tells it to, cloning included, but may <strong>not</strong> open the source tree, or it would find the answer in the code and the check could never fail), that it must state a blocking question rather than guess a value, a repeat policy of three dispatches, and the pass criterion (the server responds). The first dispatch stops at the first run command, having no value for a required environment variable, and says so instead of inventing one; the other two stop at the same place. That is the falsifier firing, which is the loop working. L2 adds the missing line, and alongside it <code>scripts/doc-commands.sh</code>, which runs the quickstart’s commands in CI; three re-dispatched readers reach a responding server.</p>
+<p><em>Decide.</em> The packet proposes a clause and its scenario, and you promote it. Evidence: baseline three of three pass; on a scratch copy, every line carrying that content is deleted — the prose sentence <em>and</em> the <code>export</code> line in the example block — and three dispatches all stop where they stopped before, the named failure being the reader’s blocking question; three restore dispatches pass. Nine dispatches for one pin:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="github-light github-dark"><code data-language="text" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>### Requirement: environment is stated before it is needed</span></span>
+<span data-line><span>The quickstart SHALL state every required environment variable before the first run command.</span></span>
+<span data-line> </span>
+<span data-line><span>#### Scenario: fresh reader reaches a running server</span></span>
+<span data-line><span>- WHEN a reader with the quickstart and a clean machine follows it</span></span>
+<span data-line><span>- THEN the server responds without the reader asking a question</span></span>
+<span data-line><span>Pin: id=onboarding.env-vars-before-first-run acceptance=wanted oracle=reader check=checks/readers/quickstart-to-running.md born=quickstart-env mutant=env-line-removed</span></span></code></pre></figure>
+<p>The packet also proposes a second clause — <em>the quickstart SHALL print commands that execute</em>; WHEN CI runs the quickstart’s commands in order THEN every one exits zero — pinned to <code>consistency</code> as <code>id=onboarding.quickstart-commands-execute check=scripts/doc-commands.sh::quickstart</code>, with <code>mutant=run-command-broken</code>: on a scratch copy of the quickstart, corrupt the run command and the script fails at the exit-code assertion. One clause protects comprehension, the other protects truth, and neither substitutes for the other. A third run, question <code>complete</code>, is recorded beside the clause and not pinned: a reader with the quickstart <em>and</em> the repository on a clean machine, which is what a real newcomer has; it passes, which says the realistic path works, not that the document alone does. What you chose to leave out is logged rather than forgotten:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="github-light github-dark"><code data-language="text" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>2026-06-18 | reject | onboarding | quickstart-env | Docker path left out of the quickstart; deliberate omission, belongs in a how-to</span></span></code></pre></figure>
+<p><em>Close.</em> L2’s not-exercised list named the Docker path and a Windows shell; the two loops took about fifty minutes; writes matched the envelope; your spot-check was the <code>consistency</code> mutant, re-applied by the CI scratch job. Both clauses are passing, the intent read finds nothing substituted, the delta merges into <code>specs/onboarding/spec.md</code>, and the log gets <code>2026-06-18 | archive | onboarding | quickstart-env | 2 promoted, 0 rejected; intent read: nothing substituted; envelope matched; onboarding stays harvesting</code>.</p>
+<h2 id="what-to-test-next">What to test next<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#what-to-test-next" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Do not expand the method into a framework before it has been compared to something. The hypothesis is:</p>
+<blockquote>
+<p>Clause Loop reduces intent drift and undetected regression enough to justify its additional human effort.</p>
+</blockquote>
+<p><strong>Arms.</strong> <em>Baseline</em>: intent, tests, code review and a changelog. <em>Thin Clause Loop</em>: the baseline plus the observed-versus-wanted separation, one targeted mutant per clause with a named failure, and protected clause-to-check links. Nothing else from this note.</p>
+<p><strong>Changes.</strong> Comparable real ones, one of each: an exploratory feature, a brownfield bug fix, a contract-sensitive change, a documentation task.</p>
+<p><strong>Measures.</strong> Human active time, not agent runtime; end-to-end delivery time; intent substitutions caught; defects found by independent checks; unnecessary escalations and approval friction; whether the records are usable in a fresh session; whether the workflow was followed without reminders.</p>
+<p><strong>Controls.</strong> Keep failed and abandoned attempts in the record. Strip <code>clauses/</code> from the loop arm’s artifacts before evaluation so the evaluator cannot tell the arms apart. Give both arms’ artifacts to a fresh context for an intent-fulfilment read against the original intent, so “substitutions caught” has a ground truth that is not the loop’s own instrument. Seed one frozen domain before the contract-sensitive change, or the thin arm’s protected links never come into play. Alternate which arm goes first across the four changes.</p>
+<p><strong>What it can show.</strong> With one change per cell and one person in both arms this is a pilot, not an experiment: it yields observations — did gates fire, was the log written, minutes per loop, dispatches per pin, what the independent read found — not estimates of effect. Across four changes the expected number of intent substitutions is near zero, so a clean run is weak evidence for the method and one substitution the packet missed is strong evidence against it. The result feeds the falsifier in <em>The idea</em> and recalibrates every number in <em>Cadences</em>.</p>
+<h2 id="when-not-to-use-it">When not to use it<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#when-not-to-use-it" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Against the obvious baseline — a test suite, a changelog and code review — what this buys is the pin and the contract guard: the link from a chosen requirement to a check demonstrated able to fail for the right reason, and a build that breaks when that link is cut or a required check goes missing. If you would not use those two, the remaining ceremony is overhead. The entry cost is real: six words to run a loop, about twenty more to set a project up, and none of the actions is free.</p>
+<ul>
+<li>Where the smallest falsifier of an intent is “build it in production”, the work is plan-first and the loop does not apply.</li>
+<li>Where the artifact has no checkable output at all — team topology, build-versus-buy — there is no probe; what remains is an intent, an adversarial walk, and a decision record with a reversal criterion, which is a decision journal rather than this method.</li>
+<li>The rest of the boundary — multi-team contracts before anything has frozen, regenerate-from-spec practice, regulated audit trails, parallel agents and session handoff — is in <a href="../ai/spec-driven-development-operating-model" class="internal" data-slug="ai/spec-driven-development-operating-model">spec-driven-development-operating-model</a>.</li>
+</ul>
+<h2 id="related">Related<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#related" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><a href="../ai/accretive-spec-development" class="internal" data-slug="ai/accretive-spec-development">accretive-spec-development</a> — the engine: why the spec is a byproduct, the architecture mapping this note’s non-code oracles extend; its rules are defined here</li>
+<li><a href="../ai/spec-driven-development-operating-model" class="internal" data-slug="ai/spec-driven-development-operating-model">spec-driven-development-operating-model</a> — why the requirement gates some builds and the check gates others; domain transitions; the artifact mapping onto spec-driven-development layouts</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/ai-writing-workflow.md" class="external">ai-writing-workflow<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — the prose pipeline the documentation profile sits inside; a <code>locate</code> reader check is its adversarial final review — the editor who did not write the draft — made a re-runnable oracle, and its factuality audit is what a <code>consistency</code> pin runs</li>
+<li><a href="../ai/architecture-decision-records-ai" class="internal" data-slug="ai/architecture-decision-records-ai">architecture-decision-records-ai</a> — where a prototype’s findings go once the throwaway is discarded</li>
+<li><a href="../ai/oracle-problem-verification" class="internal" data-slug="ai/oracle-problem-verification">oracle-problem-verification</a> — why an agent-written check is not an independent oracle, which is what rule 1 exists for</li>
+<li><a href="../ai/mutation-testing-ai-generated-code" class="internal" data-slug="ai/mutation-testing-ai-generated-code">mutation-testing-ai-generated-code</a> — the tooled form of <code>mutant=</code> for code oracles: a mutation score, where this method asks for one watched sabotage per scenario and more by consequence</li>
+<li><a href="../ai/intent-to-retrospective-loop" class="internal" data-slug="ai/intent-to-retrospective-loop">intent-to-retrospective-loop</a> — the lifecycle this method compresses to minutes</li>
+<li><a href="../skills/skill-to-prd" class="internal alias" data-slug="skills/skill-to-prd">to-prd</a>, <a href="../skills/skill-task-decompose" class="internal alias" data-slug="skills/skill-task-decompose">task-decompose</a>, <a href="../skills/skill-red-team" class="internal alias" data-slug="skills/skill-red-team">red-team</a>, <a href="../skills/skill-intent-check" class="internal alias" data-slug="skills/skill-intent-check">intent-check</a>, <a href="../skills/skill-intent-fulfilment-check" class="internal alias" data-slug="skills/skill-intent-fulfilment-check">intent-fulfilment-check</a>, <a href="../skills/skill-predict-then-compare" class="internal alias" data-slug="skills/skill-predict-then-compare">predict-then-compare</a> — the vault skills the operations above delegate to</li>
+</ul>
+<h2 id="sources">Sources<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#sources" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>The method is original to this vault, assembled 2026-09-04 from the two parent notes and revised 2026-09-05 against an external design review; their sources carry the external tool mechanics. The non-code oracles, the mutant-by-deletion rule, the spec rule and the profile table were designed here and their precedents have not been checked — candidates are queued in <code>knowledge/ai/topic-suggestions.md</code>. No claim is made about any tool’s compatibility with the <code>Pin:</code> line or the folder layout.</p></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>Graph View</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc desktop-only"><button type="button" class="toc-header" aria-controls="toc-content" aria-expanded="true"><h3>Table of Contents</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="toc-content"><ul id="h9l23p" class="overflow"><li class="depth-0"><a href="#clause-loop" data-for="clause-loop">Clause Loop</a></li><li class="depth-1"><a href="#the-idea" data-for="the-idea">The idea</a></li><li class="depth-1"><a href="#vocabulary" data-for="vocabulary">Vocabulary</a></li><li class="depth-1"><a href="#the-four-actions" data-for="the-four-actions">The four actions</a></li><li class="depth-1"><a href="#getting-started" data-for="getting-started">Getting started</a></li><li class="depth-1"><a href="#reference" data-for="reference">Reference</a></li><li class="depth-2"><a href="#the-seven-rules" data-for="the-seven-rules">The seven rules</a></li><li class="depth-2"><a href="#evidence" data-for="evidence">Evidence</a></li><li class="depth-2"><a href="#oracles" data-for="oracles">Oracles</a></li><li class="depth-2"><a href="#states" data-for="states">States</a></li><li class="depth-2"><a href="#the-contract-guard" data-for="the-contract-guard">The contract guard</a></li><li class="depth-2"><a href="#files-and-the-pin-line" data-for="files-and-the-pin-line">Files and the pin line</a></li><li class="depth-2"><a href="#operations" data-for="operations">Operations</a></li><li class="depth-2"><a href="#the-proposal-path" data-for="the-proposal-path">The proposal path</a></li><li class="depth-2"><a href="#profiles" data-for="profiles">Profiles</a></li><li class="depth-2"><a href="#cadences-and-stop-rules" data-for="cadences-and-stop-rules">Cadences and stop rules</a></li><li class="depth-1"><a href="#worked-example-a--a-feature-on-brownfield-code" data-for="worked-example-a--a-feature-on-brownfield-code">Worked example A — a feature on brownfield code</a></li><li class="depth-1"><a href="#worked-example-b--documentation" data-for="worked-example-b--documentation">Worked example B — documentation</a></li><li class="depth-1"><a href="#what-to-test-next" data-for="what-to-test-next">What to test next</a></li><li class="depth-1"><a href="#when-not-to-use-it" data-for="when-not-to-use-it">When not to use it</a></li><li class="depth-1"><a href="#related" data-for="related">Related</a></li><li class="depth-1"><a href="#sources" data-for="sources">Sources</a></li><li class="overflow-end"></li></ul></div></div><div class="backlinks"><h3>Backlinks</h3><ul id="xacmdj" class="overflow"><li><a href="../ai/accretive-spec-development" class="internal">Accretive Spec Development</a></li><li><a href="../ai/" class="internal">AI — Index</a></li><li><a href="../ai/spec-driven-development-operating-model" class="internal">Spec-Driven Development and the Accretive Loop as One Operating Model</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v4.4.1</a> © 2026</p><ul><li><a href="https://github.com/oxzo/brains">source</a></li><li><a href="/index.xml">rss</a></li></ul></footer></div></div></body><script type="application/javascript">function o(){let t=this.parentElement;t.classList.toggle("is-collapsed");let e=t.classList.contains("is-collapsed")?this.scrollHeight:t.scrollHeight;t.style.maxHeight=e+"px";let c=t,l=t.parentElement;for(;l;){if(!l.classList.contains("callout"))return;let i=l.classList.contains("is-collapsed")?l.scrollHeight:l.scrollHeight+c.scrollHeight;l.style.maxHeight=i+"px",c=l,l=l.parentElement}}function n(){let t=document.getElementsByClassName("callout is-collapsible");for(let s of t){let e=s.firstElementChild;if(!e)continue;e.addEventListener("click",o),window.addCleanup(()=>e.removeEventListener("click",o));let l=s.classList.contains("is-collapsed")?e.scrollHeight:s.scrollHeight;s.style.maxHeight=l+"px"}}document.addEventListener("nav",n);
+</script><script type="module">function f(i,e){if(!i)return;function r(o){o.target===this&&(o.preventDefault(),o.stopPropagation(),e())}function t(o){o.key.startsWith("Esc")&&(o.preventDefault(),e())}i?.addEventListener("click",r),window.addCleanup(()=>i?.removeEventListener("click",r)),document.addEventListener("keydown",t),window.addCleanup(()=>document.removeEventListener("keydown",t))}function y(i){for(;i.firstChild;)i.removeChild(i.firstChild)}var h=class{constructor(e,r){this.container=e;this.content=r;this.setupEventListeners(),this.setupNavigationControls(),this.resetTransform()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;cleanups=[];setupEventListeners(){let e=this.onMouseDown.bind(this),r=this.onMouseMove.bind(this),t=this.onMouseUp.bind(this),o=this.resetTransform.bind(this);this.container.addEventListener("mousedown",e),document.addEventListener("mousemove",r),document.addEventListener("mouseup",t),window.addEventListener("resize",o),this.cleanups.push(()=>this.container.removeEventListener("mousedown",e),()=>document.removeEventListener("mousemove",r),()=>document.removeEventListener("mouseup",t),()=>window.removeEventListener("resize",o))}cleanup(){for(let e of this.cleanups)e()}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let r=this.createButton("+",()=>this.zoom(.1)),t=this.createButton("-",()=>this.zoom(-.1)),o=this.createButton("Reset",()=>this.resetTransform());e.appendChild(t),e.appendChild(o),e.appendChild(r),this.container.appendChild(e)}createButton(e,r){let t=document.createElement("button");return t.textContent=e,t.className="mermaid-control-button",t.addEventListener("click",r),window.addCleanup(()=>t.removeEventListener("click",r)),t}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}zoom(e){let r=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),t=this.content.getBoundingClientRect(),o=t.width/2,n=t.height/2,c=r-this.scale;this.currentPan.x-=o*c,this.currentPan.y-=n*c,this.scale=r,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){this.scale=1;let e=this.content.querySelector("svg");this.currentPan={x:e.getBoundingClientRect().width/2,y:e.getBoundingClientRect().height/2},this.updateTransform()}},C=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],E;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;E||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let r=E.default,t=new WeakMap;for(let n of e)t.set(n,n.innerText);async function o(){for(let s of e){s.removeAttribute("data-processed");let a=t.get(s);a&&(s.innerHTML=a)}let n=C.reduce((s,a)=>(s[a]=window.getComputedStyle(document.documentElement).getPropertyValue(a),s),{}),c=document.documentElement.getAttribute("saved-theme")==="dark";r.initialize({startOnLoad:!1,securityLevel:"loose",theme:c?"dark":"base",themeVariables:{fontFamily:n["--codeFont"],primaryColor:n["--light"],primaryTextColor:n["--darkgray"],primaryBorderColor:n["--tertiary"],lineColor:n["--darkgray"],secondaryColor:n["--secondary"],tertiaryColor:n["--tertiary"],clusterBkg:n["--light"],edgeLabelBackground:n["--highlight"]}}),await r.run({nodes:e})}await o(),document.addEventListener("themechange",o),window.addCleanup(()=>document.removeEventListener("themechange",o));for(let n=0;n<e.length;n++){let v=function(){let g=l.querySelector("#mermaid-space"),m=l.querySelector(".mermaid-content");if(!m)return;y(m);let w=c.querySelector("svg").cloneNode(!0);m.appendChild(w),l.classList.add("active"),g.style.cursor="grab",u=new h(g,m)},M=function(){l.classList.remove("active"),u?.cleanup(),u=null},c=e[n],s=c.parentElement,a=s.querySelector(".clipboard-button"),d=s.querySelector(".expand-button"),p=window.getComputedStyle(a),L=a.offsetWidth+parseFloat(p.marginLeft||"0")+parseFloat(p.marginRight||"0");d.style.right=`calc(${L}px + 0.3rem)`,s.prepend(d);let l=s.querySelector("#mermaid-container");if(!l)return;let u=null;d.addEventListener("click",v),f(l,M),window.addCleanup(()=>{u?.cleanup(),d.removeEventListener("click",v)})}});
+</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript"></script><script src="../postscript.00b09a8c.js" type="module"></script></html>

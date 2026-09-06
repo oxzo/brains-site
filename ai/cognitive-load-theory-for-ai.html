@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en"><head><title>Cognitive Load Theory for AI Prompts and Plans · second-brain</title><meta charset="utf-8"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400;1,600&amp;family=Inter:wght@400;700&amp;family=JetBrains Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="synapse"/><meta property="og:title" content="Cognitive Load Theory for AI Prompts and Plans · second-brain"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Cognitive Load Theory for AI Prompts and Plans · second-brain"/><meta name="twitter:description" content="Cognitive Load Theory for AI Prompts and Plans Cognitive Load Theory (CLT) decomposes the mental effort demanded during learning or problem-solving into distinct sources, against ..."/><meta property="og:description" content="Cognitive Load Theory for AI Prompts and Plans Cognitive Load Theory (CLT) decomposes the mental effort demanded during learning or problem-solving into distinct sources, against ..."/><meta property="og:image:alt" content="Cognitive Load Theory for AI Prompts and Plans Cognitive Load Theory (CLT) decomposes the mental effort demanded during learning or problem-solving into distinct sources, against ..."/><meta property="twitter:domain" content="oxzo.github.io/brains-site"/><meta property="og:url" content="https://oxzo.github.io/brains-site/ai/cognitive-load-theory-for-ai"/><meta property="twitter:url" content="https://oxzo.github.io/brains-site/ai/cognitive-load-theory-for-ai"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="Cognitive Load Theory for AI Prompts and Plans Cognitive Load Theory (CLT) decomposes the mental effort demanded during learning or problem-solving into distinct sources, against ..."/><meta name="generator" content="Quartz"/><link href="../index.322b98b4.css" rel="stylesheet" type="text/css" spa-preserve/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  padding: 2rem;
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL2hvbWUvcnVubmVyL3dvcmsvYnJhaW5zL2JyYWlucy9zaXRlL3F1YXJ0ei9jb21wb25lbnRzL3N0eWxlcyIsInNvdXJjZXMiOlsibWVybWFpZC5pbmxpbmUuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTs7QUFHRjtFQUNFO0VBQ0E7O0FBR0Y7RUFDRTs7O0FBS0Y7RUFDRTtFQUNBOzs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7O0FBR0Y7RUFDRTs7QUFJRjtFQUNFO0VBQ0E7RUFDQSIsInNvdXJjZXNDb250ZW50IjpbIi5leHBhbmQtYnV0dG9uIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbG9hdDogcmlnaHQ7XG4gIHBhZGRpbmc6IDAuNHJlbTtcbiAgbWFyZ2luOiAwLjNyZW07XG4gIHJpZ2h0OiAwOyAvLyBOT1RFOiByaWdodCB3aWxsIGJlIHNldCBpbiBtZXJtYWlkLmlubGluZS50c1xuICBjb2xvcjogdmFyKC0tZ3JheSk7XG4gIGJvcmRlci1jb2xvcjogdmFyKC0tZGFyayk7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWxpZ2h0KTtcbiAgYm9yZGVyOiAxcHggc29saWQ7XG4gIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgb3BhY2l0eTogMDtcbiAgdHJhbnNpdGlvbjogMC4ycztcblxuICAmID4gc3ZnIHtcbiAgICBmaWxsOiB2YXIoLS1saWdodCk7XG4gICAgZmlsdGVyOiBjb250cmFzdCgwLjMpO1xuICB9XG5cbiAgJjpob3ZlciB7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIGJvcmRlci1jb2xvcjogdmFyKC0tc2Vjb25kYXJ5KTtcbiAgfVxuXG4gICY6Zm9jdXMge1xuICAgIG91dGxpbmU6IDA7XG4gIH1cbn1cblxucHJlIHtcbiAgJjpob3ZlciA+IC5leHBhbmQtYnV0dG9uIHtcbiAgICBvcGFjaXR5OiAxO1xuICAgIHRyYW5zaXRpb246IDAuMnM7XG4gIH1cbn1cblxuI21lcm1haWQtY29udGFpbmVyIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICBjb250YWluOiBsYXlvdXQ7XG4gIHotaW5kZXg6IDk5OTtcbiAgbGVmdDogMDtcbiAgdG9wOiAwO1xuICB3aWR0aDogMTAwdnc7XG4gIGhlaWdodDogMTAwdmg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGRpc3BsYXk6IG5vbmU7XG4gIGJhY2tkcm9wLWZpbHRlcjogYmx1cig0cHgpO1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuNSk7XG5cbiAgJi5hY3RpdmUge1xuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgfVxuXG4gICYgPiAjbWVybWFpZC1zcGFjZSB7XG4gICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1saWdodCk7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDUwJTtcbiAgICBsZWZ0OiA1MCU7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gICAgaGVpZ2h0OiA4MHZoO1xuICAgIHdpZHRoOiA4MHZ3O1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG5cbiAgICAmID4gLm1lcm1haWQtY29udGVudCB7XG4gICAgICBwYWRkaW5nOiAycmVtO1xuICAgICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgICAgdHJhbnNmb3JtLW9yaWdpbjogMCAwO1xuICAgICAgdHJhbnNpdGlvbjogdHJhbnNmb3JtIDAuMXMgZWFzZTtcbiAgICAgIG92ZXJmbG93OiB2aXNpYmxlO1xuICAgICAgbWluLWhlaWdodDogMjAwcHg7XG4gICAgICBtaW4td2lkdGg6IDIwMHB4O1xuXG4gICAgICBwcmUge1xuICAgICAgICBtYXJnaW46IDA7XG4gICAgICAgIGJvcmRlcjogbm9uZTtcbiAgICAgIH1cblxuICAgICAgc3ZnIHtcbiAgICAgICAgbWF4LXdpZHRoOiBub25lO1xuICAgICAgICBoZWlnaHQ6IGF1dG87XG4gICAgICB9XG4gICAgfVxuXG4gICAgJiA+IC5tZXJtYWlkLWNvbnRyb2xzIHtcbiAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgIGJvdHRvbTogMjBweDtcbiAgICAgIHJpZ2h0OiAyMHB4O1xuICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgIGdhcDogOHB4O1xuICAgICAgcGFkZGluZzogOHB4O1xuICAgICAgYmFja2dyb3VuZDogdmFyKC0tbGlnaHQpO1xuICAgICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICAgIGJvcmRlci1yYWRpdXM6IDZweDtcbiAgICAgIGJveC1zaGFkb3c6IDAgMnB4IDRweCByZ2JhKDAsIDAsIDAsIDAuMSk7XG4gICAgICB6LWluZGV4OiAyO1xuXG4gICAgICAubWVybWFpZC1jb250cm9sLWJ1dHRvbiB7XG4gICAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAgICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICAgICAgICB3aWR0aDogMzJweDtcbiAgICAgICAgaGVpZ2h0OiAzMnB4O1xuICAgICAgICBwYWRkaW5nOiAwO1xuICAgICAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodCk7XG4gICAgICAgIGNvbG9yOiB2YXIoLS1kYXJrKTtcbiAgICAgICAgYm9yZGVyLXJhZGl1czogNHB4O1xuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgICAgIGZvbnQtc2l6ZTogMTZweDtcbiAgICAgICAgZm9udC1mYW1pbHk6IHZhcigtLWJvZHlGb250KTtcbiAgICAgICAgdHJhbnNpdGlvbjogYWxsIDAuMnMgZWFzZTtcblxuICAgICAgICAmOmhvdmVyIHtcbiAgICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICB9XG5cbiAgICAgICAgJjphY3RpdmUge1xuICAgICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWSgxcHgpO1xuICAgICAgICB9XG5cbiAgICAgICAgLy8gU3R5bGUgdGhlIHJlc2V0IGJ1dHRvbiBkaWZmZXJlbnRseVxuICAgICAgICAmOm50aC1jaGlsZCgyKSB7XG4gICAgICAgICAgd2lkdGg6IGF1dG87XG4gICAgICAgICAgcGFkZGluZzogMCAxMnB4O1xuICAgICAgICAgIGZvbnQtc2l6ZTogMTRweDtcbiAgICAgICAgfVxuICAgICAgfVxuICAgIH1cbiAgfVxufVxuIl19 */</style><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" spa-preserve/><script src="../prescript.be9697b4.js" type="application/javascript" spa-preserve></script><script type="application/javascript" spa-preserve>const fetchData = fetch("../static/contentIndex.73890e1e.json").then(data => data.json())</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://oxzo.github.io/brains-site/index.xml"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://oxzo.github.io/brains-site/ai/cognitive-load-theory-for-ai-og-image.webp"/><meta property="og:image:url" content="https://oxzo.github.io/brains-site/ai/cognitive-load-theory-for-ai-og-image.webp"/><meta name="twitter:image" content="https://oxzo.github.io/brains-site/ai/cognitive-load-theory-for-ai-og-image.webp"/><meta property="og:image:type" content="image/.webp"/></head><body data-slug="ai/cognitive-load-theory-for-ai"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">synapse</a></h2><div class="spacer mobile-only"></div><div style="display: flex; flex-direction: row; flex-wrap: nowrap; gap: 1rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button"><p>Search</p><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Search for something" placeholder="Search for something"/><div class="search-layout" data-preview="true"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Dark mode"><title>Dark mode</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Light mode"><title>Light mode</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div></div><div class="explorer" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a,b)=>!a.isFolder&amp;&amp;!b.isFolder||a.isFolder&amp;&amp;b.isFolder?a.displayName.localeCompare(b.displayName,void 0,{numeric:!0,sensitivity:\&quot;base\&quot;}):!a.isFolder&amp;&amp;b.isFolder?1:-1&quot;,&quot;filterFn&quot;:&quot;node=>node.slugSegment!==\&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;node=>node&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-content"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>Explorer</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="explorer-content" aria-expanded="false"><ul class="explorer-ul overflow" id="0x8mfk"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#"></a></li></template><template id="template-folder"><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../ai/">AI — Index</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>Cognitive Load Theory for AI Prompts and Plans</a></div></nav><h1 class="article-title">Cognitive Load Theory for AI Prompts and Plans</h1><p show-comma="true" class="content-meta"><time datetime="2026-07-19T00:00:00.000Z">Jul 19, 2026</time><span>12 min read</span></p><ul class="tags"><li><a href="../tags/ai" class="internal tag-link">ai</a></li><li><a href="../tags/llm" class="internal tag-link">llm</a></li><li><a href="../tags/prompting" class="internal tag-link">prompting</a></li><li><a href="../tags/cognitive-load" class="internal tag-link">cognitive-load</a></li><li><a href="../tags/plan-design" class="internal tag-link">plan-design</a></li><li><a href="../tags/publish" class="internal tag-link">publish</a></li></ul></div></div><article class="popover-hint"><h1 id="cognitive-load-theory-for-ai-prompts-and-plans">Cognitive Load Theory for AI Prompts and Plans<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#cognitive-load-theory-for-ai-prompts-and-plans" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p><strong>Cognitive Load Theory</strong> (CLT) decomposes the mental effort demanded during learning or problem-solving into distinct sources, against a fixed working-memory bottleneck (Sweller, 1988; Sweller, van Merrienboer &amp; Paas, 1998). The framework originates with John Sweller’s work in the late 1980s and was developed for instructional design; this note ports its diagnostic vocabulary to AI prompt and plan design.</p>
+<p>The bridge is not literal — LLMs do not have a Baddeley-style working memory; the binding constraint is <em>attention dilution within the context window</em> rather than a separate short-term store. But the three-load taxonomy is structurally portable: AI executors face load from the inherent difficulty of the task, from the <em>form</em> in which the task is presented, and from the productive synthesis work itself. Naming the three lets prompt and plan designers diagnose <em>which</em> kind of load a failure traces to and apply the right corrective.</p>
+<h2 id="the-three-load-types-canonical-formulation">The three load types (canonical formulation)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-three-load-types-canonical-formulation" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Type</th><th>Source</th><th>Property</th></tr></thead><tbody><tr><td><strong>Intrinsic</strong></td><td>The inherent difficulty of the task or material — irreducible, set by the problem itself given the executor’s prior knowledge</td><td>Cannot be eliminated; can only be staged or scaffolded</td></tr><tr><td><strong>Extraneous</strong></td><td>The form, presentation, or organization of the task — load that does <em>not</em> contribute to solving the problem</td><td>Eliminable; the primary target of prompt and plan improvement</td></tr><tr><td><strong>Germane</strong></td><td>The productive cognitive effort dedicated to schema-building, pattern-recognition, and integration</td><td>Productive; the load you <em>want</em> the executor spending capacity on</td></tr></tbody></table></div>
+<p>Working memory capacity is bounded — the classical figure of ~7±2 items (Miller, 1956) has been revised downward to ~4±1 for unrelated items (Cowan, 2001). When the sum of intrinsic + extraneous + germane load exceeds capacity, performance collapses non-gracefully.</p>
+<p><strong>Important note on the framework.</strong> Sweller and collaborators substantially revised the three-load formulation in later work (Sweller, Ayres &amp; Kalyuga, 2011; Sweller, 2010 onward), reconceptualizing germane load as a <em>redistribution</em> of working-memory resources to intrinsic-load processing rather than a separately measurable third type. This note uses the three-type vocabulary because it remains the most useful descriptive frame for design decisions, while flagging that the underlying construct is contested even within CLT research. Treat the categories as <em>diagnostic labels</em> for design, not as separately quantifiable load measurements.</p>
+<h2 id="the-llm-mapping">The LLM mapping<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-llm-mapping" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>The structural analogs hold. The mechanism differs.</p>
+<h3 id="intrinsic-load--problem-difficulty-for-the-executor">Intrinsic load → problem difficulty for the executor<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#intrinsic-load--problem-difficulty-for-the-executor" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>The task’s irreducible complexity <em>given</em> the LLM’s pre-trained capabilities and the in-context information available.</p>
+<ul>
+<li>Asking GPT-4 / Claude / equivalent to do arithmetic on six-digit numbers is high intrinsic load (the operation is poorly represented in training)</li>
+<li>Asking the same model to summarize a paragraph is low intrinsic load (well-represented operation)</li>
+<li>A reasoning task that requires holding three independent constraints simultaneously is high intrinsic load on attention-allocation</li>
+</ul>
+<p>You cannot reduce intrinsic load by reformatting the prompt. You <em>can</em> stage it (chain-of-thought, multi-step plans, scratchpads) — which converts what looked like high intrinsic load into a sequence of lower-load steps each within capacity.</p>
+<h3 id="extraneous-load--load-from-prompt-form-not-content">Extraneous load → load from prompt form, not content<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#extraneous-load--load-from-prompt-form-not-content" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>The portion of working-memory / attention budget consumed by <em>how</em> the task is presented, not by the task itself. Sources:</p>
+<ul>
+<li><strong>Repetition</strong> — the same context restated multiple times across a plan, forcing the executor to re-parse it each time</li>
+<li><strong>Irrelevant ceremony</strong> — boilerplate, system-prompt cruft, retrieval noise, verbose XML markup that doesn’t carry task information</li>
+<li><strong>Bad ordering</strong> — task statement after the context it operates on, or task scattered across the prompt</li>
+<li><strong>Format mismatches</strong> — natural-language description of what should be a table; code presented as prose</li>
+<li><strong>Position-bias-vulnerable layout</strong> — load-bearing instructions in the middle of a long prompt where <a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/information-density-for-llm-prompts.md" class="external">lost-in-the-middle<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> applies</li>
+</ul>
+<p>Extraneous load is the <em>primary actionable target</em> of prompt engineering. Most “the model didn’t follow my instructions” failures trace here.</p>
+<h3 id="germane-load--productive-synthesis">Germane load → productive synthesis<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#germane-load--productive-synthesis" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>The cognitive work that actually produces the output — pattern recognition, integration of context with the task, generation of the answer. For LLMs, this is the next-token-prediction process operating over the active context.</p>
+<p>You want maximum capacity available for germane load. The path is: reduce extraneous load aggressively, stage intrinsic load when it exceeds capacity, <em>don’t try to “increase germane load”</em> — that’s not a thing you control directly; you control what capacity <em>remains</em> for it.</p>
+<h2 id="chunking--pre-existing-schemas-expand-effective-capacity">Chunking — pre-existing schemas expand effective capacity<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#chunking--pre-existing-schemas-expand-effective-capacity" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>In human CLT, <strong>chunking</strong> — organizing disparate elements into a single Gestalt — is the mechanism by which experts process material that overwhelms novices. A grandmaster sees a chess position as a few high-level structures (open file, weak square, attacking formation) where a novice sees 32 individual pieces. The chunk is a single working-memory item; the schema is the long-term-memory structure that produces the chunk.</p>
+<p>The LLM analog is well-established empirically: prompts that <em>cue</em> an existing model schema (named pattern, well-known framework, canonical example) execute better than prompts that describe the same structure from scratch. “Apply the Strategy pattern to this code” cues a pre-trained schema; “Create classes such that…” forces the model to reconstruct the same structure from primitives. The first prompt has lower extraneous load not because it’s shorter, but because it leverages a chunk the model already holds.</p>
+<p>The corollary: a prompt that uses <strong>vocabulary the model doesn’t have a chunk for</strong> pays extraneous load for the same task. Stylistic conventions specific to your codebase, jargon from a narrow domain, or invented framework names all force the model to reconstruct schemas from primitives — extraneous load that should have been eliminated. Either use the canonical vocabulary, or lift the schema definition once at the top of the prompt rather than implicitly assuming it.</p>
+<h2 id="the-granularity-paradox">The granularity paradox<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-granularity-paradox" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>The same load decomposition explains why both under-decomposition and over-decomposition fail — they fail through <em>different</em> load types.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Decomposition state</th><th>Failure load source</th><th>Symptom</th></tr></thead><tbody><tr><td><strong>Monolithic (zero decomposition)</strong></td><td>Intrinsic load exceeds capacity</td><td>Attention drift, confabulated state-carry, “the agent did the wrong thing on step 8”</td></tr><tr><td><strong>Optimal (intermediate)</strong></td><td>Germane load maximized for capacity</td><td>Clean execution; verification checkpoints land at natural seams</td></tr><tr><td><strong>Hyper-granular (over-decomposition)</strong></td><td>Extraneous load exceeds capacity</td><td>Each step re-establishes context; coordination overhead exceeds task work; “plans of plans” syndrome</td></tr></tbody></table></div>
+<p>This is the load-theoretic restatement of the <a href="../ai/task-decomposition-for-ai-plans" class="internal alias" data-slug="ai/task-decomposition-for-ai-plans">task-decomposition note’s</a> over-decomposition counter: there is no single “more granular = better” axis. The right granularity is where intrinsic load per step fits the executor’s capacity <em>and</em> the cumulative extraneous load of orchestration doesn’t dominate the productive work.</p>
+<h2 id="diagnostic-moves-for-the-three-load-types">Diagnostic moves for the three load types<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#diagnostic-moves-for-the-three-load-types" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>When a prompt or plan is failing, classify the dominant load type before reaching for a fix.</p>
+<h3 id="if-failure-traces-to-intrinsic-load">If failure traces to intrinsic load<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#if-failure-traces-to-intrinsic-load" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Symptom</strong>: the executor competently follows the structure but produces a wrong answer on the substantive question. Re-prompting in the same shape produces the same wrong answer. The model “doesn’t know” or “can’t reason about” the problem.</p>
+<p><strong>Fixes</strong>:</p>
+<ul>
+<li>Stage the work — split the high-intrinsic step into a chain where each link is within capacity</li>
+<li>Add scaffolding — chain-of-thought, scratchpad, intermediate artifacts</li>
+<li>Provide the missing schema — example, definition, named pattern reference</li>
+<li>Accept and escalate — if intrinsic load exceeds the executor’s reach even after staging, escalate to a more capable executor (larger model, human review, external tool)</li>
+</ul>
+<p><strong>Anti-pattern</strong>: rewriting the prompt with more emphasis or threatening tone. Intrinsic load isn’t a compliance problem.</p>
+<h3 id="if-failure-traces-to-extraneous-load">If failure traces to extraneous load<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#if-failure-traces-to-extraneous-load" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Symptom</strong>: the executor follows part of the instruction, misses or contradicts another part, or seems to “lose track” mid-execution. The instructions are correct but the executor doesn’t act on them coherently.</p>
+<p><strong>Fixes</strong>:</p>
+<ul>
+<li>Cut repetition — state shared context once, lift it to the top</li>
+<li>Drop ceremony — verbose markup that doesn’t carry task information</li>
+<li>Reorder — task statement first or last (avoid middle), with <a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/information-density-for-llm-prompts.md" class="external">position-bias<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> mitigated</li>
+<li>Use chunked vocabulary — leverage pre-trained schemas instead of inventing terminology</li>
+<li>Run <a href="../ai/skills/skill-density-scan" class="internal alias" data-slug="ai/skills/skill-density-scan">density-scan</a> on the prompt — the six levers there target extraneous-load patterns specifically</li>
+</ul>
+<p><strong>Anti-pattern</strong>: adding more instructions hoping one will stick. Each addition is more extraneous load.</p>
+<h3 id="if-failure-traces-to-germane-capacity-exhaustion">If failure traces to germane-capacity exhaustion<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#if-failure-traces-to-germane-capacity-exhaustion" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Symptom</strong>: the executor handles each individual instruction correctly but produces a shallow or incoherent synthesis. Surface compliance, missing depth.</p>
+<p><strong>Fixes</strong>:</p>
+<ul>
+<li>Reduce extraneous load to free capacity for synthesis (the primary lever)</li>
+<li>Break the synthesis into named sub-syntheses that the executor produces in sequence</li>
+<li>Use intermediate artifacts that capture early synthesis output, then feed it back as input to later steps</li>
+</ul>
+<p><strong>Anti-pattern</strong>: asking for “deeper analysis.” This often increases intrinsic load without freeing germane capacity.</p>
+<h2 id="what-this-does-and-doesnt-translate-from-human-clt">What this does and doesn’t translate from human CLT<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#what-this-does-and-doesnt-translate-from-human-clt" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>Translates well:</strong></p>
+<ul>
+<li>The three-load <em>diagnostic vocabulary</em> — useful for naming what kind of failure you’re seeing</li>
+<li>The capacity-is-bounded principle — different substrate, same shape: attention dilution as the LLM analog of working-memory capacity</li>
+<li>Chunking and schema-leverage — pre-trained patterns reduce extraneous load</li>
+<li>The granularity paradox — under- and over-decomposition fail through different load mechanisms</li>
+</ul>
+<p><strong>Translates with caution:</strong></p>
+<ul>
+<li>Specific numeric capacity claims — “4±1 items” is a human result; LLM equivalents would need entirely separate measurement</li>
+<li>The germane-load construct itself — contested within CLT research (Sweller’s own later revisions); use as a label, not a measurement</li>
+<li>Worked-example effect, expertise reversal effect, redundancy effect — empirically grounded in human studies; plausibly applicable to LLM prompts but the specifics may differ. Treat as design hypotheses to test, not laws</li>
+</ul>
+<p><strong>Does not translate:</strong></p>
+<ul>
+<li>The motivational and self-efficacy mechanisms layered on top of CLT in <a href="../ai/task-decomposition-for-ai-plans" class="internal alias" data-slug="ai/task-decomposition-for-ai-plans">the goal-setting literature</a> — LLMs do not have motivation, fatigue, or affect</li>
+<li>“Cognitive overload as protective shutdown” — humans avoid overwhelming tasks; LLMs typically generate confabulated output instead of refusing, which is a different failure shape that CLT does not predict</li>
+</ul>
+<h2 id="composition-with-related-skills">Composition with related skills<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#composition-with-related-skills" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><strong><code>/density-scan</code></strong> on prompt prose — operates on the surface patterns that drive extraneous load (surprisal spikes, monotony, long dependencies). The skill is what you reach for when you suspect extraneous load is the dominant failure source.</li>
+<li><strong><code>/plan-split-scan</code></strong> on multi-step plans — operates on plan structure (concern count, state-carry, branches). The load-theoretic lens is the <em>why</em> behind the signals: each signal flags a structural pattern that drives extraneous load at the orchestration layer.</li>
+<li><strong><code>/reviewers-map</code></strong> on AI output — operates on the <em>receiver</em> side. Where CLT-for-AI is about executor load, reviewers-map is about the load the AI output places on the human reviewer.</li>
+</ul>
+<p>The three are non-overlapping in target (prompt prose, plan structure, output verification) and complementary in lens (CLT explains <em>what kind</em> of load each scan addresses).</p>
+<h2 id="tradeoffs-and-context-dependence">Tradeoffs and context-dependence<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#tradeoffs-and-context-dependence" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><strong>The framework is a diagnostic vocabulary, not a measurement instrument.</strong> Don’t try to assign numeric loads to prompt components — the construct doesn’t support that even in human CLT.</li>
+<li><strong>Intrinsic load is executor-dependent.</strong> What’s intrinsically hard for a 7B local model is intrinsically easy for Claude Opus. The same prompt may need different staging for different executors. The executor declaration in <a href="../ai/skills/skill-plan-split-scan" class="internal alias" data-slug="ai/skills/skill-plan-split-scan">the plan-split-scan</a> (Step 0) is the entry point.</li>
+<li><strong>Some “extraneous load” is intentional.</strong> Examples, worked solutions, and reference material <em>look</em> extraneous if you measure by token count but are productive scaffolding for intrinsic load. The distinction is functional: does this content help the executor build a schema that reduces total load downstream? If yes, it’s germane scaffolding, not extraneous noise.</li>
+</ul>
+<h2 id="what-this-doesnt-cover">What this doesn’t cover<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#what-this-doesnt-cover" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><strong>Worked-example effect in detail.</strong> The CLT literature has a substantial body on worked examples, expertise reversal, and faded guidance. The plausibility of these transferring to LLMs is high but unmeasured; a separate empirical note would be needed to claim more.</li>
+<li><strong>Multi-modal load.</strong> Human CLT has substantial work on visual + auditory split-attention effects. LLM analogs (text + image, text + code) are an open area; this note does not address them.</li>
+<li><strong>Cross-executor calibration.</strong> “How much intrinsic load can model X handle in step Y?” — there is no general answer; calibrate against your own failure data.</li>
+</ul>
+<h2 id="counterargument">Counterargument<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#counterargument" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>The strongest objection: the three-load decomposition is a useful framing, but importing it from human educational psychology to LLM prompt design risks <strong>dressing prompt-engineering folklore in scientific vocabulary</strong>. The fixes recommended above (“cut repetition,” “use named patterns,” “stage hard problems”) are practitioner consensus <em>anyway</em>; the CLT lens doesn’t add new fixes, it just relabels existing ones.</p>
+<p>The honest position: the lens adds value at the <em>diagnostic</em> layer, not the prescriptive layer. The fixes are what they are; the value of CLT-for-AI is letting you say “this failure is extraneous-load-driven, not intrinsic-load-driven” — which changes <em>which</em> fix to reach for. If a designer already knew which fix to apply, the lens is overhead. If they were applying intrinsic-load fixes to an extraneous-load failure (or vice versa), the lens corrects them.</p>
+<p>The framework is also vulnerable to the <a href="../ai/ai-output-bias-fingerprints" class="internal alias" data-slug="ai/ai-output-bias-fingerprints">narrative-coherence</a> failure mode — CLT <em>sounds</em> explanatory because it has named categories and authoritative citations. Treat it as a working hypothesis for AI design, not as established science applied to LLMs. The empirical work has not been done.</p>
+<h2 id="related">Related<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#related" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><a href="../ai/task-decomposition-for-ai-plans" class="internal" data-slug="ai/task-decomposition-for-ai-plans">task-decomposition-for-ai-plans</a> — plan-structure sibling; granularity paradox restated in load terms here</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/information-density-for-llm-prompts.md" class="external">information-density-for-llm-prompts<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — surface-density patterns; the lever-level toolkit for reducing extraneous load</li>
+<li><a href="../ai/cognitive-burden-of-ai-use" class="internal" data-slug="ai/cognitive-burden-of-ai-use">cognitive-burden-of-ai-use</a> — receiver-side load (the human reviewing AI output); orthogonal to this note’s executor-side framing</li>
+<li><a href="../ai/implementation-intentions-for-ai-plans" class="internal" data-slug="ai/implementation-intentions-for-ai-plans">implementation-intentions-for-ai-plans</a> — companion plan-design move; reduces extraneous load at branch points</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/context-window-management.md" class="external">context-window-management<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — position bias and lost-in-the-middle; the attention-dilution mechanism this note’s capacity analog relies on</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/system-prompt-design-principles.md" class="external">system-prompt-design-principles<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — cache-efficient, low-extraneous prompt construction</li>
+</ul>
+<h2 id="sources">Sources<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#sources" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Verified 2026-05-12. The framework citations are canonical CLT references; the LLM mapping is this note’s analytical extension and is not empirically grounded in human-CLT research.</p>
+<ul>
+<li>Sweller, J. (1988). “Cognitive load during problem solving: Effects on learning.” <em>Cognitive Science</em>, 12(2), 257–285. Foundational CLT paper.</li>
+<li>Sweller, J., van Merrienboer, J. J. G. &amp; Paas, F. G. W. C. (1998). “Cognitive architecture and instructional design.” <em>Educational Psychology Review</em>, 10(3), 251–296. The canonical three-load formulation.</li>
+<li>Sweller, J., Ayres, P. &amp; Kalyuga, S. (2011). <em>Cognitive Load Theory</em>. Springer. Textbook-length synthesis incorporating later revisions.</li>
+<li>Sweller, J. (2010). “Element interactivity and intrinsic, extraneous, and germane cognitive load.” <em>Educational Psychology Review</em>, 22(2), 123–138. The revision reconceptualizing germane load as redistribution of working-memory resources rather than a separate type.</li>
+<li>Miller, G. A. (1956). “The magical number seven, plus or minus two: Some limits on our capacity for processing information.” <em>Psychological Review</em>, 63(2). Original capacity claim.</li>
+<li>Cowan, N. (2001). “The magical number 4 in short-term memory: A reconsideration of mental storage capacity.” <em>Behavioral and Brain Sciences</em>, 24(1). Revised capacity claim for unrelated items.</li>
+<li>Liu, N. F. et al. (2023). “Lost in the Middle: How Language Models Use Long Contexts.” <em>TACL</em>. The attention-dilution finding behind the LLM-side mapping.</li>
+</ul></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>Graph View</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc desktop-only"><button type="button" class="toc-header" aria-controls="toc-content" aria-expanded="true"><h3>Table of Contents</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="toc-content"><ul id="h9l23p" class="overflow"><li class="depth-0"><a href="#cognitive-load-theory-for-ai-prompts-and-plans" data-for="cognitive-load-theory-for-ai-prompts-and-plans">Cognitive Load Theory for AI Prompts and Plans</a></li><li class="depth-1"><a href="#the-three-load-types-canonical-formulation" data-for="the-three-load-types-canonical-formulation">The three load types (canonical formulation)</a></li><li class="depth-1"><a href="#the-llm-mapping" data-for="the-llm-mapping">The LLM mapping</a></li><li class="depth-2"><a href="#intrinsic-load--problem-difficulty-for-the-executor" data-for="intrinsic-load--problem-difficulty-for-the-executor">Intrinsic load → problem difficulty for the executor</a></li><li class="depth-2"><a href="#extraneous-load--load-from-prompt-form-not-content" data-for="extraneous-load--load-from-prompt-form-not-content">Extraneous load → load from prompt form, not content</a></li><li class="depth-2"><a href="#germane-load--productive-synthesis" data-for="germane-load--productive-synthesis">Germane load → productive synthesis</a></li><li class="depth-1"><a href="#chunking--pre-existing-schemas-expand-effective-capacity" data-for="chunking--pre-existing-schemas-expand-effective-capacity">Chunking — pre-existing schemas expand effective capacity</a></li><li class="depth-1"><a href="#the-granularity-paradox" data-for="the-granularity-paradox">The granularity paradox</a></li><li class="depth-1"><a href="#diagnostic-moves-for-the-three-load-types" data-for="diagnostic-moves-for-the-three-load-types">Diagnostic moves for the three load types</a></li><li class="depth-2"><a href="#if-failure-traces-to-intrinsic-load" data-for="if-failure-traces-to-intrinsic-load">If failure traces to intrinsic load</a></li><li class="depth-2"><a href="#if-failure-traces-to-extraneous-load" data-for="if-failure-traces-to-extraneous-load">If failure traces to extraneous load</a></li><li class="depth-2"><a href="#if-failure-traces-to-germane-capacity-exhaustion" data-for="if-failure-traces-to-germane-capacity-exhaustion">If failure traces to germane-capacity exhaustion</a></li><li class="depth-1"><a href="#what-this-does-and-doesnt-translate-from-human-clt" data-for="what-this-does-and-doesnt-translate-from-human-clt">What this does and doesn’t translate from human CLT</a></li><li class="depth-1"><a href="#composition-with-related-skills" data-for="composition-with-related-skills">Composition with related skills</a></li><li class="depth-1"><a href="#tradeoffs-and-context-dependence" data-for="tradeoffs-and-context-dependence">Tradeoffs and context-dependence</a></li><li class="depth-1"><a href="#what-this-doesnt-cover" data-for="what-this-doesnt-cover">What this doesn’t cover</a></li><li class="depth-1"><a href="#counterargument" data-for="counterargument">Counterargument</a></li><li class="depth-1"><a href="#related" data-for="related">Related</a></li><li class="depth-1"><a href="#sources" data-for="sources">Sources</a></li><li class="overflow-end"></li></ul></div></div><div class="backlinks"><h3>Backlinks</h3><ul id="xacmdj" class="overflow"><li><a href="../ai/generative-ui-landscape" class="internal">Generative UI — Runtime Landscape and Evidence Base</a></li><li><a href="../ai/" class="internal">AI — Index</a></li><li><a href="../ai/skills/skill-plan-split-scan" class="internal">Skill: plan-split-scan</a></li><li><a href="../ai/task-decomposition-for-ai-plans" class="internal">Task Decomposition for AI Plans</a></li><li><a href="../ai/trainability-of-ai-use" class="internal">Trainability of AI Use</a></li><li><a href="../general/higher-order-thinking-skills" class="internal">Higher-Order Thinking Skills (HOTS)</a></li><li><a href="../general/how-much-information-at-once" class="internal">How Much Information to Give at Once</a></li><li><a href="../general/teaching-higher-order-thinking" class="internal">Teaching Higher-Order Thinking — What the Evidence Supports</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v4.4.1</a> © 2026</p><ul><li><a href="https://github.com/oxzo/brains">source</a></li><li><a href="/index.xml">rss</a></li></ul></footer></div></div></body><script type="application/javascript">function o(){let t=this.parentElement;t.classList.toggle("is-collapsed");let e=t.classList.contains("is-collapsed")?this.scrollHeight:t.scrollHeight;t.style.maxHeight=e+"px";let c=t,l=t.parentElement;for(;l;){if(!l.classList.contains("callout"))return;let i=l.classList.contains("is-collapsed")?l.scrollHeight:l.scrollHeight+c.scrollHeight;l.style.maxHeight=i+"px",c=l,l=l.parentElement}}function n(){let t=document.getElementsByClassName("callout is-collapsible");for(let s of t){let e=s.firstElementChild;if(!e)continue;e.addEventListener("click",o),window.addCleanup(()=>e.removeEventListener("click",o));let l=s.classList.contains("is-collapsed")?e.scrollHeight:s.scrollHeight;s.style.maxHeight=l+"px"}}document.addEventListener("nav",n);
+</script><script type="module">function f(i,e){if(!i)return;function r(o){o.target===this&&(o.preventDefault(),o.stopPropagation(),e())}function t(o){o.key.startsWith("Esc")&&(o.preventDefault(),e())}i?.addEventListener("click",r),window.addCleanup(()=>i?.removeEventListener("click",r)),document.addEventListener("keydown",t),window.addCleanup(()=>document.removeEventListener("keydown",t))}function y(i){for(;i.firstChild;)i.removeChild(i.firstChild)}var h=class{constructor(e,r){this.container=e;this.content=r;this.setupEventListeners(),this.setupNavigationControls(),this.resetTransform()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;cleanups=[];setupEventListeners(){let e=this.onMouseDown.bind(this),r=this.onMouseMove.bind(this),t=this.onMouseUp.bind(this),o=this.resetTransform.bind(this);this.container.addEventListener("mousedown",e),document.addEventListener("mousemove",r),document.addEventListener("mouseup",t),window.addEventListener("resize",o),this.cleanups.push(()=>this.container.removeEventListener("mousedown",e),()=>document.removeEventListener("mousemove",r),()=>document.removeEventListener("mouseup",t),()=>window.removeEventListener("resize",o))}cleanup(){for(let e of this.cleanups)e()}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let r=this.createButton("+",()=>this.zoom(.1)),t=this.createButton("-",()=>this.zoom(-.1)),o=this.createButton("Reset",()=>this.resetTransform());e.appendChild(t),e.appendChild(o),e.appendChild(r),this.container.appendChild(e)}createButton(e,r){let t=document.createElement("button");return t.textContent=e,t.className="mermaid-control-button",t.addEventListener("click",r),window.addCleanup(()=>t.removeEventListener("click",r)),t}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}zoom(e){let r=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),t=this.content.getBoundingClientRect(),o=t.width/2,n=t.height/2,c=r-this.scale;this.currentPan.x-=o*c,this.currentPan.y-=n*c,this.scale=r,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){this.scale=1;let e=this.content.querySelector("svg");this.currentPan={x:e.getBoundingClientRect().width/2,y:e.getBoundingClientRect().height/2},this.updateTransform()}},C=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],E;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;E||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let r=E.default,t=new WeakMap;for(let n of e)t.set(n,n.innerText);async function o(){for(let s of e){s.removeAttribute("data-processed");let a=t.get(s);a&&(s.innerHTML=a)}let n=C.reduce((s,a)=>(s[a]=window.getComputedStyle(document.documentElement).getPropertyValue(a),s),{}),c=document.documentElement.getAttribute("saved-theme")==="dark";r.initialize({startOnLoad:!1,securityLevel:"loose",theme:c?"dark":"base",themeVariables:{fontFamily:n["--codeFont"],primaryColor:n["--light"],primaryTextColor:n["--darkgray"],primaryBorderColor:n["--tertiary"],lineColor:n["--darkgray"],secondaryColor:n["--secondary"],tertiaryColor:n["--tertiary"],clusterBkg:n["--light"],edgeLabelBackground:n["--highlight"]}}),await r.run({nodes:e})}await o(),document.addEventListener("themechange",o),window.addCleanup(()=>document.removeEventListener("themechange",o));for(let n=0;n<e.length;n++){let v=function(){let g=l.querySelector("#mermaid-space"),m=l.querySelector(".mermaid-content");if(!m)return;y(m);let w=c.querySelector("svg").cloneNode(!0);m.appendChild(w),l.classList.add("active"),g.style.cursor="grab",u=new h(g,m)},M=function(){l.classList.remove("active"),u?.cleanup(),u=null},c=e[n],s=c.parentElement,a=s.querySelector(".clipboard-button"),d=s.querySelector(".expand-button"),p=window.getComputedStyle(a),L=a.offsetWidth+parseFloat(p.marginLeft||"0")+parseFloat(p.marginRight||"0");d.style.right=`calc(${L}px + 0.3rem)`,s.prepend(d);let l=s.querySelector("#mermaid-container");if(!l)return;let u=null;d.addEventListener("click",v),f(l,M),window.addCleanup(()=>{u?.cleanup(),d.removeEventListener("click",v)})}});
+</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript"></script><script src="../postscript.00b09a8c.js" type="module"></script></html>
