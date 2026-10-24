@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+    <channel>
+      <title>synapse</title>
+      <link>https://oxzo.github.io/brains-site</link>
+      <description>Last 10 notes on synapse</description>
+      <generator>Quartz -- quartz.jzhao.xyz</generator>
+      <item>
+    <title>AI — Index</title>
+    <link>https://oxzo.github.io/brains-site/ai/</link>
+    <guid>https://oxzo.github.io/brains-site/ai/</guid>
+    <description>AI Research, best practices, prompting, tools, and models. News &amp; Analysis ai-news-july-2026 — Delta window late Jun → mid Jul 2026: the frontier release cluster (Sonnet 5, Grok 4.5, GPT-5.6 Sol/Terra/Luna, Gemini 3.5 Pro delayed to ~Jul 17), the ~$2/M near-frontier price tier, Reflection AI’s Colossus 2 lease + Meta Compute, Illinois audit-mandating AI safety law + EU AI Act re-timing in law + FTC “truthful outputs” preemption move; resolves the predecessor’s OpenAI-funding and what-did-the-other-labs-ship open questions.</description>
+    <pubDate>Sat, 24 Oct 2026 19:05:53 GMT</pubDate>
+  </item><item>
+    <title>TypeScript for AI Tooling</title>
+    <link>https://oxzo.github.io/brains-site/snippets/tech/typescript-for-ai-tooling-claim-1</link>
+    <guid>https://oxzo.github.io/brains-site/snippets/tech/typescript-for-ai-tooling-claim-1</guid>
+    <description>Force structured JSON output from an LLM by using tool_choice with a specific tool name, then parsing the tool input against a schema. This is more reliable than asking for JSON in the prompt.</description>
+    <pubDate>Sat, 24 Oct 2026 19:05:37 GMT</pubDate>
+  </item><item>
+    <title>TypeScript for AI Tooling</title>
+    <link>https://oxzo.github.io/brains-site/snippets/tech/typescript-for-ai-tooling-claim-2</link>
+    <guid>https://oxzo.github.io/brains-site/snippets/tech/typescript-for-ai-tooling-claim-2</guid>
+    <description>Never throw from an agent’s tool handler — return the error back to the model as an is_error tool result so it can self-correct, and always cap the agent loop (e.g ...</description>
+    <pubDate>Sat, 24 Oct 2026 19:05:37 GMT</pubDate>
+  </item><item>
+    <title>TypeScript for AI Tooling</title>
+    <link>https://oxzo.github.io/brains-site/snippets/tech/typescript-for-ai-tooling-claim-3</link>
+    <guid>https://oxzo.github.io/brains-site/snippets/tech/typescript-for-ai-tooling-claim-3</guid>
+    <description>For LLM tool schemas, prefer flat structures over deeply nested ones — the model produces more accurate output. If you need nested data, consider splitting into multiple tool calls.</description>
+    <pubDate>Sat, 24 Oct 2026 19:05:37 GMT</pubDate>
+  </item><item>
+    <title>Web Page Typologies — Intent-Driven Taxonomy</title>
+    <link>https://oxzo.github.io/brains-site/snippets/tech/web-page-typologies-claim-1</link>
+    <guid>https://oxzo.github.io/brains-site/snippets/tech/web-page-typologies-claim-1</guid>
+    <description>Most “bad” web pages aren’t ugly — they’re misaligned: a transactional checkout designed like an informational article, or a landing page with homepage navigation bleeding attention ...</description>
+    <pubDate>Sat, 24 Oct 2026 19:05:37 GMT</pubDate>
+  </item><item>
+    <title>Web Page Typologies — Intent-Driven Taxonomy</title>
+    <link>https://oxzo.github.io/brains-site/snippets/tech/web-page-typologies-claim-2</link>
+    <guid>https://oxzo.github.io/brains-site/snippets/tech/web-page-typologies-claim-2</guid>
+    <description>For goal-directed catalog browsing, “Load More” or pagination tends to beat infinite scroll — infinite scroll disrupts spatial memory and hides footer content ...</description>
+    <pubDate>Sat, 24 Oct 2026 19:05:37 GMT</pubDate>
+  </item><item>
+    <title>Web Page Typologies — Intent-Driven Taxonomy</title>
+    <link>https://oxzo.github.io/brains-site/snippets/tech/web-page-typologies-claim-3</link>
+    <guid>https://oxzo.github.io/brains-site/snippets/tech/web-page-typologies-claim-3</guid>
+    <description>A landing page is engineered for a low attention ratio (interactive links ÷ conversion goals, ideally 1:1): strip global nav and competing CTAs, and enforce message match with the ...</description>
+    <pubDate>Sat, 24 Oct 2026 19:05:37 GMT</pubDate>
+  </item><item>
+    <title>Web Page Typologies — Intent-Driven Taxonomy</title>
+    <link>https://oxzo.github.io/brains-site/snippets/tech/web-page-typologies-claim-4</link>
+    <guid>https://oxzo.github.io/brains-site/snippets/tech/web-page-typologies-claim-4</guid>
+    <description>Treat any percentage in web-design literature as directionally useful, not authoritative. Most precise-looking figures trace loosely to Baymard, Nielsen Norman Group, or vendor A/B posts — rerun the measurement on your own funnel before citing it.</description>
+    <pubDate>Sat, 24 Oct 2026 19:05:37 GMT</pubDate>
+  </item><item>
+    <title>Web Page Typologies — Intent-Driven Taxonomy</title>
+    <link>https://oxzo.github.io/brains-site/snippets/tech/web-page-typologies-claim-5</link>
+    <guid>https://oxzo.github.io/brains-site/snippets/tech/web-page-typologies-claim-5</guid>
+    <description>Zero-results search states must offer alternatives — curated recommendations, popular categories, parameter suggestions — never a dead end.</description>
+    <pubDate>Sat, 24 Oct 2026 19:05:37 GMT</pubDate>
+  </item><item>
+    <title>Wine, Proton, and Gaming on Linux</title>
+    <link>https://oxzo.github.io/brains-site/snippets/tech/wine-proton-gaming-linux-claim-1</link>
+    <guid>https://oxzo.github.io/brains-site/snippets/tech/wine-proton-gaming-linux-claim-1</guid>
+    <description>Wine is not an emulator — it reimplements the Windows API at the syscall level, translating Win32 calls (CreateFile, Direct3D) through DLL replacements down to Linux syscalls ...</description>
+    <pubDate>Sat, 24 Oct 2026 19:05:37 GMT</pubDate>
+  </item>
+    </channel>
+  </rss>
