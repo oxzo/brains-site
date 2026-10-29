@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en"><head><title>Layered Review at Agent Volume — How the Claude Code Team Reviews (Oct 2026) · second-brain</title><meta charset="utf-8"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400;1,600&amp;family=Inter:wght@400;700&amp;family=JetBrains Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="synapse"/><meta property="og:title" content="Layered Review at Agent Volume — How the Claude Code Team Reviews (Oct 2026) · second-brain"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Layered Review at Agent Volume — How the Claude Code Team Reviews (Oct 2026) · second-brain"/><meta name="twitter:description" content="Layered Review at Agent Volume — How the Claude Code Team Reviews (Oct 2026) A case-study note on two October 2026 write-ups: “How the Claude Code team does code review”, by Addy Osmani, ..."/><meta property="og:description" content="Layered Review at Agent Volume — How the Claude Code Team Reviews (Oct 2026) A case-study note on two October 2026 write-ups: “How the Claude Code team does code review”, by Addy Osmani, ..."/><meta property="og:image:alt" content="Layered Review at Agent Volume — How the Claude Code Team Reviews (Oct 2026) A case-study note on two October 2026 write-ups: “How the Claude Code team does code review”, by Addy Osmani, ..."/><meta property="twitter:domain" content="oxzo.github.io/brains-site"/><meta property="og:url" content="https://oxzo.github.io/brains-site/ai/claude-code-team-review-pipeline"/><meta property="twitter:url" content="https://oxzo.github.io/brains-site/ai/claude-code-team-review-pipeline"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="Layered Review at Agent Volume — How the Claude Code Team Reviews (Oct 2026) A case-study note on two October 2026 write-ups: “How the Claude Code team does code review”, by Addy Osmani, ..."/><meta name="generator" content="Quartz"/><link href="../index.322b98b4.css" rel="stylesheet" type="text/css" spa-preserve/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  padding: 2rem;
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL2hvbWUvcnVubmVyL3dvcmsvYnJhaW5zL2JyYWlucy9zaXRlL3F1YXJ0ei9jb21wb25lbnRzL3N0eWxlcyIsInNvdXJjZXMiOlsibWVybWFpZC5pbmxpbmUuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTs7QUFHRjtFQUNFO0VBQ0E7O0FBR0Y7RUFDRTs7O0FBS0Y7RUFDRTtFQUNBOzs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7O0FBR0Y7RUFDRTs7QUFJRjtFQUNFO0VBQ0E7RUFDQSIsInNvdXJjZXNDb250ZW50IjpbIi5leHBhbmQtYnV0dG9uIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbG9hdDogcmlnaHQ7XG4gIHBhZGRpbmc6IDAuNHJlbTtcbiAgbWFyZ2luOiAwLjNyZW07XG4gIHJpZ2h0OiAwOyAvLyBOT1RFOiByaWdodCB3aWxsIGJlIHNldCBpbiBtZXJtYWlkLmlubGluZS50c1xuICBjb2xvcjogdmFyKC0tZ3JheSk7XG4gIGJvcmRlci1jb2xvcjogdmFyKC0tZGFyayk7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWxpZ2h0KTtcbiAgYm9yZGVyOiAxcHggc29saWQ7XG4gIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgb3BhY2l0eTogMDtcbiAgdHJhbnNpdGlvbjogMC4ycztcblxuICAmID4gc3ZnIHtcbiAgICBmaWxsOiB2YXIoLS1saWdodCk7XG4gICAgZmlsdGVyOiBjb250cmFzdCgwLjMpO1xuICB9XG5cbiAgJjpob3ZlciB7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIGJvcmRlci1jb2xvcjogdmFyKC0tc2Vjb25kYXJ5KTtcbiAgfVxuXG4gICY6Zm9jdXMge1xuICAgIG91dGxpbmU6IDA7XG4gIH1cbn1cblxucHJlIHtcbiAgJjpob3ZlciA+IC5leHBhbmQtYnV0dG9uIHtcbiAgICBvcGFjaXR5OiAxO1xuICAgIHRyYW5zaXRpb246IDAuMnM7XG4gIH1cbn1cblxuI21lcm1haWQtY29udGFpbmVyIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICBjb250YWluOiBsYXlvdXQ7XG4gIHotaW5kZXg6IDk5OTtcbiAgbGVmdDogMDtcbiAgdG9wOiAwO1xuICB3aWR0aDogMTAwdnc7XG4gIGhlaWdodDogMTAwdmg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGRpc3BsYXk6IG5vbmU7XG4gIGJhY2tkcm9wLWZpbHRlcjogYmx1cig0cHgpO1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuNSk7XG5cbiAgJi5hY3RpdmUge1xuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgfVxuXG4gICYgPiAjbWVybWFpZC1zcGFjZSB7XG4gICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1saWdodCk7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDUwJTtcbiAgICBsZWZ0OiA1MCU7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gICAgaGVpZ2h0OiA4MHZoO1xuICAgIHdpZHRoOiA4MHZ3O1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG5cbiAgICAmID4gLm1lcm1haWQtY29udGVudCB7XG4gICAgICBwYWRkaW5nOiAycmVtO1xuICAgICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgICAgdHJhbnNmb3JtLW9yaWdpbjogMCAwO1xuICAgICAgdHJhbnNpdGlvbjogdHJhbnNmb3JtIDAuMXMgZWFzZTtcbiAgICAgIG92ZXJmbG93OiB2aXNpYmxlO1xuICAgICAgbWluLWhlaWdodDogMjAwcHg7XG4gICAgICBtaW4td2lkdGg6IDIwMHB4O1xuXG4gICAgICBwcmUge1xuICAgICAgICBtYXJnaW46IDA7XG4gICAgICAgIGJvcmRlcjogbm9uZTtcbiAgICAgIH1cblxuICAgICAgc3ZnIHtcbiAgICAgICAgbWF4LXdpZHRoOiBub25lO1xuICAgICAgICBoZWlnaHQ6IGF1dG87XG4gICAgICB9XG4gICAgfVxuXG4gICAgJiA+IC5tZXJtYWlkLWNvbnRyb2xzIHtcbiAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgIGJvdHRvbTogMjBweDtcbiAgICAgIHJpZ2h0OiAyMHB4O1xuICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgIGdhcDogOHB4O1xuICAgICAgcGFkZGluZzogOHB4O1xuICAgICAgYmFja2dyb3VuZDogdmFyKC0tbGlnaHQpO1xuICAgICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICAgIGJvcmRlci1yYWRpdXM6IDZweDtcbiAgICAgIGJveC1zaGFkb3c6IDAgMnB4IDRweCByZ2JhKDAsIDAsIDAsIDAuMSk7XG4gICAgICB6LWluZGV4OiAyO1xuXG4gICAgICAubWVybWFpZC1jb250cm9sLWJ1dHRvbiB7XG4gICAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAgICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICAgICAgICB3aWR0aDogMzJweDtcbiAgICAgICAgaGVpZ2h0OiAzMnB4O1xuICAgICAgICBwYWRkaW5nOiAwO1xuICAgICAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodCk7XG4gICAgICAgIGNvbG9yOiB2YXIoLS1kYXJrKTtcbiAgICAgICAgYm9yZGVyLXJhZGl1czogNHB4O1xuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgICAgIGZvbnQtc2l6ZTogMTZweDtcbiAgICAgICAgZm9udC1mYW1pbHk6IHZhcigtLWJvZHlGb250KTtcbiAgICAgICAgdHJhbnNpdGlvbjogYWxsIDAuMnMgZWFzZTtcblxuICAgICAgICAmOmhvdmVyIHtcbiAgICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICB9XG5cbiAgICAgICAgJjphY3RpdmUge1xuICAgICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWSgxcHgpO1xuICAgICAgICB9XG5cbiAgICAgICAgLy8gU3R5bGUgdGhlIHJlc2V0IGJ1dHRvbiBkaWZmZXJlbnRseVxuICAgICAgICAmOm50aC1jaGlsZCgyKSB7XG4gICAgICAgICAgd2lkdGg6IGF1dG87XG4gICAgICAgICAgcGFkZGluZzogMCAxMnB4O1xuICAgICAgICAgIGZvbnQtc2l6ZTogMTRweDtcbiAgICAgICAgfVxuICAgICAgfVxuICAgIH1cbiAgfVxufVxuIl19 */</style><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" spa-preserve/><script src="../prescript.be9697b4.js" type="application/javascript" spa-preserve></script><script type="application/javascript" spa-preserve>const fetchData = fetch("../static/contentIndex.eee8579a.json").then(data => data.json())</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://oxzo.github.io/brains-site/index.xml"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://oxzo.github.io/brains-site/ai/claude-code-team-review-pipeline-og-image.webp"/><meta property="og:image:url" content="https://oxzo.github.io/brains-site/ai/claude-code-team-review-pipeline-og-image.webp"/><meta name="twitter:image" content="https://oxzo.github.io/brains-site/ai/claude-code-team-review-pipeline-og-image.webp"/><meta property="og:image:type" content="image/.webp"/></head><body data-slug="ai/claude-code-team-review-pipeline"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">synapse</a></h2><div class="spacer mobile-only"></div><div style="display: flex; flex-direction: row; flex-wrap: nowrap; gap: 1rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button"><p>Search</p><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Search for something" placeholder="Search for something"/><div class="search-layout" data-preview="true"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Dark mode"><title>Dark mode</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Light mode"><title>Light mode</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div></div><div class="explorer" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a,b)=>!a.isFolder&amp;&amp;!b.isFolder||a.isFolder&amp;&amp;b.isFolder?a.displayName.localeCompare(b.displayName,void 0,{numeric:!0,sensitivity:\&quot;base\&quot;}):!a.isFolder&amp;&amp;b.isFolder?1:-1&quot;,&quot;filterFn&quot;:&quot;node=>node.slugSegment!==\&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;node=>node&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-content"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>Explorer</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="explorer-content" aria-expanded="false"><ul class="explorer-ul overflow" id="c6vpzr"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#"></a></li></template><template id="template-folder"><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../ai/">AI — Index</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>Layered Review at Agent Volume — How the Claude Code Team Reviews (Oct 2026)</a></div></nav><h1 class="article-title">Layered Review at Agent Volume — How the Claude Code Team Reviews (Oct 2026)</h1><p show-comma="true" class="content-meta"><time datetime="2026-10-26T00:00:00.000Z">Oct 26, 2026</time><span>12 min read</span></p><ul class="tags"><li><a href="../tags/ai" class="internal tag-link">ai</a></li><li><a href="../tags/code-review" class="internal tag-link">code-review</a></li><li><a href="../tags/case-study" class="internal tag-link">case-study</a></li><li><a href="../tags/time-sensitive" class="internal tag-link">time-sensitive</a></li><li><a href="../tags/publish" class="internal tag-link">publish</a></li></ul></div></div><article class="popover-hint"><h1 id="layered-review-at-agent-volume--how-the-claude-code-team-reviews-oct-2026">Layered Review at Agent Volume — How the Claude Code Team Reviews (Oct 2026)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#layered-review-at-agent-volume--how-the-claude-code-team-reviews-oct-2026" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>A case-study note on two October 2026 write-ups:</p>
+<ul>
+<li><strong>“How the Claude Code team does code review”</strong>, by Addy Osmani, Morgan Westlee Lunt and Qing Wang, published 2026-10-15 on the claude.dev blog. The blog describes itself as articles “from Anthropic’s developers” and links to Anthropic’s docs. Its ownership wasn’t independently confirmed.</li>
+<li><strong>“Redesigning source control at Anthropic”</strong>, anthropic.com/research, published 2026-10-13 and updated 2026-10-15. It is mostly about Scion, an in-house version-control system. Only its review-related lessons are used here.</li>
+</ul>
+<p>Last verified: 2026-10-26, against both posts read in full. All figures below are Anthropic’s own, about its own engineering, from a company that sells the review product the post describes. Nothing here has been independently replicated.</p>
+<h2 id="the-objective-changed-from-did-a-human-read-it-to-minimum-human-time-at-no-extra-breakage">The objective changed from “did a human read it” to “minimum human time at no extra breakage”<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-objective-changed-from-did-a-human-read-it-to-minimum-human-time-at-no-extra-breakage" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>The post rejects “did a human read the code?” as the goal, calling it “an imprecise proxy for ‘what could go wrong with this change, and which check—automated or human—is the right one to catch it?‘” The team’s stated target is that most PRs in the Claude Code repos merge “with at most one human in the loop, who can be the author, with no increase in reverts or incidents.”</p>
+<p>Human time is counted on both sides: time spent reviewing <em>and</em> time spent fixing what bad code breaks. “Cutting the first doesn’t help if the time just shows up in the second.” The metrics are:</p>
+<ul>
+<li><strong>What’s being minimized:</strong> human approvals per PR (median and p95), human comments, and how long a PR waits on a person.</li>
+<li><strong>The guardrail:</strong> revert and incident rates. “If they rise, we haven’t saved human time, we’ve only moved it.”</li>
+</ul>
+<p>The headline result: from June to September 2026, merged PRs to Claude Code “more than doubled while the share that had to be reverted fell by more than 40 percent.” That is a before/after comparison with no control. The post doesn’t rule out other changes over the same window, such as newer models writing and reviewing the code (this note’s caveat; the post doesn’t discuss it). Read it as a result consistent with the pipeline, not one caused by it.</p>
+<p>This is the same reframing <a href="../tech/effective-code-review" class="internal" data-slug="tech/effective-code-review">effective-code-review</a> records from the human-review literature: review’s defect-finding job was always weaker than its reputation. The new part is making the reframing <em>operational</em>, with a metric to minimize and a guardrail to hold.</p>
+<h2 id="seven-layers-none-of-them-a-single-gate">Seven layers, none of them a single gate<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#seven-layers-none-of-them-a-single-gate" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Review moved from “a gate at the end of the road” to something that “runs continuously, more like spellcheck while you write.” Each layer catches some problems and misses others, and rollback sits underneath them all.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>#</th><th>Layer</th><th>What it does</th></tr></thead><tbody><tr><td>1</td><td>Verified before anyone looks</td><td>Claude is given something runnable (tests, a build, a screenshot to compare against the design) and asked to <em>show the output</em> rather than say it’s done. A fresh-context subagent then reviews the diff. Before opening the PR, many authors also run internal skills: one hunts bugs, one simplifies the diff, one checks behaviour end to end.</td></tr><tr><td>2</td><td>AI review on every PR</td><td>Reads the diff against the whole repo and the PR’s stated intent. Several bug-hunting agents run in parallel, and a separate group votes on each finding; it is posted only if “enough of them agree it’s real.” Style, diagnostic and cleanup-only findings are dropped (filters A/B-tested on internal PRs). Findings are tagged Important, Nit or Pre-existing. Every finding must be answered: fixed, or the thread resolved with a reason.</td></tr><tr><td>3</td><td>Security review that can block</td><td>No merge while any bug or security finding is open. A false positive is cleared by closing the thread with a short reason.</td></tr><tr><td>4</td><td>Automated checks that block</td><td>Lint, type checks, tests on every platform, a build. The PR template asks how the change was tested and how to undo it. Claude may fill it in, but the person who asked for the change signs off.</td></tr><tr><td>5</td><td>Human approval scaled by risk</td><td>See the next section.</td></tr><tr><td>6</td><td>Merge queue, flags, gradual release</td><td>The queue re-runs every check against main with the change applied. New behaviour ships behind a flag to employees first, then to the latest channel, then stable.</td></tr><tr><td>7</td><td>Fast detection, fast rollback</td><td>Flags turn off without a deploy. A weekly on-call rotation runs, and incident reviews ask “which layer should have caught the issue.”</td></tr></tbody></table></div>
+<p>Reported effect of layer 2 at its research-preview launch: the share of internal PRs getting substantive review comments went from 16% to 54%. “Most PRs over 1,000 lines get findings, and most small ones come back clean.”</p>
+<p>Layer 2 is a qualified exception to the “LLM reviewers advise, they don’t gate” rule in <a href="../ai/ai-assisted-code-review" class="internal" data-slug="ai/ai-assisted-code-review">ai-assisted-code-review</a>. In the team’s own repos, open findings block merge, but a finding is cleared by resolving its thread with a reason. That blocking is the team’s repo configuration, not the product’s: the managed Code Review service “never approves or blocks the pull request.” In effect the bot’s comment must be <em>answered</em>, not <em>obeyed</em>. That keeps a non-deterministic reviewer out of the compliance-gate role while making it impossible to ignore.</p>
+<h2 id="human-approval-the-change-sets-the-tier-not-the-author">Human approval: the change sets the tier, not the author<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#human-approval-the-change-sets-the-tier-not-the-author" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Risk</th><th>Examples (from the post)</th><th>Human approvals</th></tr></thead><tbody><tr><td>Low</td><td>Docs, copy, internal-only features, additive changes behind a flag</td><td>None, once automated review and security checks are green</td></tr><tr><td>Medium</td><td>Ordinary product changes; sensitive areas such as caching, the auto-updater, system prompts</td><td>One</td></tr><tr><td>High</td><td>The highest-risk code, plus a small set of paths that always need two people</td><td>Two</td></tr></tbody></table></div>
+<p>The rules around the table matter more than the table:</p>
+<ul>
+<li><strong>Classifier-assigned tiers.</strong> “A classifier reads the change and picks its risk tier. A second classifier asks whether this particular change needs another person even when its tier says it doesn’t.”</li>
+<li><strong>Paths that always need a person:</strong> anything owners listed as sensitive, and any CI workflow file.</li>
+<li><strong>Lighter paths only for trusted authors.</strong> Only authors on the repo’s trusted list, mostly the owning team, get them. Everyone else needs a second approver.</li>
+<li><strong>An agent’s approval never fills a human slot.</strong> “Automated review can clear a low-risk change, but it can’t fill a slot that calls for a human.”</li>
+<li><strong>The prompter is on the hook.</strong> On an agent-written PR, the person directing the agent counts as one of the required reviewers.</li>
+<li><strong>Approvals bind to one commit.</strong> New commits the system can’t vouch for (an agent’s push, a hand-resolved merge) need re-approval.</li>
+</ul>
+<h2 id="tuning-the-reviewer-incidents-become-the-eval">Tuning the reviewer: incidents become the eval<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#tuning-the-reviewer-incidents-become-the-eval" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><strong>Past incidents are a daily regression set.</strong> Past PRs that caused incidents, with their reverts and fix-forwards, were confirmed bug by bug by engineers who know that code. The reviewer runs against the set daily, and every reviewer change is scored against all of it. This is the <a href="../ai/evaluating-ai-code-beyond-tests" class="internal" data-slug="ai/evaluating-ai-code-beyond-tests">evaluating-ai-code-beyond-tests</a> critic-tuning loop with a concrete ground-truth source.</li>
+<li><strong>Noise is measured by what authors do.</strong> Each comment is sorted into fixed it / said it was wrong / said it was intentional / decided it didn’t matter. The reviewer is also run on known-clean PRs, counting how often it reports something “that would have led someone to make a harmful change.”</li>
+<li><strong>Written priority:</strong> “catching real bugs first and cutting review rounds second.”</li>
+<li><strong>Convergence became a tracked metric.</strong> Rounds-to-pass is tracked next to recall, after agent-author/agent-reviewer loops proved able to run indefinitely. Mechanism and countermeasures: <a href="../ai/review-convergence-agent-loops" class="internal" data-slug="ai/review-convergence-agent-loops">review-convergence-agent-loops</a>.</li>
+<li><strong>Fix repeat findings at the source.</strong> When the reviewer keeps flagging the same thing, the fix goes into a skill, a lint rule, <code>CLAUDE.md</code> or <code>REVIEW.md</code>. How to write those files for a reviewer: <a href="../ai/review-instructions-for-ai-reviewers" class="internal" data-slug="ai/review-instructions-for-ai-reviewers">review-instructions-for-ai-reviewers</a>.</li>
+<li><strong>Nightly sweeps of old code.</strong> Review agents run nightly over existing code to catch old bugs before they surface elsewhere.</li>
+</ul>
+<h2 id="where-humans-stay">Where humans stay<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#where-humans-stay" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>The post lists five responsibilities:</p>
+<ol>
+<li>Deciding whether to build it at all: direction, taste, scope.</li>
+<li>Reviewing risky code (billing, auto-updater, CI workflows).</li>
+<li>Reviewing architecture “that sets a pattern others will copy.”</li>
+<li>Reading the evidence: test output, commands run, screenshots, the reviewer’s findings. “If you can’t say what the checks would miss, ask for a real review rather than a quick approval.”</li>
+<li>Owning the outcome. “A person is accountable for every change that ships, whoever typed it.”</li>
+</ol>
+<p>The source-control post adds the same theme from another team. Engineers’ role was often “to tell Claude ‘no’”, because “agents will sometimes violate core system constraints to satisfy a pattern that should never have been allowed in the first place.” Adversarial review “can also be myopic.” One over-defensive review made Claude add “excessive validation and complexity” against a trusted internal service. The team still reviews every change, but examines “the intent of the change as opposed to reading every line of code.” Their review tool can also express semantic approval constraints, so a comment-only change is distinguished from a sensitive logic change.</p>
+<h2 id="reviews-second-job-context-sharing-handled-informally">Review’s second job: context sharing, handled informally<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#reviews-second-job-context-sharing-handled-informally" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><a href="../tech/effective-code-review" class="internal" data-slug="tech/effective-code-review">effective-code-review</a> holds that review’s main real-world payoff is knowledge transfer, not defect finding. Moving reading to machines threatens exactly that. The post’s answer is candid: “We don’t have a formal process for this.” Engineers ask Claude for an explainer of the slice they’re about to change, or a small visual artifact, and work in open Slack channels. Nothing in the post measures whether this preserves team understanding as well as diff-reading did. This is the least-evidenced part of the design, and it is the part <a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/vigilance-decrement-in-ai-oversight.md" class="external">vigilance-decrement-in-ai-oversight<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> would predict decays silently.</p>
+<h2 id="the-same-company-two-answers-on-the-merge-queue">The same company, two answers on the merge queue<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-same-company-two-answers-on-the-merge-queue" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>The Claude Code repo uses a merge queue that re-runs every check with the change applied (layer 6). The monorepo team, two days earlier, wrote that “a proper merge queue … doesn’t make much sense at agent scale”: with hundreds or thousands of changes merging while tests run, they couldn’t keep a global lock and moved to post-merge and pre-deploy testing, accepting that concurrent changes can conflict.</p>
+<p>These don’t contradict each other. They are evidence that the right layer depends on volume. Anthropic’s monorepo went from about 2,500 changes landing per day in May 2026 to more than 30,000 in September (both posts cite this). The Claude Code repo is a separate repository. A pipeline copied from either post should be sized to the copying team’s merge rate.</p>
+<h2 id="what-transfers-and-what-doesnt">What transfers, and what doesn’t<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#what-transfers-and-what-doesnt" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>The post closes with an adoption checklist; condensed:</p>
+<ul>
+<li><strong>Before the PR:</strong> give the agent runnable checks listed in a short <code>CLAUDE.md</code>, plus formatter and linter hooks. Run <code>/code-review</code> and <code>/security-review</code> locally or use a fresh-context subagent. Add a <code>REVIEW.md</code> and move repeated review comments into it.</li>
+<li><strong>On every PR:</strong>
+<ul>
+<li>Require CI. Add “Testing”, “Risk” and “How to revert” to the PR template.</li>
+<li>Pilot an AI reviewer on one repo, tune for a few weeks, then widen.</li>
+<li>Add automated security review, and require all review threads resolved.</li>
+<li>Match review depth to risk (Quick / Standard / Deep in Code Review). Cap rounds, and re-review only the new diff after the first few.</li>
+</ul>
+</li>
+<li><strong>Approval:</strong>
+<ul>
+<li>Write down risk tiers set from the change, starting strict and loosening with evidence.</li>
+<li>Use CODEOWNERS and branch protection so auth, billing, CI/release workflows and installers always need a person.</li>
+<li>Never let a bot approval replace a required human’s, and dismiss approvals on new commits.</li>
+</ul>
+</li>
+<li><strong>After merge:</strong> merge queue, flags, internal use first, staged release, one-step rollback. Turn incidents into the reviewer’s eval and rescore on every prompt, tool or model change. Measure human time with reverts and incidents as the guardrail.</li>
+</ul>
+<p>Parts that lean on conditions most teams lack:</p>
+<ul>
+<li><strong>Token budget.</strong> The source-control post states plainly that “Anthropic is unique in that our ability to spend tokens for internal use far exceeds what any other business would realistically want to spend.” Parallel bug-hunters, verifier votes, nightly sweeps and daily evals all cost model calls. The tiered-approval rules cost nothing extra and transfer at any budget.</li>
+<li><strong>A dogfooding population.</strong> Shipping to employees first only catches regressions when the employees heavily use the product. A team whose staff don’t use its product doesn’t get that early warning.</li>
+<li><strong>Trusted-author lists and classifier tiers.</strong> These assume an owning team stable enough to define “trusted” and enough labelled history to trust a risk classifier.</li>
+<li><strong>No circuit breakers yet.</strong> The team writes that they don’t yet have automatic tightening when revert or incident numbers move, and engineers want them “before more code moves to zero-human merges.”</li>
+</ul>
+<h2 id="failure-modes-to-watch-if-adopting">Failure modes to watch if adopting<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#failure-modes-to-watch-if-adopting" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><strong>The risk classifier is a single point of failure.</strong> A misclassified high-risk change gets low-tier treatment, with zero humans. The second classifier and the always-human paths are the mitigation. Neither post reports a misclassification rate.</li>
+<li><strong>The objective can drift to “fewer humans” while the guardrail lags.</strong> Reverts and incidents are lagging indicators. Human time saved shows up immediately, while damage from under-review shows up weeks later.</li>
+<li><strong>“Answered, not obeyed” depends on honest dismissals.</strong> Closing a true positive with a plausible reason is cheap. The per-comment outcome sorting is what would eventually catch that pattern, but only in aggregate.</li>
+<li><strong>Ownership by default (“you land it, you own it”)</strong> relies on small, reversible changes. The post lists small changes, flags, staged release and fast telemetry as what keeps the norm from “going badly”. Without those, it becomes blame.</li>
+</ul>
+<h2 id="related">Related<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#related" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><a href="../ai/ai-assisted-code-review" class="internal" data-slug="ai/ai-assisted-code-review">ai-assisted-code-review</a> — the July 2026 synthesis of AI-as-reviewer practice; this note is the first-party worked example it lacked</li>
+<li><a href="../ai/review-instructions-for-ai-reviewers" class="internal" data-slug="ai/review-instructions-for-ai-reviewers">review-instructions-for-ai-reviewers</a> — writing the <code>REVIEW.md</code> / <code>CLAUDE.md</code> guidance layer 1 and layer 2 depend on</li>
+<li><a href="../ai/review-convergence-agent-loops" class="internal" data-slug="ai/review-convergence-agent-loops">review-convergence-agent-loops</a> — why agent-author/agent-reviewer loops don’t terminate, and the round-cap rules</li>
+<li><a href="../tech/effective-code-review" class="internal" data-slug="tech/effective-code-review">effective-code-review</a> — the human-review substrate, including the knowledge-transfer finding this pipeline puts at risk</li>
+<li><a href="../ai/ai-code-quality-evidence-2026" class="internal" data-slug="ai/ai-code-quality-evidence-2026">ai-code-quality-evidence-2026</a> — independent evidence on AI review acceptance and agent-only review merge rates</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/review-capacity-org-design.md" class="external">review-capacity-org-design<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — the org-design view of review as the scarce resource</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/vigilance-decrement-in-ai-oversight.md" class="external">vigilance-decrement-in-ai-oversight<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — why the human slots that remain need scoping, not just staffing</li>
+</ul>
+<h2 id="sources">Sources<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#sources" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>Addy Osmani, Morgan Westlee Lunt, Qing Wang, <a href="https://claude.dev/blog/solving-code-review-at-anthropic/" class="external">“How the Claude Code team does code review”<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>, claude.dev blog, 2026-10-15. Read in full 2026-10-26.</li>
+<li>Nick G. and the Anthropic source control team, <a href="https://www.anthropic.com/research/redesigning-source-control" class="external">“Redesigning source control at Anthropic”<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>, Anthropic, 2026-10-13 (updated 2026-10-15). Read in full 2026-10-26.</li>
+<li>Anthropic, <a href="https://code.claude.com/docs/en/code-review.md" class="external">Code Review docs<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>: Quick/Standard/Deep levels, Team and Enterprise plans, findings posted, never approvals. Checked 2026-10-26.</li>
+</ul></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>Graph View</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc desktop-only"><button type="button" class="toc-header" aria-controls="toc-content" aria-expanded="true"><h3>Table of Contents</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="toc-content"><ul id="ihq5hk" class="overflow"><li class="depth-0"><a href="#layered-review-at-agent-volume--how-the-claude-code-team-reviews-oct-2026" data-for="layered-review-at-agent-volume--how-the-claude-code-team-reviews-oct-2026">Layered Review at Agent Volume — How the Claude Code Team Reviews (Oct 2026)</a></li><li class="depth-1"><a href="#the-objective-changed-from-did-a-human-read-it-to-minimum-human-time-at-no-extra-breakage" data-for="the-objective-changed-from-did-a-human-read-it-to-minimum-human-time-at-no-extra-breakage">The objective changed from “did a human read it” to “minimum human time at no extra breakage”</a></li><li class="depth-1"><a href="#seven-layers-none-of-them-a-single-gate" data-for="seven-layers-none-of-them-a-single-gate">Seven layers, none of them a single gate</a></li><li class="depth-1"><a href="#human-approval-the-change-sets-the-tier-not-the-author" data-for="human-approval-the-change-sets-the-tier-not-the-author">Human approval: the change sets the tier, not the author</a></li><li class="depth-1"><a href="#tuning-the-reviewer-incidents-become-the-eval" data-for="tuning-the-reviewer-incidents-become-the-eval">Tuning the reviewer: incidents become the eval</a></li><li class="depth-1"><a href="#where-humans-stay" data-for="where-humans-stay">Where humans stay</a></li><li class="depth-1"><a href="#reviews-second-job-context-sharing-handled-informally" data-for="reviews-second-job-context-sharing-handled-informally">Review’s second job: context sharing, handled informally</a></li><li class="depth-1"><a href="#the-same-company-two-answers-on-the-merge-queue" data-for="the-same-company-two-answers-on-the-merge-queue">The same company, two answers on the merge queue</a></li><li class="depth-1"><a href="#what-transfers-and-what-doesnt" data-for="what-transfers-and-what-doesnt">What transfers, and what doesn’t</a></li><li class="depth-1"><a href="#failure-modes-to-watch-if-adopting" data-for="failure-modes-to-watch-if-adopting">Failure modes to watch if adopting</a></li><li class="depth-1"><a href="#related" data-for="related">Related</a></li><li class="depth-1"><a href="#sources" data-for="sources">Sources</a></li><li class="overflow-end"></li></ul></div></div><div class="backlinks"><h3>Backlinks</h3><ul id="49ovev" class="overflow"><li><a href="../ai/ai-assisted-code-review" class="internal">AI-Assisted Code Review — Best Practices</a></li><li><a href="../ai/ai-code-quality-evidence-2026" class="internal">Improving Code Quality with AI — What the Evidence Supports (Oct 2026)</a></li><li><a href="../ai/" class="internal">AI — Index</a></li><li><a href="../ai/review-convergence-agent-loops" class="internal">Review Convergence — When Agent Authors and Agent Reviewers Never Finish</a></li><li><a href="../ai/review-instructions-for-ai-reviewers" class="internal">Writing Review Instructions for an AI Reviewer (REVIEW.md and CLAUDE.md)</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v4.4.1</a> © 2026</p><ul><li><a href="https://github.com/oxzo/brains">source</a></li><li><a href="/index.xml">rss</a></li></ul></footer></div></div></body><script type="application/javascript">function o(){let t=this.parentElement;t.classList.toggle("is-collapsed");let e=t.classList.contains("is-collapsed")?this.scrollHeight:t.scrollHeight;t.style.maxHeight=e+"px";let c=t,l=t.parentElement;for(;l;){if(!l.classList.contains("callout"))return;let i=l.classList.contains("is-collapsed")?l.scrollHeight:l.scrollHeight+c.scrollHeight;l.style.maxHeight=i+"px",c=l,l=l.parentElement}}function n(){let t=document.getElementsByClassName("callout is-collapsible");for(let s of t){let e=s.firstElementChild;if(!e)continue;e.addEventListener("click",o),window.addCleanup(()=>e.removeEventListener("click",o));let l=s.classList.contains("is-collapsed")?e.scrollHeight:s.scrollHeight;s.style.maxHeight=l+"px"}}document.addEventListener("nav",n);
+</script><script type="module">function f(i,e){if(!i)return;function r(o){o.target===this&&(o.preventDefault(),o.stopPropagation(),e())}function t(o){o.key.startsWith("Esc")&&(o.preventDefault(),e())}i?.addEventListener("click",r),window.addCleanup(()=>i?.removeEventListener("click",r)),document.addEventListener("keydown",t),window.addCleanup(()=>document.removeEventListener("keydown",t))}function y(i){for(;i.firstChild;)i.removeChild(i.firstChild)}var h=class{constructor(e,r){this.container=e;this.content=r;this.setupEventListeners(),this.setupNavigationControls(),this.resetTransform()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;cleanups=[];setupEventListeners(){let e=this.onMouseDown.bind(this),r=this.onMouseMove.bind(this),t=this.onMouseUp.bind(this),o=this.resetTransform.bind(this);this.container.addEventListener("mousedown",e),document.addEventListener("mousemove",r),document.addEventListener("mouseup",t),window.addEventListener("resize",o),this.cleanups.push(()=>this.container.removeEventListener("mousedown",e),()=>document.removeEventListener("mousemove",r),()=>document.removeEventListener("mouseup",t),()=>window.removeEventListener("resize",o))}cleanup(){for(let e of this.cleanups)e()}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let r=this.createButton("+",()=>this.zoom(.1)),t=this.createButton("-",()=>this.zoom(-.1)),o=this.createButton("Reset",()=>this.resetTransform());e.appendChild(t),e.appendChild(o),e.appendChild(r),this.container.appendChild(e)}createButton(e,r){let t=document.createElement("button");return t.textContent=e,t.className="mermaid-control-button",t.addEventListener("click",r),window.addCleanup(()=>t.removeEventListener("click",r)),t}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}zoom(e){let r=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),t=this.content.getBoundingClientRect(),o=t.width/2,n=t.height/2,c=r-this.scale;this.currentPan.x-=o*c,this.currentPan.y-=n*c,this.scale=r,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){this.scale=1;let e=this.content.querySelector("svg");this.currentPan={x:e.getBoundingClientRect().width/2,y:e.getBoundingClientRect().height/2},this.updateTransform()}},C=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],E;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;E||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let r=E.default,t=new WeakMap;for(let n of e)t.set(n,n.innerText);async function o(){for(let s of e){s.removeAttribute("data-processed");let a=t.get(s);a&&(s.innerHTML=a)}let n=C.reduce((s,a)=>(s[a]=window.getComputedStyle(document.documentElement).getPropertyValue(a),s),{}),c=document.documentElement.getAttribute("saved-theme")==="dark";r.initialize({startOnLoad:!1,securityLevel:"loose",theme:c?"dark":"base",themeVariables:{fontFamily:n["--codeFont"],primaryColor:n["--light"],primaryTextColor:n["--darkgray"],primaryBorderColor:n["--tertiary"],lineColor:n["--darkgray"],secondaryColor:n["--secondary"],tertiaryColor:n["--tertiary"],clusterBkg:n["--light"],edgeLabelBackground:n["--highlight"]}}),await r.run({nodes:e})}await o(),document.addEventListener("themechange",o),window.addCleanup(()=>document.removeEventListener("themechange",o));for(let n=0;n<e.length;n++){let v=function(){let g=l.querySelector("#mermaid-space"),m=l.querySelector(".mermaid-content");if(!m)return;y(m);let w=c.querySelector("svg").cloneNode(!0);m.appendChild(w),l.classList.add("active"),g.style.cursor="grab",u=new h(g,m)},M=function(){l.classList.remove("active"),u?.cleanup(),u=null},c=e[n],s=c.parentElement,a=s.querySelector(".clipboard-button"),d=s.querySelector(".expand-button"),p=window.getComputedStyle(a),L=a.offsetWidth+parseFloat(p.marginLeft||"0")+parseFloat(p.marginRight||"0");d.style.right=`calc(${L}px + 0.3rem)`,s.prepend(d);let l=s.querySelector("#mermaid-container");if(!l)return;let u=null;d.addEventListener("click",v),f(l,M),window.addCleanup(()=>{u?.cleanup(),d.removeEventListener("click",v)})}});
+</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript"></script><script src="../postscript.819daeba.js" type="module"></script></html>
