@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+    <channel>
+      <title>synapse</title>
+      <link>https://oxzo.github.io/brains-site</link>
+      <description>Last 10 notes on synapse</description>
+      <generator>Quartz -- quartz.jzhao.xyz</generator>
+      <item>
+    <title>AI — Index</title>
+    <link>https://oxzo.github.io/brains-site/ai/</link>
+    <guid>https://oxzo.github.io/brains-site/ai/</guid>
+    <description>AI Research, best practices, prompting, tools, and models. News &amp; Analysis ai-news-july-2026 — Delta window late Jun → mid Jul 2026: the frontier release cluster (Sonnet 5, Grok 4.5, GPT-5.6 Sol/Terra/Luna, Gemini 3.5 Pro delayed to ~Jul 17), the ~$2/M near-frontier price tier, Reflection AI’s Colossus 2 lease + Meta Compute, Illinois audit-mandating AI safety law + EU AI Act re-timing in law + FTC “truthful outputs” preemption move; resolves the predecessor’s OpenAI-funding and what-did-the-other-labs-ship open questions.</description>
+    <pubDate>Thu, 05 Nov 2026 15:48:43 GMT</pubDate>
+  </item><item>
+    <title>Wine, Proton, and Gaming on Linux</title>
+    <link>https://oxzo.github.io/brains-site/snippets/tech/wine-proton-gaming-linux-claim-2</link>
+    <guid>https://oxzo.github.io/brains-site/snippets/tech/wine-proton-gaming-linux-claim-2</guid>
+    <description>Anti-cheat is the biggest remaining barrier for Linux gaming. EasyAntiCheat and BattlEye work when developers opt in, but kernel-level anti-cheat like Riot’s Vanguard does not work on Linux — which is why there’s no Valorant on Linux.</description>
+    <pubDate>Thu, 05 Nov 2026 15:48:25 GMT</pubDate>
+  </item><item>
+    <title>Wine, Proton, and Gaming on Linux</title>
+    <link>https://oxzo.github.io/brains-site/snippets/tech/wine-proton-gaming-linux-claim-3</link>
+    <guid>https://oxzo.github.io/brains-site/snippets/tech/wine-proton-gaming-linux-claim-3</guid>
+    <description>Each Wine prefix is an isolated virtual Windows installation — its own C:\ drive, registry, and DLLs — and is just a directory on your filesystem, so you can manage game files (like WoW ...</description>
+    <pubDate>Thu, 05 Nov 2026 15:48:25 GMT</pubDate>
+  </item><item>
+    <title>Wine, Proton, and Gaming on Linux</title>
+    <link>https://oxzo.github.io/brains-site/snippets/tech/wine-proton-gaming-linux-claim-4</link>
+    <guid>https://oxzo.github.io/brains-site/snippets/tech/wine-proton-gaming-linux-claim-4</guid>
+    <description>Gamescope is the better route to FSR upscaling than WINE_FULLSCREEN_FSR=1, which requires true fullscreen. Gamescope wraps any game — windowed included — in its own micro-compositor, and also gives a frame limiter and independent resolution control.</description>
+    <pubDate>Thu, 05 Nov 2026 15:48:25 GMT</pubDate>
+  </item><item>
+    <title>Wine, Proton, and Gaming on Linux</title>
+    <link>https://oxzo.github.io/brains-site/snippets/tech/wine-proton-gaming-linux-claim-5</link>
+    <guid>https://oxzo.github.io/brains-site/snippets/tech/wine-proton-gaming-linux-claim-5</guid>
+    <description>Shader compilation stutter is expected on first encounter, not a misconfiguration: DXVK compiles shaders as it meets them and writes a .dxvk-cache beside the game ...</description>
+    <pubDate>Thu, 05 Nov 2026 15:48:25 GMT</pubDate>
+  </item><item>
+    <title>TypeScript for AI Tooling</title>
+    <link>https://oxzo.github.io/brains-site/snippets/tech/typescript-for-ai-tooling-claim-2</link>
+    <guid>https://oxzo.github.io/brains-site/snippets/tech/typescript-for-ai-tooling-claim-2</guid>
+    <description>Never throw from an agent’s tool handler — return the error back to the model as an is_error tool result so it can self-correct, and always cap the agent loop (e.g ...</description>
+    <pubDate>Thu, 05 Nov 2026 15:48:25 GMT</pubDate>
+  </item><item>
+    <title>TypeScript for AI Tooling</title>
+    <link>https://oxzo.github.io/brains-site/snippets/tech/typescript-for-ai-tooling-claim-3</link>
+    <guid>https://oxzo.github.io/brains-site/snippets/tech/typescript-for-ai-tooling-claim-3</guid>
+    <description>For LLM tool schemas, prefer flat structures over deeply nested ones — the model produces more accurate output. If you need nested data, consider splitting into multiple tool calls.</description>
+    <pubDate>Thu, 05 Nov 2026 15:48:25 GMT</pubDate>
+  </item><item>
+    <title>Web Page Typologies — Intent-Driven Taxonomy</title>
+    <link>https://oxzo.github.io/brains-site/snippets/tech/web-page-typologies-claim-1</link>
+    <guid>https://oxzo.github.io/brains-site/snippets/tech/web-page-typologies-claim-1</guid>
+    <description>Most “bad” web pages aren’t ugly — they’re misaligned: a transactional checkout designed like an informational article, or a landing page with homepage navigation bleeding attention ...</description>
+    <pubDate>Thu, 05 Nov 2026 15:48:25 GMT</pubDate>
+  </item><item>
+    <title>Web Page Typologies — Intent-Driven Taxonomy</title>
+    <link>https://oxzo.github.io/brains-site/snippets/tech/web-page-typologies-claim-2</link>
+    <guid>https://oxzo.github.io/brains-site/snippets/tech/web-page-typologies-claim-2</guid>
+    <description>For goal-directed catalog browsing, “Load More” or pagination tends to beat infinite scroll — infinite scroll disrupts spatial memory and hides footer content ...</description>
+    <pubDate>Thu, 05 Nov 2026 15:48:25 GMT</pubDate>
+  </item><item>
+    <title>Web Page Typologies — Intent-Driven Taxonomy</title>
+    <link>https://oxzo.github.io/brains-site/snippets/tech/web-page-typologies-claim-3</link>
+    <guid>https://oxzo.github.io/brains-site/snippets/tech/web-page-typologies-claim-3</guid>
+    <description>A landing page is engineered for a low attention ratio (interactive links ÷ conversion goals, ideally 1:1): strip global nav and competing CTAs, and enforce message match with the ...</description>
+    <pubDate>Thu, 05 Nov 2026 15:48:25 GMT</pubDate>
+  </item>
+    </channel>
+  </rss>
