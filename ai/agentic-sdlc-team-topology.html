@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en"><head><title>Agentic SDLC — Team Topology, Roles, Skills, Size · second-brain</title><meta charset="utf-8"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400;1,600&amp;family=Inter:wght@400;700&amp;family=JetBrains Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="synapse"/><meta property="og:title" content="Agentic SDLC — Team Topology, Roles, Skills, Size · second-brain"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Agentic SDLC — Team Topology, Roles, Skills, Size · second-brain"/><meta name="twitter:description" content="Agentic SDLC — Team Topology, Roles, Skills, Size Drafted autonomously by Claude on 2026-11-01 under D-008; not yet reviewed by oxzo. This is Plan 08’s deliverable in the agentic SDLC program."/><meta property="og:description" content="Agentic SDLC — Team Topology, Roles, Skills, Size Drafted autonomously by Claude on 2026-11-01 under D-008; not yet reviewed by oxzo. This is Plan 08’s deliverable in the agentic SDLC program."/><meta property="og:image:alt" content="Agentic SDLC — Team Topology, Roles, Skills, Size Drafted autonomously by Claude on 2026-11-01 under D-008; not yet reviewed by oxzo. This is Plan 08’s deliverable in the agentic SDLC program."/><meta property="twitter:domain" content="oxzo.github.io/brains-site"/><meta property="og:url" content="https://oxzo.github.io/brains-site/ai/agentic-sdlc-team-topology"/><meta property="twitter:url" content="https://oxzo.github.io/brains-site/ai/agentic-sdlc-team-topology"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="Agentic SDLC — Team Topology, Roles, Skills, Size Drafted autonomously by Claude on 2026-11-01 under D-008; not yet reviewed by oxzo. This is Plan 08’s deliverable in the agentic SDLC program."/><meta name="generator" content="Quartz"/><link href="../index.322b98b4.css" rel="stylesheet" type="text/css" spa-preserve/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  padding: 2rem;
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL2hvbWUvcnVubmVyL3dvcmsvYnJhaW5zL2JyYWlucy9zaXRlL3F1YXJ0ei9jb21wb25lbnRzL3N0eWxlcyIsInNvdXJjZXMiOlsibWVybWFpZC5pbmxpbmUuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTs7QUFHRjtFQUNFO0VBQ0E7O0FBR0Y7RUFDRTs7O0FBS0Y7RUFDRTtFQUNBOzs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7O0FBR0Y7RUFDRTs7QUFJRjtFQUNFO0VBQ0E7RUFDQSIsInNvdXJjZXNDb250ZW50IjpbIi5leHBhbmQtYnV0dG9uIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbG9hdDogcmlnaHQ7XG4gIHBhZGRpbmc6IDAuNHJlbTtcbiAgbWFyZ2luOiAwLjNyZW07XG4gIHJpZ2h0OiAwOyAvLyBOT1RFOiByaWdodCB3aWxsIGJlIHNldCBpbiBtZXJtYWlkLmlubGluZS50c1xuICBjb2xvcjogdmFyKC0tZ3JheSk7XG4gIGJvcmRlci1jb2xvcjogdmFyKC0tZGFyayk7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWxpZ2h0KTtcbiAgYm9yZGVyOiAxcHggc29saWQ7XG4gIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgb3BhY2l0eTogMDtcbiAgdHJhbnNpdGlvbjogMC4ycztcblxuICAmID4gc3ZnIHtcbiAgICBmaWxsOiB2YXIoLS1saWdodCk7XG4gICAgZmlsdGVyOiBjb250cmFzdCgwLjMpO1xuICB9XG5cbiAgJjpob3ZlciB7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIGJvcmRlci1jb2xvcjogdmFyKC0tc2Vjb25kYXJ5KTtcbiAgfVxuXG4gICY6Zm9jdXMge1xuICAgIG91dGxpbmU6IDA7XG4gIH1cbn1cblxucHJlIHtcbiAgJjpob3ZlciA+IC5leHBhbmQtYnV0dG9uIHtcbiAgICBvcGFjaXR5OiAxO1xuICAgIHRyYW5zaXRpb246IDAuMnM7XG4gIH1cbn1cblxuI21lcm1haWQtY29udGFpbmVyIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICBjb250YWluOiBsYXlvdXQ7XG4gIHotaW5kZXg6IDk5OTtcbiAgbGVmdDogMDtcbiAgdG9wOiAwO1xuICB3aWR0aDogMTAwdnc7XG4gIGhlaWdodDogMTAwdmg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGRpc3BsYXk6IG5vbmU7XG4gIGJhY2tkcm9wLWZpbHRlcjogYmx1cig0cHgpO1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuNSk7XG5cbiAgJi5hY3RpdmUge1xuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgfVxuXG4gICYgPiAjbWVybWFpZC1zcGFjZSB7XG4gICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1saWdodCk7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDUwJTtcbiAgICBsZWZ0OiA1MCU7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gICAgaGVpZ2h0OiA4MHZoO1xuICAgIHdpZHRoOiA4MHZ3O1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG5cbiAgICAmID4gLm1lcm1haWQtY29udGVudCB7XG4gICAgICBwYWRkaW5nOiAycmVtO1xuICAgICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgICAgdHJhbnNmb3JtLW9yaWdpbjogMCAwO1xuICAgICAgdHJhbnNpdGlvbjogdHJhbnNmb3JtIDAuMXMgZWFzZTtcbiAgICAgIG92ZXJmbG93OiB2aXNpYmxlO1xuICAgICAgbWluLWhlaWdodDogMjAwcHg7XG4gICAgICBtaW4td2lkdGg6IDIwMHB4O1xuXG4gICAgICBwcmUge1xuICAgICAgICBtYXJnaW46IDA7XG4gICAgICAgIGJvcmRlcjogbm9uZTtcbiAgICAgIH1cblxuICAgICAgc3ZnIHtcbiAgICAgICAgbWF4LXdpZHRoOiBub25lO1xuICAgICAgICBoZWlnaHQ6IGF1dG87XG4gICAgICB9XG4gICAgfVxuXG4gICAgJiA+IC5tZXJtYWlkLWNvbnRyb2xzIHtcbiAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgIGJvdHRvbTogMjBweDtcbiAgICAgIHJpZ2h0OiAyMHB4O1xuICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgIGdhcDogOHB4O1xuICAgICAgcGFkZGluZzogOHB4O1xuICAgICAgYmFja2dyb3VuZDogdmFyKC0tbGlnaHQpO1xuICAgICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICAgIGJvcmRlci1yYWRpdXM6IDZweDtcbiAgICAgIGJveC1zaGFkb3c6IDAgMnB4IDRweCByZ2JhKDAsIDAsIDAsIDAuMSk7XG4gICAgICB6LWluZGV4OiAyO1xuXG4gICAgICAubWVybWFpZC1jb250cm9sLWJ1dHRvbiB7XG4gICAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAgICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICAgICAgICB3aWR0aDogMzJweDtcbiAgICAgICAgaGVpZ2h0OiAzMnB4O1xuICAgICAgICBwYWRkaW5nOiAwO1xuICAgICAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodCk7XG4gICAgICAgIGNvbG9yOiB2YXIoLS1kYXJrKTtcbiAgICAgICAgYm9yZGVyLXJhZGl1czogNHB4O1xuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgICAgIGZvbnQtc2l6ZTogMTZweDtcbiAgICAgICAgZm9udC1mYW1pbHk6IHZhcigtLWJvZHlGb250KTtcbiAgICAgICAgdHJhbnNpdGlvbjogYWxsIDAuMnMgZWFzZTtcblxuICAgICAgICAmOmhvdmVyIHtcbiAgICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICB9XG5cbiAgICAgICAgJjphY3RpdmUge1xuICAgICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWSgxcHgpO1xuICAgICAgICB9XG5cbiAgICAgICAgLy8gU3R5bGUgdGhlIHJlc2V0IGJ1dHRvbiBkaWZmZXJlbnRseVxuICAgICAgICAmOm50aC1jaGlsZCgyKSB7XG4gICAgICAgICAgd2lkdGg6IGF1dG87XG4gICAgICAgICAgcGFkZGluZzogMCAxMnB4O1xuICAgICAgICAgIGZvbnQtc2l6ZTogMTRweDtcbiAgICAgICAgfVxuICAgICAgfVxuICAgIH1cbiAgfVxufVxuIl19 */</style><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" spa-preserve/><script src="../prescript.be9697b4.js" type="application/javascript" spa-preserve></script><script type="application/javascript" spa-preserve>const fetchData = fetch("../static/contentIndex.0f573d97.json").then(data => data.json())</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://oxzo.github.io/brains-site/index.xml"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://oxzo.github.io/brains-site/ai/agentic-sdlc-team-topology-og-image.webp"/><meta property="og:image:url" content="https://oxzo.github.io/brains-site/ai/agentic-sdlc-team-topology-og-image.webp"/><meta name="twitter:image" content="https://oxzo.github.io/brains-site/ai/agentic-sdlc-team-topology-og-image.webp"/><meta property="og:image:type" content="image/.webp"/></head><body data-slug="ai/agentic-sdlc-team-topology"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">synapse</a></h2><div class="spacer mobile-only"></div><div style="display: flex; flex-direction: row; flex-wrap: nowrap; gap: 1rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button"><p>Search</p><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Search for something" placeholder="Search for something"/><div class="search-layout" data-preview="true"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Dark mode"><title>Dark mode</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Light mode"><title>Light mode</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div></div><div class="explorer" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a,b)=>!a.isFolder&amp;&amp;!b.isFolder||a.isFolder&amp;&amp;b.isFolder?a.displayName.localeCompare(b.displayName,void 0,{numeric:!0,sensitivity:\&quot;base\&quot;}):!a.isFolder&amp;&amp;b.isFolder?1:-1&quot;,&quot;filterFn&quot;:&quot;node=>node.slugSegment!==\&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;node=>node&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-content"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>Explorer</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="explorer-content" aria-expanded="false"><ul class="explorer-ul overflow" id="oynraz"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#"></a></li></template><template id="template-folder"><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../ai/">AI — Index</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>Agentic SDLC — Team Topology, Roles, Skills, Size</a></div></nav><h1 class="article-title">Agentic SDLC — Team Topology, Roles, Skills, Size</h1><p show-comma="true" class="content-meta"><time datetime="2026-11-01T00:00:00.000Z">Nov 01, 2026</time><span>42 min read</span></p><ul class="tags"><li><a href="../tags/ai" class="internal tag-link">ai</a></li><li><a href="../tags/dev-workflow" class="internal tag-link">dev-workflow</a></li><li><a href="../tags/sdlc" class="internal tag-link">sdlc</a></li><li><a href="../tags/time-sensitive" class="internal tag-link">time-sensitive</a></li><li><a href="../tags/publish" class="internal tag-link">publish</a></li></ul></div></div><article class="popover-hint"><h1 id="agentic-sdlc--team-topology-roles-skills-size">Agentic SDLC — Team Topology, Roles, Skills, Size<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#agentic-sdlc--team-topology-roles-skills-size" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<blockquote>
+<p><em>Drafted autonomously by Claude on 2026-11-01 under D-008; not yet reviewed by oxzo.</em></p>
+</blockquote>
+<p>This is Plan 08’s deliverable in <a href="https://github.com/oxzo/brains/tree/main/projects/agentic-sdlc/master-plan.md" class="external">the agentic SDLC program<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>. It is scored against <a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/agentic-sdlc-evaluation-criteria.md" class="external">agentic-sdlc-evaluation-criteria<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> and reconciles the team-shape sections of the phase notes from <a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/agentic-sdlc-requirements-phase.md" class="external">Plan 02<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> to <a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/agentic-sdlc-governance-layer.md" class="external">Plan 07<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>. Evidence ids (<code>E-NNN</code>) point into <a href="https://github.com/oxzo/brains/tree/main/projects/agentic-sdlc/evidence-ledger.md" class="external">projects/agentic-sdlc/evidence-ledger<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>. Steps 1 to 3 were done in a first session and are kept, with every source citation, in <code>projects/agentic-sdlc/extracts/08-s1-classic-evidence-refclass.md</code>; this note summarises them and adds steps 4 to 7. Decisions are D-056 to D-063 in <a href="https://github.com/oxzo/brains/tree/main/projects/agentic-sdlc/direction-log.md" class="external">projects/agentic-sdlc/direction-log<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>.</p>
+<p>Facts are as of 2026-11-01. Firm headcounts and hiring policies carry their own dates.</p>
+<p><strong>Terms.</strong></p>
+<ul>
+<li>A <strong>role</strong> is a set of duties with an artifact and a gate. It is not a person (criteria note: “A role is not a person”). One person can hold several roles unless a rule below says they must be different people.</li>
+<li>The <strong>directing engineer</strong> runs an agent session and answers for the change it produces. The <strong>producer</strong> is the agent, its session and any agent sharing its context (G1). Under that definition the directing engineer is not a producer, but is barred from approving the change (Plan 04).</li>
+<li><strong>Tier 0, 1 and 2</strong> are Plan 05’s approval tiers: no human approval per change (a policy-admitted class of non-executable content, D-072), one approver, and two approvers with one from outside the producing team. <strong>Regime classes A to D</strong> are Plan 07’s: A is DORA’s full framework, B is an internal standard requiring a human approval per change (and SLSA L4), C is approval by authorised parties without stated independence (PCI DSS, NIST, DORA’s simplified framework, ISO provisionally), D is SOC 2-only once its system description has been read, or none.</li>
+<li>An <strong>owning team</strong> holds one or more services or areas for their whole support period. In Team Topologies’ vocabulary it is a stream-aligned team.</li>
+</ul>
+<h2 id="the-answer-in-seven-lines">The answer in seven lines<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-answer-in-seven-lines" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ol>
+<li><strong>No evidence says enterprise teams get smaller with agents, so this note makes no “smaller teams” claim; the outside view points to relocation, on a condition nobody has measured (Plan 08 pivot trigger 1 fires at function level only, D-057).</strong> No study measures enterprise team size, or reviewer and approver headcount, against agent adoption. The one A-grade size result is for startups, and there the AI tools named in job postings do not predict the smaller size (E-559). In the earlier shifts with data, total headcount in the function held or rose during the shift, while the routine slice and the entry rung shrank over a decade or more (E-584 to E-586). Every “held or rose” case ran through demand absorbing the gain. Where it did not, a role shrank and stayed down: the one team-level case (tellers per branch) was offset by more branches, until teller jobs fell 46% (E-585), and telephone operators largely vanished.</li>
+<li><strong>Ten roles and two duties, not thirty-three roles (D-059).</strong> The phase notes named 33 roles. They consolidate into ten roles plus two duties, approving and sponsoring an agent identity, which other role-holders carry and which are not jobs. “Platform owner”, loaded by five plans, becomes one platform team. Plan 02’s “compliance or contract owner” splits into Plan 03’s contract owner and Plan 07’s compliance owner.</li>
+<li><strong>Size the human work agents do not remove, not the number of agent runs (D-060).</strong> Per change, a team’s human hours are directing, the checks for new behaviour that the producer may not write, and review times the number of human approvals; per deployment, the release approvals; plus standing duties. The evidence says agents raise volume per engineer (E-560, E-573). No source measures which of those per-change terms they cut. The checks and the approvals are human work the rules require on every agent change, and the regime class sets how many approvals. So the candidate dominant variable is <strong>human verification work per change (checks plus review times approvals)</strong>, and it dominates only if directing hours per change fall below it, which is unmeasured. Where demand stays flat, a team shrinks to a floor set by its rules, its on-call rota and the theory it must hold. This is the drafter’s model; no parameter in it is measured.</li>
+<li><strong>The rules set a floor of distinct people, not a size (D-058).</strong> A tier-1 change needs two people. A tier-2 change or an irreversible release needs three, one from outside the producing team. Under MAS or APRA, the person who merges is never the directing engineer. Classes A and B add a release-owner approval per deployment, and classes A to C a compliance owner outside the delivery teams. So an organisation with a tier-2 path needs a second team or an external approver pool. An on-call rota with a second human for non-reversible writes sets a higher practical floor that no source sizes. The phase notes’ small-team collapses (several roles held by one person) are allowed only where no rule separates them, and the table in step 4 says where that is.</li>
+<li><strong>The skill the lifecycle depends on, judging agent output, is the one agents erode if the agent does the learner’s thinking (D-061).</strong> Randomised studies split on who does the cognitive work: unguarded AI help lowered later unaided performance, and tutor-style use kept the gains (E-219, E-563). AI-aided output cannot show who is still building skill (E-565). In the earlier shifts with data on it, the entry rung went first (CAD and offshoring, E-586, E-579), and AI-era data show the same pattern (E-552). So the lifecycle keeps a junior intake as a decision with a mentor-time budget, a learner mode and AI-free assessment. The design is untested.</li>
+<li><strong>The lifecycle runs with people who use agents little, because its gates are at the forge and platform, not in the method (Plan 04).</strong> What is likely to break is review: a low-fluency reviewer facing agent-rate intake either stalls the queue or waves changes through. That is the drafter’s inference; the nearest evidence is that small PRs were approved without comment most often (E-028, pre-agent). The evidence on moving low users is one B source: team-specific demos and protected learning time help, and productivity pressure without learning time stalls learning (E-575).</li>
+<li><strong>Plan 08’s own gate is the separation floor, computed by the forge from identities.</strong> Plan 08 adds no new gate. Every role in the table answers for an artifact that an existing gate protects.</li>
+</ol>
+<h2 id="step-1--the-classic-answers-restated-for-agents">Step 1 — The classic answers, restated for agents<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#step-1--the-classic-answers-restated-for-agents" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>The classic rules held for three reasons: communication overhead between producers, cognitive load per team, and ownership boundaries (working file, step 1). Each still binds, at a different place:</p>
+<ul>
+<li><strong>Communication overhead is now producer-to-reviewer and producer-to-owner, not producer-to-producer.</strong> Per-member output falls as a human team grows, through editing others’ code (E-544, A, pre-agent). With agents producing, the bottleneck firms report is human attention, mostly review: Google slowed AI migrations to the speed of the reviewing teams (E-465), Anthropic’s agent sessions sit about 80% idle waiting for a human, and its meeting time rose 20% (E-573, B). Brooks’s sequential terms, debugging and verification, are the ones agents leave to people (E-543).</li>
+<li><strong>Cognitive load per team has two terms: what the team owns and how fast it changes.</strong> Team Topologies caps scope by cognitive load and sizes teams at five to nine on social-group grounds (E-546, C). Agents probably lower the routine load, though no source measures which per-change terms they cut (D-064), and they raise the rate of change the team must understand. The size range is about human trust, so agents are not counted in it.</li>
+<li><strong>Ownership is the scarcest thing to assign.</strong> Google’s one-reviewer norm rested on the author usually holding ownership or readability (E-549, A). An agent author holds neither, so on the drafter’s reading every agent change needs an owner who does. Every gate in Plans 02 to 07 names one.</li>
+<li><strong>Social loafing returns when the agent wrote a change and someone approved it,</strong> unless one human answers for each change (E-550, A). That is G3.</li>
+</ul>
+<p>No classic gives a team size backed by software evidence, and every test predates agents.</p>
+<h2 id="step-2--what-the-evidence-says">Step 2 — What the evidence says<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#step-2--what-the-evidence-says" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>The graded evidence is in the working file, step 2. What this note leans on:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Claim</th><th>Best support</th><th>Meets the bar?</th></tr></thead><tbody><tr><td>Per-person output falls as a human team grows</td><td>E-544 (A)</td><td>Yes, on code-volume measures, pre-agent</td></tr><tr><td>Enterprise team size falls with agent adoption</td><td>none</td><td><strong>No study</strong></td></tr><tr><td>AI-native startups are smaller; AI tool use does not predict it</td><td>E-559 (A)</td><td>Yes, startups only, descriptive; the tool-use null rests on a coarse posting proxy</td></tr><tr><td>Output per engineer rises with agents</td><td>E-560 (A, vendor), E-573 (B)</td><td>Yes for volume (merged PRs, commits); no quality or headcount outcome</td></tr><tr><td>Early-career hiring fell in AI-exposed occupations</td><td>E-551, E-552, E-556 (A)</td><td>Yes for the fact, in US data. The cause is contested at A (E-554, E-555), and software is where AI exposure, remote work and the 2022 correction overlap most. The one Nordic study found precise zeros on earnings and hours through 2024 (E-553)</td></tr><tr><td>Review and owner attention is the binding constraint</td><td>E-465, E-573 (B)</td><td>Only just: E-465 is review in AI migrations, where directing cost is low by design; E-573’s 80% is time waiting on any human input, not a measure of review</td></tr><tr><td>Skill formation is harmed when the AI does the cognitive work</td><td>E-219, E-563 (A); E-565 (B); E-564 (A, medicine)</td><td>Yes, mostly outside professional software</td></tr><tr><td>Mixed-fluency teams are helped by team-specific demos and protected time</td><td>E-575 (B)</td><td>No: one B</td></tr><tr><td>A platform role appears around the tool</td><td>E-567 (B); E-582, E-586 (B, earlier shifts)</td><td>One B for agents; yes as an outside-view pattern</td></tr></tbody></table></div>
+<p>Roles observed at named firms: broadening inside existing titles (E-573), developers shifting from project management toward coding and working alone more (E-558), one named entry-rung merge (LinkedIn’s associate product builder track, E-572), a platform team around the agent (E-567), and firms split on the reviewer (Shopify keeps a human name on every PR, E-567; StrongDM’s three-person team forbids human review and moves people to held-out scenarios, E-574). Firms also split on juniors: Anthropic’s junior share of technical hires fell from 27% to 9% (E-573), while Shopify and Cloudflare expanded intern intake; Shopify names senior engineers’ time as its bottleneck and Cloudflare calls mentors essential (E-567, E-568, the latter in summariser wording).</p>
+<h2 id="step-3--the-outside-view-and-pivot-trigger-1">Step 3 — The outside view, and pivot trigger 1<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#step-3--the-outside-view-and-pivot-trigger-1" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>A fresh-context <code>/reference-class</code> run took the five forward size claims in the record and the earlier shifts in extract <code>08-r4</code>. Its verdict was <strong>outside-view treatment needed</strong> (working file, step 3). The working file’s table has nine shifts: the eight the drill used, plus telephone operators, added at review as a shrinking case.</p>
+<ul>
+<li><strong>Total headcount in the function, during the shift:</strong> four rose and three held; none of the seven with in-window data fell (compilers, offshoring’s onshore IT, DevOps-era computer occupations, low-code-era developers rose; ATMs, CAD, national QA held). Spreadsheets have only C-grade in-window data. All are confounded with demand growth.</li>
+<li><strong>Routine sub-occupations, a decade or more later:</strong> five fell 32–47% over 14–22 years (programmers, sysadmins, clerks, tellers, drafters by one survey), and the sources do not settle the cause: BLS blamed offshoring for the programmer decline in 2009 and AI in its 2025–35 handbook, and CAD-era firms blamed business conditions (E-579, E-584, E-586; clerks from extract <code>08-r4</code> §4.16).</li>
+<li><strong>Per-team headcount:</strong> one pre-agent case, and it is a reduction. Tellers per urban branch fell from 20 to 13 while branches rose 43% (E-585, B). The offset was a phase: teller employment then fell 46% from 2011 to 2025, cause not established (E-584, E-585).</li>
+<li><strong>A role that shrank and did not come back:</strong> telephone operators under dial automation, with the work moving to other occupations (working file, step 3 table; E-585’s note).</li>
+<li><strong>Claimed task gains far exceeded realised labour savings</strong> wherever both were seen. CAD raised output per draughtsman 200–500% on average, with labour savings “nowhere near so high” because drawing was a minority of the job (E-586).</li>
+<li><strong>The bottom rung went first</strong> (E-586, E-579), and entry requirements rose (E-586).</li>
+</ul>
+<p><strong>Pivot trigger 1 fires at function level and not at team level (D-057).</strong> Its condition is that the drill “shows prior shifts did not reduce team size but relocated it”. For total headcount in the function, it does. For team size, the one case is a reduction offset for a time by more units. The trigger’s consequence, dropping any “smaller teams” claim, is applied, and it would be applied anyway: no A-grade or two independent B-grade sources support smaller enterprise teams, which is the master plan’s bar. What the trigger also licenses, a stated relocation, is written below as <strong>conditional</strong> on demand, because the outside view cannot carry it further.</p>
+<p><strong>The relocation, stated with its condition.</strong> <em>If demand for enterprise software absorbs agent output, as it absorbed the gain in every “held or rose” case:</em> headcount leaves the routine slice of production (translating requirements into tickets, boilerplate code, manual test execution, change-board meetings) and, unless the organisation protects it, the entry rung. The directing engineers absorb that slice’s work and hold or grow with demand. Small platform, verification and compliance roles appear around the agents. Human verification hours grow with the number of changes wherever the regime class puts a human on each change. <em>If demand does not absorb it,</em> teams shrink toward the floor in step 5, as tellers did once branch growth stopped. Neither branch is tested for software, and nobody has measured the demand response.</p>
+<p><strong>What this replaces.</strong> The release note’s “Plan 08 should size reviewers and owners, not producers” holds as a sizing rule only if “producers” means agent runs: size on the human work, not on how many agent sessions run (step 5). As a forecast about people it fails. The drill found the human role that took up the tool grew in every software case (E-584), and in this lifecycle the directing engineers are most of the reviewers and owners. The phase plans’ inside view, as the drill paraphrased it, that headcount moves away from producers is withdrawn.</p>
+<p><strong>What would reverse it.</strong> An enterprise study of team or reviewer headcount against agent adoption, or a measure of whether demand for enterprise software absorbs agent-scale output. Agents also span more of the job than drawing or cash handling did, so CAD’s brake, that drawing was a minority of the job (E-586), may be weaker. That is a hypothesis, not evidence.</p>
+<h2 id="step-4--the-roles-table">Step 4 — The roles table<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#step-4--the-roles-table" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Extract <code>08-r0</code> §0.14 lists 33 roles named by Plans 02 to 07. They consolidate as below (D-059). The criteria note’s tie-break prefers fewer roles, and two of the 33 are agents, not people.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Role</th><th>Sits in</th><th>Accountable for (artifact of record)</th><th>Gate it answers to</th><th>Skills</th><th>How many</th><th>Fed by</th></tr></thead><tbody><tr><td><strong>Directing engineer</strong></td><td>Owning team</td><td>The unit brief; marks the PR ready and answers for it (Plan 04)</td><td>G3 answers; barred from approving its own change (G1, compliance gate)</td><td>Cutting units, reading diffs, writing tests the agent did not write, judging agent output</td><td>Set by demand times the human hours per change (step 5); no fixed ratio</td><td>The entry rung (step 6)</td></tr><tr><td><strong>Requirement owner</strong>, one per area, with the arbiter duty across areas</td><td>Owning team, or product across teams</td><td>Approved intent record and <code>conflict</code> entries; acceptance against the requirement id (Plan 02)</td><td>Intent approval on the exact commit, requester and producer barred (G2 intent column, G3)</td><td>Domain, negotiation, writing intent that can be checked</td><td>One per area, plus a named alternate, because intent on the owner’s own requests must be approved by someone else. Headcount open, not absorbed (Plan 02); the translation slice shrinks</td><td>Directing engineers and analysts; one named entry track (E-572)</td></tr><tr><td><strong>Area technical owner</strong> (rule and contract owner)</td><td>Owning team, or a complicated-subsystem team</td><td>Executable rule set and decision records; contract files with a breaking-change policy (Plan 03)</td><td>Rule set and contract checks as required checks under code owners the agent is not in; edits to them are tier-2 check files</td><td>Architecture, reading rule-set reds, contract evolution</td><td>One per area or owned contract set, plus a named co-owner, because a check-file edit needs the check owner’s own approval, separate from approval of the change (G1), and the owner cannot give it on an edit they directed</td><td>Senior directing engineers</td></tr><tr><td><strong>Approver</strong> — a duty, not a job</td><td>Owners of the area, and engineers of another team for tier 2</td><td>An approval bound to the commit (Plan 05); in classes A and B, the compliance gate (Plan 07)</td><td>G1, G3; distinctness computed from identities at the forge</td><td>Reading a change against intent, rules and evidence; saying no</td><td>Floor per change by tier and class (step 5 table); pool hours set by change rate (step 5)</td><td>Every role above holding area ownership</td></tr><tr><td><strong>Release owner</strong>, per service</td><td>Owning team</td><td>Release policy and analysis templates; approval of every deployment in classes A and B (Plans 06, 07); an additional blocking authority over tier-0 classes, not their answerable owner (D-040)</td><td>Release gate, G3; on the drafter’s assignment, one of the two irreversible-class approvers (G5; Plan 06 names no role for them)</td><td>Rollout and rollback judgement, reading telemetry</td><td>One per service, with a named alternate</td><td>Owning-team engineers who have held on-call</td></tr><tr><td><strong>On-call engineer</strong></td><td>Owning team rota</td><td>Incident decisions; approves ops-agent writes, with a second human for non-reversible writes and break-glass (Plan 06)</td><td>G5 for ops writes</td><td>Diagnosing the service without the agent</td><td>A rota. No source sizes it, and no evidence says agents reduce it (Plan 06)</td><td>The owning team</td></tr><tr><td><strong>Platform owner</strong> (one platform team)</td><td>Platform team</td><td>Golden paths and baseline instructions (03); the agent envelope and managed configuration (04); merge queue and required checks (04); forge locks (05); OIDC trust, environments and deploy workflows (06); supply-chain policy (06); forge configuration, approval rules, exclusion check, evidence store and the org-operated agent fleet (07)</td><td>G4: a boundary only where its deciding component sits outside the constrained party’s reach; every edit is a tier-2 check file; in classes A to C, edits to approval rules, the exclusion check and the evidence store also need the compliance owner’s approval (Plan 07)</td><td>Platform and security engineering</td><td>A team. A platform or support role appeared in at least four of the eight earlier shifts, but the one share in the files is 4% of a vendor survey (E-583, C), so its size is open</td><td>Engineers from owning teams</td></tr><tr><td><strong>Verification owner</strong></td><td>Verification function, outside the producing teams (Plan 05’s placement, untested; not a rule); the checkpoint also allows the role inside an owning team, held by someone other than the change’s directing engineer (D-080)</td><td>Ownership of the locks on check files, held-out suites, tier policy, the AI reviewer’s instructions and incident set, the coverage metric (Plan 05); test check files and ratification of producer-added tests, delegable per area to a check owner who is neither the change’s producer nor its directing engineer; proposing entries to the tier-0 class list, which is code-owned outside the producing team (D-080)</td><td>G1; in classes A to C reports to the compliance owner</td><td>Test design, oracle design, statistics of escapes</td><td>Unknown. The one pre-agent ratio is 6 QA engineers to 78 developers and team leads in a “quality assistance” model (E-417, B), a different job</td><td>Engineers who wrote oracles in owning teams</td></tr><tr><td><strong>Design-system owner and design engineer</strong></td><td>Design-system team</td><td>Token file, component registry, lint rules, accepted visual baselines (Plan 03); the design engineer maps designs to the registry, “the handoff role”</td><td>Token and component lint and visual regression under code owners; a human reviewer accepts baselines, never the producing agent’s identity (Plan 03); baselines are check files under their owner</td><td>Design, tokens, component APIs, reading diffs</td><td>Not stated by any source (E-264, E-265 are C)</td><td>Designers and front-end engineers</td></tr><tr><td><strong>Compliance owner</strong>, per regime scope</td><td>Outside the delivery teams</td><td>Regime map, control register, AI-tool inventory; approves edits to approval rules and class C’s preapproved types (Plan 07); co-approves requirements sourced from a regulation or acquisition contract (D-080)</td><td>Owns the compliance gate</td><td>Regulation, audit evidence</td><td>Small; present where classes A, B or C apply (Plan 07), or where requirements are sourced from an acquisition contract (D-080); absent otherwise</td><td>Risk and audit functions</td></tr><tr><td><strong>Security function</strong></td><td>Outside the delivery teams</td><td>Threat model of the lifecycle; G4’s run test by executing the forbidden action; the approved-model register with procurement and legal (Plans 04, 07)</td><td>G4</td><td>Offensive testing, supply chain</td><td>Not sized by any source</td><td>Security engineering</td></tr><tr><td><strong>Sponsor per agent identity</strong> — a duty</td><td>On the drafter’s assignment, the owning team’s lead for team agents and the platform owner for fleet agents (Plan 07 names no holder)</td><td>One named human per agent identity, with a disable switch (Plan 07, E-523)</td><td>G3 for the identity</td><td>—</td><td>One per agent identity</td><td>—</td></tr></tbody></table></div>
+<p><strong>Folded in.</strong> Arbiter into requirement owner. Rule owner and contract owner into area technical owner. Check owners into the area technical owner (rules and contract files) and the verification owner (tests), with the design-system owner owning visual baselines (D-080). Tier-1, tier-2, irreversible-class and class-sized approver pools into the approver duty, with each artifact’s own owner rules kept; a baseline change needs the design-system owner’s approval (D-080). The class owner per tier-0 class stays a named duty, as Plans 05 and 06 define it: the one human who answers for every change in the class; the class list is a check file code-owned outside the producing team (compliance owner, otherwise platform team), each entry naming its class owner, and the release owner is an added blocking authority, not a second answerable person (D-040, D-080). Integration owner, harness owner, credential-surface owner and supply-chain policy owner into the platform owner. Vendor and model approver into the security function. QA “as a function that owns the oracles” into the verification owner, with test-writing itself merged into owning teams (below). The agent drafter and agent proposer are not human roles.</p>
+<p><strong>What shrinks or goes.</strong> The change advisory board as a meeting (Plan 06). The per-change test team (Plan 05). The routine translation slice: requirements into tickets, boilerplate code, manual regression runs. A separate test-writing job: the outside view says verification first merges into producers (Microsoft’s SDET, Yahoo’s QA, Google’s SET, E-414 to E-416), and this lifecycle agrees in part. New behaviour needs a check the producer did not write. Tests added in the same change, whoever typed them, are listed as producer-authored and unratified until their owner ratifies them, and the expected closer is the requirement owner’s held-out acceptance check (verification note). So the human per-change check work sits with owners in the owning team: acceptance checks, ratification, check-file approvals. What stays separate, in Plan 05’s best guess, is ownership of the locks, held-out suites and tier policy. G1 does not require that placement: it bars the producer, and Plan 05 itself labels the placement untested. That split is Plan 05’s best guess, which embeds the people and keeps ownership of the locks, now with its headcount reading: per-change check work grows inside owning teams, and the verification function stays small. <em>Checkpoint (D-080): “owners in the owning team” reads as the verification owner role delegating test check files and ratification per area to a check owner who is neither the change’s producer nor its directing engineer.</em></p>
+<p><strong>Two vocabularies tested (survey handoff).</strong> Wang and Liu’s Responsibility Anchor holds “formal authority to accept or reject residual risk for a software baseline” (E-180). In this table that is the release owner per deployment and the requirement owner for intent, not the directing engineer, and their line that “Technical permissions are not identical to formal risk-acceptance authority” is why the platform owner is not an approver of what the platform lets through. OWASP’s distinct principals for generation, review, approval and deployment map onto the agent with its directing engineer, the AI reviewer plus human approver, the approver, and the release owner. The one difference: at tier 1 this lifecycle lets review and approval be the same human. Both vocabularies fit without a new role. The measured datum is that single-human oversight dominates agentic PRs in open source (E-183). This lifecycle requires two humans per tier-1 change, so it is stricter than observed practice, and the cost lands on the approver duty.</p>
+<h3 id="when-roles-may-be-one-person">When roles may be one person<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#when-roles-may-be-one-person" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>The phase notes asked at what size four sets of roles may collapse into one person, and how small a team must be for “no QA function”. The answer is by rule, not by headcount. A collapse is allowed wherever no rule separates the roles, and the rules differ by regime class. Where a cell rests on a reading or a best guess rather than a rule, the Why column says so.</p>
+<p><strong>Plan 08 pivot trigger 2 does not fire (D-058).</strong> Its condition is that one plan retires a role another relies on. None does: the change-board meeting and the per-change test team are the only roles declared to shrink, and nothing relies on either. The conflicts the phase notes do have are between small-team collapses and later independence rules. Three are decided by rules already in the log: the directing engineer as platform owner in classes A to C (row 3, D-050), the directing engineer merging under MAS or APRA (D-049), and the distinct people that tier 2 and irreversible releases need (D-052, the floor in step 5). Three rest on readings this note makes, listed for the checkpoint rather than presented as rules: the directing engineer is not Plan 03’s “producer” (row 2), a QA duty may sit inside an owning team (rows 4 and 5), and the reading of “size reviewers” in step 5. <em>The checkpoint accepted all three (D-080).</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Collapse</th><th>Class D</th><th>Class C</th><th>Classes A and B</th><th>Why</th></tr></thead><tbody><tr><td>Requirement owner + directing engineer (Plan 02)</td><td>Yes; intent approval on changes the person requested passes to the alternate</td><td>Same</td><td>Same</td><td>Intent approval bars the requester (Plan 02)</td></tr><tr><td>Directing engineer + rule owner + contract owner (Plan 03)</td><td>Yes, if the area has a co-owner to approve the person’s own rule or contract edits</td><td>Same</td><td>Same</td><td>Rule and contract files are tier-2 check files needing the check owner’s separate approval (G1). Allowing the collapse reads Plan 03’s “not a producer of changes in that area” through G1’s definition, where the producer is the agent: a reading, accepted at the checkpoint (D-080)</td></tr><tr><td>Directing engineer + platform owner + integration owner (Plan 04)</td><td>Yes, and the platform holds only against the agent</td><td><strong>No</strong>, for the substrate the person’s own sessions run on</td><td><strong>No</strong>, same scope as C</td><td>In A to C the directing engineer is a constrained party, and only substrate they do not operate holds against them (Plan 07, D-050). The platform team’s own agent work is covered by the same rule: its engineers’ sessions run on substrate administered by other platform engineers, so a one-person platform team cannot use agents on the platform in A to C</td></tr><tr><td>Verification owner + rule owner + approver (Plan 05)</td><td>Allowed by rule; check-file edits still need the outside approver</td><td>Allowed by rule, with the verification duty reporting to the compliance owner</td><td>Same as C</td><td>No rule bars it: G1 bars the producer, and Plan 07 sets a reporting line, not team membership (D-048). It departs from Plan 05’s untested placement outside the producing teams</td></tr><tr><td>”No QA function” (Plan 05 alternative)</td><td>Allowed as a named duty in an owning team, with an outside approver pool for tier 2</td><td>Same, reporting to the compliance owner</td><td>Same as C</td><td>The duties must exist (G1 needs a check the producer did not write, which a human in the team can write). No rule and no evidence sets a team size at which a separate function is needed; the one ratio is pre-agent (E-417)</td></tr></tbody></table></div>
+<p>So the smallest organisation that can run this lifecycle with any tier-2 path, which every enterprise has because CI files, security paths and check files are tier 2, is two owning teams or one team with an external approver pool. That is a floor on teams, not on people.</p>
+<h2 id="step-5--size-as-a-function">Step 5 — Size as a function<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#step-5--size-as-a-function" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>The brief asks for size as a function of codebase size, regulatory profile, legacy share and verification cost per item. No parameter below is measured, so the function is the drafter’s model, labelled <strong>untested</strong>. It is an accounting identity: it is true for any team, and its content is which terms agents change and which the rules fix (D-060).</p>
+<p><strong>Per owning team, per week:</strong></p>
+<blockquote>
+<p>human hours needed = changes × (directing + checks + review per approval × human approvals) + deployments × release approvals + standing duties</p>
+<p>people = human hours needed ÷ usable hours per person, and never below the floor</p>
+</blockquote>
+<ul>
+<li><strong>Changes</strong> is demand: what the team is asked to ship. Plan 05’s intake cap limits it to what the team’s people can verify, so the function runs two ways. Given demand, it says how many people are needed. Given the people, it says what intake to cap at. Which way an organisation runs it is a policy choice, not an output.</li>
+<li><strong>Directing</strong> is cutting the unit, writing the brief and steering the agent. This is the term agents are expected to cut, but the evidence is volume per engineer, not hours per change: merged PRs up 24% at Microsoft (E-560), commits fivefold at Anthropic (E-573). Anthropic also reports meta-work, which includes writing specs, rising from 10% to 22% of sessions (E-573), so part of directing grew.</li>
+<li><strong>Checks</strong> is the human check work for new behaviour, which the producer may not supply: the requirement owner’s held-out acceptance check, ratifying tests added in the change, and the check owner’s approval of any check-file edit (verification note). Agents do not remove this term.</li>
+<li><strong>Review per approval</strong> is verification cost per item. Nothing read says agents cut it. When the author cannot explain the reasoning, review gets harder (review-capacity note). Review effort concentrates in a predictable tail of PRs (extract <code>08-r2</code> §2.15), which supports Plan 05’s triage over staffing. One vendor dataset points the other way: review minutes grew 3.1× against 4.2× output, so per unit of output review time fell (review-capacity note, vendor, C). That can mean cheaper review or thinner review. The review-capacity note’s wider reading is that where review can be routed around, it is, and assurance inputs fall silently. In this lifecycle approvals cannot be bypassed, so whether per-change review time falls is unmeasured.</li>
+<li><strong>Human approvals per change</strong> come from the tier mix: zero at tier 0 (non-executable content only, D-072: class D, and class C’s expressly preapproved types, not under PCI or DORA’s simplified framework without an assessor, D-049), one at tier 1, two at tier 2, and a second person to merge under MAS or APRA. Classes A and B allow no tier 0.</li>
+<li><strong>Release approvals per deployment</strong> are the release owner’s approval of each deployment in classes A and B and the two irreversible-class approvals. A deployment can carry many changes, so this term scales with deployments, not changes.</li>
+<li><strong>Standing duties</strong> are owning the requirement baseline, the rule set and contracts, the release policy, the on-call rota, and keeping the theory of the service.</li>
+</ul>
+<p><strong>Across the organisation:</strong> number of owning teams = what must be owned ÷ what one team can hold. What one team can hold falls with the rate of change and with legacy share. Legacy code without an oracle needs Plan 06’s legacy-behaviour oracle written before agents change it. The argument that a service’s theory is held only by people rests on Naur (E-491, C); Lehman’s laws (E-444, B) support continual adaptation and growing complexity, and his familiarity law was not tested. So the theory-holding floor rests on a C source alone and is labelled untested. Add one platform team, a small verification function, and a compliance owner per regime scope in classes A to C.</p>
+<p><strong>Which variable dominates, and on what condition.</strong></p>
+<ul>
+<li><strong>Where demand rises with output:</strong> the human verification work per change, checks plus review times approvals, is the candidate dominant term. It binds if this lifecycle’s gates stop work routing around review (D-065), which is the pressure valve the review-capacity note found. It is human work by rule, and the regime class multiplies the review part. It dominates <strong>if</strong> directing hours per change fall below it. That is unmeasured: the strongest support for review being the bottleneck is Google’s AI migrations, where directing cost is low by design (E-465), and Anthropic’s idle-waiting figure counts waiting on any human input, not review alone (E-573). If the condition holds, class A and B teams’ hours scale almost linearly with change count, since every change carries an independent human approval, while a class D team with a proven tier-0 class can move part of its intake to zero approvals.</li>
+<li><strong>Where demand stays flat:</strong> the floor dominates. Directing hours fall, and the team shrinks to the largest of the distinct-human floor for its paths, the on-call rota, and the people needed to hold the theory of what it owns. The one team-level precedent was offset by more branches for a time and then was not (E-585).</li>
+<li><strong>Codebase size and legacy share set the number of teams, not their size.</strong></li>
+</ul>
+<p><strong>What the rules fix (the floor, checked against D-048, D-049 and D-052).</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Change path</th><th>Distinct humans per change, minimum</th></tr></thead><tbody><tr><td>Tier 0 (non-executable content, D-072; class D, or class C’s preapproved types)</td><td>1: the directing engineer merges under the class owner’s policy</td></tr><tr><td>Tier 1</td><td>2: the directing engineer plus an approver who is neither requester, producer, directing engineer nor pusher</td></tr><tr><td>Tier 2</td><td>3, at least one from outside the producing team</td></tr><tr><td>Irreversible release</td><td>The directing engineer plus two distinct approvers</td></tr><tr><td>MAS or APRA, any change</td><td>2: whoever merges or dispatches is not the directing engineer</td></tr><tr><td>Classes A and B, any change</td><td>An independent approver at merge plus the release owner’s approval of each deployment; no tier 0</td></tr><tr><td>Ops action, non-reversible</td><td>2 distinct approvers</td></tr></tbody></table></div>
+<p>In class D the tier-1 and tier-2 approvals are the program’s default, not a regime requirement (Plan 07’s governance table); in classes A to C they are required.</p>
+<p>The rules give no team size. They give two people per owning team for tier 1, an outside pool for tier 2, and three distinct people wherever an irreversible class exists. A two-person team with a second human required for non-reversible ops writes has its whole headcount on call, so the on-call rota sets a higher practical floor. No source sizes it.</p>
+<p><strong>“Size reviewers”, “scoped, not staffed up” and “pools sized by class”: a partition, not a reconciliation (D-060).</strong> The defect null behind “do not add reviewers” (E-007) concerns defect yield. No approval in this lifecycle rests on defect yield: tier-1 and tier-2 approvals rest on G1 and G3 in every class, and on regime text in A and B. So the null lowers approver hours nowhere. What differs by class is tier 0 and the release-owner approvals. This note’s reading:</p>
+<ul>
+<li><strong>Everywhere</strong>, the approver duty is held by existing owners and by another team’s engineers for tier 2, not by a separately staffed review team, and Plan 05’s per-item cost cuts and triage apply.</li>
+<li><strong>In classes C and D</strong>, a proven tier-0 class takes changes out of the approval term, and Plan 05’s “scoped, not staffed up” holds with intake capped to owner hours. <em>Checkpoint (D-072): tier 0 now holds only copy and translations under the escape-rate condition, so this takes little out of the approval term. In classes C and D the approval term is close to one approval per change, and the C/D side of this partition is re-read in that light (D-080).</em></li>
+<li><strong>In classes A and B</strong>, there is no tier 0, so approver hours are a floor per change that grows with change count. Plan 05’s “not staffed up” is overridden there: if intake grows, owner hours for approval must grow with it.</li>
+<li><strong>Untested on either side:</strong> review may also be how a service’s theory spreads (review-capacity note; extract <code>08-r0</code> §0.17), which would argue for review hours in every class. No evidence either way.</li>
+</ul>
+<p><strong>What the team-size range stays.</strong> Team Topologies’ five to nine (E-546, C) is kept as the upper bound for a trusting human team, with agents not counted, and labelled untested: it comes from social-group research, not software. Its lower bound of five is not kept. This note’s lower bound is the rule-derived floor above plus the on-call rota.</p>
+<h2 id="step-6--skills-and-the-junior-rung">Step 6 — Skills and the junior rung<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#step-6--skills-and-the-junior-rung" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>What the lifecycle needs people to be able to do.</strong> Every role in step 4 rests on judgement: cutting a unit, reading a diff against intent, saying no to a change, holding the theory of a service. Plan 04 found review and unit-cutting judgement to be the scarce inputs, “whoever runs the agent”. The criteria note’s V1 requires that people “keep the ability to judge and own the output, and grow it”.</p>
+<p><strong>What erodes it, on the evidence.</strong></p>
+<ul>
+<li>When the AI does the learner’s cognitive work, later unaided performance falls. Learning a library with AI cut comprehension 17% (E-219, A, n=52). Unguarded GPT-4 raised assisted maths grades and cut later unassisted grades 17%, and a tutor configuration largely removed the harm (E-563, A).</li>
+<li>Practice that substitutes AI for the work predicts smaller skill gains, and “organizations screening on that output cannot tell them apart” (E-565, B; the telemetry half is A provisional, abstract only).</li>
+<li>Experts lose skill too: endoscopists’ unaided detection fell within three months of AI arriving (E-564, A, medicine, observational).</li>
+<li>The supervision channel thins. Copilot users shifted away from project-management activity and collaborative work, which the authors read as less help-seeking (E-558, A, vendor co-authored); in Lambert and Schindler’s model juniors consume senior supervision time, so anything that raises its cost pushes firms toward seniors (E-554).</li>
+<li>Peripheral contributors merge agent PRs without passing CI more often than core contributors (E-561, A), which fits judgement over agent output tracking experience in a project (project tenure, not career seniority).</li>
+</ul>
+<p>None of this is measured for professional programmers over a career. No 2026 replication of E-219 for programmers was found.</p>
+<p><strong>The junior rung (drafter’s design, untested).</strong> The class says the bottom rung goes first (E-586, E-579), the AI-era data match (E-551, E-552), and no organisation has shown a working replacement. So the lifecycle treats junior intake as a decision, not a by-product:</p>
+<ul>
+<li><strong>Intake with a mentor budget.</strong> Each owning team that takes juniors budgets senior hours for them. Of the two firms expanding intern intake, Shopify names senior engineers’ time as the bottleneck and Cloudflare calls mentors essential (E-567, E-568).</li>
+<li><strong>A learner mode.</strong> A junior’s agent runs in a tutor configuration on designated learning units: it explains and asks rather than writing the change (the E-563 guarded arm). Juniors direct normal tier-1 work too, always with a senior approver, which the tier rules already require.</li>
+<li><strong>AI-free reps and assessment.</strong> Progression is judged on work done without the agent, because AI-aided output cannot show skill (E-565). Shopify tests candidates with no AI, optional AI and mandatory AI, and says nobody yet knows whether high scorers perform well (extract <code>08-r3</code> §3.3).</li>
+<li><strong>Review as apprenticeship.</strong> Juniors read and explain changes as a second reader before they are approvers of record.</li>
+<li><strong>Seniors and the team keep hands-on reps.</strong> The practitioner sources name four practices for keeping skill: deliberate no-AI practice (Anthropic engineers), “explain the layer two or three below” (Shopify), craft leaders kept as a separate line (LinkedIn), and senior coaching paired with agent onboarding (a Swedish telecom). None is measured (extract <code>08-r3</code>, T-skill summary). The lifecycle adds one of its own, untested: on-call diagnosis is practised without the agent, since that is when the agent’s reading of the service may be wrong.</li>
+</ul>
+<p><strong>What would change this.</strong> A firm reporting outcomes (retention, time to approver, escaped defects) for a deliberate junior design, or a career-length study of skill under agents. Until then this section is a design, not a finding.</p>
+<h2 id="step-7--adoption-with-mixed-fluency">Step 7 — Adoption with mixed fluency<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#step-7--adoption-with-mixed-fluency" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>What does not break.</strong> The gates are at the forge and platform, so a person who uses agents little cannot weaken them. Human-written changes go through the same tiers. Plan 04’s stance holds: the fluency spread is a design input, and the boundary is set at the platform for everyone.</p>
+<p><strong>What breaks when people use agents little.</strong></p>
+<ul>
+<li><strong>Review.</strong> A low-fluency reviewer facing agent-rate intake either stalls the queue or waves changes through. Small PRs were approved without comment most often (E-028). This is the failure the drafter expects to matter most (an inference, untested), and it sits on the term step 5 names as the candidate to dominate.</li>
+<li><strong>The intake cap.</strong> A cap set from the fastest directors’ throughput overloads the team’s slower reviewers.</li>
+<li><strong>The expectation gradient.</strong> In a mandated, appraisal-linked rollout, expected gains grew “with hierarchical distance from the code” (E-576, B). Productivity pressure without learning time stops people learning the tools (E-575, B).</li>
+<li><strong>Theory concentration.</strong> If a few heavy users produce most changes, the theory may concentrate in them, and the service loses it when they leave. This is the drafter’s inference. No source measures it.</li>
+</ul>
+<p><strong>What helps, on thin evidence.</strong> Team-specific demos of the team’s own tasks, champions, and protected learning time (E-575, one B). Skip-level peers’ use, which was the strongest predictor of adoption at Microsoft (E-560). Agent work made public by construction, so colleagues learn from transcripts (E-567, B). No outcome comparison of mandated and voluntary adoption exists (E-576). The lifecycle does not tie appraisal to agent use, and does not size anyone on perceived speed-up (Plan 04, E-337).</p>
+<p><strong>The designer case.</strong> The vault’s one record of a stalled adoption is a single-vantage account, with an undefeated rival explanation that the tools were built for programmers first (<a href="../ai/design-side-ai-adoption-stall" class="internal" data-slug="ai/design-side-ai-adoption-stall">design-side-ai-adoption-stall</a>). Read as adoption: designers do not need to direct agents to run this lifecycle. Their artifacts of record are the token file, the registry and accepted baselines (Plan 03), and the design engineer is the handoff role. The onramp in <a href="../ai/design-side-ai-onramp" class="internal" data-slug="ai/design-side-ai-onramp">design-side-ai-onramp</a>, which separates AI use from developer tooling, fits this, and is not validated.</p>
+<h2 id="the-eight-questions-the-subset-that-applies">The eight questions (the subset that applies)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-eight-questions-the-subset-that-applies" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="1-does-the-phase-survive--skipped">1. Does the phase survive? — skipped<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#1-does-the-phase-survive--skipped" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Team topology is not a phase. Plan 08 does not feed program trigger 2’s count.</p>
+<h3 id="2-who-does-the-work">2. Who does the work?<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#2-who-does-the-work" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Step 4’s table. Agents produce; directing engineers in owning teams direct and answer; owners approve; a platform team, a small verification function, a compliance owner and a security function sit outside the owning teams.</p>
+<h3 id="3-artifact-of-record--skipped">3. Artifact of record — skipped<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#3-artifact-of-record--skipped" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Plan 08 adds none. Each role answers for an artifact another plan defined.</p>
+<h3 id="4-the-gate">4. The gate<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#4-the-gate" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>No new gate. The separation floor in step 5 is enforced by existing gates: approver distinctness computed from F-sourced identities (D-048), tier-2 outside membership at approval time, and dual authorisation by distinct persons (D-052).</p>
+<h3 id="5-failure-modes">5. Failure modes<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#5-failure-modes" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li><strong>The approver becomes a rubber stamp</strong> when review hours do not grow with change count (E-028). Criteria V2 asks the synthesis to name any role designed this way. The approver duty is at risk of it in classes A and B whenever intake is not capped.</li>
+<li><strong>Owners hold too much.</strong> One person as requirement owner, area technical owner and release owner across several services loses the theory of some of them.</li>
+<li><strong>The entry rung disappears silently,</strong> through hiring that does not happen (E-552, E-570), with no line item to notice it.</li>
+<li><strong>The platform team becomes the bottleneck,</strong> since every envelope, lock and credential change is a tier-2 check file it owns.</li>
+<li><strong>Collapse past the rules.</strong> A small organisation lets the directing engineer administer the substrate their sessions run on in class A to C (step 4 table).</li>
+<li><strong>Enterprise-specific:</strong> approver pools drawn from a central group that knows none of the services, so “outside the producing team” becomes outside any understanding of the change.</li>
+</ul>
+<h3 id="6-team-shape-implications">6. Team shape implications<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#6-team-shape-implications" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>This note is the answer.</p>
+<h3 id="7-what-would-change-this">7. What would change this<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#7-what-would-change-this" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li><strong>An enterprise study of team, reviewer or approver headcount against agent adoption.</strong> It replaces the outside view in step 3.</li>
+<li><strong>A measured review cost per change under agents,</strong> in hours, with a comparison to human-authored changes. It turns step 5 into numbers.</li>
+<li><strong>A study comparing AI review with tiered human review on the same changes by escaped defects</strong> (Plan 05’s trigger). If AI catches as much, the approver term falls outside classes A and B.</li>
+<li><strong>A supervisor admitting tier 0 in class A</strong> (Plan 07). The approver floor there falls.</li>
+<li><strong>Evidence that demand for enterprise software does not absorb agent output.</strong> Then teams shrink to the floor, and the relocation reads as reduction.</li>
+<li><strong>Outcomes for a junior-rung design.</strong> Step 6 becomes a finding or is dropped.</li>
+</ul>
+<h3 id="8-best-guess-and-alternatives">8. Best guess and alternatives<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#8-best-guess-and-alternatives" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Best guess.</strong></p>
+<ul>
+<li>Owning teams (stream-aligned) per service or area, each holding requirement ownership, area technical ownership, release ownership and on-call for its services through their support period, sized by step 5 and never below the separation floor and the on-call rota. Five to nine people is kept as the upper bound, untested (E-546, C).</li>
+<li>One platform team owning every boundary control from Plans 03 to 07.</li>
+<li>A small verification function owning locks, held-out suites and tier policy, with per-change check work (acceptance checks, ratification) inside owning teams.</li>
+<li>A compliance owner per regime scope outside the delivery teams in classes A to C, and a security function.</li>
+<li>Size the human side on the human work per change (directing, checks, review times approvals) and per deployment, and cap intake to it. Do not size on the number of agent runs or on perceived speed-up.</li>
+<li>Junior intake kept as a decision with mentor hours, a learner mode and AI-free assessment.</li>
+</ul>
+<p>The headcount direction is relocation if demand absorbs agent output, and shrinkage toward the floor if it does not. The outside view (A and B sources on earlier shifts) supports the first branch only through a demand response nobody has measured for software. The sizing function and which term dominates, the role consolidation, the theory-holding floor (C only) and the junior design are <strong>untested</strong>: no A or B source measures any of them under agents. The pilot is told.</p>
+<p><strong>Alternatives and when they win.</strong></p>
+<ul>
+<li><strong>One small team, everyone holds every role.</strong> Wins in class D with no tier-2 path, which is not enterprise software as Plan 00 defines it. With a tier-2 path it needs an external approver pool.</li>
+<li><strong>StrongDM’s shape: no human review, humans own held-out scenarios</strong> (E-574). Wins only in class D, only for a class with Plan 05’s own-history escape condition met. It is never a separation of duties (D-048).</li>
+<li><strong>A central review team instead of owners approving.</strong> Wins where approvals must be independent of the delivery organisation and the reviewers can hold enough context. It loses the theory channel, and no source shows a central team keeping up with agent-rate intake.</li>
+<li><strong>No junior intake.</strong> Cheaper now. It wins only if the organisation can keep hiring its future seniors from outside. Whether that market holds when many firms cut their entry rung at once is the drafter’s concern, not a finding; the outside view shows only that the bottom rung goes first (E-586, E-579).</li>
+</ul>
+<h2 id="handoffs-this-plan-does-not-settle">Handoffs this plan does not settle<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#handoffs-this-plan-does-not-settle" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><strong>On-call rota size under ops agents.</strong> No source either way (Plan 06).</li>
+<li><strong>Reviewer hours per change, and the usable review share of a week.</strong> Plan 09 owns the cost and Plan 10 should measure both.</li>
+<li><strong>Whether demand absorbs agent output.</strong> The hinge of step 3, unmeasured.</li>
+<li><strong>Whether theory concentrates in heavy agent users.</strong> Step 7 inference.</li>
+<li><strong>Plan 09</strong> inherits the step 5 function as its cost model’s labour side.</li>
+</ul>
+<h2 id="findings-against-the-vaults-own-notes">Findings against the vault’s own notes<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#findings-against-the-vaults-own-notes" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Recorded as findings, not rewrites, with one line in each note linking here (D-062).</p>
+<ul>
+<li><strong><a href="https://github.com/oxzo/brains/tree/main/knowledge/general/skill-valuation-in-the-ai-age.md" class="external">skill-valuation-in-the-ai-age<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>:</strong> the “roughly 20%” junior decline was never read at source. The current <em>Canaries</em> revision (August 2026) reports a 19% descriptive gap for 22–25-year-olds in exposed occupations; the 13% and 16% were earlier regression estimates (E-551).</li>
+<li><strong><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/ai-job-displacement-timescales-mechanisms.md" class="external">ai-job-displacement-timescales-mechanisms<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>:</strong> the “−16% relative” is one revision’s estimate; the August 2026 revision reports 19% (E-551). Cite the version.</li>
+<li><strong><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/review-capacity-org-design.md" class="external">review-capacity-org-design<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>:</strong> “Do not add reviewers” rests on defect nulls (E-007). The program’s approvers in classes A and B rest on separation of duties, so the null does not lower approver hours there.</li>
+<li><strong><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/agentic-sdlc-release-operate-phase.md" class="external">agentic-sdlc-release-operate-phase<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>:</strong> “size reviewers and owners, not producers” holds as a sizing rule and fails as a forecast (step 3).</li>
+<li><strong><a href="../ai/design-side-ai-adoption-stall" class="internal" data-slug="ai/design-side-ai-adoption-stall">design-side-ai-adoption-stall</a>:</strong> its “What this trace did not do” section says it ran no forward trace and no adversarial pass, but the note contains both; and “assumption 5 below” sits above.</li>
+<li><strong>Plan 08’s brief</strong> said the 45% rule and rubber-stamp problem in <a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/multi-agent-diminishing-returns.md" class="external">multi-agent-diminishing-returns<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> “transfer to human teams”. The note does not claim that, and the program had already declined its numbers. The premise is dropped.</li>
+</ul>
+<h2 id="what-the-pilot-must-exercise">What the pilot must exercise<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#what-the-pilot-must-exercise" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ol>
+<li><strong>Count the floor.</strong> Run one tier-1, one tier-2 and one irreversible change. Record how many distinct people each needed, and whether the forge refused a collapse the rules forbid.</li>
+<li><strong>Measure review hours per change</strong> for agent-authored and human-authored changes of the same tier, so step 5 gets a number.</li>
+<li><strong>Try the forbidden collapse.</strong> In a class A to C configuration, have the directing engineer hold admin on the substrate their session runs on. The G4 run test must catch it.</li>
+<li><strong>Run one learner-mode unit</strong> with a tutor-configured agent and an AI-free check afterwards.</li>
+</ol>
+<p>A solo pilot cannot test points 1 and 3 beyond refusal. Plan 10 recruits a second person or lists them as untestable in advance.</p>
+<h2 id="related">Related<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#related" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><a href="https://github.com/oxzo/brains/tree/main/projects/agentic-sdlc/master-plan.md" class="external">projects/agentic-sdlc/master-plan<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — the program and its contracts</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/agentic-sdlc-evaluation-criteria.md" class="external">agentic-sdlc-evaluation-criteria<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — G1 to G6, V1 and V2, and the fewer-roles tie-break</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/agentic-sdlc-requirements-phase.md" class="external">agentic-sdlc-requirements-phase<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>, <a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/agentic-sdlc-design-phase.md" class="external">agentic-sdlc-design-phase<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>, <a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/agentic-sdlc-build-phase.md" class="external">agentic-sdlc-build-phase<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>, <a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/agentic-sdlc-verification-phase.md" class="external">agentic-sdlc-verification-phase<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>, <a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/agentic-sdlc-release-operate-phase.md" class="external">agentic-sdlc-release-operate-phase<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>, <a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/agentic-sdlc-governance-layer.md" class="external">agentic-sdlc-governance-layer<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — the team-shape sections reconciled here</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/review-capacity-org-design.md" class="external">review-capacity-org-design<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — cut per-item cost; corrected here for classes A and B</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/ai-function-topology.md" class="external">ai-function-topology<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — the vault’s earlier read of Conway and Team Topologies</li>
+<li><a href="../general/higher-order-thinking-under-ai" class="internal" data-slug="general/higher-order-thinking-under-ai">higher-order-thinking-under-ai</a>, <a href="../general/teaching-higher-order-thinking" class="internal" data-slug="general/teaching-higher-order-thinking">teaching-higher-order-thinking</a>, <a href="https://github.com/oxzo/brains/tree/main/knowledge/general/skill-valuation-in-the-ai-age.md" class="external">skill-valuation-in-the-ai-age<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — the skill thread step 6 draws on</li>
+<li><a href="../ai/cognitive-burden-of-ai-use" class="internal" data-slug="ai/cognitive-burden-of-ai-use">cognitive-burden-of-ai-use</a> — review capacity as time per item</li>
+<li><a href="../ai/design-side-ai-adoption-stall" class="internal" data-slug="ai/design-side-ai-adoption-stall">design-side-ai-adoption-stall</a>, <a href="../ai/design-side-ai-onramp" class="internal" data-slug="ai/design-side-ai-onramp">design-side-ai-onramp</a> — the adoption case</li>
+</ul>
+<h2 id="sources">Sources<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#sources" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Ledger rows E-542 to E-587 were entered for this plan on 2026-11-01, each with its read depth, and the earlier rows cited are carried from Plans 00 to 07. The source-level extracts, with URLs and verbatim quotes:</p>
+<ul>
+<li><code>projects/agentic-sdlc/extracts/08-r0-vault-inputs.md</code>: the input notes, the 33 roles, every handoff to Plan 08, the derived floor</li>
+<li><code>08-r1-classic-team-claims.md</code>: Conway, Brooks, Team Topologies, two-pizza teams, DORA, Google’s review norm, social loafing</li>
+<li><code>08-r2-measured-employment-skills.md</code>: early-career employment, startup size, output per engineer, review, skill formation</li>
+<li><code>08-r3-practitioner-roles-adoption.md</code>: mandates, headcount statements, role redesign, junior hiring, adoption studies</li>
+<li><code>08-r4-reference-classes.md</code>: compilers, offshoring, DevOps, low-code, ATMs, spreadsheets, CAD, QA automation</li>
+<li><code>08-s1-classic-evidence-refclass.md</code>: steps 1 to 3, with the fresh-context reference-class drill as written</li>
+</ul></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>Graph View</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc desktop-only"><button type="button" class="toc-header" aria-controls="toc-content" aria-expanded="true"><h3>Table of Contents</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="toc-content"><ul id="ojn225" class="overflow"><li class="depth-0"><a href="#agentic-sdlc--team-topology-roles-skills-size" data-for="agentic-sdlc--team-topology-roles-skills-size">Agentic SDLC — Team Topology, Roles, Skills, Size</a></li><li class="depth-1"><a href="#the-answer-in-seven-lines" data-for="the-answer-in-seven-lines">The answer in seven lines</a></li><li class="depth-1"><a href="#step-1--the-classic-answers-restated-for-agents" data-for="step-1--the-classic-answers-restated-for-agents">Step 1 — The classic answers, restated for agents</a></li><li class="depth-1"><a href="#step-2--what-the-evidence-says" data-for="step-2--what-the-evidence-says">Step 2 — What the evidence says</a></li><li class="depth-1"><a href="#step-3--the-outside-view-and-pivot-trigger-1" data-for="step-3--the-outside-view-and-pivot-trigger-1">Step 3 — The outside view, and pivot trigger 1</a></li><li class="depth-1"><a href="#step-4--the-roles-table" data-for="step-4--the-roles-table">Step 4 — The roles table</a></li><li class="depth-2"><a href="#when-roles-may-be-one-person" data-for="when-roles-may-be-one-person">When roles may be one person</a></li><li class="depth-1"><a href="#step-5--size-as-a-function" data-for="step-5--size-as-a-function">Step 5 — Size as a function</a></li><li class="depth-1"><a href="#step-6--skills-and-the-junior-rung" data-for="step-6--skills-and-the-junior-rung">Step 6 — Skills and the junior rung</a></li><li class="depth-1"><a href="#step-7--adoption-with-mixed-fluency" data-for="step-7--adoption-with-mixed-fluency">Step 7 — Adoption with mixed fluency</a></li><li class="depth-1"><a href="#the-eight-questions-the-subset-that-applies" data-for="the-eight-questions-the-subset-that-applies">The eight questions (the subset that applies)</a></li><li class="depth-2"><a href="#1-does-the-phase-survive--skipped" data-for="1-does-the-phase-survive--skipped">1. Does the phase survive? — skipped</a></li><li class="depth-2"><a href="#2-who-does-the-work" data-for="2-who-does-the-work">2. Who does the work?</a></li><li class="depth-2"><a href="#3-artifact-of-record--skipped" data-for="3-artifact-of-record--skipped">3. Artifact of record — skipped</a></li><li class="depth-2"><a href="#4-the-gate" data-for="4-the-gate">4. The gate</a></li><li class="depth-2"><a href="#5-failure-modes" data-for="5-failure-modes">5. Failure modes</a></li><li class="depth-2"><a href="#6-team-shape-implications" data-for="6-team-shape-implications">6. Team shape implications</a></li><li class="depth-2"><a href="#7-what-would-change-this" data-for="7-what-would-change-this">7. What would change this</a></li><li class="depth-2"><a href="#8-best-guess-and-alternatives" data-for="8-best-guess-and-alternatives">8. Best guess and alternatives</a></li><li class="depth-1"><a href="#handoffs-this-plan-does-not-settle" data-for="handoffs-this-plan-does-not-settle">Handoffs this plan does not settle</a></li><li class="depth-1"><a href="#findings-against-the-vaults-own-notes" data-for="findings-against-the-vaults-own-notes">Findings against the vault’s own notes</a></li><li class="depth-1"><a href="#what-the-pilot-must-exercise" data-for="what-the-pilot-must-exercise">What the pilot must exercise</a></li><li class="depth-1"><a href="#related" data-for="related">Related</a></li><li class="depth-1"><a href="#sources" data-for="sources">Sources</a></li><li class="overflow-end"></li></ul></div></div><div class="backlinks"><h3>Backlinks</h3><ul id="t93upu" class="overflow"><li><a href="../ai/agentic-sdlc-best-guess" class="internal">Agentic SDLC — The Best Guess, the Alternatives, and What Decides</a></li><li><a href="../ai/agentic-sdlc-candidate-a-explained" class="internal">Agentic SDLC — Candidate A, the Assembled Lifecycle, Explained</a></li><li><a href="../ai/design-side-ai-adoption-stall" class="internal">Why Design-Side AI Adoption Stalls — a Structural Trace</a></li><li><a href="../ai/" class="internal">AI — Index</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v4.4.1</a> © 2026</p><ul><li><a href="https://github.com/oxzo/brains">source</a></li><li><a href="/index.xml">rss</a></li></ul></footer></div></div></body><script type="application/javascript">function o(){let t=this.parentElement;t.classList.toggle("is-collapsed");let e=t.classList.contains("is-collapsed")?this.scrollHeight:t.scrollHeight;t.style.maxHeight=e+"px";let c=t,l=t.parentElement;for(;l;){if(!l.classList.contains("callout"))return;let i=l.classList.contains("is-collapsed")?l.scrollHeight:l.scrollHeight+c.scrollHeight;l.style.maxHeight=i+"px",c=l,l=l.parentElement}}function n(){let t=document.getElementsByClassName("callout is-collapsible");for(let s of t){let e=s.firstElementChild;if(!e)continue;e.addEventListener("click",o),window.addCleanup(()=>e.removeEventListener("click",o));let l=s.classList.contains("is-collapsed")?e.scrollHeight:s.scrollHeight;s.style.maxHeight=l+"px"}}document.addEventListener("nav",n);
+</script><script type="module">function f(i,e){if(!i)return;function r(o){o.target===this&&(o.preventDefault(),o.stopPropagation(),e())}function t(o){o.key.startsWith("Esc")&&(o.preventDefault(),e())}i?.addEventListener("click",r),window.addCleanup(()=>i?.removeEventListener("click",r)),document.addEventListener("keydown",t),window.addCleanup(()=>document.removeEventListener("keydown",t))}function y(i){for(;i.firstChild;)i.removeChild(i.firstChild)}var h=class{constructor(e,r){this.container=e;this.content=r;this.setupEventListeners(),this.setupNavigationControls(),this.resetTransform()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;cleanups=[];setupEventListeners(){let e=this.onMouseDown.bind(this),r=this.onMouseMove.bind(this),t=this.onMouseUp.bind(this),o=this.resetTransform.bind(this);this.container.addEventListener("mousedown",e),document.addEventListener("mousemove",r),document.addEventListener("mouseup",t),window.addEventListener("resize",o),this.cleanups.push(()=>this.container.removeEventListener("mousedown",e),()=>document.removeEventListener("mousemove",r),()=>document.removeEventListener("mouseup",t),()=>window.removeEventListener("resize",o))}cleanup(){for(let e of this.cleanups)e()}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let r=this.createButton("+",()=>this.zoom(.1)),t=this.createButton("-",()=>this.zoom(-.1)),o=this.createButton("Reset",()=>this.resetTransform());e.appendChild(t),e.appendChild(o),e.appendChild(r),this.container.appendChild(e)}createButton(e,r){let t=document.createElement("button");return t.textContent=e,t.className="mermaid-control-button",t.addEventListener("click",r),window.addCleanup(()=>t.removeEventListener("click",r)),t}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}zoom(e){let r=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),t=this.content.getBoundingClientRect(),o=t.width/2,n=t.height/2,c=r-this.scale;this.currentPan.x-=o*c,this.currentPan.y-=n*c,this.scale=r,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){this.scale=1;let e=this.content.querySelector("svg");this.currentPan={x:e.getBoundingClientRect().width/2,y:e.getBoundingClientRect().height/2},this.updateTransform()}},C=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],E;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;E||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let r=E.default,t=new WeakMap;for(let n of e)t.set(n,n.innerText);async function o(){for(let s of e){s.removeAttribute("data-processed");let a=t.get(s);a&&(s.innerHTML=a)}let n=C.reduce((s,a)=>(s[a]=window.getComputedStyle(document.documentElement).getPropertyValue(a),s),{}),c=document.documentElement.getAttribute("saved-theme")==="dark";r.initialize({startOnLoad:!1,securityLevel:"loose",theme:c?"dark":"base",themeVariables:{fontFamily:n["--codeFont"],primaryColor:n["--light"],primaryTextColor:n["--darkgray"],primaryBorderColor:n["--tertiary"],lineColor:n["--darkgray"],secondaryColor:n["--secondary"],tertiaryColor:n["--tertiary"],clusterBkg:n["--light"],edgeLabelBackground:n["--highlight"]}}),await r.run({nodes:e})}await o(),document.addEventListener("themechange",o),window.addCleanup(()=>document.removeEventListener("themechange",o));for(let n=0;n<e.length;n++){let v=function(){let g=l.querySelector("#mermaid-space"),m=l.querySelector(".mermaid-content");if(!m)return;y(m);let w=c.querySelector("svg").cloneNode(!0);m.appendChild(w),l.classList.add("active"),g.style.cursor="grab",u=new h(g,m)},M=function(){l.classList.remove("active"),u?.cleanup(),u=null},c=e[n],s=c.parentElement,a=s.querySelector(".clipboard-button"),d=s.querySelector(".expand-button"),p=window.getComputedStyle(a),L=a.offsetWidth+parseFloat(p.marginLeft||"0")+parseFloat(p.marginRight||"0");d.style.right=`calc(${L}px + 0.3rem)`,s.prepend(d);let l=s.querySelector("#mermaid-container");if(!l)return;let u=null;d.addEventListener("click",v),f(l,M),window.addCleanup(()=>{u?.cleanup(),d.removeEventListener("click",v)})}});
+</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript"></script><script src="../postscript.9f9f68c6.js" type="module"></script></html>
