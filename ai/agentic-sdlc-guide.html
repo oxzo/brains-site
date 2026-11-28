@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en"><head><title>Agentic SDLC — Current Best-Guess Guide · second-brain</title><meta charset="utf-8"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&amp;family=Inter:wght@400;500;600;700&amp;family=JetBrains Mono:wght@400;500&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="synapse"/><meta property="og:title" content="Agentic SDLC — Current Best-Guess Guide · second-brain"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Agentic SDLC — Current Best-Guess Guide · second-brain"/><meta name="twitter:description" content="Agentic SDLC — Current Best-Guess Guide As of November 2026. This is the practical, standalone guide distilled from the vault’s enterprise Agentic SDLC research program (starting from agentic-sdlc-best-guess and its phase notes)."/><meta property="og:description" content="Agentic SDLC — Current Best-Guess Guide As of November 2026. This is the practical, standalone guide distilled from the vault’s enterprise Agentic SDLC research program (starting from agentic-sdlc-best-guess and its phase notes)."/><meta property="og:image:alt" content="Agentic SDLC — Current Best-Guess Guide As of November 2026. This is the practical, standalone guide distilled from the vault’s enterprise Agentic SDLC research program (starting from agentic-sdlc-best-guess and its phase notes)."/><meta property="twitter:domain" content="oxzo.github.io/brains-site"/><meta property="og:url" content="https://oxzo.github.io/brains-site/ai/agentic-sdlc-guide"/><meta property="twitter:url" content="https://oxzo.github.io/brains-site/ai/agentic-sdlc-guide"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="Agentic SDLC — Current Best-Guess Guide As of November 2026. This is the practical, standalone guide distilled from the vault’s enterprise Agentic SDLC research program (starting from agentic-sdlc-best-guess and its phase notes)."/><meta name="generator" content="Quartz"/><link href="../index.d28573c7.css" rel="stylesheet" type="text/css" spa-preserve/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  padding: 2rem;
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL2hvbWUvcnVubmVyL3dvcmsvYnJhaW5zL2JyYWlucy9zaXRlL3F1YXJ0ei9jb21wb25lbnRzL3N0eWxlcyIsInNvdXJjZXMiOlsibWVybWFpZC5pbmxpbmUuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTs7QUFHRjtFQUNFO0VBQ0E7O0FBR0Y7RUFDRTs7O0FBS0Y7RUFDRTtFQUNBOzs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7O0FBR0Y7RUFDRTs7QUFJRjtFQUNFO0VBQ0E7RUFDQSIsInNvdXJjZXNDb250ZW50IjpbIi5leHBhbmQtYnV0dG9uIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbG9hdDogcmlnaHQ7XG4gIHBhZGRpbmc6IDAuNHJlbTtcbiAgbWFyZ2luOiAwLjNyZW07XG4gIHJpZ2h0OiAwOyAvLyBOT1RFOiByaWdodCB3aWxsIGJlIHNldCBpbiBtZXJtYWlkLmlubGluZS50c1xuICBjb2xvcjogdmFyKC0tZ3JheSk7XG4gIGJvcmRlci1jb2xvcjogdmFyKC0tZGFyayk7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWxpZ2h0KTtcbiAgYm9yZGVyOiAxcHggc29saWQ7XG4gIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgb3BhY2l0eTogMDtcbiAgdHJhbnNpdGlvbjogMC4ycztcblxuICAmID4gc3ZnIHtcbiAgICBmaWxsOiB2YXIoLS1saWdodCk7XG4gICAgZmlsdGVyOiBjb250cmFzdCgwLjMpO1xuICB9XG5cbiAgJjpob3ZlciB7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIGJvcmRlci1jb2xvcjogdmFyKC0tc2Vjb25kYXJ5KTtcbiAgfVxuXG4gICY6Zm9jdXMge1xuICAgIG91dGxpbmU6IDA7XG4gIH1cbn1cblxucHJlIHtcbiAgJjpob3ZlciA+IC5leHBhbmQtYnV0dG9uIHtcbiAgICBvcGFjaXR5OiAxO1xuICAgIHRyYW5zaXRpb246IDAuMnM7XG4gIH1cbn1cblxuI21lcm1haWQtY29udGFpbmVyIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICBjb250YWluOiBsYXlvdXQ7XG4gIHotaW5kZXg6IDk5OTtcbiAgbGVmdDogMDtcbiAgdG9wOiAwO1xuICB3aWR0aDogMTAwdnc7XG4gIGhlaWdodDogMTAwdmg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGRpc3BsYXk6IG5vbmU7XG4gIGJhY2tkcm9wLWZpbHRlcjogYmx1cig0cHgpO1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuNSk7XG5cbiAgJi5hY3RpdmUge1xuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgfVxuXG4gICYgPiAjbWVybWFpZC1zcGFjZSB7XG4gICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1saWdodCk7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDUwJTtcbiAgICBsZWZ0OiA1MCU7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gICAgaGVpZ2h0OiA4MHZoO1xuICAgIHdpZHRoOiA4MHZ3O1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG5cbiAgICAmID4gLm1lcm1haWQtY29udGVudCB7XG4gICAgICBwYWRkaW5nOiAycmVtO1xuICAgICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgICAgdHJhbnNmb3JtLW9yaWdpbjogMCAwO1xuICAgICAgdHJhbnNpdGlvbjogdHJhbnNmb3JtIDAuMXMgZWFzZTtcbiAgICAgIG92ZXJmbG93OiB2aXNpYmxlO1xuICAgICAgbWluLWhlaWdodDogMjAwcHg7XG4gICAgICBtaW4td2lkdGg6IDIwMHB4O1xuXG4gICAgICBwcmUge1xuICAgICAgICBtYXJnaW46IDA7XG4gICAgICAgIGJvcmRlcjogbm9uZTtcbiAgICAgIH1cblxuICAgICAgc3ZnIHtcbiAgICAgICAgbWF4LXdpZHRoOiBub25lO1xuICAgICAgICBoZWlnaHQ6IGF1dG87XG4gICAgICB9XG4gICAgfVxuXG4gICAgJiA+IC5tZXJtYWlkLWNvbnRyb2xzIHtcbiAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgIGJvdHRvbTogMjBweDtcbiAgICAgIHJpZ2h0OiAyMHB4O1xuICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgIGdhcDogOHB4O1xuICAgICAgcGFkZGluZzogOHB4O1xuICAgICAgYmFja2dyb3VuZDogdmFyKC0tbGlnaHQpO1xuICAgICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICAgIGJvcmRlci1yYWRpdXM6IDZweDtcbiAgICAgIGJveC1zaGFkb3c6IDAgMnB4IDRweCByZ2JhKDAsIDAsIDAsIDAuMSk7XG4gICAgICB6LWluZGV4OiAyO1xuXG4gICAgICAubWVybWFpZC1jb250cm9sLWJ1dHRvbiB7XG4gICAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAgICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICAgICAgICB3aWR0aDogMzJweDtcbiAgICAgICAgaGVpZ2h0OiAzMnB4O1xuICAgICAgICBwYWRkaW5nOiAwO1xuICAgICAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodCk7XG4gICAgICAgIGNvbG9yOiB2YXIoLS1kYXJrKTtcbiAgICAgICAgYm9yZGVyLXJhZGl1czogNHB4O1xuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgICAgIGZvbnQtc2l6ZTogMTZweDtcbiAgICAgICAgZm9udC1mYW1pbHk6IHZhcigtLWJvZHlGb250KTtcbiAgICAgICAgdHJhbnNpdGlvbjogYWxsIDAuMnMgZWFzZTtcblxuICAgICAgICAmOmhvdmVyIHtcbiAgICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICB9XG5cbiAgICAgICAgJjphY3RpdmUge1xuICAgICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWSgxcHgpO1xuICAgICAgICB9XG5cbiAgICAgICAgLy8gU3R5bGUgdGhlIHJlc2V0IGJ1dHRvbiBkaWZmZXJlbnRseVxuICAgICAgICAmOm50aC1jaGlsZCgyKSB7XG4gICAgICAgICAgd2lkdGg6IGF1dG87XG4gICAgICAgICAgcGFkZGluZzogMCAxMnB4O1xuICAgICAgICAgIGZvbnQtc2l6ZTogMTRweDtcbiAgICAgICAgfVxuICAgICAgfVxuICAgIH1cbiAgfVxufVxuIl19 */</style><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" spa-preserve/><script src="../prescript.be9697b4.js" type="application/javascript" spa-preserve></script><script type="application/javascript" spa-preserve>const fetchData = fetch("../static/contentIndex.a5abb13e.json").then(data => data.json())</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://oxzo.github.io/brains-site/index.xml"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://oxzo.github.io/brains-site/ai/agentic-sdlc-guide-og-image.webp"/><meta property="og:image:url" content="https://oxzo.github.io/brains-site/ai/agentic-sdlc-guide-og-image.webp"/><meta name="twitter:image" content="https://oxzo.github.io/brains-site/ai/agentic-sdlc-guide-og-image.webp"/><meta property="og:image:type" content="image/.webp"/></head><body data-slug="ai/agentic-sdlc-guide"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">synapse</a></h2><div class="spacer mobile-only"></div><div style="display: flex; flex-direction: row; flex-wrap: nowrap; gap: 1rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button"><p>Search</p><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Search for something" placeholder="Search for something"/><div class="search-layout" data-preview="true"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Dark mode"><title>Dark mode</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Light mode"><title>Light mode</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div></div><div class="explorer" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a,b)=>!a.isFolder&amp;&amp;!b.isFolder||a.isFolder&amp;&amp;b.isFolder?a.displayName.localeCompare(b.displayName,void 0,{numeric:!0,sensitivity:\&quot;base\&quot;}):!a.isFolder&amp;&amp;b.isFolder?1:-1&quot;,&quot;filterFn&quot;:&quot;node=>node.slugSegment!==\&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;node=>node&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-content"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>Explorer</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="explorer-content" aria-expanded="false"><ul class="explorer-ul overflow" id="t8o3bz"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#"></a></li></template><template id="template-folder"><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../ai/">AI — Index</a></div></nav><h1 class="article-title">Agentic SDLC — Current Best-Guess Guide</h1><p show-comma="true" class="content-meta"><time datetime="2026-11-23T00:00:00.000Z">Nov 23, 2026</time><span>27 min read</span></p><ul class="tags"><li><a href="../tags/ai" class="internal tag-link">ai</a></li><li><a href="../tags/dev-workflow" class="internal tag-link">dev-workflow</a></li><li><a href="../tags/sdlc" class="internal tag-link">sdlc</a></li><li><a href="../tags/time-sensitive" class="internal tag-link">time-sensitive</a></li><li><a href="../tags/publish" class="internal tag-link">publish</a></li></ul></div></div><article class="popover-hint"><h1 id="agentic-sdlc--current-best-guess-guide">Agentic SDLC — Current Best-Guess Guide<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#agentic-sdlc--current-best-guess-guide" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>As of November 2026. This is the practical, standalone guide distilled from the vault’s enterprise Agentic SDLC research program (starting from <a href="../ai/agentic-sdlc-best-guess" class="internal" data-slug="ai/agentic-sdlc-best-guess">agentic-sdlc-best-guess</a> and its phase notes). For full source tables, evidence grades, and decision logs, follow the phase links at the bottom.</p>
+<p><strong>Scope.</strong> This guide targets <strong>enterprise-level software</strong>: long-lived systems shared by multiple teams, bound to legacy integrations, owned by many stakeholders, and subject to outside audit, regulation, or customer security review. If you are a solo developer shipping a small greenfield app, you do not need most of this — use <a href="../ai/clause-loop" class="internal" data-slug="ai/clause-loop">clause-loop</a> or <a href="../ai/spec-driven-development-operating-model" class="internal" data-slug="ai/spec-driven-development-operating-model">spec-driven-development-operating-model</a> instead.</p>
+<hr/>
+<h2 id="the-core-bet-in-one-paragraph">The Core Bet in One Paragraph<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#the-core-bet-in-one-paragraph" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Do <strong>not</strong> try to build an AI-native SDLC out of prompt instructions, multi-agent persona chains, or AI self-approval. Instructions decay within a session, prompt-only guardrails fail against injection and fatigue, and current enterprise data shows coding agents raise <strong>change volume and review wait</strong>, not proven net delivery speed. Our best guess keeps <strong>five event-triggered engineering phases</strong>, moves every safety boundary out of prompts into the <strong>forge and platform</strong>, treats <strong>human verification and intent ownership</strong> as the binding constraint, and pairs <strong>model-free automated gates</strong> with <strong>risk-tiered human approval</strong>.</p>
+<hr/>
+<h2 id="six-non-negotiable-rules">Six Non-Negotiable Rules<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#six-non-negotiable-rules" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Every choice below rests on six structural rules. Break one and the lifecycle loses its safety properties regardless of how good the model gets.</p>
+<ol>
+<li><strong>No self-certification.</strong> The producing agent (and anything sharing its session or context) never approves its own change and cannot edit or weaken the checks that judge it.</li>
+<li><strong>Boundaries live outside the agent.</strong> Permissions, sandboxes, branch rules, egress limits, and credentials are enforced by the forge, cloud IAM, or an org-operated harness — never by <code>CLAUDE.md</code>, <code>AGENTS.md</code>, or interactive confirmation pop-ups.</li>
+<li><strong>An answerable human stands behind every production change.</strong> Either a named human approved the change directly, or a named human owns the admission policy that allowed it.</li>
+<li><strong>Irreversible changes get a separate, stricter gate.</strong> Data migrations, deletions, breaking shared contracts, and external sends cannot rely on rollback. They require explicit classification, a dry-run diff against the target, and two distinct human approvers.</li>
+<li><strong>Artifacts and gates outlive the model.</strong> Every artifact of record is plain text, every blocking gate is model-free and re-runnable without the producing model, and audit records are exported at write time to a write-once store.</li>
+<li><strong>Protect review capacity by cutting per-item cost, not by rubber-stamping.</strong> Shrink what reaches humans where regulations allow, give reviewers a structured evidence bundle instead of a raw diff, and throttle agent PR intake before review thins into silent approval.</li>
+</ol>
+<hr/>
+<h2 id="lifecycle-at-a-glance">Lifecycle at a Glance<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#lifecycle-at-a-glance" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>A change does <strong>not</strong> march through all five phases blindly. Phases are event-triggered stretches of work: a routine bug fix enters Build → Verify → Release; only changes that alter requirements or architecture enter the upstream phases. Five standing functions hold ongoing accountability across phases.</p>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;flowchart LR\n    Req[\&quot;1: Requirement Change (per delta)\&quot;] --> Build[\&quot;3: Build (per unit, draft PR)\&quot;]\n    Arch[\&quot;2: Architecture Decision (4 triggers)\&quot;] --> Build\n    Build --> Verify[\&quot;4: Verify (per change, to merge)\&quot;]\n    Verify --> Release[\&quot;5: Release (per deployment)\&quot;]\n    Release -->|Incidents &amp; findings| Req\n    Build -.->|Rule red / contract break| Arch\n    Verify -.->|Corrections become rules| Arch&quot;">flowchart LR
+    Req[&quot;1: Requirement Change (per delta)&quot;] --> Build[&quot;3: Build (per unit, draft PR)&quot;]
+    Arch[&quot;2: Architecture Decision (4 triggers)&quot;] --> Build
+    Build --> Verify[&quot;4: Verify (per change, to merge)&quot;]
+    Verify --> Release[&quot;5: Release (per deployment)&quot;]
+    Release -->|Incidents &amp; findings| Req
+    Build -.->|Rule red / contract break| Arch
+    Verify -.->|Corrections become rules| Arch
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Phase</th><th>Trigger to enter</th><th>Artifact of record (exit)</th><th>Enforcing gate (layer)</th></tr></thead><tbody><tr><td><strong>1. Requirement change</strong></td><td>Request adds, edits, or retires a requirement</td><td>Updated plain-text requirement baseline + intent record</td><td>Area owner approval on exact commit + model-free structure check (Forge)</td></tr><tr><td><strong>2. Architecture decision</strong></td><td>Rule red you want to keep, consumed-contract break, irreversible class, or pattern-setting flag</td><td>Executable rule set + linked ADR + irreversibility classification</td><td>Rule set &amp; contract checks required on every PR under code owners (Forge)</td></tr><tr><td><strong>3. Build</strong></td><td>Approved intent, ticket citing requirement IDs, or draft intent with pre-written scenarios</td><td>Diff on agent-only branch + write-time change record</td><td>Platform-owned envelope: sandbox, egress, credentials, round/spend caps (Harness + Forge)</td></tr><tr><td><strong>4. Verify</strong></td><td>Draft PR with change record &amp; touched-path flags</td><td>Evidence bundle exported to write-once store at merge</td><td>Deterministic stack + strict check-file locks + tiered independent human approval (Forge)</td></tr><tr><td><strong>5. Release</strong></td><td>Merged changes with complete evidence bundles</td><td>Release record + SBOM in write-once store</td><td>Release policy over bundles + OIDC-pinned deploy + progressive rollout (Forge + Cloud IAM)</td></tr></tbody></table></div>
+<p><strong>Five standing functions</strong> run continuously beside the phases: <strong>Platform</strong> (envelope, forge rules, credentials, evidence store), <strong>Verification</strong> (held-out oracles, check-file locks, tier policy, AI-reviewer regression set), <strong>Operations</strong> (rollout monitoring, on-call, incident response), <strong>Support</strong> (the owning team holding the service across its support period), and <strong>Governance</strong> (regime mapping, compliance gate, approved-model register).</p>
+<hr/>
+<h2 id="phase-by-phase-operating-guidance">Phase-by-Phase Operating Guidance<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#phase-by-phase-operating-guidance" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="1-requirements--intent-per-requirement-change-not-per-project">1. Requirements &amp; Intent (per requirement change, not per project)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#1-requirements--intent-per-requirement-change-not-per-project" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Agents almost never ask clarifying questions on their own (failing to ask on 44–100% of underspecified benchmark tasks), and test-passing agent PRs still miss intent (maintainers rejected ~24 percentage points more PRs than automated graders passed in one benchmark study). Treat requirement ownership as a first-class engineering boundary.</p>
+<ul>
+<li><strong>Keep a living plain-text baseline in the repo</strong>, one file per area: <code>SHALL</code> statements, <code>WHEN/THEN</code> scenarios, non-functional and design constraints (not just behavior), owner, source (stakeholder, regulation, or contract clause), and risk/irreversibility class.</li>
+<li><strong>Lock the baseline at the forge.</strong> Put baseline paths under CODEOWNERS excluding all agent identities, with admin bypass disabled. Agents may draft deltas on branches; only the human <strong>Requirement Owner</strong> (plus a <strong>Compliance Owner</strong> for regulated/contractual items) lands them. Assign one accountable owner per area plus a named deputy so leave does not trigger bypasses.</li>
+<li><strong>Time approval by change class</strong> <em>(untested design rule)</em>:
+<ul>
+<li><em>Approve before building:</em> regulated or contract-sourced requirements, irreversible changes, shared/consumed contracts, or multi-owner changes.</li>
+<li><em>Approve on the built change (prototype-first):</em> everything else — <strong>only if</strong> the Requirement Owner writes acceptance scenarios <em>before</em> seeing the prototype, to guard against anchoring on polished output.</li>
+</ul>
+</li>
+<li><strong>Run an advisory ambiguity pass before building.</strong> Use a separate-context agent to surface ambiguities and send questions to the Requirement Owner. For stakeholder conflicts, log the conflict explicitly: the ticket wins locally for the current build, and one named arbiter fixes the baseline.</li>
+<li><strong>Trace at write time, not after the fact.</strong> Checks annotate which requirement ID they verify; CI generates the requirement→check map automatically (so routine test churn doesn’t touch the owner-locked baseline) and fails any requirement that has no check or named invariant owner.</li>
+</ul>
+<h3 id="2-architecture--design-event-triggered-only">2. Architecture &amp; Design (event-triggered only)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#2-architecture--design-event-triggered-only" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Prose architecture rules decay within a session, and across real repositories LLM-judged compliance with them levels off around 72% even after rule edits; compiling the same rules into executable checks reached ~88% vs. ~67% for prose in one controlled study. Meanwhile, module-level design belongs inside Build.</p>
+<ul>
+<li><strong>Skip this phase for normal changes.</strong> Enter only on four observable triggers: (1) an executable architecture rule fails and the builder wants to keep the change, (2) a consumed contract would break, (3) the change is irreversible, or (4) a human flags it as pattern-setting.</li>
+<li><strong>Make the executable rule set + linked ADRs the artifact of record.</strong> Encode layers, allowed dependency edges, cycle bans, naming/element rules, and contract-break checks (e.g., Buf, oasdiff, Pact) as required forge checks. Pair each accepted decision with a short ADR referencing its enforcing Rule ID. Keep <code>CLAUDE.md</code> / <code>AGENTS.md</code> short (~100 lines, as a pointer map into docs and rules), never as the enforcement mechanism.</li>
+<li><strong>Lock rule files and self-exemption hatches.</strong> Most static architecture tools allow one-line self-exemptions in-repo (<code>warn</code> defaults, frozen-violation stores, tag edits). Put all rule files, thresholds, violation stores, and contracts under <strong>Area Technical Owner</strong> code owners.</li>
+<li><strong>Separate erosion from drift.</strong> Executable rules catch <em>erosion</em> (broken rules), not <em>drift</em> (creeping loss of coherence or duplicated behavior). Address drift with periodic, small, human-reviewed cleanup PRs — never unreviewed autonomous refactors (one study found aggressive agent cleanup introduced 140 new smells alongside a 63% detector false-positive rate).</li>
+<li><strong>UI &amp; product design handoff.</strong> Treat Figma as upstream input, not an artifact of record (it is seat-gated and supports agent writes without documented review gates). Make the <strong>design token file</strong> (e.g., DTCG JSON), <strong>component registry</strong>, <strong>design-system lint</strong>, <strong>accessibility floor</strong> (WCAG / EAA / ADA), and <strong>human-accepted visual regression baselines</strong> the record, locked under the <strong>Design-System Owner</strong>. Never let an agent or vision-language model approve visual baselines (pixel diffs catch single-CSS changes reliably; tested VLMs missed >59%).</li>
+</ul>
+<h3 id="3-build-one-writing-agent-per-unit-inside-a-platform-envelope">3. Build (one writing agent per unit, inside a platform envelope)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#3-build-one-writing-agent-per-unit-inside-a-platform-envelope" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Published enterprise pipelines (Stripe, Spotify, Google, Airbnb) all converge on one writing agent per unit inside a deterministic frame. Controlled evidence does not yet show multi-agent persona chains beating a single agent on coding at matched tokens.</p>
+<ul>
+<li><strong>Use one writing agent per unit; fan out only on reading and judging.</strong> Run parallel units only across disjoint write sets; serialize units touching the same module. Use best-of-N candidate generation only when a validator <em>the producer did not write</em> picks the winner.</li>
+<li><strong>Size units by files touched and verifiable end state, not hours.</strong> Benchmark performance drops sharply with file count and drops steeply on private repos versus public ones (on SWE-Bench Pro, GPT-5 (high) fell from 41.8% public to 15.7% on commercial repos). Split large outputs into <strong>stacked PRs</strong> so each layer stays small enough to review.</li>
+<li><strong>Bound runs in code and restart clean.</strong> Cap CI/fix rounds (e.g., Stripe’s two CI rounds) and spend in workflow code, never in prompts. When a run hits its cap or spirals, restart from a clean context rather than accumulating failed attempts (errors compound in long contexts).</li>
+<li><strong>Cap build autonomy at a draft PR on an agent-only branch.</strong> Build agents hold zero credentials to merge, deploy, publish packages, or touch production data. Worktrees isolate working files, <em>not</em> blast radius (<code>.git</code> and standing approvals can leak across them).</li>
+<li><strong>Harden the platform envelope — never trust vendor defaults.</strong> Every major coding-agent vendor ships sandboxes off, fail-open, user-loosenable, or excluding surfaces like MCP servers. In regulated/contractual scopes (Classes A–C below), run change-producing sessions on <strong>org-operated substrate</strong> (managed VM or CI runner) so controls hold against both the agent and the directing engineer:
+<ul>
+<li>Admin-pinned sandbox failing closed with bypass modes disabled.</li>
+<li>Protected configuration paths (<code>.git</code>, hooks, agent settings, <code>CLAUDE.md</code>/<code>AGENTS.md</code>, MCP configs — the dominant sandbox-escape vector is writing a file a privileged process later runs).</li>
+<li>Credential-bound egress proxies (not mere domain allowlists; treat the forge itself as an exfiltration channel and keep MCP servers inside the boundary).</li>
+<li>Separate caches and runners from release workflows (shared caches enable PR-to-release token theft).</li>
+<li>Platform-pinned approved models, endpoints, and data-residency regions (zero personal accounts; re-approve when models or retention terms change).</li>
+</ul>
+</li>
+<li><strong>Record write-time provenance.</strong> Capture agent identity (distinct from the directing human), directing engineer identity (from forge/platform auth), dated <strong>serving</strong> model ID + provider + inference region, inputs, tool-call metadata, and touched-path flags.</li>
+</ul>
+<h3 id="4-verification-cost-ordered-stack-strict-check-locks-tiered-human-review">4. Verification (cost-ordered stack, strict check locks, tiered human review)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#4-verification-cost-ordered-stack-strict-check-locks-tiered-human-review" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Under a real enterprise throughput-doubling mandate, human review coverage fell from 89% to 68%, substantive review fell from ~39% to ~21%, and silent approvals roughly doubled. Do not try to fix review by adding more reviewers — cut per-item review cost, automate everything model-free first, and throttle intake before assurance collapses.</p>
+<ul>
+<li><strong>Run verification cheapest and most independent first — with the forge run as the gate of record:</strong>
+<ol>
+<li><strong>Deterministic gates (blocking):</strong> compile, types, lint, SAST, architecture and contract rules, and required CI run under a workflow the repo cannot edit — on both the pushed commit and the <strong>integrated result</strong> (a merge queue up to queue-wait crossover; post-merge milestones + pre-deploy integration past it). Keep static-analyzer false positives below ~10% or engineers ignore them.</li>
+<li><strong>Oracle strength &amp; held-out suites (blocking / diagnostic):</strong> run held-out checks the producer cannot see or edit, plus mutation/property checks on changed code so 100%-coverage weak tests cannot mask behavioral drift.</li>
+<li><strong>AI review (advisory finding generator — never a gate or approver):</strong> on real PRs, measured AI review recall sits between about a quarter and three-fifths (~23% on one benchmark; 45–59% LLM-judged on another), models share errors within a provider, and producer PR text can steer them (getting 15 of 17 security-fix reverts past one reviewer). Run the AI reviewer in a separate context, reading instructions from the <strong>base branch</strong>, with producer PR text and commit messages <strong>stripped</strong>. Prefer a cross-family model. Apply <strong>“answered, not obeyed”</strong>: high-severity findings block only until the directing engineer records a reasoned answer (the producer never closes them). Do <strong>not</strong> present an AI first pass ahead of human review — in one controlled study, reviewers given one found no more issues and inspected less code.</li>
+<li><strong>Tiered human approval (blocking):</strong>
+<ul>
+<li><strong>Tier 0 (zero human approval):</strong> <em>Non-executable content only</em> (e.g., plain copy and translations — never code, rendered markup, or docs/instructions read by agents), <em>only</em> in Regime Class D (or expressly preapproved non-executable types in Class C), under a named <strong>Class Owner</strong> and a clean escape-rate history.</li>
+<li><strong>Tier 1 (1 independent human approver):</strong> Default for ordinary changes. Approver cannot be the requester, producing agent, directing engineer, or anyone who pushed to the branch (computed from forge identities, not self-declared).</li>
+<li><strong>Tier 2 (2 independent human approvers, ≥1 outside the producing team):</strong> Mandatory for security/auth paths, CI and deploy workflows, check files, architecture rules, and irreversible changes.</li>
+</ul>
+</li>
+<li><strong>Intent acceptance:</strong> Required from the Requirement Owner bound to the head commit <em>only</em> when the change edits the requirement baseline (not for routine PRs implementing existing requirement IDs).</li>
+</ol>
+</li>
+<li><strong>Enforce strict check-file locks</strong> <em>(custom, untested)</em>: Any edit to tests, test setup/fixtures, snapshots, visual baselines, rule files/thresholds, CI/deploy workflows, package-manager configs, release policies, reviewer instructions, ownership files, or inline suppressions requires <strong>separate approval from the check’s owner</strong> (distinct from whole-PR approval).
+<ul>
+<li><em>Exemption:</em> A brand-new test file that <em>only adds cases</em> needs no separate lock approval, counts as evidence, and joins the gate once ratified by a non-producer. New behavior still needs a check the producer did not write.</li>
+<li>Run base check files against the PR (revert-and-rerun) and verify per-test execution identity so skipped or deleted tests fail the gate.</li>
+</ul>
+</li>
+<li><strong>Give reviewers an Evidence Bundle, not just a raw diff:</strong> link to approved intent, checks executed with per-test identity, check-file changes + revert-and-rerun result, mutation score, answered AI findings, risk tier + inputs, and computed approver independence.</li>
+<li><strong>Throttle intake when review thins.</strong> Track team-level review coverage, silent-approval share, and a monthly sampled review-substance rating. Never turn these into individual metrics; when pool substance drops past your threshold, cap agent PR intake into that pool.</li>
+<li><strong>Reshape QA into a standing Verification function.</strong> Retire per-change QA handoffs and manual system-test phases. The Verification function owns held-out suites, check-file locks, tier policies, oracle ratification (delegable per area outside the producer/directing engineer), and the AI reviewer’s regression set.</li>
+</ul>
+<h3 id="5-release-operations--legacy-evolution">5. Release, Operations &amp; Legacy Evolution<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#5-release-operations--legacy-evolution" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Change advisory boards (CABs) fail at scale — a UK FCA review of 23 firms and over a million production changes found CABs approved >90% of major changes — and configuration pushes trigger nearly as many outages as code pushes (31% vs. 37% in Google’s 2010–2017 postmortems). Gate deployments with automated policy over evidence, progressive rollout, and strict credential boundaries.</p>
+<ul>
+<li><strong>Gate releases with a policy check over evidence bundles</strong> <em>(custom, untested)</em>: Before deploying the exact built artifact, re-run release-level integration/contract suites and run a policy check across every included change’s bundle:
+<ul>
+<li><em>Admit</em> automatically if every change carries its required tier approvals (or is an admitted Tier-0 class) and none is irreversible (in Classes C–D).</li>
+<li><em>Route</em> to the <strong>Release Owner</strong> in Classes A–B (every deployment) or when policy demands it, and to <strong>two distinct humans</strong> for any irreversible change.</li>
+<li><em>Refuse</em> any incomplete bundle or stale artifact digest (except pipeline-initiated rollbacks).</li>
+<li>Include configuration changes in the same gate and evidence trail as code.</li>
+</ul>
+</li>
+<li><strong>Lock down the deploy credential surface.</strong> Deploy only from protected branches through protected environments using OIDC whose cloud trust policy pins the protected environment. Disable admin bypass; keep zero production secrets at repo or org level; isolate deploy runners and caches from PR workflows; deny agents dispatch, re-run, tag, or admin rights.</li>
+<li><strong>Roll out progressively with an external signal.</strong> Use staged canaries or flags reading at least one health signal <em>outside</em> the changed service (load balancer, client, or downstream error rate) so a change cannot corrupt its own telemetry. Auto-abort on failure; pause for a human on inconclusive results. Schedule automated/Tier-0 rollouts during the owning team’s working hours.</li>
+<li><strong>Gate irreversible changes with two humans + dry-run diff</strong> <em>(custom, untested)</em>: Require two distinct human approvers (verified as different individuals) reviewing a dry-run diff against the target environment plus a rehearsed restore or forward-fix plan. Pre-wire a separate <strong>two-human break-glass path</strong> (incident commander + second human, time-bounded credential, mandatory post-hoc review) so emergency fixes do not stall during an outage.</li>
+<li><strong>Harden the software supply chain.</strong> Never allow agent-added dependencies in Tier 0; require at least Tier 1 for version bumps (agents pick vulnerable versions more often and still hallucinate ~5% of package names in bare generation). Enforce package-manager install controls (<code>preinstall</code> scripts drove 99% of Shai-Hulud 2.0 infections), force installs through a registry proxy, and emit an SBOM per release.</li>
+<li><strong>Keep Ops Agents read-only with per-action write credentials.</strong> Give ops agents their own identity class with standing read-only access to telemetry (customer data gated). Grant zero standing writes: issue single-operation, single-resource, time-bounded credentials on approval — 1 human for pre-classified reversible actions (rollback, restart, bounded scaling), 2 distinct humans for any other write or external send, and <strong>refuse deletes even if approved</strong>. Route code fixes back through Build/Verify as PRs. Treat agent root-cause analysis as advisory and require it to show its causal path.</li>
+<li><strong>Fold maintenance into the loop and protect legacy with characterization oracles.</strong> Assign one owning team for the service’s full declared support period and reserve a standing share of capacity for preventive cleanup (flag removal, upgrades, complexity repair — open-source studies show complexity rising after agent adoption). Before letting agents refactor legacy code without tests, build <strong>characterization tests</strong> outside the producing agent (golden outputs from running legacy behavior + independent inputs), and batch migration PRs to reviewer capacity.</li>
+</ul>
+<hr/>
+<h2 id="governance--compliance-pick-your-regime-class">Governance &amp; Compliance: Pick Your Regime Class<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#governance--compliance-pick-your-regime-class" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>“Regulated” is not one rulebook. Map each system across its applicable regimes (taking the strictest requirement per axis) to set approval tiers, substrate, and audit fields.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Class</th><th>Applies to (as of Nov 2026)</th><th>Merge approval</th><th>Deploy approval</th><th>Tier 0 allowed?</th><th>Agent substrate</th></tr></thead><tbody><tr><td><strong>A</strong></td><td>EU DORA full framework (Title II)</td><td>Tier 1 or 2, independent human</td><td>Release Owner approves every deployment</td><td><strong>No</strong></td><td>Org-operated VM / CI runner</td></tr><tr><td><strong>B</strong></td><td>Internal human-approval mandate (e.g., UK Home Office style) or SLSA Source L4</td><td>Tier 1 or 2 (2 humans for SLSA L4)</td><td>Release Owner approves every deployment</td><td><strong>No</strong></td><td>Org-operated VM / CI runner</td></tr><tr><td><strong>C</strong></td><td>PCI DSS v4.0.1, NIST 800-53/128, DORA simplified, ISO 27001 (provisional)</td><td>Tier 1 or 2</td><td>Release policy (routes exceptions)</td><td><strong>Only</strong> expressly regime-preapproved non-executable types (not PCI / DORA simplified without assessor sign-off)</td><td>Org-operated VM / CI runner</td></tr><tr><td><strong>D</strong></td><td>SOC 2-only (after confirming system description) or no binding regime</td><td>Tier 1 or 2 by default</td><td>Release policy</td><td><strong>Yes</strong>, non-executable content under escape-rate tracking</td><td>Developer laptop possible (rely on Forge for hard gates)</td></tr></tbody></table></div>
+<p><strong>Three cross-cutting compliance rules:</strong></p>
+<ul>
+<li><strong>Release-path separation overlay:</strong> Wherever MAS TRM / APRA CPG 234-style rules apply, the person who merges or dispatches <em>any</em> change (even Tier 0) cannot be its directing engineer.</li>
+<li><strong>Fall-back column:</strong> Wherever DORA Title II or PCI DSS applies, every change record must include rollback/fall-back steps and a security-impact statement.</li>
+<li><strong>Export a joined write-once record at write time</strong> <em>(custom, untested)</em>: Do not rely on git commit signatures (lost on GitHub squash/rebase merges), git notes (lost on rebase), or native forge audit logs (7–180 days on GitHub/Azure DevOps as of Nov 2026). Join the <strong>Change Record</strong> (push) + <strong>Evidence Bundle</strong> (merge) + <strong>Release Record</strong> (deploy) on <strong>PR ID + commit SHAs</strong>, and export at write time to a write-once enterprise store neither the agent nor the directing engineer can alter. Retain for the service’s lifetime plus the longest post-retirement duty (e.g., 10 years for EU CRA technical docs).</li>
+</ul>
+<hr/>
+<h2 id="team-topology-roles--skills">Team Topology, Roles &amp; Skills<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#team-topology-roles--skills" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>Do not plan on shrinking teams.</strong> No study measures enterprise team size falling with coding agents; historical automation shifts relocated headcount when demand absorbed output and cut the entry rung first.</p>
+<p><strong>Size around human verification work and the separation floor.</strong> Per week, a team’s human load is <code>changes × (directing + human-authored checks + review × approvals) + deployments × release approvals + standing duties</code>. Whenever demand absorbs agent output, <strong>human verification work</strong> is the candidate bottleneck. Regardless of throughput, never drop below the <strong>separation floor</strong>:</p>
+<ul>
+<li><strong>Tier 1 change:</strong> ≥2 distinct humans (directing engineer + independent approver).</li>
+<li><strong>Tier 2 / irreversible change:</strong> ≥3 distinct humans, with ≥1 outside the producing team (meaning the smallest viable org is two owning teams, or one team plus an external approver pool), plus a sustainable on-call rota.</li>
+</ul>
+<p><strong>Ten roles and two duties</strong> (a role is an accountability, not a full-time job):</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Role / Duty</th><th>Home</th><th>Owns</th><th>Small-team collapse rule</th></tr></thead><tbody><tr><td><strong>Directing Engineer</strong></td><td>Owning team</td><td>Unit brief, steering agent, answering PR findings</td><td>Cannot approve own changes or merge under MAS/APRA</td></tr><tr><td><strong>Requirement Owner</strong> (+ arbiter)</td><td>Owning team / Product</td><td>Requirement baseline, intent records, conflict decisions</td><td>May direct work if an alternate approves their own requests</td></tr><tr><td><strong>Area Technical Owner</strong></td><td>Owning team / Subsystem</td><td>Architecture rule set, ADRs, consumed contracts</td><td>May direct work if a co-owner approves their rule/contract edits</td></tr><tr><td><strong>Release Owner</strong></td><td>Owning team (per service)</td><td>Release policy, rollout templates, Class A/B deploy approval</td><td>Needs a named alternate</td></tr><tr><td><strong>On-Call Engineer</strong></td><td>Owning team rota</td><td>Incident calls, ops-agent write approvals, break-glass</td><td>Rota sets practical minimum team size</td></tr><tr><td><strong>Platform Team</strong></td><td>Central platform</td><td>Envelope, forge rules, merge queue, OIDC, evidence store, agent fleet</td><td><strong>Cannot</strong> collapse with Directing Engineer on same substrate in Classes A–C</td></tr><tr><td><strong>Verification Owner</strong></td><td>Verification function (or delegated in-team)</td><td>Held-out suites, check locks, tier policy, coverage metrics</td><td>May sit inside owning team (reporting to Compliance in A–C) if excluded from directing that change</td></tr><tr><td><strong>Design-System Owner / Design Engineer</strong></td><td>Design-system team</td><td>Tokens, component registry, design lint, visual baselines</td><td>Designers do not need to direct coding agents</td></tr><tr><td><strong>Compliance Owner</strong></td><td>Outside delivery</td><td>Regime map, control register, AI-tool inventory, rule-edit co-approval</td><td>Present in Classes A–C or contractual-requirement scope</td></tr><tr><td><strong>Security Function</strong></td><td>Outside delivery</td><td>Lifecycle threat model, live bypass testing of the agent envelope, approved-model register</td><td>Runs annual model-register governance</td></tr><tr><td><em>Duty:</em> <strong>Approver</strong></td><td>Area owners + external pool</td><td>Commit-bound approval (compliance gate in A–B)</td><td>Never requester, producer, directing engineer, or pusher</td></tr><tr><td><em>Duty:</em> <strong>Agent-Identity Sponsor</strong></td><td>Team lead / Platform</td><td>Named human per agent identity with a kill switch</td><td>One per agent identity</td></tr></tbody></table></div>
+<p><strong>Protect skill formation and mixed-fluency teams.</strong> Controlled studies show unguarded AI assistance hurts subsequent unaided comprehension and performance (~17% drop), while tutor-style scaffolding preserves learning.</p>
+<ul>
+<li>Treat junior hiring as a deliberate investment with <strong>budgeted mentor hours</strong>, <strong>tutor-mode agents</strong> on learning units, <strong>second-reader review apprenticeships</strong>, and <strong>AI-free skill assessments</strong> (AI-aided output cannot distinguish skill from delegation). Keep seniors sharp with periodic no-AI on-call/diagnostic reps.</li>
+<li>Never tie performance appraisals to AI usage or token volume. Help low-fluency reviewers adapt with team-specific demos and protected learning time — otherwise agent-rate PR volume makes them either stall the queue or wave PRs through.</li>
+</ul>
+<hr/>
+<h2 id="economics-metrics--model-change">Economics, Metrics &amp; Model Change<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#economics-metrics--model-change" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>Plan for more volume landing on review, not a proven speedup.</strong> Enterprise studies show higher PR volume (+24% to +36%), much smaller delivery gains (+13.7% resolved issues on deployment, borderline), and +56% longer review wait. Human review time (pre-agent rough anchor ~40 min/change) likely dwarfs token cost (cents to ~$1.50/task on minimal scaffolds, though frontier costs and 30× run variance can push heavy tiers higher). The highest-leverage cost cut is lowering <strong>human verification minutes per change</strong>, not pinching tokens.</p>
+<p><strong>Track eleven service-level metrics</strong> (freeze definitions up front, compare each service only against its own past, report raw counts beside rates, and <strong>never</strong> use as individual performance targets):</p>
+<ul>
+<li><em>Quality &amp; rework:</em> 7/30-day follow-up fix rate per change; change-fail &amp; deployment rework rate; defect escape by phase (90-day window).</li>
+<li><em>Review &amp; flow:</em> human verification effort per change (minutes + CI compute); team-level review substance (coverage, silent-approval share, monthly sampled quality); wait to approval &amp; deploy; end-to-end lead time (recorded request → production); delivery rate (items resolved on deployment per engineer).</li>
+<li><em>Cost &amp; adaptation:</em> total cost per accepted change <em>and</em> per delivered unit; AI-authored share from forge provenance (stratifier only, <strong>never a target</strong>); adaptation hours per model change.</li>
+</ul>
+<p><strong>Do NOT target:</strong> PR/commit counts, lines of code, autocomplete acceptance rate, token consumption, CI-green rate, or MTTR trends at low incident counts (high statistical noise).</p>
+<p><strong>Treat model change as an annual, budgeted maintenance event.</strong> Generally available models retire every ~12–22 months (with 45-day to 6-month notices), and serving stacks drift silently even under pinned IDs.</p>
+<ul>
+<li>Pin dated model IDs in managed settings (never unpinned aliases) and log the <strong>serving model ID</strong> returned by the API.</li>
+<li>Treat any model swap (producer, AI reviewer, or classifier) as a Tier-2 check-file change.</li>
+<li>Maintain an <strong>execution-graded golden set</strong> for every model-specific component (prompts, harness, AI reviewer, classifiers) and measure <strong>per-item flips</strong> (not just averages) before promoting a new model. Re-verify held-out and incident-regression coverage with the new producer.</li>
+</ul>
+<hr/>
+<h2 id="when-to-pick-a-different-lifecycle-alternatives--counterargument">When to Pick a Different Lifecycle (Alternatives &amp; Counterargument)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#when-to-pick-a-different-lifecycle-alternatives--counterargument" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>No single lifecycle wins every enterprise context. Our best guess above is the strongest default for <strong>multi-team, evolving enterprise products</strong> — but two alternatives genuinely win in narrower regimes, and adopting the full model carries real costs.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Situation</th><th>Better choice</th><th>Why</th></tr></thead><tbody><tr><td><strong>High-volume migration factory</strong> across many repos, fixed architecture, short owner-authored prompts</td><td><strong>Platform-Native Baseline</strong> (Spotify Honk / GitHub / Stripe shape)</td><td>Skips Requirement Owner, Area Technical Owner, and Tier-0 machinery. <em>Breaks</em> the moment a change needs a new architectural decision or resolves conflicting stakeholders. Note survivorship bias: all published accounts are well-resourced platform teams sharing successes.</td></tr><tr><td><strong>Strictest blanket-review mandate</strong> (regulation/contract literally forbids any automated substitution) <strong>and low change volume</strong></td><td><strong>Classic Gated Lifecycle</strong> (spec-first + architecture/change boards + full human review)</td><td>Most literal compliance posture. <em>Actively undercut</em> at higher volume by FCA data showing blanket CABs rubber-stamp >90% of major changes while costing the most per change.</td></tr><tr><td><strong>Class A or B regulated systems</strong></td><td><strong>All three converge on cost</strong></td><td>With Tier 0 barred everywhere, every candidate pays for independent human approval on every change; our best guess still wins on explicit governance mapping, event-triggered architecture, and check-file discipline.</td></tr><tr><td><strong>Solo developer or sub-floor team</strong></td><td><strong>None of these enterprise models</strong></td><td>Separation-of-duties rules cannot be met without a second human. Use a solo workflow (<a href="../ai/clause-loop" class="internal" data-slug="ai/clause-loop">clause-loop</a>) and accept that you do not have independent approval.</td></tr></tbody></table></div>
+<p><strong>The strongest case against adopting this full best guess today:</strong></p>
+<ol>
+<li><strong>Three load-bearing mechanisms are custom and unbuilt by vendors.</strong> Strict check-file add-vs-edit locking, the unified write-once joined change record, and irreversibility dual-authorization with dry-run diffs do not ship out of the box in any surveyed forge or lifecycle. Building and maintaining them is a <strong>non-amortizing platform tax</strong> that breaks whenever forges or agent vendors change interfaces.</li>
+<li><strong>Classification gaming can recreate self-certification one layer up.</strong> If Tier-0 relief or lighter substrate rules depend on a Compliance Owner’s regime classification, organizational pressure shifts from bypassing PR review to lobbying for a cheaper regime class.</li>
+<li><strong>Dual authorization can collide with incident recovery.</strong> If an urgent production forward-fix is itself irreversible, requiring two humans on a dry-run diff slows recovery right when minutes matter — which is why the two-human break-glass path must be pre-wired and rehearsed before go-live.</li>
+</ol>
+<hr/>
+<h2 id="what-is-evidenced-vs-untested-and-what-would-change-our-mind">What Is Evidenced vs. Untested (and What Would Change Our Mind)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#what-is-evidenced-vs-untested-and-what-would-change-our-mind" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Be explicit with stakeholders about epistemic confidence — the program’s empirical pilot was cancelled before running, so this guide combines well-evidenced failure modes with <strong>untested</strong> operational fixes:</p>
+<ul>
+<li><strong>Solidly evidenced (high confidence):</strong> Agents fail to ask on ambiguous tasks; tests pass while violating intent and design constraints; prose rules decay (compliance levels off around 72%); instruction-only security controls fail against prompt injection and click-through fatigue; agent adoption raises PR volume and review wait without proven net enterprise delivery speedup; blanket CAB review degrades into rubber-stamping; GA models retire roughly yearly; unguarded AI erodes unaided skill formation.</li>
+<li><strong>Current best guess, untested in production:</strong> The three custom gate mechanisms (strict check-file add-vs-edit detector, unified write-once joined change record, irreversible-class dual authorization on dry-run diffs); the undefined class-level escape-rate metric required before admitting any executable Tier-0 class; exact human review minutes per agent change; intake throttling when review thins; the junior-rung learner design; and whether the full control stack catches more risk than it costs.</li>
+</ul>
+<p><strong>Watch list — re-open this guide when any of these land:</strong></p>
+<ul>
+<li><strong>Forge defaults:</strong> GitHub, GitLab, or Azure DevOps ships native check-file locking (distinguishing test edits from pure additions) or forge-signed model-ID provenance — turning our custom platform glue into configuration.</li>
+<li><strong>Regulatory rulings:</strong> An EU supervisor/ESA Q&amp;A clarifies whether DORA Art. 17(1)(b) allows policy-admitted Tier-0 changes, or the AICPA 2027 SOC 2 criteria tighten rules on single-user development and deployment.</li>
+<li><strong>Measured verification &amp; delivery data:</strong> Enterprise studies publish human review minutes per agent change, AI-vs-human review escaped-defect comparisons on the same PRs, or an enterprise RCT showing net delivery speedup after review and rework.</li>
+<li><strong>Vendor defaults:</strong> Major coding-agent vendors ship fail-closed, admin-pinned sandboxes with protected config paths by default.</li>
+</ul>
+<hr/>
+<h2 id="sources">Sources<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#sources" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>The figures above come from the program’s evidence ledger, where each carries a grade and a note on how it was read. The main ones, by section:</p>
+<p><strong>Requirements &amp; design</strong></p>
+<ul>
+<li>Agents failing to ask on 44–100% of underspecified tasks: Vijayvargiya et al., <em>Ambig-SWE</em>, arXiv 2502.13069 (ICLR 2026).</li>
+<li>Maintainers rejecting ~24 points more test-passing agent PRs than the grader: METR research note, 2026-03-10 (four maintainers, three repositories).</li>
+<li>Prose-rule compliance around 72% across 83 repositories: Cai, Li, Liang, Li, Shahin, arXiv 2606.12231 (2026).</li>
+<li>Executable checks at 88.3% vs. prose at 67.0%: Sharma, <em>ContextCov</em>, arXiv 2603.00822 (2026); the author’s own tool, on synthetic instruction files.</li>
+<li>63.1% detector false positives and 140 new smells: Dinu, Mihăescu, Rebedea, <em>SmellBench</em>, arXiv 2605.07001 (2026); one project, abstract only.</li>
+<li>Vision-language models finding at best 40.7% of single-CSS changes: Zhang, Liu, Liu, Zhou, <em>DiffSpot</em>, arXiv 2605.29615 (2026).</li>
+</ul>
+<p><strong>Build</strong></p>
+<ul>
+<li>Published pipelines: Stripe, “Minions” parts 1–2, stripe.dev (2026-02); Spotify, “Background Coding Agents (Honk, Part 2)” (2025-11-24); Ziftci et al., “Migrating Code At Scale With LLMs At Google”, arXiv 2504.09691 (2025); Airbnb, “Accelerating Large-Scale Test Migration with LLMs” (c. 2025).</li>
+<li>SWE-Bench Pro public vs. commercial scores: Deng, Da, Pan et al. (Scale AI), arXiv 2509.16941 (2025).</li>
+</ul>
+<p><strong>Verification</strong></p>
+<ul>
+<li>Review coverage 89%→68% under a throughput mandate: He et al., arXiv 2607.01904 (one site; the authors call it an upper envelope).</li>
+<li>Static-analysis false positives under 10%: Sadowski et al., ICSE 2015, on Google’s Tricorder.</li>
+<li>AI review recall ~23%: Zeng et al., <em>SWR-Bench</em>, arXiv 2509.01494 (FSE 2026). 45–59% (LLM-judged): Martian Code Review Bench leaderboard, read 2026-11-01.</li>
+<li>15 of 17 security-fix reverts passed with adversarial PR text: Mitropoulos et al., arXiv 2603.18740 (2026).</li>
+<li>AI first pass narrowing what reviewers inspect: Tufano et al., arXiv 2411.11401 (2024).</li>
+</ul>
+<p><strong>Release &amp; operations</strong></p>
+<ul>
+<li>CABs approving over 90% of major changes: UK FCA, <em>Implementing Technology Change</em> (2021-02-05), 2019 data.</li>
+<li>Binary pushes 37% and configuration pushes 31% of outage triggers: Google, <em>The Site Reliability Workbook</em>, Appendix C.</li>
+<li>Package hallucination and vulnerable versions: Spracklen et al., USENIX Security 2025; Singla et al., arXiv 2601.00205 (2026).</li>
+<li><code>preinstall</code> in 99% of Shai-Hulud 2.0 infections: Wiz, <em>Shai-Hulud 2.0 Aftermath</em> (2025-12-01).</li>
+</ul>
+<p><strong>Governance</strong></p>
+<ul>
+<li>Forge audit-log retention, commit signatures, git notes: GitHub, GitLab and Azure DevOps docs and git-notes(1), read 2026-11-01.</li>
+<li>CRA documentation kept 10 years or the support period, whichever is longer: Regulation (EU) 2024/2847, Art. 13(13).</li>
+</ul>
+<p><strong>Team &amp; economics</strong></p>
+<ul>
+<li>17% lower comprehension: Shen and Tamkin, “How AI Impacts Skill Formation”, arXiv 2601.20245 (2026). Tutor-style use keeping the gains: Bastani et al., <em>PNAS</em> 122(26) (2025).</li>
+<li>Merged PRs +24%: Murphy-Hill et al. (Microsoft), arXiv 2607.01418 (2026). PRs +35.7%, delivered issues +13.7%, review wait +56.1%: Chen and Stratton, <em>Artificial Intelligence in the Firm</em>, working paper (version of 2026-11-01).</li>
+<li>~40 reviewer-minutes per change (pre-agent): Sadowski et al., “Modern Code Review: A Case Study at Google”, ICSE-SEIP 2018.</li>
+<li>Token cost per task and 30× run variance: SWE-bench Verified bash-only leaderboard data (2026); Bai et al., arXiv 2604.22750 (2026).</li>
+<li>Model lifecycles of 12–22 months: Anthropic, OpenAI, Microsoft, AWS and Google model-deprecation pages, read 2026-11-01.</li>
+</ul>
+<hr/>
+<h2 id="deep-dive-reference-notes">Deep-Dive Reference Notes<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#deep-dive-reference-notes" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Of the notes below, <a href="../ai/agentic-sdlc-best-guess" class="internal" data-slug="ai/agentic-sdlc-best-guess">agentic-sdlc-best-guess</a> and <a href="../ai/agentic-sdlc-team-topology" class="internal" data-slug="ai/agentic-sdlc-team-topology">agentic-sdlc-team-topology</a> are published; the rest are private working notes, so their links will not open for public readers.</p>
+<ul>
+<li><a href="../ai/agentic-sdlc-best-guess" class="internal" data-slug="ai/agentic-sdlc-best-guess">agentic-sdlc-best-guess</a> — Program synthesis, three-candidate scoring, contingency table, and formal citation trail</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/agentic-sdlc-evaluation-criteria.md" class="external">agentic-sdlc-evaluation-criteria<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — Enterprise scope definition, six pass/fail gates, and tradeoff axes</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/agentic-sdlc-proposals-survey.md" class="external">agentic-sdlc-proposals-survey<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — Scorecard of 17 existing proposals (Spotify, GitHub, Stripe, AWS AI-DLC, BMAD, Spec Kit, Kiro, OpenSpec, etc.)</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/agentic-sdlc-requirements-phase.md" class="external">agentic-sdlc-requirements-phase<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> · <a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/agentic-sdlc-design-phase.md" class="external">agentic-sdlc-design-phase<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> · <a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/agentic-sdlc-build-phase.md" class="external">agentic-sdlc-build-phase<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> · <a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/agentic-sdlc-verification-phase.md" class="external">agentic-sdlc-verification-phase<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> · <a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/agentic-sdlc-release-operate-phase.md" class="external">agentic-sdlc-release-operate-phase<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — Detailed phase evidence and failure modes</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/agentic-sdlc-governance-layer.md" class="external">agentic-sdlc-governance-layer<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — Threat model, control substrate inventory, and regime-by-regime legal breakdown</li>
+<li><a href="../ai/agentic-sdlc-team-topology" class="internal" data-slug="ai/agentic-sdlc-team-topology">agentic-sdlc-team-topology</a> — Role consolidation, sizing identity, junior rung, and mixed-fluency adoption</li>
+<li><a href="https://github.com/oxzo/brains/tree/main/knowledge/ai/agentic-sdlc-economics-and-metrics.md" class="external">agentic-sdlc-economics-and-metrics<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> — Cost skeleton, graded productivity evidence, metric definitions, and model-turnover analysis</li>
+</ul></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="toc desktop-only"><button type="button" class="toc-header" aria-controls="toc-content" aria-expanded="true"><h3>Table of Contents</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="toc-content"><ul id="4x55b7" class="overflow"><li class="depth-0"><a href="#the-core-bet-in-one-paragraph" data-for="the-core-bet-in-one-paragraph">The Core Bet in One Paragraph</a></li><li class="depth-0"><a href="#six-non-negotiable-rules" data-for="six-non-negotiable-rules">Six Non-Negotiable Rules</a></li><li class="depth-0"><a href="#lifecycle-at-a-glance" data-for="lifecycle-at-a-glance">Lifecycle at a Glance</a></li><li class="depth-0"><a href="#phase-by-phase-operating-guidance" data-for="phase-by-phase-operating-guidance">Phase-by-Phase Operating Guidance</a></li><li class="depth-1"><a href="#1-requirements--intent-per-requirement-change-not-per-project" data-for="1-requirements--intent-per-requirement-change-not-per-project">1. Requirements &amp; Intent (per requirement change, not per project)</a></li><li class="depth-1"><a href="#2-architecture--design-event-triggered-only" data-for="2-architecture--design-event-triggered-only">2. Architecture &amp; Design (event-triggered only)</a></li><li class="depth-1"><a href="#3-build-one-writing-agent-per-unit-inside-a-platform-envelope" data-for="3-build-one-writing-agent-per-unit-inside-a-platform-envelope">3. Build (one writing agent per unit, inside a platform envelope)</a></li><li class="depth-1"><a href="#4-verification-cost-ordered-stack-strict-check-locks-tiered-human-review" data-for="4-verification-cost-ordered-stack-strict-check-locks-tiered-human-review">4. Verification (cost-ordered stack, strict check locks, tiered human review)</a></li><li class="depth-1"><a href="#5-release-operations--legacy-evolution" data-for="5-release-operations--legacy-evolution">5. Release, Operations &amp; Legacy Evolution</a></li><li class="depth-0"><a href="#governance--compliance-pick-your-regime-class" data-for="governance--compliance-pick-your-regime-class">Governance &amp; Compliance: Pick Your Regime Class</a></li><li class="depth-0"><a href="#team-topology-roles--skills" data-for="team-topology-roles--skills">Team Topology, Roles &amp; Skills</a></li><li class="depth-0"><a href="#economics-metrics--model-change" data-for="economics-metrics--model-change">Economics, Metrics &amp; Model Change</a></li><li class="depth-0"><a href="#when-to-pick-a-different-lifecycle-alternatives--counterargument" data-for="when-to-pick-a-different-lifecycle-alternatives--counterargument">When to Pick a Different Lifecycle (Alternatives &amp; Counterargument)</a></li><li class="depth-0"><a href="#what-is-evidenced-vs-untested-and-what-would-change-our-mind" data-for="what-is-evidenced-vs-untested-and-what-would-change-our-mind">What Is Evidenced vs. Untested (and What Would Change Our Mind)</a></li><li class="depth-0"><a href="#sources" data-for="sources">Sources</a></li><li class="depth-0"><a href="#deep-dive-reference-notes" data-for="deep-dive-reference-notes">Deep-Dive Reference Notes</a></li><li class="overflow-end"></li></ul></div></div><div class="backlinks"><h3>Backlinks</h3><ul id="kiys9k" class="overflow"><li><a href="../ai/" class="internal">AI — Index</a></li><li class="overflow-end"></li></ul></div><div class="graph"><h3>Graph View</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v4.4.1</a> © 2026</p><ul><li><a href="https://github.com/oxzo/brains">source</a></li><li><a href="/index.xml">rss</a></li></ul></footer></div></div></body><script type="application/javascript">function o(){let t=this.parentElement;t.classList.toggle("is-collapsed");let e=t.classList.contains("is-collapsed")?this.scrollHeight:t.scrollHeight;t.style.maxHeight=e+"px";let c=t,l=t.parentElement;for(;l;){if(!l.classList.contains("callout"))return;let i=l.classList.contains("is-collapsed")?l.scrollHeight:l.scrollHeight+c.scrollHeight;l.style.maxHeight=i+"px",c=l,l=l.parentElement}}function n(){let t=document.getElementsByClassName("callout is-collapsible");for(let s of t){let e=s.firstElementChild;if(!e)continue;e.addEventListener("click",o),window.addCleanup(()=>e.removeEventListener("click",o));let l=s.classList.contains("is-collapsed")?e.scrollHeight:s.scrollHeight;s.style.maxHeight=l+"px"}}document.addEventListener("nav",n);
+</script><script type="module">function f(i,e){if(!i)return;function r(o){o.target===this&&(o.preventDefault(),o.stopPropagation(),e())}function t(o){o.key.startsWith("Esc")&&(o.preventDefault(),e())}i?.addEventListener("click",r),window.addCleanup(()=>i?.removeEventListener("click",r)),document.addEventListener("keydown",t),window.addCleanup(()=>document.removeEventListener("keydown",t))}function y(i){for(;i.firstChild;)i.removeChild(i.firstChild)}var h=class{constructor(e,r){this.container=e;this.content=r;this.setupEventListeners(),this.setupNavigationControls(),this.resetTransform()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;cleanups=[];setupEventListeners(){let e=this.onMouseDown.bind(this),r=this.onMouseMove.bind(this),t=this.onMouseUp.bind(this),o=this.resetTransform.bind(this);this.container.addEventListener("mousedown",e),document.addEventListener("mousemove",r),document.addEventListener("mouseup",t),window.addEventListener("resize",o),this.cleanups.push(()=>this.container.removeEventListener("mousedown",e),()=>document.removeEventListener("mousemove",r),()=>document.removeEventListener("mouseup",t),()=>window.removeEventListener("resize",o))}cleanup(){for(let e of this.cleanups)e()}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let r=this.createButton("+",()=>this.zoom(.1)),t=this.createButton("-",()=>this.zoom(-.1)),o=this.createButton("Reset",()=>this.resetTransform());e.appendChild(t),e.appendChild(o),e.appendChild(r),this.container.appendChild(e)}createButton(e,r){let t=document.createElement("button");return t.textContent=e,t.className="mermaid-control-button",t.addEventListener("click",r),window.addCleanup(()=>t.removeEventListener("click",r)),t}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}zoom(e){let r=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),t=this.content.getBoundingClientRect(),o=t.width/2,n=t.height/2,c=r-this.scale;this.currentPan.x-=o*c,this.currentPan.y-=n*c,this.scale=r,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){this.scale=1;let e=this.content.querySelector("svg");this.currentPan={x:e.getBoundingClientRect().width/2,y:e.getBoundingClientRect().height/2},this.updateTransform()}},C=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],E;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;E||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let r=E.default,t=new WeakMap;for(let n of e)t.set(n,n.innerText);async function o(){for(let s of e){s.removeAttribute("data-processed");let a=t.get(s);a&&(s.innerHTML=a)}let n=C.reduce((s,a)=>(s[a]=window.getComputedStyle(document.documentElement).getPropertyValue(a),s),{}),c=document.documentElement.getAttribute("saved-theme")==="dark";r.initialize({startOnLoad:!1,securityLevel:"loose",theme:c?"dark":"base",themeVariables:{fontFamily:n["--codeFont"],primaryColor:n["--light"],primaryTextColor:n["--darkgray"],primaryBorderColor:n["--tertiary"],lineColor:n["--darkgray"],secondaryColor:n["--secondary"],tertiaryColor:n["--tertiary"],clusterBkg:n["--light"],edgeLabelBackground:n["--highlight"]}}),await r.run({nodes:e})}await o(),document.addEventListener("themechange",o),window.addCleanup(()=>document.removeEventListener("themechange",o));for(let n=0;n<e.length;n++){let v=function(){let g=l.querySelector("#mermaid-space"),m=l.querySelector(".mermaid-content");if(!m)return;y(m);let w=c.querySelector("svg").cloneNode(!0);m.appendChild(w),l.classList.add("active"),g.style.cursor="grab",u=new h(g,m)},M=function(){l.classList.remove("active"),u?.cleanup(),u=null},c=e[n],s=c.parentElement,a=s.querySelector(".clipboard-button"),d=s.querySelector(".expand-button"),p=window.getComputedStyle(a),L=a.offsetWidth+parseFloat(p.marginLeft||"0")+parseFloat(p.marginRight||"0");d.style.right=`calc(${L}px + 0.3rem)`,s.prepend(d);let l=s.querySelector("#mermaid-container");if(!l)return;let u=null;d.addEventListener("click",v),f(l,M),window.addCleanup(()=>{u?.cleanup(),d.removeEventListener("click",v)})}});
+</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript"></script><script src="../postscript.fb3395c2.js" type="module"></script></html>
